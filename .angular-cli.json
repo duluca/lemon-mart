@@ -9,7 +9,20 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "android-chrome-192x192.png",
+        "favicon-16x16.png",
+        "mstile-310x150.png",
+        "android-chrome-512x512.png",
+        "favicon-32x32.png",
+        "mstile-310x310.png",
+        "apple-touch-icon.png",
+        "manifest.json",
+        "mstile-70x70.png",
+        "browserconfig.xml",
+        "mstile-144x144.png",
+        "safari-pinned-tab.svg",
+        "mstile-150x150.png"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -18,9 +31,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": [
-        "styles.css"
-      ],
+      "styles": ["styles.css", "lemonmart-theme.scss"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "johnpapa.angular-essentials",
+    "formulahendry.auto-close-tag",
+    "esbenp.prettier-vscode",
+    "PeterJausovec.vscode-docker",
+    "eamodio.gitlens",
+    "WallabyJs.quokka-vscode"
+  ]
+}
