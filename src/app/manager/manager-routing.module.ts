@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router'
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/manager', pathMatch: 'full' },
-  { path: 'manager', component: ManagerHomeComponent },
+  { path: '', redirectTo: '/manager/home', pathMatch: 'full' },
+  { path: 'home', component: ManagerHomeComponent },
 ]
 
 @NgModule({

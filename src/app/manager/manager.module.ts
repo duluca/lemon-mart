@@ -5,10 +5,8 @@ import { CommonModule } from '@angular/common'
 import { ManagerRoutingModule } from './manager-routing.module'
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
 
-export const managerModuleRoutes: Routes = [{ path: '', component: ManagerHomeComponent }]
-
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ManagerRoutingModule],
   declarations: [ManagerHomeComponent],
 })
 export class ManagerModule {}
