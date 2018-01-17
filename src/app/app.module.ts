@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http'
     PosModule,
     UserModule,
     HttpClientModule,
+    ManagerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
