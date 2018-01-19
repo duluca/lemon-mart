@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-manager-home',
-  template: `
-    <p>
-      manager-home works!
-    </p>
-  `,
   styles: [],
+  template: `
+    <p>manager-home works!</p>
+  `,
 })
 export class ManagerHomeComponent implements OnInit {
   constructor() {}

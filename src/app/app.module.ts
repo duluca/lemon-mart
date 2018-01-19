@@ -7,9 +7,6 @@ import 'hammerjs'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AppComponent } from './app.component'
 import { MaterialModule } from './material.module'
-import { InventoryModule } from './inventory/inventory.module'
-import { PosModule } from './pos/pos.module'
-import { UserModule } from './user/user.module'
 import { HomeComponent } from './home/home.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 import { HttpClientModule } from '@angular/common/http'
@@ -23,9 +20,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    InventoryModule,
-    PosModule,
-    UserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -34,4 +28,4 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
