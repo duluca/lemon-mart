@@ -1,6 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material'
+import { AuthService } from './auth/auth.service'
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,22 @@ import { MatIconRegistry } from '@angular/material'
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+export class AppComponent implements OnInit {
+  displayAccountIcons = false
+  constructor(
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    private authService: AuthService
+  ) {
     iconRegistry.addSvgIcon(
       'lemon',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/lemon.svg')
+    )
+  }
+
+  ngOnInit() {
+    this.authService.isAuthenticated.subscribe(
+      isAuthenticated => (this.displayAccountIcons = isAuthenticated)
     )
   }
 }

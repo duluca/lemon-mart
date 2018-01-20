@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HttpClientModule } from '@angular/common/http'
 import { LoginComponent } from './login/login.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { AuthService } from './auth/auth.service'
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, PageNotFoundComponent, LoginComponent],
@@ -25,7 +26,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

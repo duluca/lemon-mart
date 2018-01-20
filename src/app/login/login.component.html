@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()" fxLayout="column">
+<form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <mat-icon>email</mat-icon>
     <mat-form-field fxFlex>
@@ -27,7 +27,9 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <div fxLayout="row" fxLayoutAlign="end" class="margin-top">
+  <div fxLayout="row" class="margin-top">
+    <div *ngIf="loginError" class="mat-caption error">{{loginError}}</div>
+    <div class="flex-spacer"></div>
     <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">Login</button>
   </div>
 </form>

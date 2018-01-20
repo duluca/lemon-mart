@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms'
+import { AuthService } from '../auth/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
-  styles: [`mat-icon {}`],
+  styles: [
+    `.error {
+    color: red
+  }`,
+  ],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup
-
-  constructor(private formBuilder: FormBuilder) {}
+  loginError = ''
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.buildLoginForm()
@@ -25,5 +35,13 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  login() {}
+  async login(submittedForm: FormGroup) {
+    this.authService
+      .login(submittedForm.value.email, submittedForm.value.password)
+      .subscribe(isAuthenticated => {
+        if (isAuthenticated) {
+          this.router.navigate(['/user/profile'])
+        }
+      }, error => (this.loginError = error))
+  }
 }
