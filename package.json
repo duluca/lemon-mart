@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "config": {
-    "imageRepo": "duluca/lemon-mart",
+    "imageRepo": "073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
     "imageName": "lemon-mart",
-    "imagePort": "8080"
+    "imagePort": "8080",
+    "awsRegion": "us-east-1",
+    "awsEcsCluster": "fargate-cluster",
+    "awsService": "lemon-mart-service"
   },
   "scripts": {
     "ng": "ng",
@@ -15,7 +18,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "predocker:build": "npm run build -- --prod && npm test -- --single-run && npm run e2e -- --no-delete-output-path",
+    "2predocker:build": "npm run build -- --prod && npm test -- --single-run && npm run e2e -- --no-delete-output-path",
     "docker:build": "cross-conf-env docker image build . -t $npm_package_config_imageRepo:$npm_package_version",
     "postdocker:build": "npm run docker:tag",
     "docker:tag": " cross-conf-env docker image tag $npm_package_config_imageRepo:$npm_package_version $npm_package_config_imageRepo:latest",
@@ -31,7 +34,13 @@
     "docker:open:mac": "echo Trying to launch on MacOS && sleep 2 && URL=http://localhost:$npm_package_config_imagePort && open $URL",
     "docker:debugmessage": "echo Docker Debug Completed Successfully! Hit Ctrl+C to terminate log tailing.",
     "predocker:debug": "run-s -c docker:build docker:run",
-    "docker:debug": "run-s -cs docker:open:win docker:open:mac docker:debugmessage docker:taillogs"
+    "docker:debug": "run-s -cs docker:open:win docker:open:mac docker:debugmessage docker:taillogs",
+    "aws:login:win": "cross-conf-env aws ecr get-login --no-include-email --region $npm_package_config_awsRegion > dockerLogin.cmd && call dockerLogin.cmd && del dockerLogin.cmd",
+    "aws:login:mac": "eval $(aws ecr get-login --no-include-email --region $npm_package_config_awsRegion)",
+    "aws:login": "run-p -cs aws:login:win aws:login:mac",
+    "aws:deploy": "cross-conf-env docker run --env-file ./.env duluca/ecs-deploy-fargate -c $npm_package_config_awsEcsCluster -n $npm_package_config_awsService -i $npm_package_config_imageRepo:latest -r $npm_package_config_awsRegion --timeout 1000",
+    "aws:release": "run-s -cs aws:login docker:publish aws:deploy",
+    "aws:fargate-release": "run-s -cs aws:login docker:publish"
   },
   "private": true,
   "dependencies": {
