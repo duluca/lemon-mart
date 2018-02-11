@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ManagerComponent } from './manager.component'
+import { MaterialModule } from '../material.module'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing'
 
 describe('ManagerComponent', () => {
   let component: ManagerComponent
@@ -10,6 +13,7 @@ describe('ManagerComponent', () => {
     async(() => {
       TestBed.configureTestingModule({
         declarations: [ManagerComponent],
+        imports: [RouterTestingModule, MaterialModule, NoopAnimationsModule],
       }).compileComponents()
     })
   )
