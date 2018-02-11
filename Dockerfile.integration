@@ -16,11 +16,12 @@ RUN npm run $BUILD_SCRIPT
 
 FROM rastasheep/alpine-node-chromium:8-alpine as tester
 ENV BUILDER_SRC_DIR /usr/src
+ENV SRC_DIR /usr/src
 ENV TEST_SCRIPT test:prod
 
 RUN mkdir -p $SRC_DIR
 WORKDIR $SRC_DIR
-COPY --from=builder $BUILDER_SRC_DIR/dist /var/www
+COPY --from=builder $BUILDER_SRC_DIR $SRC_DIR
 
 RUN npm run $TEST_SCRIPT
 
