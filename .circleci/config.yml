@@ -12,3 +12,8 @@ jobs:
           name: Build Docker Image
           command: |
             docker build -f Dockerfile.integration .
+
+# For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
+# For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
+# For Heroku see https://devcenter.heroku.com/articles/container-registry-and-runtime#pushing-an-image-s
+# For cache optimization read https://medium.com/@gajus/making-docker-in-docker-builds-x2-faster-using-docker-cache-from-option-c01febd8ef84
