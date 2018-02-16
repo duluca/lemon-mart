@@ -1,8 +1,6 @@
 # LemonMart
+> LemonMart was implemented with a Route-first approach to designing SPAs.
 > This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
-
-## Swagger Mock Server
-https://github.com/duluca/lemon-mart-swagger-server
 
 ## Router-first Approach
 A router-first approach to SPA design will save development teams, large and small, significant waste in duplicative work, and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
@@ -16,27 +14,30 @@ In order to pull off a router-first implementation, you need to:
 6. Differentiate between user controls and components to appropriate use binding, resolve and auth guards,
 7. With TypeScript classes, interfaces, enums, validators and pipes maximize code reuse
 
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Design Artifacts
+Head over to the Wiki for user roles, site maps, data entity diagrams and user mock ups.
+https://github.com/duluca/lemon-mart/wiki
 
 ## Build
+- `npm run build:prod` to build a production optimized version of the app.
+- `npm run docker:debug` to run tests and build a containerized version of the app.
+- Dockerfile.integration is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Zeit Now and Azure.
+### Swagger Mock Server
+Swagger, in a yaml/json format, establishes a data contract between the front-end and back-end. Using code generators, you can create a mock server that responds to requests with auto-generated or customized data.
+https://github.com/duluca/lemon-mart-swagger-server
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
+## Developers
+### Pre-requisites
+- Do NOT install `@angular/cli` or `typescript` globally to avoid version mismatch issues across multiple projects.
+- Run `npx @angular/cli new app-name --routing` to create a new Angular app with basic routing wired.
+- To run `ng` commands from within the project directory, preprend `npx` to commands, like `npx ng build`.
+- To continue using `ng` without having to prepend `npx`, configure shell autofallback as described here https://www.npmjs.com/package/npx#shell-auto-fallback.
+### During Development
+- Run `npm start` for a developmenet server. Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.
+- Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Code scaffolding
+- Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Further help with Angular CLI
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
