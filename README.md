@@ -1,6 +1,5 @@
 # LemonMart
 > LemonMart was implemented with a Route-first approach to designing SPAs.
-> This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
 
 ## Router-first Approach
 A router-first approach to SPA design will save development teams, large and small, significant waste in duplicative work, and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
@@ -39,5 +38,6 @@ https://github.com/duluca/lemon-mart-swagger-server
 ### Code scaffolding
 - Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 ### Further help with Angular CLI
+> This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
