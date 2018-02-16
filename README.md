@@ -14,23 +14,23 @@ In order to pull off a router-first implementation, you need to:
 7. With TypeScript classes, interfaces, enums, validators and pipes maximize code reuse
 
 ### Design Artifacts
-Head over to the Wiki for user roles, site maps, data entity diagrams and user mock ups.
-https://github.com/duluca/lemon-mart/wiki
+Head over to the Wiki for user roles, site maps, data entity diagrams and user mock ups:
+https://github.com/duluca/lemon-mart/wiki.
 
 ## Build
 - `npm run build:prod` to build a production optimized version of the app.
 - `npm run docker:debug` to run tests and build a containerized version of the app.
 - Dockerfile.integration is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Zeit Now and Azure.
 ### Swagger Mock Server
-Swagger, in a yaml/json format, establishes a data contract between the front-end and back-end. Using code generators, you can create a mock server that responds to requests with auto-generated or customized data.
-https://github.com/duluca/lemon-mart-swagger-server
+Swagger, in a yaml/json format, establishes a data contract between the front-end and back-end. Using code generators, you can create a mock server that responds to requests with auto-generated or customized data. A sample server can be found here:
+https://github.com/duluca/lemon-mart-swagger-server.
 
 ## Developers
 ### Pre-requisites
 - Do NOT install `@angular/cli` or `typescript` globally to avoid version mismatch issues across multiple projects.
 - Run `npx @angular/cli new app-name --routing` to create a new Angular app with basic routing wired.
 - To run `ng` commands from within the project directory, preprend `npx` to commands, like `npx ng build`.
-- To continue using `ng` without having to prepend `npx`, configure shell autofallback as described here https://www.npmjs.com/package/npx#shell-auto-fallback.
+- To continue using `ng` without having to prepend `npx`, configure shell autofallback as described here: https://www.npmjs.com/package/npx#shell-auto-fallback.
 ### During Development
 - Run `npm start` for a developmenet server. Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.
 - Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
