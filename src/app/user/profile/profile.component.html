@@ -1,3 +1,76 @@
-<p>
-  profile works!
-</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h2>Create Certificate of Eligibility for Nonimmigrant Students (Form I-20)</h2>
+  <h3>Class of Admission and Personal Information</h3>
+  <h4>SEVIS Mod School - Main Campus</h4>
+  <caption>Required fields are marked with an asterisk (*)</caption>
+</div>
+<div fxLayout="row" fxLayoutAlign="start">
+  <mat-horizontal-stepper #stepper="matHorizontalStepper">
+    <mat-step [stepControl]="userForm">
+      <form [formGroup]="userForm">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Last name, First name" formControlName="email" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="userForm">
+      <form [formGroup]="userForm">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="password" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.selectedIndex = 0">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <form [formGroup]="userForm" (ngSubmit)="save(userForm)" fxLayout="column" *ngIf="false">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-icon>email</mat-icon>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email">
+        <mat-error *ngIf="userForm.get('email').hasError('required')">
+          E-mail is required
+        </mat-error>
+        <mat-error *ngIf="userForm.get('email').hasError('email')">
+          E-mail is not valid
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-icon matPrefix>vpn_key</mat-icon>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Password" aria-label="Password" type="password" formControlName="password">
+        <mat-hint>Minimum 8 characters</mat-hint>
+        <mat-error *ngIf="userForm.get('password').hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="userForm.get('password').hasError('minLength')">
+          Password is at least 8 characters long
+        </mat-error>
+        <mat-error *ngIf="userForm.get('password').hasError('maxLength')">
+          Password cannot be longer than 50 characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="margin-top">
+      <div *ngIf="userError" class="mat-caption error">{{userError}}</div>
+      <div class="flex-spacer"></div>
+      <button mat-raised-button type="submit" color="primary" [disabled]="userForm.invalid">Login</button>
+    </div>
+  </form>
+</div>
