@@ -13,9 +13,17 @@ import { HttpClientModule } from '@angular/common/http'
 import { LoginComponent } from './login/login.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { AuthService } from './auth/auth.service'
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
+import { MatSidenavModule, MatListModule } from '@angular/material'
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PageNotFoundComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    LoginComponent,
+    NavigationMenuComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +33,8 @@ import { AuthService } from './auth/auth.service'
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
