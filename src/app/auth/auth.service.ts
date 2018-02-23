@@ -41,4 +41,8 @@ export class AuthService {
       return Observable.throw('Failed to login!')
     }
   }
+
+  logout() {
+    this.authStatus.next({ isAuthenticated: false, userRole: Role.None })
+  }
 }

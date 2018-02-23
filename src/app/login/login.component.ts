@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms'
 import { AuthService } from '../auth/auth.service'
 import { Router } from '@angular/router'
+import { Role } from '../auth/role.enum'
 
 @Component({
   selector: 'app-login',
@@ -38,10 +39,23 @@ export class LoginComponent implements OnInit {
   async login(submittedForm: FormGroup) {
     this.authService
       .login(submittedForm.value.email, submittedForm.value.password)
-      .subscribe(isAuthenticated => {
-        if (isAuthenticated) {
-          this.router.navigate(['/user/profile'])
+      .subscribe(authStatus => {
+        if (authStatus.isAuthenticated) {
+          this.router.navigate([this.homeRoutePerRole(authStatus.userRole)])
         }
       }, error => (this.loginError = error))
+  }
+
+  homeRoutePerRole(role: Role) {
+    switch (role) {
+      case Role.Cashier:
+        return '/pos'
+      case Role.Clerk:
+        return '/inventory'
+      case Role.Manager:
+        return '/manager'
+      default:
+        return '/'
+    }
   }
 }
