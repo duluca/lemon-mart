@@ -10,10 +10,14 @@ export interface IAuthStatus {
   userRole: Role
 }
 
+const defaultAuthStatus = { isAuthenticated: false, userRole: Role.None }
+
 @Injectable()
 export class AuthService {
   currentUser = new BehaviorSubject<User>(this.getItem('user') || new User())
-  authStatus = new BehaviorSubject<IAuthStatus>(this.getItem('authStatus'))
+  authStatus = new BehaviorSubject<IAuthStatus>(
+    this.getItem('authStatus') || defaultAuthStatus
+  )
 
   constructor() {
     this.authStatus.subscribe(authStatus => this.setItem('authStatus', authStatus))
@@ -37,12 +41,12 @@ export class AuthService {
       this.authStatus.next({ isAuthenticated: true, userRole: Role.Manager })
       return this.authStatus.asObservable()
     } else {
-      this.authStatus.next({ isAuthenticated: false, userRole: Role.None })
-      return Observable.throw('Failed to login!')
+      this.authStatus.next(defaultAuthStatus)
+      return Observable.throw('Failed to login! Email needs to end with @test.com.')
     }
   }
 
   logout() {
-    this.authStatus.next({ isAuthenticated: false, userRole: Role.None })
+    this.authStatus.next(defaultAuthStatus)
   }
 }
