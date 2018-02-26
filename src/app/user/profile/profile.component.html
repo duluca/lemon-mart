@@ -1,192 +1,201 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <h2>Create Certificate of Eligibility for Nonimmigrant Students (Form I-20)</h2>
-  <h3>Class of Admission and Personal Information</h3>
-  <h4>SEVIS Mod School - Main Campus</h4>
-</div>
-<div fxLayout="row" fxLayoutAlign="start" *ngIf=false>
-  <mat-horizontal-stepper #stepper="matHorizontalStepper">
-    <mat-step [stepControl]="userForm">
-      <form [formGroup]="userForm">
-        <ng-template matStepLabel>Class of Admission</ng-template>
+<mat-toolbar color="accent">
+  <h5>User Profile</h5>
+</mat-toolbar>
 
-        <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="email" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+  <mat-step [stepControl]="userForm">
+    <form [formGroup]="userForm">
+      <ng-template matStepLabel>Account Information</ng-template>
+      <div class="stepContent">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('name')" fxLayoutGap="10px">
+          <mat-form-field fxFlex="40%">
+            <input matInput placeholder="First Name" aria-label="First Name" formControlName="first">
+            <mat-error *ngIf="userForm.get('name').get('first').hasError('required')">
+              First Name is required
+            </mat-error>
+            <mat-error *ngIf="userForm.get('name').get('first').hasError('minLength')">
+              Must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('name').get('first').hasError('maxLength')">
+              Can't exceed 50 characters
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="20%">
+            <input matInput placeholder="MI" aria-label="Middle Initial" formControlName="middle">
+            <mat-error *ngIf="userForm.get('name').get('middle').invalid">
+              Only inital
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="40%">
+            <input matInput placeholder="Last Name" aria-label="Last Name" formControlName="last">
+            <mat-error *ngIf="userForm.get('name').get('last').hasError('required')">
+              Last Name is required
+            </mat-error>
+            <mat-error *ngIf="userForm.get('name').get('last').hasError('minLength')">
+              Must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('name').get('last').hasError('maxLength')">
+              Can't exceed 50 characters
+            </mat-error>
+          </mat-form-field>
         </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="userForm">
-      <form [formGroup]="userForm">
-        <ng-template matStepLabel>Name</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="name" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+          <mat-form-field fxFlex="50%">
+            <input matInput placeholder="Date of Birth" aria-label="Date of Birth" formControlName="dateOfBirth" [matDatepicker]="dateOfBirthPicker">
+            <mat-hint *ngIf="userForm.get('dateOfBirth').touched">{{this.age}} year(s) old</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateOfBirthPicker></mat-datepicker>
+            <mat-error *ngIf="userForm.get('dateOfBirth').invalid">
+              Date must be with the last 100 years
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="50%">
+            <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email">
+            <mat-hint>Only your manager can update your e-mail.</mat-hint>
+            <mat-error *ngIf="userForm.get('email').invalid">
+              A valid E-mail is required
+            </mat-error>
+          </mat-form-field>
         </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="userForm">
-      <form [formGroup]="userForm">
-        <ng-template matStepLabel>Demographics</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="name" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top" fxLayoutGap="10px">
+          <div fxFlex>
+            <mat-label class="mat-body-1">Role</mat-label>
+            <mat-radio-group formControlName="role">
+              <mat-radio-button style="margin-right: 10px;" value="this.Role.None">
+                <span class="mat-body-1">None</span>
+              </mat-radio-button>
+              <mat-radio-button style="margin-right: 10px;" value="this.Role.Cashier">
+                <span class="mat-body-1">Cashier</span>
+              </mat-radio-button>
+              <mat-radio-button style="margin-right: 10px;" value="this.Role.Clerk">
+                <span class="mat-body-1">Clerk</span>
+              </mat-radio-button>
+              <mat-radio-button style="margin-right: 10px;" value="this.Role.Manager">
+                <span class="mat-body-1">Manager</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="userForm.get('role').hasError('required') && userForm.get('role').touched">
+              <span class="mat-caption">Role is required</span>
+            </mat-error>
+          </div>
         </div>
-      </form>
-    </mat-step>
-    <mat-step>
+      </div>
+      <div fxLayout="row" class="margin-top">
+        <div class="flex-spacer"></div>
+        <div *ngIf="userError" class="mat-caption error">{{userError}}</div>
+        <button mat-raised-button matStepperNext color="accent">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="userForm">
+    <form [formGroup]="userForm">
+      <ng-template matStepLabel>Contact Information</ng-template>
+      <div class="stepContent">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')" fxLayoutGap="10px">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Address Line 1" aria-label="Address Line 1" formControlName="line1">
+            <mat-error *ngIf="userForm.get('address').get('line1').hasError('required')">
+              Line 1 is required
+            </mat-error>
+            <mat-error *ngIf="userForm.get('address').get('line1').hasError('minLength')">
+              Must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('address').get('line1').hasError('maxLength')">
+              Can't exceed 50 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')" fxLayoutGap="10px">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Address Line 2" aria-label="Address Line 2" formControlName="line2">
+            <mat-hint>Optional</mat-hint>
+            <mat-error *ngIf="userForm.get('address').get('line2').hasError('minLength')">
+              Must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('address').get('line2').hasError('maxLength')">
+              Can't exceed 50 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')" fxLayoutGap="10px">
+          <mat-form-field fxFlex="40%">
+            <input matInput placeholder="City" aria-label="City" formControlName="city">
+            <mat-error *ngIf="userForm.get('address').get('city').hasError('required')">
+              City is required
+            </mat-error>
+            <mat-error *ngIf="userForm.get('address').get('city').hasError('minLength')">
+              Must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('address').get('city').hasError('maxLength')">
+              Can't exceed 50 characters
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="30%">
+            <input type="text" placeholder="State" aria-label="State" matInput formControlName="state" [matAutocomplete]="stateAuto">
+            <mat-autocomplete #stateAuto="matAutocomplete">
+              <mat-option *ngFor="let state of states | async" [value]="state.name">
+                {{ state.name }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="userForm.get('address').get('state').hasError('required')">
+              State is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="30%">
+            <input matInput placeholder="Zip Code" aria-label="Zip Code" formControlName="zip">
+            <mat-error *ngIf="userForm.get('address').get('zip').invalid">
+              A valid Zip Code is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column">
+          <mat-list formArrayName="phones">
+            <h2 mat-subheader>Phone Number(s)</h2>
+            <button mat-button (click)="this.addPhone()">
+              <mat-icon>add</mat-icon>Add Phone</button>
+            <mat-list-item *ngFor="let position of this.phonesArray.controls let i=index" [formGroupName]="i">
+              <mat-form-field fxFlex="100px">
+                <mat-select placeholder="Type" formControlName="type">
+                  <mat-option *ngFor="let type of this.PhoneTypes" [value]="type">
+                    {{ type }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field fxFlex fxFlexOffset="10px">
+                <input matInput type="text" placeholder="Number" formControlName="number">
+                <mat-error *ngIf="this.phonesArray.controls[i].invalid">
+                  A valid phone number is required
+                </mat-error>
+              </mat-form-field>
+              <button fxFlex="33px" mat-icon-button (click)="this.phonesArray.removeAt(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+      <div fxLayout="row" class="margin-top">
+        <button mat-button matStepperPrevious color="accent">Back</button>
+        <div class="flex-spacer"></div>
+        <div *ngIf="userError" class="mat-caption error">{{userError}}</div>
+        <button mat-raised-button matStepperNext color="accent">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="userForm">
+    <form [formGroup]="userForm" (ngSubmit)="save(userForm)">
       <ng-template matStepLabel>Review</ng-template>
-      You are now ready to create the Certificate of Eligibility.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
+      <div class="stepContent">
+        Review and update your user profile.
+        <app-view-user [user]="this.userForm.value"></app-view-user>
+      </div>
+      <div fxLayout="row" class="margin-top">
+        <button mat-button matStepperPrevious color="accent">Back</button>
+        <div class="flex-spacer"></div>
+        <div *ngIf="userError" class="mat-caption error">{{userError}}</div>
         <button mat-button color="warn" (click)="stepper.reset()">Reset</button>
-        <button mat-button color="primary">Create</button>
+        <button mat-raised-button matStepperNext color="primary" type="submit" [disabled]="this.userForm.invalid">Update</button>
       </div>
-    </mat-step>
-  </mat-horizontal-stepper>
-</div>
-<div fxLayout="row" fxLayoutAlign="start">
-  <form [formGroup]="userForm" (ngSubmit)="save(userForm)" fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <h3>Class of Admission</h3>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <div fxLayout="column">
-        <mat-label>Class of Admission</mat-label>
-        <mat-radio-group formControlName="coa">
-          <mat-radio-button fxLayout="row" *ngFor="let c of coas" [value]="c.value">{{c.class}}</mat-radio-button>
-        </mat-radio-group>
-        <mat-error *ngIf="userForm.get('coa').hasError('required')">
-          COA is required
-        </mat-error>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <div fxLayout="column">
-        <mat-label>Issue Reason</mat-label>
-        <mat-radio-group formControlName="ir">
-          <mat-radio-button fxLayout="row" value="1">Issue of Attendance</mat-radio-button>
-          <mat-radio-button fxLayout="row" value="2">Issue of Attendance - Change of Status Requested</mat-radio-button>
-        </mat-radio-group>
-        <mat-error *ngIf="userForm.get('ir').hasError('required')">
-          Issue reason is required
-        </mat-error>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <h3>Name</h3>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Surname/Primary Name" aria-label="E-mail" formControlName="email">
-        <mat-error *ngIf="userForm.get('email').hasError('required')">
-          Name is required
-        </mat-error>
-        <mat-error *ngIf="userForm.get('email').hasError('email')">
-          Name is not valid
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Given Name" aria-label="name" type="name" formControlName="name">
-        <mat-hint>Use for names such as first, middle or other.</mat-hint>
-        <mat-error *ngIf="userForm.get('name').hasError('required')">
-          Name is required
-        </mat-error>
-        <mat-error *ngIf="userForm.get('name').hasError('minLength')">
-          Name is at least 1 character long
-        </mat-error>
-        <mat-error *ngIf="userForm.get('name').hasError('maxLength')">
-          Name cannot be longer than 50 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-form-field fxFlex>
-        <mat-select placeholder="Suffix" formControlName="suffix">
-          <mat-option *ngFor="let s of suffice" [value]="s">
-            {{ s }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Passport Name" aria-label="name" type="name" formControlName="name">
-        <mat-hint>&lt;&lt;
-          <b>SMITH</b>&lt;&lt;
-          <b>A</b>&lt;&lt;
-          <b>JOHN</b>&lt;&lt;</mat-hint>
-        <mat-error *ngIf="userForm.get('name').hasError('required')">
-          Name is required
-        </mat-error>
-        <mat-error *ngIf="userForm.get('name').hasError('minLength')">
-          Name is at least 1 character long
-        </mat-error>
-        <mat-error *ngIf="userForm.get('name').hasError('maxLength')">
-          Name cannot be longer than 50 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <h3>Demographics</h3>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="MM" aria-label="month" type="number" formControlName="name">
-      </mat-form-field>
-      <mat-form-field fxFlex>
-        <input matInput placeholder="DD" aria-label="day" type="number" formControlName="name">
-      </mat-form-field>
-      <mat-form-field fxFlex>
-        <input matInput placeholder="YYYY" aria-label="year" type="number" formControlName="name">
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-form-field fxFlex>
-        <input type="text" placeholder="Country of Birth" aria-label="Country of Birth" matInput formControlName="br" [matAutocomplete]="auto1">
-        <mat-autocomplete #auto1="matAutocomplete">
-          <mat-option *ngFor="let c of birthCountries | async" [value]="c">
-            {{ c }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-form-field fxFlex>
-        <input type="text" placeholder="Country of Citizenship" aria-label="Country of Citizenship" matInput formControlName="cr"
-          [matAutocomplete]="auto2">
-        <mat-autocomplete #auto2="matAutocomplete">
-          <mat-option *ngFor="let c of filteredCountries | async" [value]="c">
-            {{ c }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <div fxLayout="column">
-        <mat-label>Gender</mat-label>
-        <mat-radio-group formControlName="ir">
-          <mat-radio-button fxLayout="row" value="F">Female</mat-radio-button>
-          <mat-radio-button fxLayout="row" value="M">Male</mat-radio-button>
-        </mat-radio-group>
-        <mat-error *ngIf="userForm.get('ir').hasError('required')">
-          Gender is required
-        </mat-error>
-      </div>
-    </div>
-    <div fxLayout="row" class="margin-top">
-      <div *ngIf="userError" class="mat-caption error">{{userError}}</div>
-      <div class="flex-spacer"></div>
-      <button mat-raised-button type="submit" color="primary" [disabled]="userForm.invalid">Next</button>
-    </div>
-  </form>
-</div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>

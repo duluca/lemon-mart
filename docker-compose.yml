@@ -1,0 +1,13 @@
+version: '2'
+services:
+  web-app:
+    build: .
+    ports:
+      - '8080:80'
+    links:
+      - server
+
+  server:
+    image: duluca/lemon-mart-swagger-server
+    ports:
+      - '3000:3000'

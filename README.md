@@ -26,6 +26,8 @@ https://github.com/duluca/lemon-mart/wiki.
 ### Swagger Mock Server
 Swagger, in a yaml/json format, establishes a data contract between the front-end and back-end. Using code generators, you can create a mock server that responds to requests with auto-generated or customized data. A sample server can be found here:
 https://github.com/duluca/lemon-mart-swagger-server.
+- `npm run mock:start` to build a production optimized version of the app, running on port 8080, connected to the mock server.
+- `npm run mock:stop` to stop
 
 ## Developers
 ### Pre-requisites
@@ -42,4 +44,6 @@ https://github.com/duluca/lemon-mart-swagger-server.
 ### Further help with Angular CLI
 > This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Full-Stack Setup with Docker Compose and Deploying to AWS
+See my example project here https://github.com/excellalabs/minimal-mean
 

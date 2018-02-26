@@ -19,7 +19,11 @@ import {
   MatLineModule,
   MatDividerModule,
   MatAutocompleteModule,
+  MatNativeDateModule,
+  MatListModule,
 } from '@angular/material'
+import { UserService } from './user/user.service';
+import { ViewUserComponent } from './view-user/view-user.component'
 
 @NgModule({
   imports: [
@@ -36,10 +40,13 @@ import {
     MatSelectModule,
     MatTooltipModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatLineModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatListModule,
   ],
-  declarations: [ProfileComponent, LogoutComponent],
+  declarations: [ProfileComponent, LogoutComponent, ViewUserComponent],
+  providers: [UserService],
 })
 export class UserModule {}

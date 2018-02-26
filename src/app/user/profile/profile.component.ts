@@ -1,9 +1,24 @@
 import { Component, OnInit } from '@angular/core'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 import { startWith } from 'rxjs/operators/startWith'
 import { map } from 'rxjs/operators/map'
+import { USStateFilter, IUSState, PhoneType } from './data'
+import {
+  OptionalTextValidation,
+  RequiredTextValidation,
+  OneCharValidation,
+  EmailValidation,
+  BirthDateValidation,
+  USAZipCodeValidation,
+  USAPhoneNumberValidation,
+} from '../../validations'
+import { IUser, IPhone, User } from '../user/user'
+import { UserService } from '../user/user.service'
+import { AuthService } from '../../auth/auth.service'
+import { Role as UserRole } from '../../auth/role.enum'
+import { $enum } from 'ts-enum-util'
 
 @Component({
   selector: 'app-profile',
@@ -11,287 +26,126 @@ import { map } from 'rxjs/operators/map'
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  Role = UserRole
+  PhoneTypes = $enum(PhoneType).getKeys()
   userForm: FormGroup
+  states: Observable<IUSState[]>
   userError = ''
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  currentUserRole = this.Role.None
 
-  coas = [{ class: 'F-1', value: 'F1' }, { class: 'M-1', value: 'M1' }]
-  suffice = ['Sr.', 'Jr.', '1st', '2nd', '3rd', '4th']
-  countries = [
-    'Afghanistan',
-    'Albania',
-    'Algeria',
-    'American Samoa',
-    'Andorra',
-    'Angola',
-    'Anguilla',
-    'Antarctica',
-    'Antigua and/or Barbuda',
-    'Argentina',
-    'Armenia',
-    'Aruba',
-    'Australia',
-    'Austria',
-    'Azerbaijan',
-    'Bahamas',
-    'Bahrain',
-    'Bangladesh',
-    'Barbados',
-    'Belarus',
-    'Belgium',
-    'Belize',
-    'Benin',
-    'Bermuda',
-    'Bhutan',
-    'Bolivia',
-    'Bosnia and Herzegovina',
-    'Botswana',
-    'Bouvet Island',
-    'Brazil',
-    'British lndian Ocean Territory',
-    'Brunei Darussalam',
-    'Bulgaria',
-    'Burkina Faso',
-    'Burundi',
-    'Canada',
-    'Cambodia',
-    'Cameroon',
-    'Cape Verde',
-    'Cayman Islands',
-    'Central African Republic',
-    'Chad',
-    'Chile',
-    'China',
-    'Christmas Island',
-    'Cocos (Keeling) Islands',
-    'Colombia',
-    'Comoros',
-    'Congo',
-    'Cook Islands',
-    'Costa Rica',
-    'Croatia (Hrvatska)',
-    'Cuba',
-    'Cyprus',
-    'Czech Republic',
-    'Denmark',
-    'Djibouti',
-    'Dominica',
-    'Dominican Republic',
-    'East Timor',
-    'Ecudaor',
-    'Egypt',
-    'El Salvador',
-    'Equatorial Guinea',
-    'Eritrea',
-    'Estonia',
-    'Ethiopia',
-    'Falkland Islands (Malvinas)',
-    'Faroe Islands',
-    'Fiji',
-    'Finland',
-    'France',
-    'France, Metropolitan',
-    'French Guiana',
-    'French Polynesia',
-    'French Southern Territories',
-    'Gabon',
-    'Gambia',
-    'Georgia',
-    'Germany',
-    'Ghana',
-    'Gibraltar',
-    'Greece',
-    'Greenland',
-    'Grenada',
-    'Guadeloupe',
-    'Guam',
-    'Guatemala',
-    'Guinea',
-    'Guinea-Bissau',
-    'Guyana',
-    'Haiti',
-    'Heard and Mc Donald Islands',
-    'Honduras',
-    'Hong Kong',
-    'Hungary',
-    'Iceland',
-    'India',
-    'Indonesia',
-    'Iran (Islamic Republic of)',
-    'Iraq',
-    'Ireland',
-    'Israel',
-    'Italy',
-    'Ivory Coast',
-    'Jamaica',
-    'Japan',
-    'Jordan',
-    'Kazakhstan',
-    'Kenya',
-    'Kiribati',
-    "Korea, Democratic People's Republic of",
-    'Korea, Republic of',
-    'Kuwait',
-    'Kyrgyzstan',
-    "Lao People's Democratic Republic",
-    'Latvia',
-    'Lebanon',
-    'Lesotho',
-    'Liberia',
-    'Libyan Arab Jamahiriya',
-    'Liechtenstein',
-    'Lithuania',
-    'Luxembourg',
-    'Macau',
-    'Macedonia',
-    'Madagascar',
-    'Malawi',
-    'Malaysia',
-    'Maldives',
-    'Mali',
-    'Malta',
-    'Marshall Islands',
-    'Martinique',
-    'Mauritania',
-    'Mauritius',
-    'Mayotte',
-    'Mexico',
-    'Micronesia, Federated States of',
-    'Moldova, Republic of',
-    'Monaco',
-    'Mongolia',
-    'Montserrat',
-    'Morocco',
-    'Mozambique',
-    'Myanmar',
-    'Namibia',
-    'Nauru',
-    'Nepal',
-    'Netherlands',
-    'Netherlands Antilles',
-    'New Caledonia',
-    'New Zealand',
-    'Nicaragua',
-    'Niger',
-    'Nigeria',
-    'Niue',
-    'Norfork Island',
-    'Northern Mariana Islands',
-    'Norway',
-    'Oman',
-    'Pakistan',
-    'Palau',
-    'Panama',
-    'Papua New Guinea',
-    'Paraguay',
-    'Peru',
-    'Philippines',
-    'Pitcairn',
-    'Poland',
-    'Portugal',
-    'Puerto Rico',
-    'Qatar',
-    'Reunion',
-    'Romania',
-    'Russian Federation',
-    'Rwanda',
-    'Saint Kitts and Nevis',
-    'Saint Lucia',
-    'Saint Vincent and the Grenadines',
-    'Samoa',
-    'San Marino',
-    'Sao Tome and Principe',
-    'Saudi Arabia',
-    'Senegal',
-    'Seychelles',
-    'Sierra Leone',
-    'Singapore',
-    'Slovakia',
-    'Slovenia',
-    'Solomon Islands',
-    'Somalia',
-    'South Africa',
-    'South Georgia South Sandwich Islands',
-    'Spain',
-    'Sri Lanka',
-    'St. Helena',
-    'St. Pierre and Miquelon',
-    'Sudan',
-    'Suriname',
-    'Svalbarn and Jan Mayen Islands',
-    'Swaziland',
-    'Sweden',
-    'Switzerland',
-    'Syrian Arab Republic',
-    'Taiwan',
-    'Tajikistan',
-    'Tanzania, United Republic of',
-    'Thailand',
-    'Togo',
-    'Tokelau',
-    'Tonga',
-    'Trinidad and Tobago',
-    'Tunisia',
-    'Turkey',
-    'Turkmenistan',
-    'Turks and Caicos Islands',
-    'Tuvalu',
-    'Uganda',
-    'Ukraine',
-    'United Arab Emirates',
-    'United Kingdom',
-    'United States',
-    'United States minor outlying islands',
-    'Uruguay',
-    'Uzbekistan',
-    'Vanuatu',
-    'Vatican City State',
-    'Venezuela',
-    'Vietnam',
-    'Virigan Islands (British)',
-    'Virgin Islands (U.S.)',
-    'Wallis and Futuna Islands',
-    'Western Sahara',
-    'Yemen',
-    'Yugoslavia',
-    'Zaire',
-    'Zambia',
-    'Zimbabwe',
-  ]
-
-  filteredCountries: Observable<string[]>
-  birthCountries: Observable<string[]>
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.buildUserForm()
-    this.filteredCountries = this.userForm
-      .get('cr')
-      .valueChanges.pipe(startWith(''), map(val => this.filter(val)))
-    this.birthCountries = this.userForm
-      .get('br')
-      .valueChanges.pipe(startWith(''), map(val => this.filter(val)))
+    this.authService.authStatus.subscribe(
+      authStatus => (this.currentUserRole = authStatus.userRole)
+    )
+
+    let draftUser = JSON.parse(localStorage.getItem('draft-user'))
+
+    if (!draftUser) {
+      this.userService.getCurrentUser().subscribe(user => {
+        console.log(user)
+        this.buildUserForm(user)
+      })
+    }
+    this.buildUserForm(draftUser)
   }
 
-  buildUserForm() {
+  buildUserForm(user?: IUser) {
     this.userForm = this.formBuilder.group({
-      coa: ['', [Validators.required]],
-      ir: ['', [Validators.required]],
-      cr: ['', [Validators.required]],
-      br: ['', [Validators.required]],
-      suffix: [''],
-      email: ['', [Validators.required, Validators.email]],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(1), Validators.maxLength(50)],
+      email: [
+        {
+          value: (user && user.email) || '',
+          disabled: this.currentUserRole !== this.Role.Manager,
+        },
+        EmailValidation,
       ],
+      name: this.formBuilder.group({
+        first: [(user && user.name.first) || '', RequiredTextValidation],
+        middle: [(user && user.name.middle) || '', OneCharValidation],
+        last: [(user && user.name.last) || '', RequiredTextValidation],
+      }),
+      role: [
+        {
+          value: (user && user.role) || '',
+          disabled: this.currentUserRole !== this.Role.Manager,
+        },
+        [Validators.required],
+      ],
+      dateOfBirth: [(user && user.dateOfBirth) || '', BirthDateValidation],
+      address: this.formBuilder.group({
+        line1: [
+          (user && user.address && user.address.line1) || '',
+          RequiredTextValidation,
+        ],
+        line2: [
+          (user && user.address && user.address.line2) || '',
+          OptionalTextValidation,
+        ],
+        city: [(user && user.address && user.address.city) || '', RequiredTextValidation],
+        state: [
+          (user && user.address && user.address.state) || '',
+          RequiredTextValidation,
+        ],
+        zip: [(user && user.address && user.address.zip) || '', USAZipCodeValidation],
+      }),
+      phones: this.formBuilder.array(this.buildPhoneArray(user ? user.phones : [])),
     })
+
+    this.states = this.userForm
+      .get('address')
+      .get('state')
+      .valueChanges.pipe(startWith(''), map(value => USStateFilter(value)))
   }
 
-  filter(val: string): string[] {
-    return this.countries.filter(
-      option => option.toLowerCase().indexOf(val.toLowerCase()) === 0
+  addPhone() {
+    this.phonesArray.push(
+      this.buildPhoneFormControl(this.userForm.get('phones').value.length + 1)
     )
   }
 
-  async save(submittedForm: FormGroup) {}
+  get phonesArray(): FormArray {
+    return <FormArray>this.userForm.get('phones')
+  }
+
+  private buildPhoneArray(phones: IPhone[]) {
+    const groups = []
+
+    if (!phones || (phones && phones.length === 0)) {
+      groups.push(this.buildPhoneFormControl(1))
+    } else {
+      phones.forEach(p => {
+        groups.push(this.buildPhoneFormControl(p.id, p.type, p.number))
+      })
+    }
+    return groups
+  }
+
+  private buildPhoneFormControl(id, type?: string, number?: string) {
+    return this.formBuilder.group({
+      id: [id],
+      type: [type || '', Validators.required],
+      number: [number || '', USAPhoneNumberValidation],
+    })
+  }
+
+  get dateOfBirth() {
+    return this.userForm.get('dateOfBirth').value || new Date()
+  }
+
+  get age() {
+    return new Date().getFullYear() - this.dateOfBirth.getFullYear()
+  }
+
+  async save(form: FormGroup) {
+    console.log(form.value)
+    this.userService
+      .updateUser(form.value)
+      .subscribe(res => this.buildUserForm(res), err => (this.userError = err))
+  }
 }
