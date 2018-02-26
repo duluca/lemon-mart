@@ -19,5 +19,7 @@
   "prettier.printWidth": 90,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "prettier.trailingComma": "es5"
+  "prettier.trailingComma": "es5",
+  "typescriptHero.imports.insertSemicolons": false,
+  "typescriptHero.imports.multiLineWrapThreshold": 90,
 }
