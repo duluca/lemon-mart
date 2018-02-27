@@ -9,22 +9,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import {
-  MatStepperModule,
-  MatRadioModule,
-  MatDatepickerModule,
-  MatSelectModule,
-  MatTooltipModule,
-  MatFormFieldModule,
-  MatLineModule,
-  MatDividerModule,
-  MatAutocompleteModule,
-  MatNativeDateModule,
-  MatListModule,
-} from '@angular/material'
+
 import { UserService } from './user/user.service'
 import { ViewUserComponent } from './view-user/view-user.component'
 import { AuthGuard } from '../auth/auth-guard.service'
+import { UserMaterialModule } from './user.material.module'
 
 @NgModule({
   imports: [
@@ -35,17 +24,7 @@ import { AuthGuard } from '../auth/auth-guard.service'
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MatStepperModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatLineModule,
-    MatDividerModule,
-    MatAutocompleteModule,
-    MatListModule,
+    UserMaterialModule,
   ],
   declarations: [ProfileComponent, LogoutComponent, ViewUserComponent],
   providers: [UserService, AuthGuard],

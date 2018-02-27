@@ -11,6 +11,11 @@ import { IfObservable } from 'rxjs/observable/IfObservable'
 import { catchError } from 'rxjs/operators'
 import { transformError } from '../../common/common'
 
+export interface IUsers {
+  items: IUser[]
+  total: number
+}
+
 @Injectable()
 export class UserService extends CacheService {
   currentUser = new BehaviorSubject<IUser>(this.getItem('user') || new User())
@@ -35,7 +40,7 @@ export class UserService extends CacheService {
   }
 
   getUser(id): Observable<IUser> {
-    return this.httpClient.get<User>(`${environment.baseUrl}/v1/user/${id}`)
+    return this.httpClient.get<IUser>(`${environment.baseUrl}/v1/user/${id}`)
   }
 
   updateUser(user: IUser): Observable<IUser> {
@@ -53,5 +58,15 @@ export class UserService extends CacheService {
     )
 
     return updateResponse
+  }
+
+  getUsers(pageSize: number, searchText = '', pagesToSkip = 0): Observable<IUsers> {
+    return this.httpClient.get<IUsers>(`${environment.baseUrl}/v1/users`, {
+      params: {
+        search: searchText,
+        offset: pagesToSkip.toString(),
+        limit: pageSize.toString(),
+      },
+    })
   }
 }
