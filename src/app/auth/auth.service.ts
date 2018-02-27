@@ -8,7 +8,7 @@ import { CacheService } from './cache.service'
 import * as decode from 'jwt-decode'
 import { HttpClient } from '@angular/common/http'
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable'
-import { transformError } from '../common'
+import { transformError } from '../common/common'
 import { environment } from '../../environments/environment'
 import { of } from 'rxjs/observable/of'
 import * as jwt from 'jsonwebtoken' // For fakeAuthProvider only

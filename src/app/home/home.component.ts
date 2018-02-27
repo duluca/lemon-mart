@@ -9,16 +9,7 @@ import { AuthService } from '../auth/auth.service'
   `,
   ],
   template: `
-    <div fxLayout="row" fxLayoutAlign="center">
-      <mat-card fxFlex="400px">
-        <mat-card-header>
-          <mat-card-title><div class="mat-headline">Hello, Lemonite!</div></mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <app-login></app-login>
-        </mat-card-content>
-      </mat-card>
-    </div>
+    <app-login></app-login>
   `,
 })
 export class HomeComponent implements OnInit {

@@ -9,6 +9,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component'
 import { ManagerMaterialModule } from './manager.material.module'
 import { ManagerComponent } from './manager.component'
+import { AuthGuard } from '../auth/auth-guard.service'
 
 @NgModule({
   imports: [CommonModule, ManagerRoutingModule, MaterialModule],
@@ -18,5 +19,6 @@ import { ManagerComponent } from './manager.component'
     UserManagementComponent,
     ReceiptLookupComponent,
   ],
+  providers: [AuthGuard],
 })
 export class ManagerModule {}

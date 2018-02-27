@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment'
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable'
 import { IfObservable } from 'rxjs/observable/IfObservable'
 import { catchError } from 'rxjs/operators'
-import { transformError } from '../../common'
+import { transformError } from '../../common/common'
 
 @Injectable()
 export class UserService extends CacheService {

@@ -22,8 +22,9 @@ import {
   MatNativeDateModule,
   MatListModule,
 } from '@angular/material'
-import { UserService } from './user/user.service';
+import { UserService } from './user/user.service'
 import { ViewUserComponent } from './view-user/view-user.component'
+import { AuthGuard } from '../auth/auth-guard.service'
 
 @NgModule({
   imports: [
@@ -47,6 +48,6 @@ import { ViewUserComponent } from './view-user/view-user.component'
     MatListModule,
   ],
   declarations: [ProfileComponent, LogoutComponent, ViewUserComponent],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
 })
 export class UserModule {}

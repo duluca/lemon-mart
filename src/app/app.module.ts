@@ -14,7 +14,14 @@ import { LoginComponent } from './login/login.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { AuthService } from './auth/auth.service'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
-import { MatSidenavModule, MatListModule } from '@angular/material'
+import {
+  MatSidenavModule,
+  MatListModule,
+  MatDialogModule,
+  MatSnackBarModule,
+} from '@angular/material'
+import { AuthGuard } from './auth/auth-guard.service'
+import { SimpleDialog, UiService } from './common/ui.service'
 
 @NgModule({
   declarations: [
@@ -23,6 +30,7 @@ import { MatSidenavModule, MatListModule } from '@angular/material'
     PageNotFoundComponent,
     LoginComponent,
     NavigationMenuComponent,
+    SimpleDialog,
   ],
   imports: [
     BrowserModule,
@@ -35,8 +43,10 @@ import { MatSidenavModule, MatListModule } from '@angular/material'
     FlexLayoutModule,
     MatSidenavModule,
     MatListModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard, UiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

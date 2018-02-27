@@ -5,7 +5,7 @@ import { LogoutComponent } from './logout/logout.component'
 import { AuthGuard } from '../auth/auth-guard.service'
 
 const routes: Routes = [
-  { path: 'profile', component: ProfileComponent, canLoad: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
 ]
 

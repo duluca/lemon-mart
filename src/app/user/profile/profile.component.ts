@@ -13,7 +13,7 @@ import {
   BirthDateValidation,
   USAZipCodeValidation,
   USAPhoneNumberValidation,
-} from '../../validations'
+} from '../../common/validations'
 import { IUser, IPhone, User } from '../user/user'
 import { UserService } from '../user/user.service'
 import { AuthService } from '../../auth/auth.service'
