@@ -13,8 +13,9 @@ import { AuthGuard } from '../auth/auth-guard.service'
 import { UserTableComponent } from './user-table/user-table.component'
 import { UserService } from '../user/user/user.service'
 import { UserResolve } from '../user/user/user.resolve'
-import { ViewUserComponent } from '../user/view-user/view-user.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { SharedComponentsModule } from '../shared-components.module'
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 @NgModule({
   imports: [
@@ -24,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedComponentsModule,
+    FlexLayoutModule,
   ],
   declarations: [
     ManagerComponent,
@@ -31,7 +34,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     UserManagementComponent,
     ReceiptLookupComponent,
     UserTableComponent,
-    ViewUserComponent,
   ],
   providers: [AuthGuard, UserService, UserResolve],
 })

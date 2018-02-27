@@ -11,9 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FlexLayoutModule } from '@angular/flex-layout'
 
 import { UserService } from './user/user.service'
-import { ViewUserComponent } from './view-user/view-user.component'
 import { AuthGuard } from '../auth/auth-guard.service'
 import { UserMaterialModule } from './user.material.module'
+import { SharedComponentsModule } from '../shared-components.module'
 
 @NgModule({
   imports: [
@@ -25,8 +25,9 @@ import { UserMaterialModule } from './user.material.module'
     ReactiveFormsModule,
     FlexLayoutModule,
     UserMaterialModule,
+    SharedComponentsModule,
   ],
-  declarations: [ProfileComponent, LogoutComponent, ViewUserComponent],
+  declarations: [ProfileComponent, LogoutComponent],
   providers: [UserService, AuthGuard],
 })
 export class UserModule {}

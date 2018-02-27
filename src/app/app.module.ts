@@ -14,14 +14,9 @@ import { LoginComponent } from './login/login.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { AuthService } from './auth/auth.service'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
-import {
-  MatSidenavModule,
-  MatListModule,
-  MatDialogModule,
-  MatSnackBarModule,
-} from '@angular/material'
 import { AuthGuard } from './auth/auth-guard.service'
 import { SimpleDialog, UiService } from './common/ui.service'
+import { ViewUserComponent } from './user/view-user/view-user.component'
 
 @NgModule({
   declarations: [
@@ -41,10 +36,6 @@ import { SimpleDialog, UiService } from './common/ui.service'
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDialogModule,
-    MatSnackBarModule,
   ],
   providers: [AuthService, AuthGuard, UiService],
   bootstrap: [AppComponent],
