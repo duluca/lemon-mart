@@ -19,6 +19,9 @@ jobs:
           key: built-image-{{ .BuildNum }}
           paths:
             - docker-cache
+      - store_artifacts:
+          path: docker-cache/built-image.tar
+          destination: built-image.tar
   publish:
     docker:
       - image: docker:17.12.0-ce-git
@@ -38,6 +41,18 @@ jobs:
             docker load < docker-cache/built-image.tar
             docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: sequential-branch-filter
 
 # *restore_repo
 # Consider tagging images with $CIRCLE_BRANCH
