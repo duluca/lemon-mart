@@ -6,13 +6,35 @@ jobs:
     working_directory: /usr/src
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - run:
           name: Build Docker Image
           command: |
-            docker build -f Dockerfile.integration . -t 073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest --build-arg CACHEBUST=$(date +%s)
+            docker build -f Dockerfile.integration . -t lemon-mart:$CIRCLE_BRANCH --build-arg CACHEBUST=$(date +%s)
+            mkdir -p docker-cache
+            docker save -o docker-cache/built-image.tar lemon-mart:$CIRCLE_BRANCH
+      - save_cache:
+          key: *docker_cache_key
+          paths:
+            - docker-cache
+  publish:
+    docker:
+      - image: docker:17.12.0-ce-git
+    working_directory: /usr/src
+    steps:
+      - *restore_docker_cache
+      - setup_remote_docker
+      - run:
+          name: Sign into AWS ecr
+          command: $(aws ecr get-login --no-include-email --region us-east-1)
+      - run:
+          name: Push it to ECR
+          command: |
+            docker load < docker-cache/built-image.tar
+            docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
 
+# Consider tagging images with $CIRCLE_BRANCH
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
 # For Heroku see https://devcenter.heroku.com/articles/container-registry-and-runtime#pushing-an-image-s
