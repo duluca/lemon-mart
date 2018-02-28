@@ -51,7 +51,6 @@ export class ProfileComponent implements OnInit {
     if (!draftUser) {
       // the if condition is for demo purposes only
       this.userService.getCurrentUser().subscribe(user => {
-        console.log(user)
         this.buildUserForm(user)
       })
     }
