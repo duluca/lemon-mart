@@ -9,14 +9,15 @@ import { AppComponent } from './app.component'
 import { MaterialModule } from './material.module'
 import { HomeComponent } from './home/home.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { LoginComponent } from './login/login.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { AuthService } from './auth/auth.service'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { AuthGuard } from './auth/auth-guard.service'
-import { SimpleDialog, UiService } from './common/ui.service'
+import { SimpleDialogComponent, UiService } from './common/ui.service'
 import { ViewUserComponent } from './user/view-user/view-user.component'
+import { AuthHttpInterceptor } from './auth/auth-http-interceptor'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ViewUserComponent } from './user/view-user/view-user.component'
     PageNotFoundComponent,
     LoginComponent,
     NavigationMenuComponent,
-    SimpleDialog,
+    SimpleDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,16 @@ import { ViewUserComponent } from './user/view-user/view-user.component'
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
-  providers: [AuthService, AuthGuard, UiService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UiService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

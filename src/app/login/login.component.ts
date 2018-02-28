@@ -15,6 +15,9 @@ import { UiService } from '../common/ui.service'
         color: red
     }
     `,
+    `
+    div[fxLayout] {margin-top: 32px;}
+    `,
   ],
 })
 export class LoginComponent implements OnInit {

@@ -1,11 +1,7 @@
 export abstract class CacheService {
-  protected getStringItem(key: string) {
-    return localStorage.getItem(key)
-  }
-
   protected getItem<T>(key: string): T {
-    let data = localStorage.getItem(key)
-    if (data) {
+    const data = localStorage.getItem(key)
+    if (data && data !== 'undefined') {
       return JSON.parse(data)
     }
     return null

@@ -11,7 +11,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable'
 import { transformError } from '../common/common'
 import { environment } from '../../environments/environment'
 import { of } from 'rxjs/observable/of'
-import * as jwt from 'jsonwebtoken' // For fakeAuthProvider only
+import * as jwtLib from 'jsonwebtoken' // For fakeAuthProvider only
 import { map, filter, reduce } from 'rxjs/operators'
 
 export interface IAuthStatus {
@@ -48,8 +48,11 @@ export class AuthService extends CacheService {
   login(email: string, password: string): Observable<IAuthStatus> {
     this.logout()
 
-    let loginResponse = this.authProvider(email, password).pipe(
-      map(value => decode(value.accessToken)),
+    const loginResponse = this.authProvider(email, password).pipe(
+      map(value => {
+        this.setToken(value.accessToken)
+        return decode(value.accessToken)
+      }),
       catchError(transformError)
     )
 
@@ -84,7 +87,7 @@ export class AuthService extends CacheService {
       return Observable.throw('Failed to login! Email needs to end with @test.com.')
     }
 
-    let authStatus = {
+    const authStatus = {
       isAuthenticated: true,
       userId: 'e4d1bc2ab25c',
       userRole: email.toLowerCase().includes('cashier')
@@ -94,8 +97,8 @@ export class AuthService extends CacheService {
           : email.toLowerCase().includes('manager') ? Role.Manager : Role.None,
     } as IAuthStatus
 
-    let authResponse = {
-      accessToken: jwt.sign(authStatus, 'secret', {
+    const authResponse = {
+      accessToken: jwtLib.sign(authStatus, 'secret', {
         expiresIn: '1h',
         algorithm: 'none',
       }),
@@ -114,11 +117,11 @@ export class AuthService extends CacheService {
   }
 
   private getDecodedToken(): IAuthStatus {
-    return decode(this.getStringItem('jwt'))
+    return decode(this.getItem('jwt'))
   }
 
   getToken(): string {
-    return this.getStringItem('jwt')
+    return this.getItem('jwt') || ''
   }
 
   private clearToken() {

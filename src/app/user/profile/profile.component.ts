@@ -45,15 +45,17 @@ export class ProfileComponent implements OnInit {
       authStatus => (this.currentUserRole = authStatus.userRole)
     )
 
-    let draftUser = JSON.parse(localStorage.getItem('draft-user'))
+    // for demo purposes only
+    const draftUser = JSON.parse(localStorage.getItem('draft-user'))
 
     if (!draftUser) {
+      // the if condition is for demo purposes only
       this.userService.getCurrentUser().subscribe(user => {
         console.log(user)
         this.buildUserForm(user)
       })
     }
-    this.buildUserForm(draftUser)
+    this.buildUserForm(draftUser) // draftUser is being passed in for demo purposes only
   }
 
   buildUserForm(user?: IUser) {
@@ -143,7 +145,6 @@ export class ProfileComponent implements OnInit {
   }
 
   async save(form: FormGroup) {
-    console.log(form.value)
     this.userService
       .updateUser(form.value)
       .subscribe(res => this.buildUserForm(res), err => (this.userError = err))

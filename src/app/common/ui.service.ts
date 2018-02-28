@@ -7,7 +7,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogConfig,
 } from '@angular/material'
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 export class UiService {
@@ -31,7 +31,7 @@ export class UiService {
     customConfig?: MatDialogConfig
   ): Observable<Boolean> {
     const dialogRef = this.dialog.open(
-      SimpleDialog,
+      SimpleDialogComponent,
       customConfig || {
         width: '300px',
         data: { title: title, content: content, okText: okText, cancelText: cancelText },
@@ -43,7 +43,7 @@ export class UiService {
 }
 
 @Component({
-  selector: 'simple-dialog',
+  selector: 'app-simple-dialog',
   template: `
     <h2 mat-dialog-title>data.title</h2>
     <mat-dialog-content>
@@ -56,9 +56,9 @@ export class UiService {
     </mat-dialog-actions>
   `,
 })
-export class SimpleDialog {
+export class SimpleDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<SimpleDialog, Boolean>,
+    public dialogRef: MatDialogRef<SimpleDialogComponent, Boolean>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 }

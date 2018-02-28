@@ -29,7 +29,7 @@ export class UserService extends CacheService {
   }
 
   getCurrentUser(): Observable<IUser> {
-    let userObservable = this.getUser(this.currentAuthStatus.userId).pipe(
+    const userObservable = this.getUser(this.currentAuthStatus.userId).pipe(
       catchError(transformError)
     )
     userObservable.subscribe(
@@ -45,7 +45,7 @@ export class UserService extends CacheService {
 
   updateUser(user: IUser): Observable<IUser> {
     this.setItem('draft-user', user) // cache user data in case of errors
-    let updateResponse = this.httpClient
+    const updateResponse = this.httpClient
       .put<IUser>(`${environment.baseUrl}/v1/user/${user.id || 0}`, user)
       .pipe(catchError(transformError))
 
