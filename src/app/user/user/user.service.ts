@@ -16,8 +16,16 @@ export interface IUsers {
   total: number
 }
 
+export interface IUserService {
+  currentUser: BehaviorSubject<IUser>
+  getCurrentUser(): Observable<IUser>
+  getUser(id): Observable<IUser>
+  updateUser(user: IUser): Observable<IUser>
+  getUsers(pageSize: number, searchText: string, pagesToSkip: number): Observable<IUsers>
+}
+
 @Injectable()
-export class UserService extends CacheService {
+export class UserService extends CacheService implements IUserService {
   currentUser = new BehaviorSubject<IUser>(this.getItem('user') || new User())
   private currentAuthStatus: IAuthStatus
   constructor(private httpClient: HttpClient, private authService: AuthService) {

@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  AfterContentInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material'
 import { AuthService } from './auth/auth.service'
@@ -54,7 +60,7 @@ import { ObservableMedia, MediaChange } from '@angular/flex-layout'
   `,
 })
 export class AppComponent implements OnInit {
-  displayAccountIcons = false
+  _displayAccountIcons = false
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -68,8 +74,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.authStatus.subscribe(
-      authStatus => (this.displayAccountIcons = authStatus.isAuthenticated)
-    )
+    this.authService.authStatus.subscribe(authStatus => {
+      // HACK: setTimeout mitigates ExpressionChangedAfterItHasBeenCheckedError
+      setTimeout(() => {
+        this._displayAccountIcons = authStatus.isAuthenticated
+      }, 0)
+    })
+  }
+
+  get displayAccountIcons() {
+    return this._displayAccountIcons
   }
 }

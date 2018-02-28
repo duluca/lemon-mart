@@ -48,6 +48,10 @@ export class User implements IUser {
   ) {}
 
   static BuildUser(user: IUser) {
+    if (!user) {
+      return new User()
+    }
+
     return new User(
       user.id,
       user.email,

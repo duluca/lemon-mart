@@ -6,18 +6,28 @@ import { MaterialModule } from './material.module'
 import { AuthService } from './auth/auth.service'
 import { AuthServiceFake } from './auth/auth.service.fake'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
+import { ObservableMedia } from '@angular/flex-layout'
+import {
+  commonTestingModules,
+  commonTestingProviders,
+  MatIconRegistryFake,
+  DomSanitizerFake,
+  ObservableMediaFake,
+} from './common/common.testing'
+import { MatIconRegistry } from '@angular/material'
+import { DomSanitizer } from '@angular/platform-browser'
 describe('AppComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule,
-          MaterialModule,
-          NoopAnimationsModule,
-          HttpClientTestingModule,
-        ],
-        providers: [{ provide: AuthService, useClass: AuthServiceFake }],
-        declarations: [AppComponent],
+        imports: commonTestingModules,
+        providers: commonTestingProviders.concat([
+          { provide: ObservableMedia, useClass: ObservableMediaFake },
+          { provide: MatIconRegistry, useClass: MatIconRegistryFake },
+          { provide: DomSanitizer, useClass: DomSanitizerFake },
+        ]),
+        declarations: [AppComponent, NavigationMenuComponent],
       }).compileComponents()
     })
   )
@@ -30,12 +40,12 @@ describe('AppComponent', () => {
     })
   )
   it(
-    'should render title in a h1 tag',
+    'should render app-container',
     async(() => {
       const fixture = TestBed.createComponent(AppComponent)
       fixture.detectChanges()
       const compiled = fixture.debugElement.nativeElement
-      expect(compiled.querySelector('.mat-h2').textContent).toContain('LemonMart')
+      expect(compiled.querySelector('.app-container')).toBeDefined()
     })
   )
 })

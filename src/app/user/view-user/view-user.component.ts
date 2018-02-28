@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router'
         <p><span class="mat-input bold">Date of Birth</span></p>
         <p>{{currentUser.dateOfBirth | date:'mediumDate'}}</p>
       </mat-card-content>
-      <mat-card-actions *ngIf="!this.user">
+      <mat-card-actions *ngIf="editMode">
         <button mat-button mat-raised-button>Edit</button>
       </mat-card-actions>
     </mat-card>
@@ -33,6 +33,10 @@ import { ActivatedRoute } from '@angular/router'
 export class ViewUserComponent implements OnInit {
   @Input() user: IUser
   currentUser = new User()
+
+  get editMode() {
+    return !this.user
+  }
 
   constructor(private route: ActivatedRoute) {}
 

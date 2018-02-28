@@ -7,6 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { AuthService } from '../auth/auth.service'
 import { AuthServiceFake } from '../auth/auth.service.fake'
 import { RouterTestingModule } from '@angular/router/testing'
+import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
 
 describe('LoginComponent', () => {
   let component: LoginComponent
@@ -16,14 +17,8 @@ describe('LoginComponent', () => {
     async(() => {
       TestBed.configureTestingModule({
         declarations: [LoginComponent],
-        providers: [{ provide: AuthService, useClass: AuthServiceFake }],
-        imports: [
-          RouterTestingModule,
-          FormsModule,
-          ReactiveFormsModule,
-          MaterialModule,
-          NoopAnimationsModule,
-        ],
+        providers: commonTestingProviders,
+        imports: commonTestingModules,
       }).compileComponents()
     })
   )

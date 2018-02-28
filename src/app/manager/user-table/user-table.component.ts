@@ -18,11 +18,11 @@ import 'rxjs/add/operator/debounceTime'
 export class UserTableComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name', 'email', 'role', 'status', 'id']
   dataSource = new MatTableDataSource()
-  searchForm: FormGroup
   resultsLength = 0
-  isLoadingResults = true
-  hasError = false
+  _isLoadingResults = true
+  _hasError = false
   errorText = ''
+  _skipLoading = false
 
   search = new FormControl('', OptionalTextValidation)
 
@@ -39,6 +39,10 @@ export class UserTableComponent implements OnInit, AfterViewInit {
 
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0))
 
+    if (this._skipLoading) {
+      return
+    }
+
     merge(
       this.sort.sortChange,
       this.paginator.page,
@@ -47,7 +51,7 @@ export class UserTableComponent implements OnInit, AfterViewInit {
       .pipe(
         startWith({}),
         switchMap(() => {
-          this.isLoadingResults = true
+          this._isLoadingResults = true
           return this.userService.getUsers(
             this.paginator.pageSize,
             this.search.value,
@@ -55,19 +59,27 @@ export class UserTableComponent implements OnInit, AfterViewInit {
           )
         }),
         map((data: { total: number; items: IUser[] }) => {
-          this.isLoadingResults = false
-          this.hasError = false
+          this._isLoadingResults = false
+          this._hasError = false
           this.resultsLength = data.total
 
           return data.items
         }),
         catchError(err => {
-          this.isLoadingResults = false
-          this.hasError = true
+          this._isLoadingResults = false
+          this._hasError = true
           this.errorText = err
           return of([])
         })
       )
       .subscribe(data => (this.dataSource.data = data))
+  }
+
+  get isLoadingResults() {
+    return this._isLoadingResults
+  }
+
+  get hasError() {
+    return this._hasError
   }
 }

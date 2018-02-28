@@ -8,6 +8,7 @@ import { LoginComponent } from '../login/login.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AuthService } from '../auth/auth.service'
 import { AuthServiceFake } from '../auth/auth.service.fake'
+import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
 
 describe('HomeComponent', () => {
   let component: HomeComponent
@@ -17,14 +18,8 @@ describe('HomeComponent', () => {
     async(() => {
       TestBed.configureTestingModule({
         declarations: [HomeComponent, LoginComponent],
-        providers: [{ provide: AuthService, useClass: AuthServiceFake }],
-        imports: [
-          RouterTestingModule,
-          MaterialModule,
-          NoopAnimationsModule,
-          FormsModule,
-          ReactiveFormsModule,
-        ],
+        providers: commonTestingProviders,
+        imports: commonTestingModules,
       }).compileComponents()
     })
   )

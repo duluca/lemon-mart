@@ -1,17 +1,26 @@
 import { TestBed, inject } from '@angular/core/testing'
 
-import { AuthGuardService } from './auth-guard.service'
+import { AuthGuard } from './auth-guard.service'
+import { AuthService } from './auth.service'
+import { AuthServiceFake } from './auth.service.fake'
+import { UiService } from '../common/ui.service'
+import { commonTestingModules } from '../common/common.testing'
 
-describe('AuthGuardService', () => {
+describe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthGuardService],
+      imports: commonTestingModules,
+      providers: [
+        AuthGuard,
+        { provide: AuthService, useClass: AuthServiceFake },
+        UiService,
+      ],
     })
   })
 
   it(
     'should be created',
-    inject([AuthGuardService], (service: AuthGuardService) => {
+    inject([AuthGuard], (service: AuthGuard) => {
       expect(service).toBeTruthy()
     })
   )

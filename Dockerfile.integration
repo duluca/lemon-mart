@@ -14,7 +14,7 @@ RUN git clone $GIT_REPO .
 RUN npm install
 RUN npm run $BUILD_SCRIPT
 
-FROM rastasheep/alpine-node-chromium:8-alpine as tester
+FROM rastasheep/alpine-node-chromium:6-alpine as tester
 ENV BUILDER_SRC_DIR /usr/src
 ENV SRC_DIR /usr/src
 ENV TEST_SCRIPT test:prod
@@ -23,7 +23,7 @@ RUN mkdir -p $SRC_DIR
 WORKDIR $SRC_DIR
 COPY --from=builder $BUILDER_SRC_DIR $SRC_DIR
 
-# RUN npm run $TEST_SCRIPT
+RUN npm run $TEST_SCRIPT
 
 FROM duluca/minimal-nginx-web-server:1.13.8-alpine
 ENV BUILDER_SRC_DIR /usr/src

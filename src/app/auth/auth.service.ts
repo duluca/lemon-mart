@@ -14,6 +14,13 @@ import { of } from 'rxjs/observable/of'
 import * as jwtLib from 'jsonwebtoken' // For fakeAuthProvider only
 import { map, filter, reduce } from 'rxjs/operators'
 
+export interface IAuthService {
+  authStatus: BehaviorSubject<IAuthStatus>
+  login(email: string, password: string): Observable<IAuthStatus>
+  logout()
+  getToken(): string
+}
+
 export interface IAuthStatus {
   isAuthenticated: boolean
   userRole: Role
@@ -24,10 +31,14 @@ interface IServerAuthResponse {
   accessToken: string
 }
 
-const defaultAuthStatus = { isAuthenticated: false, userRole: Role.None, userId: null }
+export const defaultAuthStatus = {
+  isAuthenticated: false,
+  userRole: Role.None,
+  userId: null,
+}
 
 @Injectable()
-export class AuthService extends CacheService {
+export class AuthService extends CacheService implements IAuthService {
   private readonly authProvider: (
     email: string,
     password: string
