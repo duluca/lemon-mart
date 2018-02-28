@@ -5,16 +5,17 @@ jobs:
       - image: docker:17.12.0-ce-git
     working_directory: /usr/src
     steps:
-      - checkout
+      # - checkout //code is checked out in the pipeline, consider copying from CI to Pipeline
       - setup_remote_docker
       - run:
-          name: Build Docker Image
+          name: Execute Pipeline (Build Source -> Test -> Build Web Server)
+          # consider caching node_modules or switching to npm ci option when it becomes stable
           command: |
             docker build -f Dockerfile.integration . -t lemon-mart:$CIRCLE_BRANCH --build-arg CACHEBUST=$(date +%s)
             mkdir -p docker-cache
             docker save -o docker-cache/built-image.tar lemon-mart:$CIRCLE_BRANCH
       - save_cache:
-          key: *docker_cache_key
+          key: built-image-{{ .BuildNum }}
           paths:
             - docker-cache
   publish:
@@ -22,7 +23,10 @@ jobs:
       - image: docker:17.12.0-ce-git
     working_directory: /usr/src
     steps:
-      - *restore_docker_cache
+      - restore_cache:
+        keys:
+          - built-image-{{ .BuildNum }}
+          - built-image
       - setup_remote_docker
       - run:
           name: Sign into AWS ecr
@@ -34,6 +38,7 @@ jobs:
             docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
 
+# *restore_repo
 # Consider tagging images with $CIRCLE_BRANCH
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
