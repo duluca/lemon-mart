@@ -9,6 +9,7 @@ ENV BUILD_SCRIPT build:prod
 RUN mkdir -p $SRC_DIR
 WORKDIR $SRC_DIR
 # if necessary, do SSH setup here or copy source code from local or CI environment
+ARG CACHEBUST=1
 RUN git clone $GIT_REPO .
 
 RUN npm install

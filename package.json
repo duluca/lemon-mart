@@ -21,7 +21,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:prod": "ng build --prod",
-    "build:integration": "docker build --no-cache -f Dockerfile.integration .",
+    "build:integration": "cross-conf-env docker build -f Dockerfile.integration . -t $npm_package_config_imageRepo:latest --build-arg CACHEBUST=$(date +%s)",
     "premock:start": "npm run build:prod",
     "mock:standalone": "docker run -p 3000:3000 -t duluca/lemon-mart-swagger-server",
     "mock:start": "docker-compose up",

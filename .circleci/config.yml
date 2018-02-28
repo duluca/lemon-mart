@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: false
+          docker_layer_caching: true
       - run:
           name: Build Docker Image
           command: |
-            docker build -f Dockerfile.integration .
+            docker build -f Dockerfile.integration . -t 073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest --build-arg CACHEBUST=$(date +%s)
 
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
