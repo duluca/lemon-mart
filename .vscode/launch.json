@@ -2,21 +2,29 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
+      "name": "npm start",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:5000/#",
-      "webRoot": "${workspaceRoot}"
+      "webRoot": "${workspaceRoot}",
+      "runtimeArgs": [
+        "--remote-debugging-port=9222"
+        ],
+      "sourceMaps": true
     },
     {
-      "name": "ng test",
+      "name": "npm test",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:9876/debug.html",
-      "webRoot": "${workspaceRoot}"
+      "webRoot": "${workspaceRoot}",
+      "runtimeArgs": [
+        "--remote-debugging-port=9222"
+        ],
+      "sourceMaps": true
     },
     {
-      "name": "ng e2e",
+      "name": "npm run e2e",
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/node_modules/protractor/bin/protractor",
