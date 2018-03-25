@@ -15,7 +15,6 @@ RUN git clone $GIT_REPO .
 RUN npm install
 RUN npm run $BUILD_SCRIPT
 
-# FROM rastasheep/alpine-node-chromium:6-alpine as tester
 FROM slapers/alpine-node-chromium as tester
 ENV BUILDER_SRC_DIR /usr/src
 ENV SRC_DIR /usr/src
