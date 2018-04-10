@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "license": "MIT",
   "config": {
-    "imageRepo": "073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
+    "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
     "imageName": "lemon-mart",
     "imagePort": "8080",
     "awsRegion": "us-east-1",
