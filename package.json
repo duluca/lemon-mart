@@ -80,6 +80,8 @@
     "@angular/language-service": "5.2.5",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
+    "@types/jsonwebtoken": "^7.2.6",
+    "@types/jwt-decode": "^2.2.1",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
     "cross-conf-env": "^1.1.2",

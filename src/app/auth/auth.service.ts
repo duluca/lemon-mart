@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core'
-import { Role } from './role.enum'
+import { HttpClient } from '@angular/common/http'
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/observable/throw'
-import { catchError, tap } from 'rxjs/operators'
-import { CacheService } from './cache.service'
-import * as decode from 'jwt-decode'
-import { HttpClient } from '@angular/common/http'
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable'
+import { map, filter, reduce, catchError, tap } from 'rxjs/operators'
+import { of } from 'rxjs/observable/of'
+import 'rxjs/add/observable/throw'
+
+import { Role } from './role.enum'
+import { CacheService } from './cache.service'
 import { transformError } from '../common/common'
 import { environment } from '../../environments/environment'
-import { of } from 'rxjs/observable/of'
+
+import * as decode from 'jwt-decode'
 import * as jwtLib from 'jsonwebtoken' // For fakeAuthProvider only
-import { map, filter, reduce } from 'rxjs/operators'
 
 export interface IAuthService {
   authStatus: BehaviorSubject<IAuthStatus>
