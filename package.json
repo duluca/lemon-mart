@@ -14,7 +14,7 @@
     "ng": "ng",
     "standardize": "prettier **/*.ts --write",
     "standardize:linux": "prettier '**/*.ts' --write",
-    "start": "npm run standardize && ng serve --port $PORT",
+    "start": "npm run standardize && ng serve --port 5000",
     "build": "npm run standardize && ng build",
     "test": "ng test --browsers Chrome",
     "test:debug": "ng test --browsers Chrome --sourcemaps=false",
