@@ -1,1 +1,1 @@
-web: ng serve --port $PORT
+web: http-server ./dist -p $PORT
