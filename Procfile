@@ -1,1 +1,1 @@
-web: http-server ./dist -p $PORT
+web: npx http-server ./dist -p $PORT
