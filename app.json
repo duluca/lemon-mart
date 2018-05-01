@@ -1,0 +1,21 @@
+{
+  "name": "lemon-mart",
+  "scripts": {
+  },
+  "env": {
+    "NODE_ENV": "dev"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
