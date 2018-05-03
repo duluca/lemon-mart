@@ -6,6 +6,8 @@
 ## Get the book
 LemontMart has been developed in support of my book _Angular 6 for Enterprise-Ready Web Applications_. You can find it on http://AngularForEnterprise.com.
 
+Checkout **LocalCast Weather**, to learn Angular, Material, RxJS fundemantals using OpenWeatherMap.org APIs, at https://github.com/duluca/local-weather-app.
+
 ## Router-first Approach
 A router-first approach to SPA design will save development teams, large and small, significant waste in duplicative work, and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
 
