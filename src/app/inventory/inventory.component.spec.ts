@@ -9,14 +9,12 @@ describe('InventoryComponent', () => {
   let component: InventoryComponent
   let fixture: ComponentFixture<InventoryComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [InventoryComponent],
-        imports: [RouterTestingModule, MaterialModule, NoopAnimationsModule],
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [InventoryComponent],
+      imports: [RouterTestingModule, MaterialModule, NoopAnimationsModule],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InventoryComponent)

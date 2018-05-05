@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import { User, IUser } from './user'
-import { Observable } from 'rxjs/Observable'
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable'
-import { IfObservable } from 'rxjs/observable/IfObservable'
-import { catchError } from 'rxjs/operators'
+import { BehaviorSubject, Observable, of } from 'rxjs'
+import { IUser, User } from './user'
 import { IUsers } from './user.service'
-import { of } from 'rxjs/observable/of'
 
 export interface IUserService {
   currentUser: BehaviorSubject<IUser>

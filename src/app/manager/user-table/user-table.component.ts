@@ -1,14 +1,11 @@
+import { debounceTime, startWith, switchMap, map, catchError } from 'rxjs/operators'
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core'
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
 import { UserService } from '../../user/user/user.service'
-import { startWith, switchMap, map, catchError } from 'rxjs/operators'
-import { of } from 'rxjs/observable/of'
+import { of, merge } from 'rxjs'
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
-
-import { merge } from 'rxjs/observable/merge'
-import 'rxjs/add/operator/debounceTime'
 
 @Component({
   selector: 'app-user-table',
@@ -46,7 +43,7 @@ export class UserTableComponent implements OnInit, AfterViewInit {
     merge(
       this.sort.sortChange,
       this.paginator.page,
-      this.search.valueChanges.debounceTime(1000)
+      this.search.valueChanges.pipe(debounceTime(1000))
     )
       .pipe(
         startWith({}),

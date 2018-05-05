@@ -11,15 +11,13 @@ describe('ManagerComponent', () => {
   let component: ManagerComponent
   let fixture: ComponentFixture<ManagerComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [ManagerComponent],
-        providers: commonTestingProviders,
-        imports: commonTestingModules.concat([ManagerMaterialModule]),
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ManagerComponent],
+      providers: commonTestingProviders,
+      imports: commonTestingModules.concat([ManagerMaterialModule]),
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ManagerComponent)

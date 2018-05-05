@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core'
-import { CacheService } from '../../auth/cache.service'
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import { User, IUser } from './user'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs/Observable'
-import { AuthService, IAuthStatus } from '../../auth/auth.service'
-import { environment } from '../../../environments/environment'
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable'
-import { IfObservable } from 'rxjs/observable/IfObservable'
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable, throwError as observableThrowError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
+import { environment } from '../../../environments/environment'
+import { AuthService, IAuthStatus } from '../../auth/auth.service'
+import { CacheService } from '../../auth/cache.service'
 import { transformError } from '../../common/common'
+import { IUser, User } from './user'
 
 export interface IUsers {
   items: IUser[]
@@ -42,7 +39,7 @@ export class UserService extends CacheService implements IUserService {
     )
     userObservable.subscribe(
       user => this.currentUser.next(user),
-      err => Observable.throw(err)
+      err => observableThrowError(err)
     )
     return userObservable
   }
@@ -62,7 +59,7 @@ export class UserService extends CacheService implements IUserService {
         this.currentUser.next(res)
         this.removeItem('draft-user')
       },
-      err => Observable.throw(err)
+      err => observableThrowError(err)
     )
 
     return updateResponse

@@ -6,13 +6,11 @@ describe('InventoryHomeComponent', () => {
   let component: InventoryHomeComponent
   let fixture: ComponentFixture<InventoryHomeComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [InventoryHomeComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [InventoryHomeComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InventoryHomeComponent)

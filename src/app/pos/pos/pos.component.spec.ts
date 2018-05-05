@@ -10,15 +10,13 @@ describe('PosComponent', () => {
   let component: PosComponent
   let fixture: ComponentFixture<PosComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [PosComponent],
-        providers: [{ provide: TransactionService, useClass: TransactionServiceFake }],
-        imports: [MaterialModule, NoopAnimationsModule],
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [PosComponent],
+      providers: [{ provide: TransactionService, useClass: TransactionServiceFake }],
+      imports: [MaterialModule, NoopAnimationsModule],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PosComponent)

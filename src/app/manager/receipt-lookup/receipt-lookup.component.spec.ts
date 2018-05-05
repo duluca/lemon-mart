@@ -6,13 +6,11 @@ describe('ReceiptLookupComponent', () => {
   let component: ReceiptLookupComponent
   let fixture: ComponentFixture<ReceiptLookupComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [ReceiptLookupComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ReceiptLookupComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReceiptLookupComponent)

@@ -10,15 +10,13 @@ describe('UserTableComponent', () => {
   let component: UserTableComponent
   let fixture: ComponentFixture<UserTableComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [UserTableComponent],
-        providers: commonTestingProviders,
-        imports: commonTestingModules.concat([ManagerMaterialModule]),
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [UserTableComponent],
+      providers: commonTestingProviders,
+      imports: commonTestingModules.concat([ManagerMaterialModule]),
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserTableComponent)

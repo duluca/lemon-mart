@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core'
 import {
-  MatStepperModule,
-  MatRadioModule,
-  MatDatepickerModule,
-  MatSelectModule,
-  MatTooltipModule,
-  MatFormFieldModule,
-  MatLineModule,
-  MatDividerModule,
   MatAutocompleteModule,
-  MatNativeDateModule,
+  MatDatepickerModule,
+  MatDividerModule,
   MatListModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatStepperModule,
+  MatTooltipModule,
 } from '@angular/material'
 
 @NgModule({
@@ -21,8 +18,6 @@ import {
     MatSelectModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    MatLineModule,
     MatDividerModule,
     MatAutocompleteModule,
     MatListModule,
@@ -34,8 +29,6 @@ import {
     MatSelectModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    MatLineModule,
     MatDividerModule,
     MatAutocompleteModule,
     MatListModule,

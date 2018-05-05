@@ -6,13 +6,11 @@ describe('StockEntryComponent', () => {
   let component: StockEntryComponent
   let fixture: ComponentFixture<StockEntryComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [StockEntryComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [StockEntryComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StockEntryComponent)

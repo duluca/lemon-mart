@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core'
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms'
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { Observable } from 'rxjs/Observable'
-import { startWith } from 'rxjs/operators/startWith'
-import { map } from 'rxjs/operators/map'
-import { USStateFilter, IUSState, PhoneType } from './data'
-import {
-  OptionalTextValidation,
-  RequiredTextValidation,
-  OneCharValidation,
-  EmailValidation,
-  BirthDateValidation,
-  USAZipCodeValidation,
-  USAPhoneNumberValidation,
-} from '../../common/validations'
-import { IUser, IPhone, User } from '../user/user'
-import { UserService } from '../user/user.service'
+import { Observable } from 'rxjs'
+import { map, startWith } from 'rxjs/operators'
+import { $enum } from 'ts-enum-util'
 import { AuthService } from '../../auth/auth.service'
 import { Role as UserRole } from '../../auth/role.enum'
-import { $enum } from 'ts-enum-util'
+import {
+  BirthDateValidation,
+  EmailValidation,
+  OneCharValidation,
+  OptionalTextValidation,
+  RequiredTextValidation,
+  USAPhoneNumberValidation,
+  USAZipCodeValidation,
+} from '../../common/validations'
+import { IPhone, IUser } from '../user/user'
+import { UserService } from '../user/user.service'
+import { IUSState, PhoneType, USStateFilter } from './data'
 
 @Component({
   selector: 'app-profile',

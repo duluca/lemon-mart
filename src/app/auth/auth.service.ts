@@ -1,20 +1,13 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import { Observable } from 'rxjs/Observable'
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable'
-import { map, filter, reduce, catchError, tap } from 'rxjs/operators'
-import { of } from 'rxjs/observable/of'
-import 'rxjs/add/observable/throw'
-
-import { Role } from './role.enum'
-import { CacheService } from './cache.service'
-import { transformError } from '../common/common'
-import { environment } from '../../environments/environment'
-
-import * as decode from 'jwt-decode'
+import { Injectable } from '@angular/core'
 import * as jwtLib from 'jsonwebtoken' // For fakeAuthProvider only
+import * as decode from 'jwt-decode'
+import { BehaviorSubject, Observable, of, throwError as observableThrowError } from 'rxjs'
+import { catchError, map } from 'rxjs/operators'
+import { environment } from '../../environments/environment'
+import { transformError } from '../common/common'
+import { CacheService } from './cache.service'
+import { Role } from './role.enum'
 
 export interface IAuthService {
   authStatus: BehaviorSubject<IAuthStatus>
@@ -64,7 +57,7 @@ export class AuthService extends CacheService implements IAuthService {
     const loginResponse = this.authProvider(email, password).pipe(
       map(value => {
         this.setToken(value.accessToken)
-        return decode(value.accessToken)
+        return decode(value.accessToken) as IAuthStatus
       }),
       catchError(transformError)
     )
@@ -75,7 +68,7 @@ export class AuthService extends CacheService implements IAuthService {
       },
       err => {
         this.logout()
-        return Observable.throw(err)
+        return observableThrowError(err)
       }
     )
 
@@ -97,7 +90,7 @@ export class AuthService extends CacheService implements IAuthService {
     password: string
   ): Observable<IServerAuthResponse> {
     if (!email.toLowerCase().endsWith('@test.com')) {
-      return Observable.throw('Failed to login! Email needs to end with @test.com.')
+      return observableThrowError('Failed to login! Email needs to end with @test.com.')
     }
 
     const authStatus = {
@@ -107,7 +100,9 @@ export class AuthService extends CacheService implements IAuthService {
         ? Role.Cashier
         : email.toLowerCase().includes('clerk')
           ? Role.Clerk
-          : email.toLowerCase().includes('manager') ? Role.Manager : Role.None,
+          : email.toLowerCase().includes('manager')
+            ? Role.Manager
+            : Role.None,
     } as IAuthStatus
 
     const authResponse = {

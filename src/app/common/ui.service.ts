@@ -7,7 +7,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogConfig,
 } from '@angular/material'
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class UiService {

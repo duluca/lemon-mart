@@ -1,26 +1,19 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MaterialModule } from '../material.module'
-import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing'
-import { RouterTestingModule } from '@angular/router/testing'
-import { AuthServiceFake } from '../auth/auth.service.fake'
-import { AuthService } from '../auth/auth.service'
-import { UiService } from './ui.service'
-import { UserServiceFake } from '../user/user/user.service.fake'
-import { UserService } from '../user/user/user.service'
-import { MatIconRegistry } from '@angular/material'
-import { DomSanitizer, SafeResourceUrl, SafeValue } from '@angular/platform-browser'
-import { HttpClientModule, HttpClient } from '@angular/common/http'
-import { fakeAsync } from '@angular/core/testing'
-import { of } from 'rxjs/observable/of'
-import { Observable } from 'rxjs/Observable'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { MediaChange } from '@angular/flex-layout'
-import { Subscription } from 'rxjs'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { SafeResourceUrl, SafeValue } from '@angular/platform-browser'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+// tslint:disable-next-line:max-line-length
 import { SecurityContext } from '@angular/platform-browser/src/security/dom_sanitization_service'
+import { RouterTestingModule } from '@angular/router/testing'
+import { Observable, Subscription, of } from 'rxjs'
+import { AuthService } from '../auth/auth.service'
+import { AuthServiceFake } from '../auth/auth.service.fake'
+import { MaterialModule } from '../material.module'
 import { SharedComponentsModule } from '../shared-components.module'
+import { UserService } from '../user/user/user.service'
+import { UserServiceFake } from '../user/user/user.service.fake'
+import { UiService } from './ui.service'
 
 const FAKE_SVGS = {
   lemon: '<svg><path id="lemon" name="lemon"></path></svg>',
@@ -47,7 +40,7 @@ export class ObservableMediaFake {
 export class MatIconRegistryFake {
   _document = document
   addSvgIcon(iconName: string, url: SafeResourceUrl): this {
-    //this.addSvgIcon('lemon', 'lemon.svg')
+    // this.addSvgIcon('lemon', 'lemon.svg')
     return this
   }
 

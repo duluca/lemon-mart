@@ -13,15 +13,13 @@ describe('LoginComponent', () => {
   let component: LoginComponent
   let fixture: ComponentFixture<LoginComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [LoginComponent],
-        providers: commonTestingProviders,
-        imports: commonTestingModules,
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginComponent],
+      providers: commonTestingProviders,
+      imports: commonTestingModules,
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent)

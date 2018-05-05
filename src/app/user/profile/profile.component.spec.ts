@@ -8,15 +8,13 @@ describe('ProfileComponent', () => {
   let component: ProfileComponent
   let fixture: ComponentFixture<ProfileComponent>
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        providers: commonTestingProviders,
-        imports: commonTestingModules.concat([UserMaterialModule]),
-        declarations: [ProfileComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      providers: commonTestingProviders,
+      imports: commonTestingModules.concat([UserMaterialModule]),
+      declarations: [ProfileComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProfileComponent)
