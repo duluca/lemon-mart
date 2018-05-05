@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import * as jwtLib from 'jsonwebtoken' // For fakeAuthProvider only
+// import { sign } from 'jsonwebtoken' // For fakeAuthProvider only
 import * as decode from 'jwt-decode'
 import { BehaviorSubject, Observable, of, throwError as observableThrowError } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
@@ -8,6 +8,10 @@ import { environment } from '../../environments/environment'
 import { transformError } from '../common/common'
 import { CacheService } from './cache.service'
 import { Role } from './role.enum'
+
+function sign(status: any, string, options: any) {
+  return ''
+}
 
 export interface IAuthService {
   authStatus: BehaviorSubject<IAuthStatus>
@@ -100,13 +104,11 @@ export class AuthService extends CacheService implements IAuthService {
         ? Role.Cashier
         : email.toLowerCase().includes('clerk')
           ? Role.Clerk
-          : email.toLowerCase().includes('manager')
-            ? Role.Manager
-            : Role.None,
+          : email.toLowerCase().includes('manager') ? Role.Manager : Role.None,
     } as IAuthStatus
 
     const authResponse = {
-      accessToken: jwtLib.sign(authStatus, 'secret', {
+      accessToken: sign(authStatus, 'secret', {
         expiresIn: '1h',
         algorithm: 'none',
       }),
