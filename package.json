@@ -31,7 +31,7 @@
     "mock:standalone": "docker run -p 3000:3000 -t duluca/lemon-mart-swagger-server",
     "mock:start": "docker-compose up",
     "mock:stop": "docker-compose down",
-    "test:prod": "ng test --browsers ChromiumNoSandbox --watch=false --reporters html",
+    "test:prod": "ng test --browsers ChromiumNoSandbox --watch=false --code-coverage",
     "test:prod:e2e": "npm run e2e",
     "predocker:build": "npm run build:prod && npm run test:prod",
     "docker:build": "cross-conf-env docker image build . -t $npm_package_config_imageRepo:$npm_package_version",
