@@ -1,11 +1,11 @@
-import { debounceTime, startWith, switchMap, map, catchError } from 'rxjs/operators'
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core'
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
+import { FormControl } from '@angular/forms'
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
-import { UserService } from '../../user/user/user.service'
-import { of, merge } from 'rxjs'
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
+import { merge, of } from 'rxjs'
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
+import { UserService } from '../../user/user/user.service'
 
 @Component({
   selector: 'app-user-table',
