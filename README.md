@@ -4,9 +4,11 @@
 ![lemon-mart-login](https://user-images.githubusercontent.com/822159/36320811-80a9c5f8-1315-11e8-8ba1-d7a62c31ec79.png)
 
 ## Get the book
-LemontMart has been developed in support of my book _Angular 6 for Enterprise-Ready Web Applications_. You can find it on http://AngularForEnterprise.com.
+LemontMart has been developed in support of my book _Angular 6 for Enterprise-Ready Web Applications_. You can get the book on http://AngularForEnterprise.com.
 
-Checkout **LocalCast Weather**, to learn Angular, Material, RxJS fundemantals using OpenWeatherMap.org APIs, at https://github.com/duluca/local-weather-app.
+Check out **LocalCast Weather**, to learn Angular, Material, RxJS fundemantals using OpenWeatherMap.org APIs, at https://github.com/duluca/local-weather-app.
+
+Build, debug and publish Docker images with [**npm Scripts for Docker**](bit.ly/npmScriptsForDocker) and achieve Blue-Green deployments on AWS Fargate with [**npm Scripts for AWS**](bit.ly/npmScriptsForAWS).
 
 ## Router-first Approach
 A router-first approach to SPA design will save development teams, large and small, significant waste in duplicative work, and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
