@@ -1,6 +1,8 @@
 # LemonMart
 > LemonMart was implemented with a Route-first approach to designing SPAs.
 
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/duluca/lemon-mart.svg?columns=all)](https://waffle.io/duluca/lemon-mart)
+
 ![lemon-mart-login](https://user-images.githubusercontent.com/822159/36320811-80a9c5f8-1315-11e8-8ba1-d7a62c31ec79.png)
 
 ## Get the book
