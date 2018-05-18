@@ -39,12 +39,21 @@ import { ObservableMedia, MediaChange } from '@angular/flex-layout'
   ],
   template: `
   <div class="app-container">
-    <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar" [class.app-is-mobile]="media.isActive('xs')">
-      <button *ngIf="displayAccountIcons" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-      <a mat-icon-button routerLink="/home"><mat-icon svgIcon="lemon"></mat-icon><span class="mat-h2">LemonMart</span></a>
+    <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar"
+      [class.app-is-mobile]="media.isActive('xs')">
+      <button *ngIf="displayAccountIcons" mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <a mat-icon-button routerLink="/home">
+        <mat-icon svgIcon="lemon"></mat-icon><span class="mat-h2">LemonMart</span>
+      </a>
       <span class="flex-spacer"></span>
-      <button *ngIf="displayAccountIcons" mat-mini-fab routerLink="/user/profile" matTooltip="Profile" aria-label="User Profile"><mat-icon>account_circle</mat-icon></button>
-      <button *ngIf="displayAccountIcons" mat-mini-fab routerLink="/user/logout" matTooltip="Logout" aria-label="Logout"><mat-icon>lock_open</mat-icon></button>
+      <button *ngIf="displayAccountIcons" mat-mini-fab routerLink="/user/profile"
+        matTooltip="Profile" aria-label="User Profile"><mat-icon>account_circle</mat-icon>
+      </button>
+      <button *ngIf="displayAccountIcons" mat-mini-fab routerLink="/user/logout"
+        matTooltip="Logout" aria-label="Logout"><mat-icon>lock_open</mat-icon>
+      </button>
     </mat-toolbar>
     <mat-sidenav-container class="app-sidenav-container"
                           [style.marginTop.px]="media.isActive('xs') ? 56 : 0">
