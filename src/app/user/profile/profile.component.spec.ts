@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ProfileComponent } from './profile.component'
-import { commonTestingProviders, commonTestingModules } from '../../common/common.testing'
+import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { UserMaterialModule } from '../user.material.module'
+import { ProfileComponent } from './profile.component'
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent
@@ -19,7 +19,6 @@ describe('ProfileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProfileComponent)
     component = fixture.componentInstance
-    //component.
     fixture.detectChanges()
   })
 

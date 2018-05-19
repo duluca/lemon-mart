@@ -22,4 +22,5 @@
   "prettier.trailingComma": "es5",
   "typescriptHero.imports.insertSemicolons": false,
   "typescriptHero.imports.multiLineWrapThreshold": 90,
+    "typescriptHero.imports.organizeOnSave": true
 }
