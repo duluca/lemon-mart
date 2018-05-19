@@ -6,7 +6,7 @@ export interface IUSState {
 export function USStateFilter(value: string): IUSState[] {
   return USStates.filter(state => {
     return (
-      (state.code.length == 2 && state.code.toLowerCase() === value.toLowerCase()) ||
+      (state.code.length === 2 && state.code.toLowerCase() === value.toLowerCase()) ||
       state.name.toLowerCase().indexOf(value.toLowerCase()) === 0
     )
   })
