@@ -1,1 +1,1 @@
-web: npm run heroku-postinstall && npx http-server ./dist -p $PORT
+web: npm install && npm run heroku-postinstall && npx http-server ./dist -p $PORT
