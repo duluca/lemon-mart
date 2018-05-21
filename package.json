@@ -15,7 +15,7 @@
     "npm": "6.0.1"
   },
   "scripts": {
-    "heroku-postinstall": "ng build --aot --prod",
+    "postinstall": "ng build --prod",
     "ng": "ng",
     "standardize:win": "prettier **/*.ts --write",
     "standardize:linux": "prettier '**/*.ts' --write",
