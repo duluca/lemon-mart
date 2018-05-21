@@ -17,7 +17,8 @@
   "scripts": {
     "heroku-postinstall": "ng build --aot --prod",
     "ng": "ng",
-    "standardize": "prettier '**/*.ts' --write",
+    "standardize": "run-s -c standardize:win standardize:linux",
+    "standardize:win": "prettier **/*.ts --write",
     "standardize:linux": "prettier '**/*.ts' --write",
     "start": "npm run standardize && ng serve --port 5000",
     "build": "npm run standardize && ng build",
