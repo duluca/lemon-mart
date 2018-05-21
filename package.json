@@ -11,8 +11,8 @@
     "awsService": "lemon-mart-service"
   },
   "engines": {
-    "node": "8.11.1",
-    "npm": "6.0.0"
+    "node": "8.11.2",
+    "npm": "6.0.1"
   },
   "scripts": {
     "heroku-postinstall": "ng build --aot --prod",
