@@ -2,8 +2,8 @@
 
 @include mat-core();
 
-// $localcast-primary: mat-palette($mat-indigo);
-$localcast-primary: mat-palette($mat-green, 800);
+$localcast-primary: mat-palette($mat-indigo);
+// $localcast-primary: mat-palette($mat-green, 800);
 $localcast-accent: mat-palette($mat-lime, A400);
 
 $localcast-app-theme: mat-light-theme($localcast-primary, $localcast-accent);

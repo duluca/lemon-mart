@@ -17,11 +17,10 @@
   "scripts": {
     "heroku-postinstall": "ng build --aot --prod",
     "ng": "ng",
-    "standardize": "run-s -c standardize:win standardize:linux",
     "standardize:win": "prettier **/*.ts --write",
     "standardize:linux": "prettier '**/*.ts' --write",
-    "start": "npm run standardize && ng serve --port 5000",
-    "build": "npm run standardize && ng build",
+    "start": "npm run standardize:linux && ng serve --port 5000",
+    "build": "npm run standardize:linux && ng build",
     "test": "ng test --browsers Chrome",
     "test:debug": "ng test --browsers Chrome --sourcemaps=false",
     "lint": "ng lint",
