@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { map, startWith } from 'rxjs/operators'
 import { $enum } from 'ts-enum-util'
+
 import { AuthService } from '../../auth/auth.service'
 import { Role as UserRole } from '../../auth/role.enum'
 import {
@@ -104,9 +105,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addPhone() {
-    this.phonesArray.push(
-      this.buildPhoneFormControl(this.userForm.get('phones').value.length + 1)
-    )
+    this.phonesArray.push(this.buildPhoneFormControl(this.phonesArray.value.length + 1))
   }
 
   get phonesArray(): FormArray {
