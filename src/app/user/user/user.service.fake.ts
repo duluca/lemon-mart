@@ -1,15 +1,7 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { IUser, User } from './user'
-import { IUsers } from './user.service'
-
-export interface IUserService {
-  currentUser: BehaviorSubject<IUser>
-  getCurrentUser(): Observable<IUser>
-  getUser(id): Observable<IUser>
-  updateUser(user: IUser): Observable<IUser>
-  getUsers(pageSize: number, searchText: string, pagesToSkip: number): Observable<IUsers>
-}
+import { IUsers, IUserService } from './user.service'
 
 @Injectable()
 export class UserServiceFake implements IUserService {
