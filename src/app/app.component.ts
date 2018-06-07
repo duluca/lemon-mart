@@ -1,14 +1,9 @@
-import {
-  Component,
-  OnInit,
-  AfterContentInit,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core'
-import { DomSanitizer } from '@angular/platform-browser'
+import { Component, OnInit } from '@angular/core'
+import { ObservableMedia } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material'
+import { DomSanitizer } from '@angular/platform-browser'
+
 import { AuthService } from './auth/auth.service'
-import { ObservableMedia, MediaChange } from '@angular/flex-layout'
 
 @Component({
   selector: 'app-root',
@@ -55,8 +50,7 @@ import { ObservableMedia, MediaChange } from '@angular/flex-layout'
         matTooltip="Logout" aria-label="Logout"><mat-icon>lock_open</mat-icon>
       </button>
     </mat-toolbar>
-    <mat-sidenav-container class="app-sidenav-container"
-                          [style.marginTop.px]="media.isActive('xs') ? 56 : 0">
+    <mat-sidenav-container class="app-sidenav-container">
       <mat-sidenav #sidenav [mode]="media.isActive('xs') ? 'over' : 'side'"
                   [fixedInViewport]="media.isActive('xs')" fixedTopGap="56">
         <app-navigation-menu></app-navigation-menu>
