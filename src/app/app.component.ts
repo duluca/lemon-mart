@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { ObservableMedia } from '@angular/flex-layout'
-import { MatIconRegistry } from '@angular/material'
+import { MatIconRegistry, MatSidenav } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
 
 import { AuthService } from './auth/auth.service'
@@ -63,7 +63,8 @@ import { AuthService } from './auth/auth.service'
   `,
 })
 export class AppComponent implements OnInit {
-  _displayAccountIcons = false
+  private _displayAccountIcons = false
+  @ViewChild('sidenav') public sideNav: MatSidenav
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -81,6 +82,9 @@ export class AppComponent implements OnInit {
       // HACK: setTimeout mitigates ExpressionChangedAfterItHasBeenCheckedError
       setTimeout(() => {
         this._displayAccountIcons = authStatus.isAuthenticated
+        if (!authStatus.isAuthenticated) {
+          this.sideNav.close()
+        }
       }, 0)
     })
   }
