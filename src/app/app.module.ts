@@ -49,5 +49,6 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor'
     },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [SimpleDialogComponent]
 })
 export class AppModule {}
