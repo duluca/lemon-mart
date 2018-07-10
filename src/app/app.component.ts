@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private authService: AuthService,
+    public authService: AuthService,
     public media: ObservableMedia
   ) {
     iconRegistry.addSvgIcon(
