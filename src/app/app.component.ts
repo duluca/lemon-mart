@@ -35,20 +35,20 @@ import { AuthService } from './auth/auth.service'
   template: `
   <div class="app-container">
     <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar"
-      [class.app-is-mobile]="media.isActive('xs')">
-      <button *ngIf="displayAccountIcons" mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <a mat-icon-button routerLink="/home">
-        <mat-icon svgIcon="lemon"></mat-icon><span class="mat-h2">LemonMart</span>
-      </a>
-      <span class="flex-spacer"></span>
-      <button *ngIf="displayAccountIcons" mat-mini-fab routerLink="/user/profile"
-        matTooltip="Profile" aria-label="User Profile"><mat-icon>account_circle</mat-icon>
-      </button>
-      <button *ngIf="displayAccountIcons" mat-mini-fab routerLink="/user/logout"
-        matTooltip="Logout" aria-label="Logout"><mat-icon>lock_open</mat-icon>
-      </button>
+      [class.app-is-mobile]="media.isActive('xs')" *ngIf="authService.authStatus | async as authStatus">
+        <button *ngIf="authStatus.isAuthenticated" mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a mat-icon-button routerLink="/home">
+          <mat-icon svgIcon="lemon"></mat-icon><span class="mat-h2">LemonMart</span>
+        </a>
+        <span class="flex-spacer"></span>
+        <button *ngIf="authStatus.isAuthenticated" mat-mini-fab routerLink="/user/profile"
+          matTooltip="Profile" aria-label="User Profile"><mat-icon>account_circle</mat-icon>
+        </button>
+        <button *ngIf="authStatus.isAuthenticated" mat-mini-fab routerLink="/user/logout"
+          matTooltip="Logout" aria-label="Logout"><mat-icon>lock_open</mat-icon>
+        </button>
     </mat-toolbar>
     <mat-sidenav-container class="app-sidenav-container">
       <mat-sidenav #sidenav [mode]="media.isActive('xs') ? 'over' : 'side'"
@@ -63,7 +63,6 @@ import { AuthService } from './auth/auth.service'
   `,
 })
 export class AppComponent implements OnInit {
-  private _displayAccountIcons = false
   @ViewChild('sidenav') public sideNav: MatSidenav
   constructor(
     iconRegistry: MatIconRegistry,
@@ -79,17 +78,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.authStatus.subscribe(authStatus => {
-      // HACK: setTimeout mitigates ExpressionChangedAfterItHasBeenCheckedError
-      setTimeout(() => {
-        this._displayAccountIcons = authStatus.isAuthenticated
-        if (!authStatus.isAuthenticated) {
-          this.sideNav.close()
-        }
-      }, 0)
+      if (!authStatus.isAuthenticated) {
+        this.sideNav.close()
+      }
     })
-  }
-
-  get displayAccountIcons() {
-    return this._displayAccountIcons
   }
 }
