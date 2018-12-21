@@ -1,4 +1,4 @@
-FROM duluca/minimal-node-web-server:8.11.1
+FROM duluca/minimal-node-web-server:10.14.2
 
 WORKDIR /usr/src/app
 
