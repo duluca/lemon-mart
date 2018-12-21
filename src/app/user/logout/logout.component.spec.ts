@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 
+import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { LogoutComponent } from './logout.component'
-import { commonTestingProviders, commonTestingModules } from '../../common/common.testing'
 
 describe('LogoutComponent', () => {
   let component: LogoutComponent

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core'
 import {
-  MatTableModule,
-  MatSortModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
+  MatSortModule,
+  MatTableModule,
 } from '@angular/material'
 
 @NgModule({

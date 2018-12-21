@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms'
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
+
 import { AuthService } from '../auth/auth.service'
-import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 import { Role } from '../auth/role.enum'
-import { EmailValidation, PasswordValidation } from '../common/validations'
 import { UiService } from '../common/ui.service'
+import { EmailValidation, PasswordValidation } from '../common/validations'
 
 @Component({
   selector: 'app-login',

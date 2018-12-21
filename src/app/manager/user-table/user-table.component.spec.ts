@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-
-import { UserTableComponent } from './user-table.component'
-import { commonTestingProviders, commonTestingModules } from '../../common/common.testing'
-import { ManagerMaterialModule } from '../manager.material.module'
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { MatTableDataSource } from '@angular/material'
+
+import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { User } from '../../user/user/user'
+import { ManagerMaterialModule } from '../manager.material.module'
+import { UserTableComponent } from './user-table.component'
 
 describe('UserTableComponent', () => {
   let component: UserTableComponent

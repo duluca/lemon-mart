@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms'
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
 import { merge, of } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
+
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
 import { UserService } from '../../user/user/user.service'

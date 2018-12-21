@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { sign } from 'fake-jwt-sign' // For fakeAuthProvider only
 import * as decode from 'jwt-decode'
-import { BehaviorSubject, Observable, of, throwError as observableThrowError } from 'rxjs'
+import { BehaviorSubject, Observable, throwError as observableThrowError, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
+
 import { environment } from '../../environments/environment'
 import { transformError } from '../common/common'
 import { CacheService } from './cache.service'

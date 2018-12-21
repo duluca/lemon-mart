@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-
-import { PosComponent } from './pos.component'
-import { MaterialModule } from '../../material.module'
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+
+import { MaterialModule } from '../../material.module'
 import { TransactionService } from '../transaction/transaction.service'
 import { TransactionServiceFake } from '../transaction/transaction.service.fake'
+import { PosComponent } from './pos.component'
 
 describe('PosComponent', () => {
   let component: PosComponent

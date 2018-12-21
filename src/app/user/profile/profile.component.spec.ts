@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { UserMaterialModule } from '../user.material.module'
