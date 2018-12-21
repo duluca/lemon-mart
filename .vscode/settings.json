@@ -23,5 +23,5 @@
   "typescriptHero.imports.insertSemicolons": false,
   "typescriptHero.imports.multiLineWrapThreshold": 90,
     "typescriptHero.imports.organizeOnSave": true,
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
