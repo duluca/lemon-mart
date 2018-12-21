@@ -44,7 +44,7 @@ https://github.com/duluca/lemon-mart-swagger-server.
 ### Pre-requisites
 - Do NOT install `@angular/cli` or `typescript` globally to avoid version mismatch issues across multiple projects.
 - Run `npx @angular/cli new app-name --routing` to create a new Angular app with basic routing wired.
-  - If you have trouble with this command, try npx -p @angular/cli new app-name --routing
+  - If you have trouble with this command, try `npx -p @angular/cli new app-name --routing`
 - To run `ng` commands from within the project directory, preprend `npx` to commands, like `npx ng build`.
 - To continue using `ng` without having to prepend `npx`, configure shell autofallback as described here: https://www.npmjs.com/package/npx#shell-auto-fallback.
 ### During Development
