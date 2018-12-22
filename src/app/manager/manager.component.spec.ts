@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { RouterTestingModule } from '@angular/router/testing'
 
 import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
-import { MaterialModule } from '../material.module'
 import { ManagerComponent } from './manager.component'
 import { ManagerMaterialModule } from './manager.material.module'
 

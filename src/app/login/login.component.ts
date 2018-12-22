@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
-import { ActivatedRoute, ParamMap, Router } from '@angular/router'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { AuthService } from '../auth/auth.service'
 import { Role } from '../auth/role.enum'

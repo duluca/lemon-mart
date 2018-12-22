@@ -3,9 +3,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
 
-import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { MaterialModule } from '../../material.module'
-import { User } from '../user/user'
 import { ViewUserComponent } from './view-user.component'
 
 describe('ViewUserComponent', () => {

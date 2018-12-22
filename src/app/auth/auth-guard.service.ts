@@ -12,7 +12,6 @@ import { Observable } from 'rxjs'
 
 import { UiService } from '../common/ui.service'
 import { AuthService, IAuthStatus } from './auth.service'
-import { Role } from './role.enum'
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {

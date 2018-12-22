@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { Routes } from '@angular/router'
 
 import { AuthGuard } from '../auth/auth-guard.service'
 import { MaterialModule } from '../material.module'
