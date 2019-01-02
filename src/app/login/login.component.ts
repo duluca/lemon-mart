@@ -11,12 +11,14 @@ import { UiService } from '../common/ui.service'
   templateUrl: 'login.component.html',
   styles: [
     `
-    .error {
-        color: red
-    }
+      .error {
+        color: red;
+      }
     `,
     `
-    div[fxLayout] {margin-top: 32px;}
+      div[fxLayout] {
+        margin-top: 32px;
+      }
     `,
   ],
 })
@@ -48,14 +50,17 @@ export class LoginComponent implements OnInit {
   async login(submittedForm: FormGroup) {
     this.authService
       .login(submittedForm.value.email, submittedForm.value.password)
-      .subscribe(authStatus => {
-        if (authStatus.isAuthenticated) {
-          this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
-          this.router.navigate([
-            this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
-          ])
-        }
-      }, error => (this.loginError = error))
+      .subscribe(
+        authStatus => {
+          if (authStatus.isAuthenticated) {
+            this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
+            this.router.navigate([
+              this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
+            ])
+          }
+        },
+        error => (this.loginError = error)
+      )
   }
 
   homeRoutePerRole(role: Role) {

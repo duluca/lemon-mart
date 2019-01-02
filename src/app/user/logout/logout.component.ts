@@ -5,9 +5,7 @@ import { AuthService } from '../../auth/auth.service'
 @Component({
   selector: 'app-logout',
   template: `
-    <p>
-      Logging out...
-    </p>
+    <p>Logging out...</p>
   `,
   styles: [],
 })

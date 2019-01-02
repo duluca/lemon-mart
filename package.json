@@ -115,7 +115,6 @@
     "printWidth": 90,
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5",
-    "parser": "typescript"
+    "trailingComma": "es5"
   }
 }

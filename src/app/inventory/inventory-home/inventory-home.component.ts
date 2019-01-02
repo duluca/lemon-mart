@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core'
 @Component({
   selector: 'app-inventory-home',
   template: `
-    <p>
-      inventory-home works!
-    </p>
+    <p>inventory-home works!</p>
   `,
   styles: [],
 })

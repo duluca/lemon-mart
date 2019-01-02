@@ -101,7 +101,10 @@ export class ProfileComponent implements OnInit {
     this.states = this.userForm
       .get('address')
       .get('state')
-      .valueChanges.pipe(startWith(''), map(value => USStateFilter(value)))
+      .valueChanges.pipe(
+        startWith(''),
+        map(value => USStateFilter(value))
+      )
   }
 
   addPhone() {
