@@ -13,7 +13,10 @@ describe('UiService', () => {
     })
   })
 
-  it('should be created', inject([UiService], (service: UiService) => {
-    expect(service).toBeTruthy()
-  }))
+  it(
+    'should be created',
+    inject([UiService], (service: UiService) => {
+      expect(service).toBeTruthy()
+    })
+  )
 })

@@ -96,9 +96,7 @@
     "http-server": "^0.11.1",
     "import-sort": "^5.2.0",
     "import-sort-cli": "^5.2.0",
-    "import-sort-parser-babylon": "^5.2.0",
     "import-sort-parser-typescript": "^5.0.0",
-    "import-sort-style-eslint": "^5.0.0",
     "import-sort-style-module": "^5.0.0",
     "jasmine": "^3.1.0",
     "jasmine-core": "~2.6.2",
@@ -118,11 +116,6 @@
     "typescript": "^3.1.6"
   },
   "importSort": {
-    ".js, .jsx, .es6, .es": {
-      "parser": "babylon",
-      "style": "eslint",
-      "options": {}
-    },
     ".ts, .tsx": {
       "parser": "typescript",
       "style": "module",
