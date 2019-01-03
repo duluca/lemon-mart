@@ -1,10 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 
+import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
 import { ManagerComponent } from './manager.component'
-import { MaterialModule } from '../material.module'
-import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { RouterTestingModule } from '@angular/router/testing'
-import { commonTestingProviders, commonTestingModules } from '../common/common.testing'
 import { ManagerMaterialModule } from './manager.material.module'
 
 describe('ManagerComponent', () => {

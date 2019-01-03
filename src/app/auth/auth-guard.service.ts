@@ -1,17 +1,17 @@
+import { Route } from '@angular/compiler/src/core'
 import { Injectable } from '@angular/core'
 import {
-  CanActivate,
-  Router,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  CanLoad,
+  CanActivate,
   CanActivateChild,
+  CanLoad,
+  Router,
+  RouterStateSnapshot,
 } from '@angular/router'
-import { AuthService, IAuthStatus } from './auth.service'
 import { Observable } from 'rxjs'
-import { Route } from '@angular/compiler/src/core'
-import { Role } from './role.enum'
+
 import { UiService } from '../common/ui.service'
+import { AuthService, IAuthStatus } from './auth.service'
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {

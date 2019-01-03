@@ -1,19 +1,18 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-
-import { UserRoutingModule } from './user-routing.module'
-import { ProfileComponent } from './profile/profile.component'
-import { LogoutComponent } from './logout/logout.component'
-import { MaterialModule } from '../material.module'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-import { UserService } from './user/user.service'
 import { AuthGuard } from '../auth/auth-guard.service'
-import { UserMaterialModule } from './user.material.module'
+import { MaterialModule } from '../material.module'
 import { SharedComponentsModule } from '../shared-components.module'
+import { LogoutComponent } from './logout/logout.component'
+import { ProfileComponent } from './profile/profile.component'
+import { UserRoutingModule } from './user-routing.module'
+import { UserMaterialModule } from './user.material.module'
+import { UserService } from './user/user.service'
 
 @NgModule({
   imports: [

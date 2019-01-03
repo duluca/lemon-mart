@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
+
 import { IAuthService, IAuthStatus, defaultAuthStatus } from './auth.service'
 
 @Injectable()

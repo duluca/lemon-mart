@@ -1,12 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-
-import { ViewUserComponent } from './view-user.component'
-import { commonTestingProviders, commonTestingModules } from '../../common/common.testing'
-import { MaterialModule } from '../../material.module'
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
-import { User } from '../user/user'
+
+import { MaterialModule } from '../../material.module'
+import { ViewUserComponent } from './view-user.component'
 
 describe('ViewUserComponent', () => {
   let component: ViewUserComponent

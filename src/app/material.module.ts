@@ -1,17 +1,17 @@
-import {
-  MatFormFieldModule,
-  MatButtonModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatCardModule,
-  MatInputModule,
-  MatTooltipModule,
-  MatSidenavModule,
-  MatListModule,
-  MatDialogModule,
-  MatSnackBarModule,
-} from '@angular/material'
 import { NgModule } from '@angular/core'
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+  MatTooltipModule,
+} from '@angular/material'
 
 @NgModule({
   imports: [

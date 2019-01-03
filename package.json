@@ -16,8 +16,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "standardize:win": "prettier **/*.ts --write",
-    "standardize:linux": "prettier '**/*.ts' --write",
+    "standardize:win": "import-sort **/*.ts --write && prettier **/*.ts --write",
+    "standardize:linux": "import-sort '**/*.ts' --write && prettier '**/*.ts' --write",
     "start": "npm run standardize:linux && ng serve --port 5000",
     "build": "npm run standardize:linux && ng build",
     "test": "ng test --browsers Chrome",
@@ -94,6 +94,12 @@
     "cross-conf-env": "^1.1.2",
     "dev-norms": "^1.3.6",
     "http-server": "^0.11.1",
+    "import-sort": "^5.2.0",
+    "import-sort-cli": "^5.2.0",
+    "import-sort-parser-babylon": "^5.2.0",
+    "import-sort-parser-typescript": "^5.0.0",
+    "import-sort-style-eslint": "^5.0.0",
+    "import-sort-style-module": "^5.0.0",
     "jasmine": "^3.1.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
@@ -110,6 +116,18 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "^3.1.6"
+  },
+  "importSort": {
+    ".js, .jsx, .es6, .es": {
+      "parser": "babylon",
+      "style": "eslint",
+      "options": {}
+    },
+    ".ts, .tsx": {
+      "parser": "typescript",
+      "style": "module",
+      "options": {}
+    }
   },
   "prettier": {
     "printWidth": 90,

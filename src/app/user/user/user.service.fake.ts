@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
+
 import { IUser, User } from './user'
-import { IUsers, IUserService } from './user.service'
+import { IUserService, IUsers } from './user.service'
 
 @Injectable()
 export class UserServiceFake implements IUserService {

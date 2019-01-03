@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router'
-import { UserService } from './user.service'
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
+
 import { IUser } from './user'
+import { UserService } from './user.service'
 
 @Injectable()
 export class UserResolve implements Resolve<IUser> {
