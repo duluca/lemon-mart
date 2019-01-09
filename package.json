@@ -6,6 +6,7 @@
     "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
     "imageName": "lemon-mart",
     "imagePort": "8080",
+    "internalContainerPort": "80",
     "awsRegion": "us-east-1",
     "awsEcsCluster": "fargate-cluster",
     "awsService": "lemon-mart-service"
@@ -39,7 +40,7 @@
     "postdocker:build": "npm run docker:tag",
     "docker:tag": " cross-conf-env docker image tag $npm_package_config_imageRepo:$npm_package_version $npm_package_config_imageRepo:latest",
     "docker:run": "run-s -c docker:clean docker:runHelper",
-    "docker:runHelper": "cross-conf-env docker run -e NODE_ENV=local --name $npm_package_config_imageName -d -p $npm_package_config_imagePort:3000 $npm_package_config_imageRepo",
+    "docker:runHelper": "cross-conf-env docker run -e NODE_ENV=local --name $npm_package_config_imageName -d -p $npm_package_config_imagePort:$npm_package_config_internalContainerPort $npm_package_config_imageRepo",
     "predocker:publish": "echo Attention! Ensure `docker login` is correct.",
     "docker:publish": "cross-conf-env docker image push $npm_package_config_imageRepo:$npm_package_version",
     "postdocker:publish": "cross-conf-env docker image push $npm_package_config_imageRepo:latest",
