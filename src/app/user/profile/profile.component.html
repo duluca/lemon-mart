@@ -1,4 +1,4 @@
-<mat-toolbar color="accent"> <h5>User Profile</h5> </mat-toolbar>
+<mat-toolbar color="accent"><h5>User Profile</h5></mat-toolbar>
 
 <mat-horizontal-stepper #stepper="matHorizontalStepper">
   <mat-step [stepControl]="userForm">
@@ -108,9 +108,9 @@
               formControlName="dateOfBirth"
               [matDatepicker]="dateOfBirthPicker"
             />
-            <mat-hint *ngIf="userForm.get('dateOfBirth').touched"
-              >{{ this.age }} year(s) old</mat-hint
-            >
+            <mat-hint *ngIf="userForm.get('dateOfBirth').touched">
+              {{ this.age }} year(s) old
+            </mat-hint>
             <mat-datepicker-toggle
               matSuffix
               [for]="dateOfBirthPicker"
@@ -332,7 +332,8 @@
           <mat-list formArrayName="phones">
             <h2 mat-subheader>Phone Number(s)</h2>
             <button mat-button (click)="this.addPhone()">
-              <mat-icon>add</mat-icon>Add Phone
+              <mat-icon>add</mat-icon>
+              Add Phone
             </button>
             <mat-list-item
               *ngFor="let position of this.phonesArray.controls; let i = index"

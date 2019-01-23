@@ -50,7 +50,8 @@ import { AuthService } from './auth/auth.service'
           <mat-icon>menu</mat-icon>
         </button>
         <a mat-icon-button routerLink="/home">
-          <mat-icon svgIcon="lemon"></mat-icon><span class="mat-h2">LemonMart</span>
+          <mat-icon svgIcon="lemon"></mat-icon>
+          <span class="mat-h2">LemonMart</span>
         </a>
         <span class="flex-spacer"></span>
         <button

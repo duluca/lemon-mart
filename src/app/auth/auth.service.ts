@@ -100,10 +100,10 @@ export class AuthService extends CacheService implements IAuthService {
       userRole: email.toLowerCase().includes('cashier')
         ? Role.Cashier
         : email.toLowerCase().includes('clerk')
-          ? Role.Clerk
-          : email.toLowerCase().includes('manager')
-            ? Role.Manager
-            : Role.None,
+        ? Role.Clerk
+        : email.toLowerCase().includes('manager')
+        ? Role.Manager
+        : Role.None,
     } as IAuthStatus
 
     const authResponse = {
