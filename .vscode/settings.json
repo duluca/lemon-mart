@@ -20,8 +20,12 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
+  "preittier.disabledLanguages": ["html"],
   "typescriptHero.imports.insertSemicolons": false,
   "typescriptHero.imports.multiLineWrapThreshold": 90,
-    "typescriptHero.imports.organizeOnSave": true,
-    "typescript.tsdk": "node_modules/typescript/lib"
+  "typescriptHero.imports.organizeOnSave": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "beautify.language": {
+    "html": ["html"]
+  }
 }

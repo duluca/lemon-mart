@@ -8,6 +8,7 @@
     "WallabyJs.quokka-vscode",
     "amatiasq.sort-imports",
     "DSKWRK.vscode-generate-getter-setter",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "HookyQR.beautify"
   ]
 }
