@@ -12,7 +12,7 @@ jobs:
           # code is checked out in the pipeline, consider copying from CI to Pipeline
           # consider caching node_modules or switching to npm ci option when it becomes stable
           command: |
-            docker build -f Dockerfile.integration . -t lemon-mart:$CIRCLE_BRANCH --build-arg CACHEBUST=$(date +%s)
+            docker build -f integration.Dockerfile . -t lemon-mart:$CIRCLE_BRANCH --build-arg CACHEBUST=$(date +%s)
             mkdir -p docker-cache
             docker save -o docker-cache/built-image.tar lemon-mart:$CIRCLE_BRANCH
       - save_cache:
@@ -56,7 +56,6 @@ workflows:
           filters:
             branches:
               only: sequential-branch-filter
-
 # *restore_repo
 # Consider tagging images with $CIRCLE_BRANCH
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
