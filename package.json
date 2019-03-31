@@ -17,12 +17,11 @@
   },
   "scripts": {
     "ng": "ng",
-    "standardize:win": "import-sort **/*.ts --write && prettier **/*.ts --write",
-    "standardize:linux": "import-sort '**/*.ts' --write && prettier '**/*.ts' --write",
-    "start": "npm run standardize:linux && ng serve --port 5000",
-    "build": "npm run standardize:linux && ng build",
+    "standardize": "import-sort --write \"**/*.ts\" && prettier --write \"**/*.ts\" --parser typescript && prettier --write \"**/*.html\" --parser angular",
+    "start": "npm run standardize && ng serve --port 5000",
+    "build": "npm run standardize && ng build",
     "test": "ng test --browsers Chrome",
-    "test:debug": "ng test --browsers Chrome --sourcemaps=false",
+    "test:debug": "ng test --browsers Chrome --sourcemaps",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:prod": "ng build --prod",
@@ -128,7 +127,6 @@
     "printWidth": 90,
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5",
-    "htmlWhitespaceSensitivity": "ignore"
+    "trailingComma": "es5"
   }
 }

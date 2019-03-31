@@ -3,7 +3,7 @@
     <div fxLayout="row">
       <mat-form-field class="full-width">
         <mat-icon matPrefix>search</mat-icon>
-        <input matInput placeholder="Search" aria-label="Search" [formControl]="search">
+        <input matInput placeholder="Search" aria-label="Search" [formControl]="search" />
         <mat-hint>Search by e-mail or name</mat-hint>
         <mat-error *ngIf="search.invalid">
           Type more than one character to search
@@ -16,37 +16,52 @@
   <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     <div class="error" *ngIf="hasError">
-      {{errorText}}
+      {{ errorText }}
     </div>
   </div>
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.name.first}} {{row.name.last}} </mat-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row.name.first }} {{ row.name.last }}
+      </mat-cell>
     </ng-container>
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.email }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.role}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.role }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.status}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.status }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef fxLayoutAlign="end center">View Details</mat-header-cell>
-      <mat-cell *matCellDef="let row" fxLayoutAlign="end center" style="margin-right: 8px">
-        <a mat-button mat-icon-button [routerLink]="['/manager/users', { outlets: { detail: ['user', {userId: row.id}] } }]" skipLocationChange>
+      <mat-header-cell *matHeaderCellDef fxLayoutAlign="end center"
+        >View Details</mat-header-cell
+      >
+      <mat-cell
+        *matCellDef="let row"
+        fxLayoutAlign="end center"
+        style="margin-right: 8px"
+      >
+        <a
+          mat-button
+          mat-icon-button
+          [routerLink]="[
+            '/manager/users',
+            { outlets: { detail: ['user', { userId: row.id }] } }
+          ]"
+          skipLocationChange
+        >
           <mat-icon>visibility</mat-icon>
         </a>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;">
-    </mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"> </mat-row>
   </mat-table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
