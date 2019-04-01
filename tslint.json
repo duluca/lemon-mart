@@ -16,7 +16,6 @@
     "indent": [true, "spaces"],
     "interface-over-type-literal": true,
     "label-position": true,
-    "max-line-length": [true, 90],
     "member-access": false,
     "member-ordering": [
       true,

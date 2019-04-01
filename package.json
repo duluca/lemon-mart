@@ -1,6 +1,6 @@
 {
   "name": "lemon-mart",
-  "version": "7.2.11",
+  "version": "8.0.0",
   "license": "MIT",
   "config": {
     "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "standardize": "import-sort --write \"**/*.ts\" && prettier --write \"**/*.ts\" --parser typescript && prettier --write \"src/**/*.html\" --parser angular",
+    "standardize": "import-sort --write \"**/*.ts\" && prettier --write \"**/*.ts\" && js-beautify \"src/**/*.html\"",
     "start": "npm run standardize && ng serve --port 5000",
     "build": "npm run standardize && ng build",
     "test": "ng test --browsers Chrome",
@@ -75,7 +75,6 @@
     "core-js": "^2.5.5",
     "fake-jwt-sign": "^1.1.0",
     "hammerjs": "^2.0.8",
-    "js-beautify": "^1.8.9",
     "jwt-decode": "^2.2.0",
     "rxjs": "6.4.0",
     "ts-enum-util": "^3.1.0",
@@ -102,6 +101,7 @@
     "jasmine": "^3.1.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
+    "js-beautify": "^1.9.1",
     "karma": "^3.1.4",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
@@ -127,6 +127,8 @@
     "printWidth": 90,
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "parser": "typescript",
+    "jsxBracketSameLine": true
   }
 }

@@ -95,6 +95,7 @@ export class AppComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public authService: AuthService,
+    // tslint:disable-next-line: deprecation
     public media: ObservableMedia
   ) {
     iconRegistry.addSvgIcon(
