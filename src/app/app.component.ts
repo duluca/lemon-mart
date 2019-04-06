@@ -33,20 +33,14 @@ import { AuthService } from './auth/auth.service'
       }
     `,
   ],
+  // prettier-ignore
   template: `
     <div class="app-container">
-      <mat-toolbar
-        color="primary"
-        fxLayoutGap="8px"
-        class="app-toolbar"
+      <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar"
         [class.app-is-mobile]="media.isActive('xs')"
-        *ngIf="(authService.authStatus | async) as authStatus"
-      >
-        <button
-          *ngIf="authStatus.isAuthenticated"
-          mat-icon-button
-          (click)="sidenav.toggle()"
-        >
+        *ngIf="(authService.authStatus | async) as authStatus">
+        <button *ngIf="authStatus.isAuthenticated" mat-icon-button
+          (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
         <a mat-icon-button routerLink="/home">
@@ -54,32 +48,18 @@ import { AuthService } from './auth/auth.service'
           <span class="mat-h2">LemonMart</span>
         </a>
         <span class="flex-spacer"></span>
-        <button
-          *ngIf="authStatus.isAuthenticated"
-          mat-mini-fab
-          routerLink="/user/profile"
-          matTooltip="Profile"
-          aria-label="User Profile"
-        >
+        <button *ngIf="authStatus.isAuthenticated" mat-mini-fab routerLink="/user/profile"
+          matTooltip="Profile" aria-label="User Profile">
           <mat-icon>account_circle</mat-icon>
         </button>
-        <button
-          *ngIf="authStatus.isAuthenticated"
-          mat-mini-fab
-          routerLink="/user/logout"
-          matTooltip="Logout"
-          aria-label="Logout"
-        >
+        <button *ngIf="authStatus.isAuthenticated" mat-mini-fab routerLink="/user/logout"
+          matTooltip="Logout" aria-label="Logout">
           <mat-icon>lock_open</mat-icon>
         </button>
       </mat-toolbar>
       <mat-sidenav-container class="app-sidenav-container">
-        <mat-sidenav
-          #sidenav
-          [mode]="media.isActive('xs') ? 'over' : 'side'"
-          [fixedInViewport]="media.isActive('xs')"
-          fixedTopGap="56"
-        >
+        <mat-sidenav #sidenav [mode]="media.isActive('xs') ? 'over' : 'side'"
+          [fixedInViewport]="media.isActive('xs')" fixedTopGap="56">
           <app-navigation-menu></app-navigation-menu>
         </mat-sidenav>
         <mat-sidenav-content>
@@ -87,7 +67,7 @@ import { AuthService } from './auth/auth.service'
         </mat-sidenav-content>
       </mat-sidenav-container>
     </div>
-  `,
+  `
 })
 export class AppComponent implements OnInit {
   @ViewChild('sidenav') public sideNav: MatSidenav

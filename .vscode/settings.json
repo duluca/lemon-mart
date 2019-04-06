@@ -26,6 +26,7 @@
   "typescriptHero.imports.organizeOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "beautify.language": {
-    "html": ["html"]
-  }
+    "html": ["html"],
+  },
+  "prettier.tslintIntegration": true
 }

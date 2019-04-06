@@ -39,8 +39,10 @@
       <mat-cell *matCellDef="let row"> {{ row.status }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef fxLayoutAlign="end center">View Details</mat-header-cell>
-      <mat-cell *matCellDef="let row" fxLayoutAlign="end center" style="margin-right: 8px">
+      <mat-header-cell *matHeaderCellDef fxLayoutAlign="end center">View Details
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayoutAlign="end center"
+        style="margin-right: 8px">
         <a mat-button mat-icon-button [routerLink]="[
             '/manager/users',
             { outlets: { detail: ['user', { userId: row.id }] } }

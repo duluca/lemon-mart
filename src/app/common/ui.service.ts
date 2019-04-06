@@ -44,6 +44,7 @@ export class UiService {
 
 @Component({
   selector: 'app-simple-dialog',
+  // prettier-ignore
   template: `
     <h2 mat-dialog-title>{{ data.title }}</h2>
     <mat-dialog-content>
@@ -54,17 +55,12 @@ export class UiService {
       <button mat-button mat-dialog-close *ngIf="data.cancelText">
         {{ data.cancelText }}
       </button>
-      <button
-        mat-button
-        mat-button-raised
-        color="primary"
-        [mat-dialog-close]="true"
-        cdkFocusInitial
-      >
+      <button mat-button mat-button-raised color="primary" [mat-dialog-close]="true"
+        cdkFocusInitial>
         {{ data.okText }}
       </button>
     </mat-dialog-actions>
-  `,
+  `
 })
 export class SimpleDialogComponent {
   constructor(

@@ -7,9 +7,11 @@
     <form [formGroup]="userForm">
       <ng-template matStepLabel>Account Information</ng-template>
       <div class="stepContent">
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('name')" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('name')"
+          fxLayoutGap="10px">
           <mat-form-field fxFlex="40%">
-            <input matInput placeholder="First Name" aria-label="First Name" formControlName="first" />
+            <input matInput placeholder="First Name" aria-label="First Name"
+              formControlName="first" />
             <mat-error *ngIf="
                 userForm
                   .get('name')
@@ -36,13 +38,15 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="20%">
-            <input matInput placeholder="MI" aria-label="Middle Initial" formControlName="middle" />
+            <input matInput placeholder="MI" aria-label="Middle Initial"
+              formControlName="middle" />
             <mat-error *ngIf="userForm.get('name').get('middle').invalid">
               Only inital
             </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="40%">
-            <input matInput placeholder="Last Name" aria-label="Last Name" formControlName="last" />
+            <input matInput placeholder="Last Name" aria-label="Last Name"
+              formControlName="last" />
             <mat-error *ngIf="
                 userForm
                   .get('name')
@@ -71,19 +75,21 @@
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
           <mat-form-field fxFlex="50%">
-            <input matInput placeholder="Date of Birth" aria-label="Date of Birth" formControlName="dateOfBirth"
-              [matDatepicker]="dateOfBirthPicker" />
+            <input matInput placeholder="Date of Birth" aria-label="Date of Birth"
+              formControlName="dateOfBirth" [matDatepicker]="dateOfBirthPicker" />
             <mat-hint *ngIf="userForm.get('dateOfBirth').touched">
               {{ this.age }} year(s) old
             </mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker">
+            </mat-datepicker-toggle>
             <mat-datepicker #dateOfBirthPicker></mat-datepicker>
             <mat-error *ngIf="userForm.get('dateOfBirth').invalid">
               Date must be with the last 100 years
             </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="50%">
-            <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email" />
+            <input matInput placeholder="E-mail" aria-label="E-mail"
+              formControlName="email" />
             <mat-hint>Only your manager can update your e-mail.</mat-hint>
             <mat-error *ngIf="userForm.get('email').invalid">
               A valid E-mail is required
@@ -126,9 +132,11 @@
     <form [formGroup]="userForm">
       <ng-template matStepLabel>Contact Information</ng-template>
       <div class="stepContent">
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')"
+          fxLayoutGap="10px">
           <mat-form-field fxFlex>
-            <input matInput placeholder="Address Line 1" aria-label="Address Line 1" formControlName="line1" />
+            <input matInput placeholder="Address Line 1" aria-label="Address Line 1"
+              formControlName="line1" />
             <mat-error *ngIf="
                 userForm
                   .get('address')
@@ -155,9 +163,11 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')"
+          fxLayoutGap="10px">
           <mat-form-field fxFlex>
-            <input matInput placeholder="Address Line 2" aria-label="Address Line 2" formControlName="line2" />
+            <input matInput placeholder="Address Line 2" aria-label="Address Line 2"
+              formControlName="line2" />
             <mat-hint>Optional</mat-hint>
             <mat-error *ngIf="
                 userForm
@@ -177,7 +187,8 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="userForm.get('address')"
+          fxLayoutGap="10px">
           <mat-form-field fxFlex="40%">
             <input matInput placeholder="City" aria-label="City" formControlName="city" />
             <mat-error *ngIf="
@@ -206,7 +217,8 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="30%">
-            <input type="text" placeholder="State" aria-label="State" matInput formControlName="state" [matAutocomplete]="stateAuto" />
+            <input type="text" placeholder="State" aria-label="State" matInput
+              formControlName="state" [matAutocomplete]="stateAuto" />
             <mat-autocomplete #stateAuto="matAutocomplete">
               <mat-option *ngFor="let state of (states | async)" [value]="state.name">
                 {{ state.name }}
@@ -222,7 +234,8 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="30%">
-            <input matInput placeholder="Zip Code" aria-label="Zip Code" formControlName="zip" />
+            <input matInput placeholder="Zip Code" aria-label="Zip Code"
+              formControlName="zip" />
             <mat-error *ngIf="userForm.get('address').get('zip').invalid">
               A valid Zip Code is required
             </mat-error>
@@ -235,7 +248,9 @@
               <mat-icon>add</mat-icon>
               Add Phone
             </button>
-            <mat-list-item *ngFor="let position of this.phonesArray.controls; let i = index" [formGroupName]="i">
+            <mat-list-item
+              *ngFor="let position of this.phonesArray.controls; let i = index"
+              [formGroupName]="i">
               <mat-form-field fxFlex="100px">
                 <mat-select placeholder="Type" formControlName="type">
                   <mat-option *ngFor="let type of this.PhoneTypes" [value]="type">
@@ -244,12 +259,14 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex fxFlexOffset="10px">
-                <input matInput type="text" placeholder="Number" formControlName="number" />
+                <input matInput type="text" placeholder="Number"
+                  formControlName="number" />
                 <mat-error *ngIf="this.phonesArray.controls[i].invalid">
                   A valid phone number is required
                 </mat-error>
               </mat-form-field>
-              <button fxFlex="33px" mat-icon-button (click)="this.phonesArray.removeAt(i)">
+              <button fxFlex="33px" mat-icon-button
+                (click)="this.phonesArray.removeAt(i)">
                 <mat-icon>close</mat-icon>
               </button>
             </mat-list-item>
@@ -276,7 +293,8 @@
         <div class="flex-spacer"></div>
         <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
         <button mat-button color="warn" (click)="stepper.reset()">Reset</button>
-        <button mat-raised-button matStepperNext color="primary" type="submit" [disabled]="this.userForm.invalid">
+        <button mat-raised-button matStepperNext color="primary" type="submit"
+          [disabled]="this.userForm.invalid">
           Update
         </button>
       </div>
