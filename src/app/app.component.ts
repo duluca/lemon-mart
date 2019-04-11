@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { ObservableMedia } from '@angular/flex-layout'
-import { MatIconRegistry, MatSidenav } from '@angular/material'
+import { MediaObserver } from '@angular/flex-layout'
+import { MatIconRegistry } from '@angular/material/icon'
+import { MatSidenav } from '@angular/material/sidenav'
 import { DomSanitizer } from '@angular/platform-browser'
 
 import { AuthService } from './auth/auth.service'
@@ -75,8 +76,7 @@ export class AppComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public authService: AuthService,
-    // tslint:disable-next-line: deprecation
-    public media: ObservableMedia
+    public media: MediaObserver
   ) {
     iconRegistry.addSvgIcon(
       'lemon',

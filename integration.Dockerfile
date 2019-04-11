@@ -29,5 +29,5 @@ RUN npm run $TEST_SCRIPT
 
 FROM duluca/minimal-nginx-web-server:1.13.8-alpine
 ENV BUILDER_SRC_DIR /usr/src
-COPY --from=builder $BUILDER_SRC_DIR/dist /var/www
+COPY --from=builder $BUILDER_SRC_DIR/dist/lemon-mart /var/www
 CMD 'nginx'

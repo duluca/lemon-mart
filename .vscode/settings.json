@@ -28,5 +28,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "beautify.language": {
     "html": ["html"],
-  }
+  },
+  "peacock.affectActivityBar": true,
+  "peacock.affectStatusBar": true,
+  "peacock.affectTitleBar": false
 }

@@ -4,9 +4,8 @@ import {
   MatDialog,
   MatDialogConfig,
   MatDialogRef,
-  MatSnackBar,
-  MatSnackBarConfig,
-} from '@angular/material'
+} from '@angular/material/dialog'
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
 import { Observable } from 'rxjs'
 
 @Injectable()

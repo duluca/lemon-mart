@@ -13,12 +13,12 @@ const routes: Routes = [
   { path: 'login/:redirectUrl', component: LoginComponent },
   {
     path: 'manager',
-    loadChildren: 'app/manager/manager.module#ManagerModule',
+    loadChildren: './manager/manager.module#ManagerModule',
     canLoad: [AuthGuard],
   },
-  { path: 'user', loadChildren: 'app/user/user.module#UserModule' },
-  { path: 'pos', loadChildren: 'app/pos/pos.module#PosModule' },
-  { path: 'inventory', loadChildren: 'app/inventory/inventory.module#InventoryModule' },
+  { path: 'user', loadChildren: './user/user.module#UserModule' },
+  { path: 'pos', loadChildren: './pos/pos.module#PosModule' },
+  { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule' },
   { path: '**', component: PageNotFoundComponent },
 ]
 
