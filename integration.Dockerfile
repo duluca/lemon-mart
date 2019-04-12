@@ -1,4 +1,4 @@
-FROM duluca/minimal-node-build-env:8.9.4 as builder
+FROM duluca/minimal-node-build-env:10.14.2 as builder
 
 # project variables
 ENV SRC_DIR /usr/src
@@ -12,7 +12,7 @@ WORKDIR $SRC_DIR
 ARG CACHEBUST=1
 RUN git clone $GIT_REPO .
 
-RUN npm install
+RUN yes | npm ci
 RUN npm run $BUILD_SCRIPT
 
 FROM slapers/alpine-node-chromium as tester
@@ -27,7 +27,7 @@ COPY --from=builder $BUILDER_SRC_DIR $SRC_DIR
 RUN npm run $TEST_SCRIPT
 # RUN npm run $TEST_SCRIPT:e2e
 
-FROM duluca/minimal-nginx-web-server:1.13.8-alpine
+FROM duluca/minimal-nginx-web-server:1.15.7-alpine
 ENV BUILDER_SRC_DIR /usr/src
 COPY --from=builder $BUILDER_SRC_DIR/dist/lemon-mart /var/www
 CMD 'nginx'
