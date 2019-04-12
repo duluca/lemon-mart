@@ -15,7 +15,7 @@ RUN git clone $GIT_REPO .
 RUN yes | npm ci
 RUN npm run $BUILD_SCRIPT
 
-FROM slapers/alpine-node-chromium as tester
+FROM slapers/alpine-node-chromium:10 as tester
 ENV BUILDER_SRC_DIR /usr/src
 ENV SRC_DIR /usr/src
 ENV TEST_SCRIPT test:prod
