@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  integration-build:
+  build:
     docker:
       - image: docker:17.12.0-ce-git
     working_directory: /usr/src
