@@ -30,7 +30,7 @@
     "mock:standalone": "docker run -p 3000:3000 -t duluca/lemon-mart-swagger-server",
     "mock:start": "docker-compose up",
     "mock:stop": "docker-compose down",
-    "test:prod": "ng test --browsers ChromiumNoSandbox --watch=false",
+    "test:prod": "ng test --browsers ChromiumNoSandbox --watch=false --code-coverage",
     "test:prod:e2e": "npm run e2e",
     "test:coverage": "ng test --browsers ChromiumNoSandbox --watch=false --code-coverage",
     "posttest:coverage": "http-server -c-1 -o -p 9875 ./coverage",

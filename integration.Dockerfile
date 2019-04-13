@@ -1,4 +1,4 @@
-FROM duluca/minimal-node-build-env:10.14.2 as builder
+FROM duluca/minimal-node-build-env:lts-alpine as builder
 
 ENV BUILDER_SRC_DIR=/usr/src
 
@@ -10,7 +10,7 @@ COPY . .
 RUN yes | npm ci
 RUN npm run build:prod
 
-FROM slapers/alpine-node-chromium:10 as tester
+FROM duluca/minimal-node-chromium:lts-alpine as tester
 
 ENV BUILDER_SRC_DIR=/usr/src
 ENV TESTER_SRC_DIR=/usr/src
@@ -19,9 +19,9 @@ WORKDIR $TESTER_SRC_DIR
 COPY --from=builder $BUILDER_SRC_DIR .
 
 RUN npm run test:prod
-# RUN npm run $TEST_SCRIPT:e2e
+RUN npm run test:prod:e2e
 
-FROM duluca/minimal-nginx-web-server:1.15.7-alpine
+FROM duluca/minimal-nginx-web-server:1-alpine as webserver
 
 ENV BUILDER_SRC_DIR=/usr/src
 
