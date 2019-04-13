@@ -1,33 +1,29 @@
 FROM duluca/minimal-node-build-env:10.14.2 as builder
 
-# project variables
-ENV SRC_DIR /usr/src
-ENV GIT_REPO https://github.com/duluca/lemon-mart.git
-ENV BUILD_SCRIPT build:prod
+ENV BUILDER_SRC_DIR=/usr/src
 
-# get source code
-RUN mkdir -p $SRC_DIR
-WORKDIR $SRC_DIR
-# if necessary, do SSH setup here or copy source code from local or CI environment
-ARG CACHEBUST=1
-RUN git clone $GIT_REPO .
+# setup source code directory and copy source code
+WORKDIR $BUILDER_SRC_DIR
+COPY . .
 
+# install dependencies and build
 RUN yes | npm ci
-RUN npm run $BUILD_SCRIPT
+RUN npm run build:prod
 
 FROM slapers/alpine-node-chromium:10 as tester
-ENV BUILDER_SRC_DIR /usr/src
-ENV SRC_DIR /usr/src
-ENV TEST_SCRIPT test:prod
 
-RUN mkdir -p $SRC_DIR
-WORKDIR $SRC_DIR
-COPY --from=builder $BUILDER_SRC_DIR $SRC_DIR
+ENV BUILDER_SRC_DIR=/usr/src
+ENV TESTER_SRC_DIR=/usr/src
 
-RUN npm run $TEST_SCRIPT
+WORKDIR $TESTER_SRC_DIR
+COPY --from=builder $BUILDER_SRC_DIR .
+
+RUN npm run test:prod
 # RUN npm run $TEST_SCRIPT:e2e
 
 FROM duluca/minimal-nginx-web-server:1.15.7-alpine
-ENV BUILDER_SRC_DIR /usr/src
+
+ENV BUILDER_SRC_DIR=/usr/src
+
 COPY --from=builder $BUILDER_SRC_DIR/dist/lemon-mart /var/www
 CMD 'nginx'

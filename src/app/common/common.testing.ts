@@ -19,7 +19,7 @@ const FAKE_SVGS = {
   lemon: '<svg><path id="lemon" name="lemon"></path></svg>',
 }
 
-export class ObservableMediaFake {
+export class MediaObserverFake {
   isActive(query: string): boolean {
     return false
   }
