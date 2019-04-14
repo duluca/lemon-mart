@@ -14,13 +14,13 @@ RUN npm run build:prod
 FROM circleci/node:lts-browsers as tester
 
 ENV BUILDER_SRC_DIR=/usr/src
-ENV TESTER_SRC_DIR=/home/circleci/repo
+ENV TESTER_SRC_DIR=~/repo
 
 WORKDIR $TESTER_SRC_DIR
 COPY --from=builder $BUILDER_SRC_DIR .
 
 RUN npm run test:prod
-RUN npm run test:prod:e2e
+# RUN npm run test:prod:e2e
 
 FROM duluca/minimal-nginx-web-server:1-alpine as webserver
 
