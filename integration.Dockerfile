@@ -10,7 +10,8 @@ COPY . .
 RUN yes | npm ci
 RUN npm run build:prod
 
-FROM duluca/minimal-node-chromium:lts-alpine as tester
+#FROM duluca/minimal-node-chromium:lts-alpine as tester
+FROM slapers/alpine-node-chromium:10 as tester
 
 ENV BUILDER_SRC_DIR=/usr/src
 ENV TESTER_SRC_DIR=/usr/src
