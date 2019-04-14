@@ -14,12 +14,10 @@ RUN npm run build:prod
 FROM circleci/node:lts-browsers as tester
 
 ENV BUILDER_SRC_DIR=/usr/src
-ENV TESTER_SRC_DIR=/usr/src
+ENV TESTER_SRC_DIR=/home/circleci/repo
 
 WORKDIR $TESTER_SRC_DIR
 COPY --from=builder $BUILDER_SRC_DIR .
-
-RUN mkdir tests
 
 RUN npm run test:prod
 #RUN npm run test:prod:e2e
