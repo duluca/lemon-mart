@@ -4,6 +4,7 @@ ENV BUILDER_SRC_DIR=/usr/src
 
 # setup source code directory and copy source code
 WORKDIR $BUILDER_SRC_DIR
+RUN mkdir tests
 COPY . .
 
 # install dependencies and build
@@ -18,7 +19,6 @@ ENV TESTER_SRC_DIR=~/repo
 
 WORKDIR $TESTER_SRC_DIR
 COPY --from=builder $BUILDER_SRC_DIR .
-RUN mkdir tests
 
 RUN npm run test:prod
 # RUN npm run test:prod:e2e
