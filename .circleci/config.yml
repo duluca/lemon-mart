@@ -23,10 +23,10 @@ jobs:
           path: docker-cache/built-image.tar
           destination: built-image.tar
       - store_test_results:
-          path: tests/units.html
+          path: ~/repo/tests/units.html
           destination: unit-tests.html
-      - store_test_results:
-          path: coverage
+      # - store_test_results:
+      #     path: coverage
 
   publish:
     docker:
