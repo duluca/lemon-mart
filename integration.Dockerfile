@@ -4,7 +4,6 @@ ENV BUILDER_SRC_DIR=/usr/src
 
 # setup source code directory and copy source code
 WORKDIR $BUILDER_SRC_DIR
-RUN mkdir tests
 COPY . .
 
 # install dependencies and build
@@ -15,7 +14,7 @@ RUN npm run build:prod
 FROM circleci/node:lts-browsers as tester
 
 ENV BUILDER_SRC_DIR=/usr/src
-ENV TESTER_SRC_DIR=~/repo
+ENV TESTER_SRC_DIR=/root/repo
 
 WORKDIR $TESTER_SRC_DIR
 COPY --from=builder $BUILDER_SRC_DIR .
