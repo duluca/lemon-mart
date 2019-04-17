@@ -5,10 +5,13 @@
   "editor.rulers": [90],
   "editor.autoIndent": true,
   "editor.cursorBlinking": "solid",
-  "editor.formatOnType": true,
+  "editor.formatOnType": false,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false
+  },
 
   "explorer.openEditors.visible": 0,
 
