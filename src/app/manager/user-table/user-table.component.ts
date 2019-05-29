@@ -19,15 +19,15 @@ export class UserTableComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name', 'email', 'role', 'status', 'id']
   dataSource = new MatTableDataSource()
   resultsLength = 0
-  _isLoadingResults = true
-  _hasError = false
+  isLoadingResults = true
+  hasError = false
   errorText = ''
-  _skipLoading = false
+  private skipLoading = false
 
   search = new FormControl('', OptionalTextValidation)
 
-  @ViewChild(MatPaginator) paginator: MatPaginator
-  @ViewChild(MatSort) sort: MatSort
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
+  @ViewChild(MatSort, { static: false }) sort: MatSort
 
   constructor(private userService: UserService) {}
 
@@ -39,7 +39,7 @@ export class UserTableComponent implements OnInit, AfterViewInit {
 
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0))
 
-    if (this._skipLoading) {
+    if (this.skipLoading) {
       return
     }
 
@@ -51,7 +51,7 @@ export class UserTableComponent implements OnInit, AfterViewInit {
       .pipe(
         startWith({}),
         switchMap(() => {
-          this._isLoadingResults = true
+          this.isLoadingResults = true
           return this.userService.getUsers(
             this.paginator.pageSize,
             this.search.value,
@@ -59,27 +59,19 @@ export class UserTableComponent implements OnInit, AfterViewInit {
           )
         }),
         map((data: { total: number; items: IUser[] }) => {
-          this._isLoadingResults = false
-          this._hasError = false
+          this.isLoadingResults = false
+          this.hasError = false
           this.resultsLength = data.total
 
           return data.items
         }),
         catchError(err => {
-          this._isLoadingResults = false
-          this._hasError = true
+          this.isLoadingResults = false
+          this.hasError = true
           this.errorText = err
           return of([])
         })
       )
       .subscribe(data => (this.dataSource.data = data))
-  }
-
-  get isLoadingResults() {
-    return this._isLoadingResults
-  }
-
-  get hasError() {
-    return this._hasError
   }
 }

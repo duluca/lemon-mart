@@ -24,7 +24,7 @@ export interface IUserService {
 
 @Injectable()
 export class UserService extends CacheService implements IUserService {
-  currentUser = new BehaviorSubject<IUser>(this.getItem('user') || new User())
+  readonly currentUser = new BehaviorSubject<IUser>(this.getItem('user') || new User())
   private currentAuthStatus: IAuthStatus
   constructor(private httpClient: HttpClient, private authService: AuthService) {
     super()

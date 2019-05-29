@@ -71,7 +71,7 @@ import { AuthService } from './auth/auth.service'
   `
 })
 export class AppComponent implements OnInit {
-  @ViewChild('sidenav') public sideNav: MatSidenav
+  @ViewChild('sidenav', { static: false }) public sideNav: MatSidenav
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
