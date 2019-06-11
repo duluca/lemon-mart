@@ -1,13 +1,15 @@
 import { Role } from '../../auth/role.enum'
 
+export interface IName {
+  first: string
+  middle?: string
+  last: string
+}
+
 export interface IUser {
   id: string
   email: string
-  name: {
-    first: string
-    middle: string
-    last: string
-  }
+  name: IName
   picture: string
   role: Role
   userStatus: boolean
@@ -32,7 +34,7 @@ export class User implements IUser {
   constructor(
     public id = '',
     public email = '',
-    public name = { first: '', middle: '', last: '' },
+    public name = { first: '', middle: '', last: '' } as IName,
     public picture = '',
     public role = Role.None,
     public dateOfBirth = null,
