@@ -6,7 +6,7 @@ import { IUserService, IUsers } from './user.service'
 
 @Injectable()
 export class UserServiceFake implements IUserService {
-  currentUser = new BehaviorSubject<IUser>(new User())
+  currentUser$ = new BehaviorSubject<IUser>(new User())
 
   constructor() {}
 

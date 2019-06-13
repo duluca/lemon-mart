@@ -11,7 +11,7 @@ import { CacheService } from './cache.service'
 import { Role } from './role.enum'
 
 export interface IAuthService {
-  authStatus: BehaviorSubject<IAuthStatus>
+  readonly authStatus$: BehaviorSubject<IAuthStatus>
   login(email: string, password: string): Observable<IAuthStatus>
   logout()
   getToken(): string
@@ -39,13 +39,13 @@ export class AuthService extends CacheService implements IAuthService {
     email: string,
     password: string
   ) => Observable<IServerAuthResponse>
-  authStatus = new BehaviorSubject<IAuthStatus>(
+  readonly authStatus$ = new BehaviorSubject<IAuthStatus>(
     this.getItem('authStatus') || defaultAuthStatus
   )
 
   constructor(private httpClient: HttpClient) {
     super()
-    this.authStatus.subscribe(authStatus => this.setItem('authStatus', authStatus))
+    this.authStatus$.subscribe(authStatus => this.setItem('authStatus', authStatus))
     // Fake login function to simulate roles
     this.authProvider = this.fakeAuthProvider
     // Example of a real login call to server-side
@@ -65,7 +65,7 @@ export class AuthService extends CacheService implements IAuthService {
 
     loginResponse.subscribe(
       res => {
-        this.authStatus.next(res)
+        this.authStatus$.next(res)
       },
       err => {
         this.logout()
@@ -81,8 +81,8 @@ export class AuthService extends CacheService implements IAuthService {
     password: string
   ): Observable<IServerAuthResponse> {
     return this.httpClient.post<IServerAuthResponse>(`${environment.baseUrl}/v1/login`, {
-      email: email,
-      password: password,
+      email,
+      password,
     })
   }
 
@@ -118,7 +118,7 @@ export class AuthService extends CacheService implements IAuthService {
 
   logout() {
     this.clearToken()
-    this.authStatus.next(defaultAuthStatus)
+    this.authStatus$.next(defaultAuthStatus)
   }
 
   private setToken(jwt: string) {

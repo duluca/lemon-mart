@@ -46,8 +46,8 @@ export class ViewUserComponent implements OnInit {
       this.currentUser = User.BuildUser(this.user)
     }
 
-    if (this.route.snapshot && this.route.snapshot.data) {
-      this.currentUser = User.BuildUser(this.route.snapshot.data['user'])
+    if (this.route.snapshot.data.user) {
+      this.currentUser = User.BuildUser(this.route.snapshot.data.user)
       this.currentUser.dateOfBirth = Date.now() // for data mocking purposes only
     }
   }

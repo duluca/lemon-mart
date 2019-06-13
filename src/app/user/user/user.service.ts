@@ -15,7 +15,7 @@ export interface IUsers {
 }
 
 export interface IUserService {
-  currentUser: BehaviorSubject<IUser>
+  readonly currentUser$: BehaviorSubject<IUser>
   getCurrentUser(): Observable<IUser>
   getUser(id): Observable<IUser>
   updateUser(user: IUser): Observable<IUser>
@@ -24,12 +24,12 @@ export interface IUserService {
 
 @Injectable()
 export class UserService extends CacheService implements IUserService {
-  readonly currentUser = new BehaviorSubject<IUser>(this.getItem('user') || new User())
+  readonly currentUser$ = new BehaviorSubject<IUser>(this.getItem('user') || new User())
   private currentAuthStatus: IAuthStatus
   constructor(private httpClient: HttpClient, private authService: AuthService) {
     super()
-    this.currentUser.subscribe(user => this.setItem('user', user))
-    this.authService.authStatus.subscribe(
+    this.currentUser$.subscribe(user => this.setItem('user', user))
+    this.authService.authStatus$.subscribe(
       authStatus => (this.currentAuthStatus = authStatus)
     )
   }
@@ -39,7 +39,7 @@ export class UserService extends CacheService implements IUserService {
       catchError(transformError)
     )
     userObservable.subscribe(
-      user => this.currentUser.next(user),
+      user => this.currentUser$.next(user),
       err => observableThrowError(err)
     )
     return userObservable
@@ -57,7 +57,7 @@ export class UserService extends CacheService implements IUserService {
 
     updateResponse.subscribe(
       res => {
-        this.currentUser.next(res)
+        this.currentUser$.next(res)
         this.removeItem('draft-user')
       },
       err => observableThrowError(err)

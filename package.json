@@ -75,6 +75,7 @@
     "fake-jwt-sign": "^1.1.0",
     "hammerjs": "^2.0.8",
     "jwt-decode": "^2.2.0",
+    "ngx-mask": "^7.9.10",
     "rxjs": "6.5.2",
     "ts-enum-util": "^4.0.1",
     "zone.js": "~0.9.1"

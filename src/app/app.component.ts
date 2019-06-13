@@ -39,7 +39,7 @@ import { AuthService } from './auth/auth.service'
     <div class="app-container">
       <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar"
         [class.app-is-mobile]="media.isActive('xs')"
-        *ngIf="(authService.authStatus | async) as authStatus">
+        *ngIf="(authService.authStatus$ | async) as authStatus">
         <button *ngIf="authStatus.isAuthenticated" mat-icon-button
           (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
@@ -85,7 +85,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.authStatus.subscribe(authStatus => {
+    this.authService.authStatus$.subscribe(authStatus => {
       if (!authStatus.isAuthenticated) {
         this.sideNav.close()
       }

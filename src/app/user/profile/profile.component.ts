@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
-import { Observable } from 'rxjs'
-import { map, startWith } from 'rxjs/operators'
+import { BehaviorSubject, Observable, Subject, pipe } from 'rxjs'
+import { map, startWith, take, tap } from 'rxjs/operators'
 import { $enum } from 'ts-enum-util'
 
 import { AuthService } from '../../auth/auth.service'
@@ -16,7 +15,7 @@ import {
   USAPhoneNumberValidation,
   USAZipCodeValidation,
 } from '../../common/validations'
-import { IPhone, IUser } from '../user/user'
+import { IName, IPhone, IUser } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, PhoneType, USStateFilter } from './data'
 
@@ -29,40 +28,46 @@ export class ProfileComponent implements OnInit {
   Role = UserRole
   PhoneTypes = $enum(PhoneType).getKeys()
   userForm: FormGroup
-  states: Observable<IUSState[]>
+  states$: Observable<IUSState[]>
   userError = ''
-  currentUserRole = this.Role.None
+  name$: BehaviorSubject<IName> = new BehaviorSubject({ first: '', middle: '', last: '' })
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private userService: UserService,
     private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.authService.authStatus.subscribe(
-      authStatus => (this.currentUserRole = authStatus.userRole)
-    )
+    this.authService.authStatus$.pipe(take(1)).subscribe(authStatus => {
+      this.tryBuildFromCache(authStatus.userRole)
+    })
+  }
 
+  tryBuildFromCache(currentUserRole: UserRole) {
     // for demo purposes only
     const draftUser = JSON.parse(localStorage.getItem('draft-user'))
 
     if (!draftUser) {
       // the if condition is for demo purposes only
       this.userService.getCurrentUser().subscribe(user => {
-        this.buildUserForm(user)
+        this.buildUserForm(user, currentUserRole)
       })
     }
-    this.buildUserForm(draftUser) // draftUser is being passed in for demo purposes only
+
+    // draftUser is being passed in for demo purposes only
+    this.buildUserForm(draftUser, currentUserRole)
   }
 
-  buildUserForm(user?: IUser) {
+  buildUserForm(user?: IUser, currentUserRole = UserRole.None) {
+    // this.name$.subscribe(value => this.name.patchValue(value, { onlySelf: false }))
+    this.name$.next(user.name)
+
     this.userForm = this.formBuilder.group({
       email: [
         {
           value: (user && user.email) || '',
-          disabled: this.currentUserRole !== this.Role.Manager,
+          disabled: currentUserRole !== this.Role.Manager,
         },
         EmailValidation,
       ],
@@ -74,7 +79,7 @@ export class ProfileComponent implements OnInit {
       role: [
         {
           value: (user && user.role) || '',
-          disabled: this.currentUserRole !== this.Role.Manager,
+          disabled: currentUserRole !== this.Role.Manager,
         },
         [Validators.required],
       ],
@@ -98,7 +103,7 @@ export class ProfileComponent implements OnInit {
       phones: this.formBuilder.array(this.buildPhoneArray(user ? user.phones : [])),
     })
 
-    this.states = this.userForm
+    this.states$ = this.userForm
       .get('address')
       .get('state')
       .valueChanges.pipe(
@@ -112,7 +117,11 @@ export class ProfileComponent implements OnInit {
   }
 
   get phonesArray(): FormArray {
-    return <FormArray>this.userForm.get('phones')
+    return this.userForm.get('phones') as FormArray
+  }
+
+  get name(): FormGroup {
+    return this.userForm.get('name') as FormGroup
   }
 
   private buildPhoneArray(phones: IPhone[]) {
@@ -128,11 +137,11 @@ export class ProfileComponent implements OnInit {
     return groups
   }
 
-  private buildPhoneFormControl(id, type?: string, number?: string) {
+  private buildPhoneFormControl(id, type?: string, phoneNumber?: string) {
     return this.formBuilder.group({
       id: [id],
       type: [type || '', Validators.required],
-      number: [number || '', USAPhoneNumberValidation],
+      number: [phoneNumber || '', USAPhoneNumberValidation],
     })
   }
 

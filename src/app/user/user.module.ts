@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgxMaskModule } from 'ngx-mask'
 
 import { AuthGuard } from '../auth/auth-guard.service'
 import { MaterialModule } from '../material.module'
@@ -22,6 +23,7 @@ import { UserService } from './user/user.service'
     FlexLayoutModule,
     UserMaterialModule,
     SharedComponentsModule,
+    NgxMaskModule.forChild({ showMaskTyped: true, showTemplate: true }),
   ],
   declarations: [ProfileComponent, LogoutComponent],
   providers: [UserService, AuthGuard],
