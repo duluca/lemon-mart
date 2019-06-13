@@ -61,7 +61,9 @@ export class ProfileComponent implements OnInit {
 
   buildUserForm(user?: IUser, currentUserRole = UserRole.None) {
     // this.name$.subscribe(value => this.name.patchValue(value, { onlySelf: false }))
-    this.name$.next(user.name)
+    if (user) {
+      this.name$.next(user.name)
+    }
 
     this.userForm = this.formBuilder.group({
       email: [
