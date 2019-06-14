@@ -77,6 +77,7 @@
     "jwt-decode": "^2.2.0",
     "ngx-mask": "^7.9.10",
     "rxjs": "6.5.2",
+    "subsink": "^1.0.0",
     "ts-enum-util": "^4.0.1",
     "zone.js": "~0.9.1"
   },

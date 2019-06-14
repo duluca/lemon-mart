@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import {Component, OnDestroy, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service'
 import { Role } from '../auth/role.enum'
 import { UiService } from '../common/ui.service'
 import { EmailValidation, PasswordValidation } from '../common/validations'
+import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,9 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
     `,
   ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
+  private subs = new SubSink();
   loginForm: FormGroup
   loginError = ''
   redirectUrl
@@ -34,11 +37,15 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private uiService: UiService
   ) {
-    route.paramMap.subscribe(params => (this.redirectUrl = params.get('redirectUrl')))
+    this.subs.sink = route.paramMap.subscribe(params => (this.redirectUrl = params.get('redirectUrl')))
   }
 
   ngOnInit() {
     this.buildLoginForm()
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   buildLoginForm() {
@@ -49,7 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   async login(submittedForm: FormGroup) {
-    this.authService
+    this.subs.add(this.authService
       .login(submittedForm.value.email, submittedForm.value.password)
       .subscribe(
         authStatus => {
@@ -61,7 +68,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error => (this.loginError = error)
-      )
+      ));
   }
 
   homeRoutePerRole(role: Role) {

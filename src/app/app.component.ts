@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core'
 import { MediaObserver } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { MatSidenav } from '@angular/material/sidenav'
 import { DomSanitizer } from '@angular/platform-browser'
 
 import { AuthService } from './auth/auth.service'
+import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-root',
@@ -70,7 +71,8 @@ import { AuthService } from './auth/auth.service'
     </div>
   `
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  private subs = new SubSink();
   @ViewChild('sidenav', { static: false }) public sideNav: MatSidenav
   constructor(
     iconRegistry: MatIconRegistry,
@@ -85,10 +87,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.authStatus$.subscribe(authStatus => {
+    this.subs.sink =   this.authService.authStatus$.subscribe(authStatus => {
       if (!authStatus.isAuthenticated) {
         this.sideNav.close()
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }

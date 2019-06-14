@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import {Component, OnDestroy, OnInit} from '@angular/core'
 
 import { ITransaction } from '../transaction/transaction'
 import { TransactionService } from '../transaction/transaction.service'
 import { TransactionType } from '../transaction/transactionType.enum'
+import {SubSink} from 'subsink';
 
 interface IEvent {
   event: 'checkoutCompleted' | 'checkoutInitiated'
@@ -14,7 +15,8 @@ declare let dataLayer: IEvent[]
   templateUrl: './pos.component.html',
   styleUrls: ['./pos.component.css'],
 })
-export class PosComponent implements OnInit {
+export class PosComponent implements OnInit, OnDestroy {
+  private subs = new SubSink();
   currentTransaction: ITransaction
   constructor(private transactionService: TransactionService) {}
 
@@ -28,8 +30,8 @@ export class PosComponent implements OnInit {
   checkout(transaction: ITransaction) {
     dataLayer.push({
       event: 'checkoutInitiated',
-    })
-    this.transactionService.processTransaction(transaction).subscribe(transactionId => {
+    });
+    this.subs.sink = this.transactionService.processTransaction(transaction).subscribe(transactionId => {
       if (transactionId) {
         dataLayer.push({
           event: 'checkoutCompleted',
@@ -37,4 +39,9 @@ export class PosComponent implements OnInit {
       }
     })
   }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
 }
