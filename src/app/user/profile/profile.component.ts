@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import {Component, OnDestroy, OnInit} from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BehaviorSubject, Observable, Subject, pipe } from 'rxjs'
 import { map, startWith, take, tap } from 'rxjs/operators'
@@ -18,19 +18,21 @@ import {
 import { IName, IPhone, IUser } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, PhoneType, USStateFilter } from './data'
+import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   Role = UserRole
   PhoneTypes = $enum(PhoneType).getKeys()
   userForm: FormGroup
   states$: Observable<IUSState[]>
   userError = ''
-  name$: BehaviorSubject<IName> = new BehaviorSubject({ first: '', middle: '', last: '' })
+  name$: BehaviorSubject<IName> = new BehaviorSubject({ first: '', middle: '', last: '' });
+  private subs = new SubSink();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,9 +41,13 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.authStatus$.pipe(take(1)).subscribe(authStatus => {
+    this.subs.sink =  this.authService.authStatus$.pipe(take(1)).subscribe(authStatus => {
       this.tryBuildFromCache(authStatus.userRole)
     })
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 
   tryBuildFromCache(currentUserRole: UserRole) {
@@ -50,9 +56,9 @@ export class ProfileComponent implements OnInit {
 
     if (!draftUser) {
       // the if condition is for demo purposes only
-      this.userService.getCurrentUser().subscribe(user => {
+      this.subs.add(this.userService.getCurrentUser().subscribe(user => {
         this.buildUserForm(user, currentUserRole)
-      })
+      }));
     }
 
     // draftUser is being passed in for demo purposes only
@@ -156,8 +162,8 @@ export class ProfileComponent implements OnInit {
   }
 
   async save(form: FormGroup) {
-    this.userService
+    this.subs.add(this.userService
       .updateUser(form.value)
-      .subscribe(res => this.buildUserForm(res), err => (this.userError = err))
+      .subscribe(res => this.buildUserForm(res), err => (this.userError = err)));
   }
 }
