@@ -1,15 +1,15 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { merge, of } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
+import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
 import { UserService } from '../../user/user/user.service'
-import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-user-table',
@@ -23,8 +23,8 @@ export class UserTableComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoadingResults = true
   hasError = false
   errorText = ''
-  private skipLoading = false;
-  private subs = new SubSink();
+  private skipLoading = false
+  private subs = new SubSink()
 
   search = new FormControl('', OptionalTextValidation)
 
@@ -49,35 +49,37 @@ export class UserTableComponent implements OnInit, OnDestroy, AfterViewInit {
       return
     }
 
-    this.subs.add(merge(
-      this.sort.sortChange,
-      this.paginator.page,
-      this.search.valueChanges.pipe(debounceTime(1000))
-    )
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true
-          return this.userService.getUsers(
-            this.paginator.pageSize,
-            this.search.value,
-            this.paginator.pageIndex
-          )
-        }),
-        map((data: { total: number; items: IUser[] }) => {
-          this.isLoadingResults = false
-          this.hasError = false
-          this.resultsLength = data.total
-
-          return data.items
-        }),
-        catchError(err => {
-          this.isLoadingResults = false
-          this.hasError = true
-          this.errorText = err
-          return of([])
-        })
+    this.subs.add(
+      merge(
+        this.sort.sortChange,
+        this.paginator.page,
+        this.search.valueChanges.pipe(debounceTime(1000))
       )
-      .subscribe(data => (this.dataSource.data = data)));
+        .pipe(
+          startWith({}),
+          switchMap(() => {
+            this.isLoadingResults = true
+            return this.userService.getUsers(
+              this.paginator.pageSize,
+              this.search.value,
+              this.paginator.pageIndex
+            )
+          }),
+          map((data: { total: number; items: IUser[] }) => {
+            this.isLoadingResults = false
+            this.hasError = false
+            this.resultsLength = data.total
+
+            return data.items
+          }),
+          catchError(err => {
+            this.isLoadingResults = false
+            this.hasError = true
+            this.errorText = err
+            return of([])
+          })
+        )
+        .subscribe(data => (this.dataSource.data = data))
+    )
   }
 }

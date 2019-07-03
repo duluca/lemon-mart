@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BehaviorSubject, Observable, Subject, pipe } from 'rxjs'
 import { map, startWith, take, tap } from 'rxjs/operators'
+import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
 
 import { AuthService } from '../../auth/auth.service'
@@ -18,7 +19,6 @@ import {
 import { IName, IPhone, IUser } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, PhoneType, USStateFilter } from './data'
-import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-profile',
@@ -31,8 +31,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userForm: FormGroup
   states$: Observable<IUSState[]>
   userError = ''
-  name$: BehaviorSubject<IName> = new BehaviorSubject({ first: '', middle: '', last: '' });
-  private subs = new SubSink();
+  name$: BehaviorSubject<IName> = new BehaviorSubject({ first: '', middle: '', last: '' })
+  private subs = new SubSink()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,13 +41,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subs.sink =  this.authService.authStatus$.pipe(take(1)).subscribe(authStatus => {
+    this.subs.sink = this.authService.authStatus$.pipe(take(1)).subscribe(authStatus => {
       this.tryBuildFromCache(authStatus.userRole)
     })
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.subs.unsubscribe()
   }
 
   tryBuildFromCache(currentUserRole: UserRole) {
@@ -56,9 +56,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     if (!draftUser) {
       // the if condition is for demo purposes only
-      this.subs.add(this.userService.getCurrentUser().subscribe(user => {
-        this.buildUserForm(user, currentUserRole)
-      }));
+      this.subs.add(
+        this.userService.getCurrentUser().subscribe(user => {
+          this.buildUserForm(user, currentUserRole)
+        })
+      )
     }
 
     // draftUser is being passed in for demo purposes only
@@ -162,8 +164,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   async save(form: FormGroup) {
-    this.subs.add(this.userService
-      .updateUser(form.value)
-      .subscribe(res => this.buildUserForm(res), err => (this.userError = err)));
+    this.subs.add(
+      this.userService
+        .updateUser(form.value)
+        .subscribe(res => this.buildUserForm(res), err => (this.userError = err))
+    )
   }
 }
