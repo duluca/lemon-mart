@@ -2,11 +2,14 @@ import 'hammerjs'
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
+import { AngularFireModule } from '@angular/fire'
+import { AngularFireAuthModule } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { IConfig, NgxMaskModule } from 'ngx-mask'
+import { environment } from 'src/environments/environment'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -42,6 +45,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxMaskModule.forRoot(options),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
   ],
   providers: [
     AuthService,
