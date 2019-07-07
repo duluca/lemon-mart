@@ -23,7 +23,7 @@ describe('UserTableComponent', () => {
     component = fixture.componentInstance
     component.dataSource = new MatTableDataSource()
     component.dataSource.data = [new User()]
-    component._skipLoading = true
+    Object.assign(component, { skipLoading: true })
     fixture.detectChanges()
   })
 
