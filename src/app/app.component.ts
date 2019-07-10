@@ -3,6 +3,8 @@ import { MediaObserver } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { MatSidenav } from '@angular/material/sidenav'
 import { DomSanitizer } from '@angular/platform-browser'
+import { combineLatest } from 'rxjs'
+import { tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 
 import { AuthService } from './auth/auth.service'
@@ -61,7 +63,7 @@ import { AuthService } from './auth/auth.service'
       </mat-toolbar>
       <mat-sidenav-container class="app-sidenav-container">
         <mat-sidenav #sidenav [mode]="media.isActive('xs') ? 'over' : 'side'"
-          [fixedInViewport]="media.isActive('xs')" fixedTopGap="56">
+          [fixedInViewport]="media.isActive('xs')" fixedTopGap="56" [(opened)]="opened">
           <app-navigation-menu></app-navigation-menu>
         </mat-sidenav>
         <mat-sidenav-content>
@@ -73,7 +75,8 @@ import { AuthService } from './auth/auth.service'
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subs = new SubSink()
-  @ViewChild('sidenav', { static: false }) public sideNav: MatSidenav
+  opened: boolean
+
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -87,11 +90,24 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subs.sink = this.authService.authStatus$.subscribe(authStatus => {
-      if (!authStatus.isAuthenticated) {
-        this.sideNav.close()
-      }
-    })
+    this.subs.sink = combineLatest([
+      this.media.asObservable(),
+      this.authService.authStatus$,
+    ])
+      .pipe(
+        tap(([mediaValue, authStatus]) => {
+          if (!authStatus.isAuthenticated) {
+            this.opened = false
+          } else {
+            if (mediaValue[0].mqAlias === 'xs') {
+              this.opened = false
+            } else {
+              this.opened = true
+            }
+          }
+        })
+      )
+      .subscribe()
   }
 
   ngOnDestroy() {
