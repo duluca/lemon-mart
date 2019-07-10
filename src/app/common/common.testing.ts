@@ -83,5 +83,4 @@ export const commonTestingModules: any[] = [
   NoopAnimationsModule,
   HttpClientTestingModule,
   RouterTestingModule,
-  SharedComponentsModule,
 ]

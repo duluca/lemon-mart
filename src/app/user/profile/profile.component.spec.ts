@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { SharedComponentsModule } from 'src/app/shared-components.module'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { UserMaterialModule } from '../user.material.module'
@@ -11,7 +12,7 @@ describe('ProfileComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: commonTestingProviders,
-      imports: commonTestingModules.concat([UserMaterialModule]),
+      imports: commonTestingModules.concat([UserMaterialModule, SharedComponentsModule]),
       declarations: [ProfileComponent],
     }).compileComponents()
   }))

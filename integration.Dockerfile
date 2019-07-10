@@ -8,6 +8,7 @@ COPY . .
 
 # install dependencies and build
 RUN yes | npm ci
+RUN npm run standardize:ci
 RUN npm run build:prod
 
 #FROM duluca/minimal-node-chromium:lts-alpine as tester
