@@ -54,5 +54,6 @@
     "statusBarItem.hoverBackground": "#3ca241",
     "statusBar.foreground": "#e7e7e7"
   },
-  "ng-evergreen.checkFrequency": "Daily"
+  "ng-evergreen.checkFrequency": "Daily",
+  "ng-evergreen.upgradeChannel": "Latest"
 }
