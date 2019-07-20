@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SubSink } from 'subsink'
+import { $enum } from 'ts-enum-util'
 
 import { AuthService } from '../auth/auth.service'
 import { Role } from '../auth/role.enum'
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup
   loginError = ''
   redirectUrl
+  roles = $enum(Role).getKeys()
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,

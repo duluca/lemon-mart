@@ -1,4 +1,9 @@
 <div class="filter-row">
+  <div class="center" style="margin-bottom: 32px">
+    <mat-slide-toggle color="accent" [(ngModel)]="useNgRxData">
+      {{useNgRxData ? 'Using NgRX Data' : 'Using BehaviorSubject'}}
+    </mat-slide-toggle>
+  </div>
   <form style="margin-bottom: 32px">
     <div fxLayout="row">
       <mat-form-field class="full-width">
@@ -13,8 +18,8 @@
   </form>
 </div>
 <div class="mat-elevation-z8">
-  <div class="loading-shade" *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  <div class="loading-shade" *ngIf="loading$ | async as loading">
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <div class="error" *ngIf="hasError">
       {{ errorText }}
     </div>

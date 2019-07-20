@@ -11,6 +11,7 @@ import { LogoutComponent } from './logout/logout.component'
 import { ProfileComponent } from './profile/profile.component'
 import { UserRoutingModule } from './user-routing.module'
 import { UserMaterialModule } from './user.material.module'
+import { UserEntityService } from './user/user.entity.service'
 import { UserService } from './user/user.service'
 
 @NgModule({
@@ -26,6 +27,6 @@ import { UserService } from './user/user.service'
     NgxMaskModule.forChild({ showMaskTyped: true, showTemplate: true }),
   ],
   declarations: [ProfileComponent, LogoutComponent],
-  providers: [UserService, AuthGuard],
+  providers: [UserService, UserEntityService, AuthGuard],
 })
 export class UserModule {}

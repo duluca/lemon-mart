@@ -47,5 +47,42 @@
         </div>
       </form>
     </mat-card-content>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Fake Login Info
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-grid-list cols="2" rowHeight="48px" role="list">
+            <mat-grid-tile [colspan]="2" role="listitem" style="background: pink">Use
+              any
+              8 character string as
+              password
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-grid-tile-header>Role</mat-grid-tile-header>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-grid-tile-header>E-mail</mat-grid-tile-header>
+            </mat-grid-tile>
+            <div *ngFor="let role of roles; odd as oddRow">
+              <mat-grid-tile role="listitem"
+                [style.background]="oddRow ? 'lightGray': 'white'">
+                {{role}}
+              </mat-grid-tile>
+              <mat-grid-tile role="listitem"
+                [style.background]="oddRow ? 'lightGray': 'white'">
+                <div *ngIf="role.toLowerCase() === 'none'; else otherRoles">
+                  Any @test.com email
+                </div>
+                <ng-template #otherRoles>{{role.toLowerCase()}}@test.com</ng-template>
+              </mat-grid-tile>
+            </div>
+          </mat-grid-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
   </mat-card>
 </div>

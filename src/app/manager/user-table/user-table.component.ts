@@ -3,37 +3,70 @@ import { FormControl } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
-import { merge, of } from 'rxjs'
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
+import { BehaviorSubject, Observable, merge, of } from 'rxjs'
+import {
+  catchError,
+  debounceTime,
+  exhaustMap,
+  map,
+  startWith,
+  switchMap,
+} from 'rxjs/operators'
+import { UserEntityService } from 'src/app/user/user/user.entity.service'
 import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
-import { IUser } from '../../user/user/user'
-import { UserService } from '../../user/user/user.service'
+import { IUser, User } from '../../user/user/user'
+import { IUsers, UserService } from '../../user/user/user.service'
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css'],
 })
-export class UserTableComponent implements OnInit, OnDestroy, AfterViewInit {
+export class UserTableComponent implements OnDestroy, AfterViewInit {
   displayedColumns = ['name', 'email', 'role', 'status', 'id']
   dataSource = new MatTableDataSource()
   resultsLength = 0
-  isLoadingResults = true
   hasError = false
   errorText = ''
   private skipLoading = false
   private subs = new SubSink()
+  useNgRxData = true
+  readonly isLoadingResults$ = new BehaviorSubject(true)
+  loading$: Observable<boolean>
 
   search = new FormControl('', OptionalTextValidation)
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
   @ViewChild(MatSort, { static: false }) sort: MatSort
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private userEntityService: UserEntityService
+  ) {
+    this.loading$ = merge(this.userEntityService.loading$, this.isLoadingResults$)
+  }
 
-  ngOnInit() {}
+  add(user: User) {
+    this.userEntityService.add(user)
+  }
+
+  delete(user: User) {
+    this.userEntityService.delete(user.id)
+  }
+
+  getUsers(pageSize: number, searchText = '', pagesToSkip = 0): Observable<IUsers> {
+    if (this.useNgRxData) {
+      return this.userEntityService.getAll().pipe(
+        map(value => {
+          return { total: 0, items: value }
+        })
+      )
+    }
+
+    return this.userService.getUsers(pageSize, searchText, pagesToSkip)
+  }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe()
@@ -58,22 +91,22 @@ export class UserTableComponent implements OnInit, OnDestroy, AfterViewInit {
         .pipe(
           startWith({}),
           switchMap(() => {
-            this.isLoadingResults = true
-            return this.userService.getUsers(
+            this.isLoadingResults$.next(true)
+            return this.getUsers(
               this.paginator.pageSize,
               this.search.value,
               this.paginator.pageIndex
             )
           }),
           map((data: { total: number; items: IUser[] }) => {
-            this.isLoadingResults = false
+            this.isLoadingResults$.next(false)
             this.hasError = false
             this.resultsLength = data.total
 
             return data.items
           }),
           catchError(err => {
-            this.isLoadingResults = false
+            this.isLoadingResults$.next(false)
             this.hasError = true
             this.errorText = err
             return of([])
