@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { BehaviorSubject, Observable, Subject, pipe } from 'rxjs'
-import { map, startWith, take, tap } from 'rxjs/operators'
+import { BehaviorSubject, Observable, merge, of } from 'rxjs'
+import { map, startWith } from 'rxjs/operators'
+import { BaseFormComponent } from 'src/app/common/base-form.class'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
 
@@ -25,71 +26,74 @@ import { IUSState, PhoneType, USStateFilter } from './data'
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent extends BaseFormComponent<IUser>
+  implements OnInit, OnDestroy {
   Role = UserRole
   PhoneTypes = $enum(PhoneType).getKeys()
-  userForm: FormGroup
+
   states$: Observable<IUSState[]>
   userError = ''
-  name$: BehaviorSubject<IName> = new BehaviorSubject({ first: '', middle: '', last: '' })
+  nameInitialData$ = new BehaviorSubject<IName>({ first: '', middle: '', last: '' })
   private subs = new SubSink()
+  private get currentUserRole() {
+    return this.authService.authStatus$.value.userRole
+  }
+
+  // conditional for demo purposes only
+  useAppNameInputComponent = true
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authService: AuthService
-  ) {}
+  ) {
+    super()
+  }
 
   ngOnInit() {
-    this.subs.sink = this.authService.authStatus$.pipe(take(1)).subscribe(authStatus => {
-      this.tryBuildFromCache(authStatus.userRole)
-    })
+    this.formGroup = this.buildForm()
+
+    // loadFromCacheForDemo is for ad-hoc cache loading, demo purposes only
+    this.subs.add(
+      merge(this.loadFromCacheForDemo(), this.userService.getCurrentUser()).subscribe(
+        user => {
+          if (user) {
+            this.patchUpdatedData(user)
+            this.nameInitialData$.next(user.name)
+          }
+        }
+      )
+    )
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe()
+    this.deregisterAllForms()
   }
 
-  tryBuildFromCache(currentUserRole: UserRole) {
-    // for demo purposes only
-    const draftUser = JSON.parse(localStorage.getItem('draft-user'))
+  buildForm(initialData?: IUser): FormGroup {
+    const user = initialData
 
-    if (!draftUser) {
-      // the if condition is for demo purposes only
-      this.subs.add(
-        this.userService.getCurrentUser().subscribe(user => {
-          this.buildUserForm(user, currentUserRole)
-        })
-      )
-    }
-
-    // draftUser is being passed in for demo purposes only
-    this.buildUserForm(draftUser, currentUserRole)
-  }
-
-  buildUserForm(user?: IUser, currentUserRole = UserRole.None) {
-    // this.name$.subscribe(value => this.name.patchValue(value, { onlySelf: false }))
-    if (user) {
-      this.name$.next(user.name)
-    }
-
-    this.userForm = this.formBuilder.group({
+    const form = this.formBuilder.group({
       email: [
         {
           value: (user && user.email) || '',
-          disabled: currentUserRole !== this.Role.Manager,
+          disabled: this.currentUserRole !== this.Role.Manager,
         },
         EmailValidation,
       ],
-      name: this.formBuilder.group({
-        first: [(user && user.name.first) || '', RequiredTextValidation],
-        middle: [(user && user.name.middle) || '', OneCharValidation],
-        last: [(user && user.name.last) || '', RequiredTextValidation],
-      }),
+      name: this.useAppNameInputComponent
+        ? null
+        : this.formBuilder.group({
+            // this will get overwritten if useAppNameInputComponent is set to true
+            first: [user && user.name ? user.name.first : '', RequiredTextValidation],
+            middle: [user && user.name ? user.name.middle : '', OneCharValidation],
+            last: [user && user.name ? user.name.last : '', RequiredTextValidation],
+          }),
       role: [
         {
           value: (user && user.role) || '',
-          disabled: currentUserRole !== this.Role.Manager,
+          disabled: this.currentUserRole !== this.Role.Manager,
         },
         [Validators.required],
       ],
@@ -113,13 +117,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
       phones: this.formBuilder.array(this.buildPhoneArray(user ? user.phones : [])),
     })
 
-    this.states$ = this.userForm
+    this.states$ = form
       .get('address')
       .get('state')
       .valueChanges.pipe(
         startWith(''),
         map(value => USStateFilter(value))
       )
+
+    this.cacheChangesForDemo(form)
+
+    return form
   }
 
   addPhone() {
@@ -127,11 +135,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   get phonesArray(): FormArray {
-    return this.userForm.get('phones') as FormArray
+    return this.formGroup.get('phones') as FormArray
   }
 
   get name(): FormGroup {
-    return this.userForm.get('name') as FormGroup
+    return this.formGroup.get('name') as FormGroup
   }
 
   private buildPhoneArray(phones: IPhone[]) {
@@ -156,7 +164,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   get dateOfBirth() {
-    return this.userForm.get('dateOfBirth').value || new Date()
+    return this.formGroup.get('dateOfBirth').value || new Date()
   }
 
   get age() {
@@ -167,7 +175,39 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.userService
         .updateUser(form.value)
-        .subscribe(res => this.buildUserForm(res), err => (this.userError = err))
+        .subscribe(res => this.patchUpdatedData(res), err => (this.userError = err))
     )
+  }
+
+  simulateLazyLoadedInitData() {
+    // for demo purposes only
+    this.nameInitialData$.next({
+      first: 'Peter',
+      middle: 'A',
+      last: 'Long',
+    })
+  }
+
+  private cacheChangesForDemo(form: FormGroup) {
+    // for demo purposes only
+    this.subs.add(
+      form.valueChanges.subscribe(() => {
+        localStorage.setItem('draft-user', form.value)
+        console.log(form.value)
+      })
+    )
+  }
+
+  private loadFromCacheForDemo(): Observable<IUser> {
+    // for demo purposes only
+    let data = null
+
+    try {
+      data = JSON.parse(localStorage.getItem('draft-user'))
+    } catch (err) {
+      // no-op
+    }
+
+    return of(data)
   }
 }

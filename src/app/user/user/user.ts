@@ -49,7 +49,7 @@ export class User implements IUser {
     public phones = []
   ) {}
 
-  static BuildUser(user: IUser) {
+  static Build(user: IUser) {
     if (!user) {
       return new User()
     }
@@ -68,6 +68,6 @@ export class User implements IUser {
   }
 
   get fullName() {
-    return `${this.name.first} ${this.name.middle} ${this.name.last}`
+    return this.name ? `${this.name.first} ${this.name.middle} ${this.name.last}` : ''
   }
 }
