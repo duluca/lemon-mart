@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { SharedComponentsModule } from 'src/app/shared-components.module'
+import { LemonRaterModule } from 'src/app/user-controls/lemon-rater/lemon-rater.module'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { UserMaterialModule } from '../user.material.module'
@@ -12,7 +13,11 @@ describe('ProfileComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: commonTestingProviders,
-      imports: commonTestingModules.concat([UserMaterialModule, SharedComponentsModule]),
+      imports: commonTestingModules.concat([
+        UserMaterialModule,
+        SharedComponentsModule,
+        LemonRaterModule,
+      ]),
       declarations: [ProfileComponent],
     }).compileComponents()
   }))

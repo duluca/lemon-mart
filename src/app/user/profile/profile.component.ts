@@ -33,7 +33,11 @@ export class ProfileComponent extends BaseFormComponent<IUser>
 
   states$: Observable<IUSState[]>
   userError = ''
-  nameInitialData$ = new BehaviorSubject<IName>({ first: '', middle: '', last: '' })
+  readonly nameInitialData$ = new BehaviorSubject<IName>({
+    first: '',
+    middle: '',
+    last: '',
+  })
   private subs = new SubSink()
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
@@ -97,6 +101,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
         },
         [Validators.required],
       ],
+      level: [null, [Validators.required]],
       dateOfBirth: [(user && user.dateOfBirth) || '', BirthDateValidation],
       address: this.formBuilder.group({
         line1: [

@@ -72,12 +72,6 @@ export class NameInputComponent extends BaseFormComponent<IName>
     this.formReady.emit(this.formGroup)
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.formGroup && this.hasChanged(changes.initialData)) {
-      this.formGroup.patchValue(this.initialData, { onlySelf: false })
-    }
-  }
-
   buildForm(initialData?: IName): FormGroup {
     const name = initialData
     return this.formBuilder.group({
@@ -85,5 +79,9 @@ export class NameInputComponent extends BaseFormComponent<IName>
       middle: [name ? name.middle : '', OneCharValidation],
       last: [name ? name.last : '', RequiredTextValidation],
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.patchUpdatedDataIfChanged(changes)
   }
 }

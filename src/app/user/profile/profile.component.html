@@ -82,28 +82,33 @@
           </div>
           <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top"
             fxLayoutGap="10px">
-            <div fxFlex>
-              <mat-label class="mat-body-1">Role</mat-label>
-              <mat-radio-group formControlName="role">
-                <mat-radio-button style="margin-right: 10px;" [value]="Role.None">
-                  <span class="mat-body-1">None</span>
-                </mat-radio-button>
-                <mat-radio-button style="margin-right: 10px;" [value]="Role.Cashier">
-                  <span class="mat-body-1">Cashier</span>
-                </mat-radio-button>
-                <mat-radio-button style="margin-right: 10px;" [value]="Role.Clerk">
-                  <span class="mat-body-1">Clerk</span>
-                </mat-radio-button>
-                <mat-radio-button style="margin-right: 10px;" [value]="Role.Manager">
-                  <span class="mat-body-1">Manager</span>
-                </mat-radio-button>
-              </mat-radio-group>
-              <mat-error *ngIf="
+            <mat-label class="mat-body-1">Role</mat-label>
+            <mat-radio-group formControlName="role">
+              <mat-radio-button style="margin-right: 10px;" [value]="Role.None">
+                <span class="mat-body-1">None</span>
+              </mat-radio-button>
+              <mat-radio-button style="margin-right: 10px;" [value]="Role.Cashier">
+                <span class="mat-body-1">Cashier</span>
+              </mat-radio-button>
+              <mat-radio-button style="margin-right: 10px;" [value]="Role.Clerk">
+                <span class="mat-body-1">Clerk</span>
+              </mat-radio-button>
+              <mat-radio-button style="margin-right: 10px;" [value]="Role.Manager">
+                <span class="mat-body-1">Manager</span>
+              </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="
           formGroup.get('role').hasError('required') && formGroup.get('role').touched
         ">
-                <span class="mat-caption">Role is required</span>
-              </mat-error>
-            </div>
+              <span class="mat-caption">Role is required</span>
+            </mat-error>
+          </div>
+          <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top"
+            fxLayoutGap="10px">
+            <mat-label class="mat-body-1">Select the Limoncu level:
+              <app-lemon-rater formControlName="level">
+              </app-lemon-rater>
+            </mat-label>
           </div>
         </div>
         <div fxLayout="row" class="margin-top">

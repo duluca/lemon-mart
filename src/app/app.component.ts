@@ -67,7 +67,7 @@ import { AuthService } from './auth/auth.service'
           <app-navigation-menu></app-navigation-menu>
         </mat-sidenav>
         <mat-sidenav-content>
-          <router-outlet class="app-container"></router-outlet>
+          <router-outlet></router-outlet>
         </mat-sidenav-content>
       </mat-sidenav-container>
     </div>

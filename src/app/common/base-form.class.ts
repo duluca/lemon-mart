@@ -1,4 +1,4 @@
-import { EventEmitter, Input, Output, SimpleChange } from '@angular/core'
+import { EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core'
 import { AbstractControl, FormGroup } from '@angular/forms'
 
 export abstract class BaseFormComponent<TFormData> {
@@ -17,6 +17,12 @@ export abstract class BaseFormComponent<TFormData> {
 
   patchUpdatedData(data) {
     this.formGroup.patchValue(data, { onlySelf: false })
+  }
+
+  patchUpdatedDataIfChanged(changes: SimpleChanges) {
+    if (this.formGroup && this.hasChanged(changes.initialData)) {
+      this.patchUpdatedData(this.initialData)
+    }
   }
 
   emitFormReady(control: AbstractControl = null) {
