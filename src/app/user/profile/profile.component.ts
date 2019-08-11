@@ -38,6 +38,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     middle: '',
     last: '',
   })
+
   private subs = new SubSink()
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole

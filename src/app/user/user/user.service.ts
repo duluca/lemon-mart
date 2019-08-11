@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, throwError as observableThrowError } from 'rxjs'
-import { catchError } from 'rxjs/operators'
+import { catchError, tap } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'
 import { AuthService, IAuthStatus } from '../../auth/auth.service'
@@ -38,9 +38,9 @@ export class UserService extends CacheService implements IUserService {
     const userObservable = this.getUser(this.currentAuthStatus.userId).pipe(
       catchError(transformError)
     )
-    userObservable.subscribe(
-      user => this.currentUser$.next(user),
-      err => observableThrowError(err)
+
+    userObservable.pipe(
+      tap(user => this.currentUser$.next(user), err => observableThrowError(err))
     )
     return userObservable
   }
@@ -55,12 +55,14 @@ export class UserService extends CacheService implements IUserService {
       .put<IUser>(`${environment.baseUrl}/v1/user/${user.id || 0}`, user)
       .pipe(catchError(transformError))
 
-    updateResponse.subscribe(
-      res => {
-        this.currentUser$.next(res)
-        this.removeItem('draft-user')
-      },
-      err => observableThrowError(err)
+    updateResponse.pipe(
+      tap(
+        res => {
+          this.currentUser$.next(res)
+          this.removeItem('draft-user')
+        },
+        err => observableThrowError(err)
+      )
     )
 
     return updateResponse
