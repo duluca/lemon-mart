@@ -34,7 +34,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
-  "prettier.tslintIntegration": true,
   "prettier.disableLanguages": ["html"],
 
   "beautify.language": {
@@ -55,5 +54,6 @@
     "statusBar.foreground": "#e7e7e7"
   },
   "ng-evergreen.checkFrequency": "Daily",
-  "ng-evergreen.upgradeChannel": "Latest"
+  "ng-evergreen.upgradeChannel": "Latest",
+  "peacock.color": "#2e7d32"
 }
