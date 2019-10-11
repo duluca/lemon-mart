@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BehaviorSubject, Observable, merge, of } from 'rxjs'
 import { map, startWith } from 'rxjs/operators'
 import { BaseFormComponent } from 'src/app/common/base-form.class'
+import { UiService } from 'src/app/common/ui.service'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
 
@@ -50,7 +51,8 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private uiService: UiService
   ) {
     super()
   }
@@ -103,6 +105,8 @@ export class ProfileComponent extends BaseFormComponent<IUser>
         [Validators.required],
       ],
       level: [null, [Validators.required]],
+      // use the code below to test disabled condition of <app-lemon-rater>
+      // level: [{ value: 2, disabled: true }, [Validators.required]],
       dateOfBirth: [(user && user.dateOfBirth) || '', BirthDateValidation],
       address: this.formBuilder.group({
         line1: [
@@ -199,7 +203,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     this.subs.add(
       form.valueChanges.subscribe(() => {
         localStorage.setItem('draft-user', form.value)
-        console.log(form.value)
+        // console.log(form.value)
       })
     )
   }
@@ -210,6 +214,9 @@ export class ProfileComponent extends BaseFormComponent<IUser>
 
     try {
       data = JSON.parse(localStorage.getItem('draft-user'))
+      if (data) {
+        this.uiService.showToast('Loaded data from cache')
+      }
     } catch (err) {
       // no-op
     }

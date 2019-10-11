@@ -1,4 +1,10 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  ViewChild,
+  forwardRef,
+} from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 
 @Component({
@@ -13,14 +19,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
     },
   ],
 })
-export class LemonRaterComponent implements ControlValueAccessor {
+export class LemonRaterComponent implements ControlValueAccessor, AfterViewInit {
+  @ViewChild('displayText', { static: false }) displayTextRef: ElementRef
   disabled = false
-  ratingText = ''
+
   private internalValue: number
   get value() {
     return this.internalValue
   }
-  ratings = [
+
+  ratings = Object.freeze([
     {
       value: 1,
       text: 'no zest',
@@ -33,10 +41,14 @@ export class LemonRaterComponent implements ControlValueAccessor {
       value: 3,
       text: 'a true lemon',
     },
-  ]
+  ])
 
   onChanged: any = () => {}
   onTouched: any = () => {}
+
+  ngAfterViewInit(): void {
+    this.setSelectedText(this.internalValue)
+  }
 
   writeValue(obj: any): void {
     this.internalValue = obj
@@ -54,9 +66,21 @@ export class LemonRaterComponent implements ControlValueAccessor {
   setRating(lemon: any) {
     if (!this.disabled) {
       this.internalValue = lemon.value
-      this.ratingText = lemon.text
+      this.setDisplayText()
       this.onChanged(lemon.value)
       this.onTouched()
     }
+  }
+
+  setDisplayText() {
+    this.setSelectedText(this.internalValue)
+  }
+
+  private setSelectedText(value: number) {
+    this.displayTextRef.nativeElement.textContent = this.getSelectedText(value)
+  }
+
+  private getSelectedText(value: number) {
+    return value ? this.ratings.find(i => i.value === value).text : ''
   }
 }
