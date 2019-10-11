@@ -1,6 +1,6 @@
 {
   "name": "lemon-mart",
-  "version": "8.0.0",
+  "version": "8.2.0",
   "license": "MIT",
   "config": {
     "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
