@@ -17,8 +17,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "standardize": "import-sort --write \"**/*.ts\" && prettier --write \"**/*.ts\" && js-beautify --editorconfig \"src/**/*.html\"",
-    "standardize:ci": "import-sort -l \"**/*.ts\" && prettier --check \"**/*.ts\"",
+    "standardize": "import-sort --write \"**/*.ts\" && prettier-tslint fix \"**/*.ts\" && js-beautify --editorconfig \"src/**/*.html\"",
+    "standardize:ci": "import-sort -l \"**/*.ts\" && prettier-tslint check \"**/*.ts\"",
     "start": "ng serve --port 5000",
     "build": "ng build",
     "test": "ng test --browsers Chrome",
