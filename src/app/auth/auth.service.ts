@@ -96,7 +96,7 @@ export class AuthService extends CacheService implements IAuthService {
 
     const authStatus = {
       isAuthenticated: true,
-      userId: 'e4d1bc2ab25c',
+      userId: '5da01751da27cc462d265913',
       userRole: email.toLowerCase().includes('cashier')
         ? Role.Cashier
         : email.toLowerCase().includes('clerk')

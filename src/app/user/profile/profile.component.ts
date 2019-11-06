@@ -159,7 +159,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       groups.push(this.buildPhoneFormControl(1))
     } else {
       phones.forEach(p => {
-        groups.push(this.buildPhoneFormControl(p.id, p.type, p.number))
+        groups.push(this.buildPhoneFormControl(p.id, p.type, p.digits))
       })
     }
     return groups

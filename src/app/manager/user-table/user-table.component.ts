@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator'
-import { MatSort } from '@angular/material/sort'
+import { MatSort, SortDirection } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { BehaviorSubject, Observable, merge, of } from 'rxjs'
 import {
@@ -25,14 +25,14 @@ import { IUsers, UserService } from '../../user/user/user.service'
   styleUrls: ['./user-table.component.css'],
 })
 export class UserTableComponent implements OnDestroy, AfterViewInit {
-  displayedColumns = ['name', 'email', 'role', 'status', 'id']
-  dataSource = new MatTableDataSource()
+  displayedColumns = ['name', 'email', 'role', '_id']
+  items: IUser[]
   resultsLength = 0
   hasError = false
   errorText = ''
   private skipLoading = false
   private subs = new SubSink()
-  useNgRxData = true
+  useNgRxData = false
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
 
@@ -53,19 +53,31 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   }
 
   delete(user: User) {
-    this.userEntityService.delete(user.id)
+    this.userEntityService.delete(user._id)
   }
 
-  getUsers(pageSize: number, searchText = '', pagesToSkip = 0): Observable<IUsers> {
+  getUsers(
+    pageSize: number,
+    searchText: string,
+    pagesToSkip: number,
+    sortColumn: string,
+    sortDirection: SortDirection
+  ): Observable<IUsers> {
     if (this.useNgRxData) {
       return this.userEntityService.getAll().pipe(
         map(value => {
-          return { total: 0, items: value }
+          return { total: 0, data: value }
         })
       )
+    } else {
+      return this.userService.getUsers(
+        pageSize,
+        searchText,
+        pagesToSkip,
+        sortColumn,
+        sortDirection
+      )
     }
-
-    return this.userService.getUsers(pageSize, searchText, pagesToSkip)
   }
 
   ngOnDestroy(): void {
@@ -73,10 +85,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
-    this.dataSource.sort = this.sort
-
-    this.subs.sink = this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0))
+    this.subs.sink = this.sort.sortChange.subscribe(() => this.paginator.firstPage())
 
     if (this.skipLoading) {
       return
@@ -95,15 +104,17 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
             return this.getUsers(
               this.paginator.pageSize,
               this.search.value,
-              this.paginator.pageIndex
+              this.paginator.pageIndex,
+              this.sort.active,
+              this.sort.direction
             )
           }),
-          map((data: { total: number; items: IUser[] }) => {
+          map((results: { total: number; data: IUser[] }) => {
             this.isLoadingResults$.next(false)
             this.hasError = false
-            this.resultsLength = data.total
+            this.resultsLength = results.total
 
-            return data.items
+            return results.data
           }),
           catchError(err => {
             this.isLoadingResults$.next(false)
@@ -112,7 +123,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
             return of([])
           })
         )
-        .subscribe(data => (this.dataSource.data = data))
+        .subscribe(data => (this.items = data))
     )
   }
 }

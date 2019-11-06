@@ -25,7 +25,7 @@ export class UserServiceFake implements IUserService {
   getUsers(pageSize: number, searchText = '', pagesToSkip = 0): Observable<IUsers> {
     return of({
       total: 1,
-      items: [new User()],
+      data: [new User()],
     } as IUsers)
   }
 }

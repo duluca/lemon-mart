@@ -7,7 +7,7 @@ export interface IName {
 }
 
 export interface IUser {
-  id: string
+  _id: string
   email: string
   name: IName
   picture: string
@@ -26,13 +26,14 @@ export interface IUser {
 
 export interface IPhone {
   type: string
-  number: string
+  digits: string
   id: number
 }
 
 export class User implements IUser {
   constructor(
-    public id = '',
+    // tslint:disable-next-line: variable-name
+    public _id = '',
     public email = '',
     public name = { first: '', middle: '', last: '' } as IName,
     public picture = '',
@@ -55,7 +56,7 @@ export class User implements IUser {
     }
 
     return new User(
-      user.id,
+      user._id,
       user.email,
       user.name,
       user.picture,
@@ -67,7 +68,10 @@ export class User implements IUser {
     )
   }
 
-  get fullName() {
-    return this.name ? `${this.name.first} ${this.name.middle} ${this.name.last}` : ''
+  public get fullName(): string {
+    if (this.name.middle) {
+      return `${this.name.first} ${this.name.middle} ${this.name.last}`
+    }
+    return `${this.name.first} ${this.name.last}`
   }
 }

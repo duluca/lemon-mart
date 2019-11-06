@@ -10,7 +10,7 @@ import { transformError } from '../../common/common'
 import { IUser, User } from './user'
 
 export interface IUsers {
-  items: IUser[]
+  data: IUser[]
   total: number
 }
 
@@ -52,7 +52,7 @@ export class UserService extends CacheService implements IUserService {
   updateUser(user: IUser): Observable<IUser> {
     this.setItem('draft-user', user) // cache user data in case of errors
     const updateResponse = this.httpClient
-      .put<IUser>(`${environment.baseUrl}/v1/user/${user.id || 0}`, user)
+      .put<IUser>(`${environment.baseUrl}/v1/user/${user._id || 0}`, user)
       .pipe(catchError(transformError))
 
     updateResponse.pipe(
@@ -68,12 +68,23 @@ export class UserService extends CacheService implements IUserService {
     return updateResponse
   }
 
-  getUsers(pageSize: number, searchText = '', pagesToSkip = 0): Observable<IUsers> {
+  getUsers(
+    pageSize: number,
+    searchText = '',
+    pagesToSkip = 0,
+    sortColumn = '',
+    sortDirection: '' | 'asc' | 'desc' = 'asc'
+  ): Observable<IUsers> {
+    const recordsToSkip = pageSize * pagesToSkip
+    if (sortColumn) {
+      sortColumn = sortDirection === 'desc' ? `-${sortColumn}` : sortColumn
+    }
     return this.httpClient.get<IUsers>(`${environment.baseUrl}/v1/users`, {
       params: {
-        search: searchText,
-        offset: pagesToSkip.toString(),
+        filter: searchText,
+        skip: recordsToSkip.toString(),
         limit: pageSize.toString(),
+        sortKey: sortColumn,
       },
     })
   }
