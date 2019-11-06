@@ -30,8 +30,7 @@ describe('UserTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserTableComponent)
     component = fixture.componentInstance
-    component.dataSource = new MatTableDataSource()
-    component.dataSource.data = [new User()]
+    component.items = [new User()]
     Object.assign(component, { skipLoading: true })
     fixture.detectChanges()
   })
