@@ -46,13 +46,13 @@ export class UserService extends CacheService implements IUserService {
   }
 
   getUser(id): Observable<IUser> {
-    return this.httpClient.get<IUser>(`${environment.baseUrl}/v1/user/${id}`)
+    return this.httpClient.get<IUser>(`${environment.baseUrl}/v2/user/${id}`)
   }
 
   updateUser(user: IUser): Observable<IUser> {
     this.setItem('draft-user', user) // cache user data in case of errors
     const updateResponse = this.httpClient
-      .put<IUser>(`${environment.baseUrl}/v1/user/${user._id || 0}`, user)
+      .put<IUser>(`${environment.baseUrl}/v2/user/${user._id || 0}`, user)
       .pipe(catchError(transformError))
 
     updateResponse.pipe(
@@ -79,7 +79,7 @@ export class UserService extends CacheService implements IUserService {
     if (sortColumn) {
       sortColumn = sortDirection === 'desc' ? `-${sortColumn}` : sortColumn
     }
-    return this.httpClient.get<IUsers>(`${environment.baseUrl}/v1/users`, {
+    return this.httpClient.get<IUsers>(`${environment.baseUrl}/v2/users`, {
       params: {
         filter: searchText,
         skip: recordsToSkip.toString(),
