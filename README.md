@@ -3,6 +3,7 @@
 > LemonMart was implemented with a Route-first approach to designing SPAs.
 
 [![CircleCI](https://circleci.com/gh/duluca/lemon-mart.svg?style=svg)](https://circleci.com/gh/duluca/lemon-mart)
+[![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=master)](https://coveralls.io/github/duluca/lemon-mart?branch=master)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)
 
 ![lemon-mart-login](https://user-images.githubusercontent.com/822159/36320811-80a9c5f8-1315-11e8-8ba1-d7a62c31ec79.png)
