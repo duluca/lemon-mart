@@ -23,7 +23,7 @@ jobs:
           path: docker-cache/built-image.tar
           destination: built-image.tar
 
-  publish:
+  deploy:
     docker:
       - image: docker:17.12.0-ce-git
     working_directory: /usr/src
@@ -48,12 +48,13 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      - publish:
+      - hold:
+        type: approval
+        requires:
+          - build
+      - deploy:
           requires:
-            - build
-          filters:
-            branches:
-              only: sequential-branch-filter
+            - hold
 
 # Consider tagging images with $CIRCLE_BRANCH
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations

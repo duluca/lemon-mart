@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { MatTableDataSource } from '@angular/material'
-import { EntityDataModule, EntityDataModuleWithoutEffects } from '@ngrx/data'
+import { EntityDataModule } from '@ngrx/data'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 
