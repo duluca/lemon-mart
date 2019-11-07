@@ -220,7 +220,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex fxFlexOffset="10px">
                   <mat-label>Number</mat-label>
-                  <input matInput type="text" formControlName="number"
+                  <input matInput type="text" formControlName="digits"
                     mask="(000) 000-0000" prefix="+1" />
                   <mat-error *ngIf="this.phonesArray.controls[i].invalid">
                     A valid phone number is required

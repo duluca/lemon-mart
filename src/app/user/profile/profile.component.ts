@@ -169,7 +169,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     return this.formBuilder.group({
       id: [id],
       type: [type || '', Validators.required],
-      number: [phoneNumber || '', USAPhoneNumberValidation],
+      digits: [phoneNumber || '', USAPhoneNumberValidation],
     })
   }
 
