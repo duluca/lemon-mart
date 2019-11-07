@@ -49,9 +49,9 @@ workflows:
     jobs:
       - build
       - hold:
-        type: approval
-        requires:
-          - build
+          type: approval
+          requires:
+            - build
       - deploy:
           requires:
             - hold
