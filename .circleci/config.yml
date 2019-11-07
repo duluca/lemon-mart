@@ -27,7 +27,7 @@ jobs:
       - run: npm run standardize:ci
       - run: npm run build:prod
       - run: npm test -- --watch=false
-      - run: npm run test:coverage -- --watch=false
+      - run: npm run test:coverage
       - run: npm run e2e
 
       - store_test_results:
