@@ -31,21 +31,12 @@
   "auto-close-tag.SublimeText3Mode": true,
   "html.autoClosingTags": false,
 
-  "prettier.printWidth": 90,
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "es5",
-  "prettier.disableLanguages": ["html"],
-
-  "beautify.language": {
-    "html": ["html"]
-  },
-
   "peacock.affectActivityBar": true,
   "peacock.affectStatusBar": true,
   "peacock.affectTitleBar": false,
   "workbench.colorCustomizations": {
     "activityBar.background": "#3ca241",
+    "activityBar.activeBorder": "#d2d0ee",
     "activityBar.foreground": "#e7e7e7",
     "activityBar.inactiveForeground": "#e7e7e799",
     "activityBarBadge.background": "#d2d0ee",

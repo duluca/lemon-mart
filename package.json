@@ -134,13 +134,5 @@
       "style": "module",
       "options": {}
     }
-  },
-  "prettier": {
-    "printWidth": 90,
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "parser": "typescript",
-    "jsxBracketSameLine": true
   }
 }
