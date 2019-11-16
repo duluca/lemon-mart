@@ -1,9 +1,9 @@
 import 'hammerjs'
 
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { AngularFireModule } from '@angular/fire'
-import { AngularFireAuthModule } from '@angular/fire/auth'
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { AuthGuard } from './auth/auth-guard.service'
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor'
+import { authFactory } from './auth/auth.factory'
 import { AuthService } from './auth/auth.service'
 import { SimpleDialogComponent } from './common/simple-dialog.component'
 import { UiService } from './common/ui.service'
@@ -33,6 +34,7 @@ import { UserService } from './user/user/user.service'
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   showMaskTyped: true,
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +62,11 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
-    AuthService,
+    {
+      provide: AuthService,
+      useFactory: authFactory,
+      deps: [HttpClient, AngularFireAuth],
+    },
     AuthGuard,
     UiService,
     {

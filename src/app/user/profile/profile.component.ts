@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute } from '@angular/router'
 import { BehaviorSubject, Observable, merge, of } from 'rxjs'
 import { map, startWith } from 'rxjs/operators'
 import { BaseFormComponent } from 'src/app/common/base-form.class'
@@ -7,8 +8,8 @@ import { UiService } from 'src/app/common/ui.service'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
 
+import { Role } from '../../auth/auth.enum'
 import { AuthService } from '../../auth/auth.service'
-import { Role as UserRole } from '../../auth/role.enum'
 import {
   BirthDateValidation,
   EmailValidation,
@@ -18,9 +19,9 @@ import {
   USAPhoneNumberValidation,
   USAZipCodeValidation,
 } from '../../common/validations'
-import { IName, IPhone, IUser } from '../user/user'
+import { IName, IPhone, IUser, PhoneType, User } from '../user/user'
 import { UserService } from '../user/user.service'
-import { IUSState, PhoneType, USStateFilter } from './data'
+import { IUSState, USStateFilter } from './data'
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,8 @@ import { IUSState, PhoneType, USStateFilter } from './data'
 })
 export class ProfileComponent extends BaseFormComponent<IUser>
   implements OnInit, OnDestroy {
-  Role = UserRole
+  Role = Role
+  PhoneType = PhoneType
   PhoneTypes = $enum(PhoneType).getKeys()
 
   states$: Observable<IUSState[]>
@@ -45,6 +47,8 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     return this.authService.authStatus$.value.userRole
   }
 
+  currentUserId: string
+
   // conditional for demo purposes only
   useAppNameInputComponent = true
 
@@ -52,7 +56,8 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
-    private uiService: UiService
+    private uiService: UiService,
+    private route: ActivatedRoute
   ) {
     super()
   }
@@ -60,17 +65,25 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   ngOnInit() {
     this.formGroup = this.buildForm()
 
-    // loadFromCacheForDemo is for ad-hoc cache loading, demo purposes only
-    this.subs.add(
-      merge(this.loadFromCacheForDemo(), this.userService.getCurrentUser()).subscribe(
-        user => {
-          if (user) {
-            this.patchUpdatedData(user)
-            this.nameInitialData$.next(user.name)
-          }
-        }
+    if (this.route.snapshot.data.user) {
+      this.patchUser(this.route.snapshot.data.user)
+    } else {
+      // loadFromCacheForDemo is for ad-hoc cache loading, demo purposes only
+      this.subs.add(
+        merge(
+          this.loadFromCacheForDemo(),
+          this.authService.currentUser$
+        ).subscribe(user => this.patchUser(user))
       )
-    )
+    }
+  }
+
+  patchUser(user: IUser) {
+    if (user) {
+      this.currentUserId = user._id
+      this.patchUpdatedData(user)
+      this.nameInitialData$.next(user.name)
+    }
   }
 
   ngOnDestroy() {
@@ -80,12 +93,12 @@ export class ProfileComponent extends BaseFormComponent<IUser>
 
   buildForm(initialData?: IUser): FormGroup {
     const user = initialData
-
+    this.currentUserId = user ? user._id : null
     const form = this.formBuilder.group({
       email: [
         {
           value: (user && user.email) || '',
-          disabled: this.currentUserRole !== this.Role.Manager,
+          disabled: this.currentUserRole !== Role.Manager,
         },
         EmailValidation,
       ],
@@ -100,11 +113,11 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       role: [
         {
           value: (user && user.role) || '',
-          disabled: this.currentUserRole !== this.Role.Manager,
+          disabled: this.currentUserRole !== Role.Manager,
         },
         [Validators.required],
       ],
-      level: [null, [Validators.required]],
+      level: [(user && user.level) || 0, Validators.required],
       // use the code below to test disabled condition of <app-lemon-rater>
       // level: [{ value: 2, disabled: true }, [Validators.required]],
       dateOfBirth: [(user && user.dateOfBirth) || '', BirthDateValidation],
@@ -183,9 +196,13 @@ export class ProfileComponent extends BaseFormComponent<IUser>
 
   async save(form: FormGroup) {
     this.subs.add(
-      this.userService
-        .updateUser(form.value)
-        .subscribe(res => this.patchUpdatedData(res), err => (this.userError = err))
+      this.userService.updateUser(this.currentUserId, form.value).subscribe(
+        res => {
+          this.patchUpdatedData(res)
+          this.uiService.showToast('Updated user')
+        },
+        err => (this.userError = err)
+      )
     )
   }
 

@@ -1,17 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort, SortDirection } from '@angular/material/sort'
-import { MatTableDataSource } from '@angular/material/table'
 import { BehaviorSubject, Observable, merge, of } from 'rxjs'
-import {
-  catchError,
-  debounceTime,
-  exhaustMap,
-  map,
-  startWith,
-  switchMap,
-} from 'rxjs/operators'
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
 import { UserEntityService } from 'src/app/user/user/user.entity.service'
 import { SubSink } from 'subsink'
 

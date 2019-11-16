@@ -12,12 +12,6 @@ export function USStateFilter(value: string): IUSState[] {
   })
 }
 
-export enum PhoneType {
-  Mobile,
-  Home,
-  Work,
-}
-
 const USStates = [
   { code: 'AK', name: 'Alaska' },
   { code: 'AL', name: 'Alabama' },

@@ -9,6 +9,8 @@ export function transformError(error: HttpErrorResponse | string) {
     errorMessage = `Error! ${error.error.message}`
   } else if (error.status) {
     errorMessage = `Request failed with ${error.status} ${error.statusText}`
+  } else if (error instanceof Error) {
+    errorMessage = error.message
   }
   return throwError(errorMessage)
 }

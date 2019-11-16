@@ -1,97 +1,91 @@
-import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
-import { User } from 'firebase'
-import * as decode from 'jwt-decode'
-import { BehaviorSubject, Observable, throwError as observableThrowError, of } from 'rxjs'
+import { User as FirebaseUser } from 'firebase'
+import { Observable, Subject } from 'rxjs'
+import { map } from 'rxjs/operators'
 
-import { CacheService } from './cache.service'
-import { Role } from './role.enum'
+import { IUser, User } from '../user/user/user'
+import { Role } from './auth.enum'
+import {
+  AuthService,
+  IAuthStatus,
+  IServerAuthResponse,
+  defaultAuthStatus,
+} from './auth.service'
 
-export interface IAuthService {
-  authStatus: BehaviorSubject<IAuthStatus>
-  login(email: string, password: string): Observable<IAuthStatus>
-  logout()
-  getToken(): string
-}
-
-export interface IAuthStatus {
-  isAuthenticated: boolean
-  userRole: Role
-  userId: string
-}
-
-export const defaultAuthStatus = {
-  isAuthenticated: false,
-  userRole: Role.None,
-  userId: null,
+interface IJwtToken {
+  email: string
+  iat: number
+  exp: number
+  sub: string
 }
 
 @Injectable()
-export class AuthService extends CacheService implements IAuthService {
-  private readonly authProvider: (email: string, password: string) => Promise<any>
-  authStatus = new BehaviorSubject<IAuthStatus>(
-    this.getItem('authStatus') || defaultAuthStatus
-  )
-  currentUser = new BehaviorSubject<User>(null)
-
-  constructor(private httpClient: HttpClient, private afAuth: AngularFireAuth) {
+export class FirebaseAuthService extends AuthService {
+  constructor(private afAuth: AngularFireAuth) {
     super()
-    this.authStatus.subscribe(authStatus => this.setItem('authStatus', authStatus))
-    this.afAuth.user.subscribe(user => this.currentUser.next(user))
-    this.authProvider = this.firebaseAuth
   }
 
-  login(email: string, password: string): Observable<IAuthStatus> {
-    this.logout()
+  protected authProvider(
+    email: string,
+    password: string
+  ): Observable<IServerAuthResponse> {
+    const serverResponse$ = new Subject<IServerAuthResponse>()
 
-    const loginResponse = this.authStatus
-
-    this.authProvider(email, password).then(
+    this.afAuth.auth.signInWithEmailAndPassword(email, password).then(
       res => {
-        const firebaseUser: User = res.user
-        firebaseUser.getIdToken().then(token => {
-          this.setToken(token)
-
-          this.authStatus.next({
-            isAuthenticated: true,
-            userRole: Role.Manager,
-            userId: firebaseUser.uid,
-          })
-        })
+        const firebaseUser: FirebaseUser = res.user
+        firebaseUser.getIdToken().then(
+          token => serverResponse$.next({ accessToken: token } as IServerAuthResponse),
+          err => serverResponse$.error(err)
+        )
       },
-      err => {
-        this.logout()
-        return observableThrowError(err.message)
-      }
+      err => serverResponse$.error(err)
     )
 
-    return loginResponse
+    return serverResponse$
   }
 
-  private firebaseAuth(email: string, password: string): Promise<any> {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  protected transformJwtToken(token: IJwtToken): IAuthStatus {
+    if (!token) {
+      return defaultAuthStatus
+    }
+
+    return {
+      isAuthenticated: token.email ? true : false,
+      userId: token.sub,
+      userRole: Role.None,
+    }
+  }
+
+  protected getCurrentUser(): Observable<User> {
+    return this.afAuth.user.pipe(map(this.transformFirebaseUser))
+  }
+
+  transformFirebaseUser(firebaseUser: FirebaseUser): User {
+    if (!firebaseUser) {
+      return new User()
+    }
+
+    return User.Build({
+      name: {
+        first: firebaseUser.displayName
+          ? firebaseUser.displayName.split(' ')[0]
+          : 'Firebase',
+        last: firebaseUser.displayName ? firebaseUser.displayName.split(' ')[1] : 'User',
+      },
+      picture: firebaseUser.photoURL,
+      email: firebaseUser.email,
+      _id: firebaseUser.uid,
+      role: Role.None,
+    } as IUser)
   }
 
   logout() {
-    this.afAuth.auth.signOut()
+    if (this.afAuth && this.afAuth.auth) {
+      this.afAuth.auth.signOut()
+    }
     this.clearToken()
-    this.authStatus.next(defaultAuthStatus)
-  }
-
-  private setToken(jwt: string) {
-    this.setItem('jwt', jwt)
-  }
-
-  private getDecodedToken(): IAuthStatus {
-    return decode(this.getItem('jwt'))
-  }
-
-  getToken(): string {
-    return this.getItem('jwt') || ''
-  }
-
-  private clearToken() {
-    this.removeItem('jwt')
+    this.authStatus$.next(defaultAuthStatus)
   }
 }

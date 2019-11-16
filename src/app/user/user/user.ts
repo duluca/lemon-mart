@@ -1,4 +1,4 @@
-import { Role } from '../../auth/role.enum'
+import { Role } from '../../auth/auth.enum'
 
 export interface IName {
   first: string
@@ -11,12 +11,13 @@ export interface IUser {
   email: string
   name: IName
   picture: string
-  role: Role
+  role: Role | string
   userStatus: boolean
-  dateOfBirth: Date
+  dateOfBirth: Date | string
+  level: number
   address: {
     line1: string
-    line2: string
+    line2?: string
     city: string
     state: string
     zip: string
@@ -24,8 +25,15 @@ export interface IUser {
   phones: IPhone[]
 }
 
+export enum PhoneType {
+  None = 'none',
+  Mobile = 'mobile',
+  Home = 'home',
+  Work = 'work',
+}
+
 export interface IPhone {
-  type: string
+  type: PhoneType
   digits: string
   id: number
 }
@@ -40,9 +48,9 @@ export class User implements IUser {
     public role = Role.None,
     public dateOfBirth = null,
     public userStatus = false,
+    public level = 0,
     public address = {
       line1: '',
-      line2: '',
       city: '',
       state: '',
       zip: '',
@@ -55,23 +63,39 @@ export class User implements IUser {
       return new User()
     }
 
+    if (typeof user.dateOfBirth === 'string') {
+      user.dateOfBirth = new Date(user.dateOfBirth)
+    }
+
     return new User(
       user._id,
       user.email,
       user.name,
       user.picture,
-      user.role,
+      user.role as Role,
       user.dateOfBirth,
       user.userStatus,
+      user.level,
       user.address,
       user.phones
     )
   }
 
   public get fullName(): string {
+    if (!this.name) {
+      return null
+    }
+
     if (this.name.middle) {
       return `${this.name.first} ${this.name.middle} ${this.name.last}`
     }
     return `${this.name.first} ${this.name.last}`
+  }
+
+  toJSON(): object {
+    const serialized = Object.assign(this)
+    delete serialized._id
+    delete serialized.fullName
+    return serialized
   }
 }

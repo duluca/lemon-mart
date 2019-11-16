@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 
 import { IUser, User } from '../user/user'
@@ -21,7 +21,9 @@ import { IUser, User } from '../user/user'
           <p>{{ currentUser.dateOfBirth | date: 'mediumDate' }}</p>
         </mat-card-content>
         <mat-card-actions *ngIf="editMode">
-          <button mat-button mat-raised-button>Edit</button>
+          <button mat-button mat-raised-button (click)="editUser(currentUser._id)">
+            Edit
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -42,7 +44,7 @@ export class ViewUserComponent implements OnInit, OnChanges {
     return !this.user
   }
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     if (this.route.snapshot.data.user) {
@@ -56,5 +58,9 @@ export class ViewUserComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.currentUser$.next(User.Build(changes.user.currentValue))
+  }
+
+  editUser(id: string) {
+    this.router.navigate(['/user/profile', id])
   }
 }
