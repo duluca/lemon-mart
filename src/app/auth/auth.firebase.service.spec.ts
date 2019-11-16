@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing'
 import { AngularFireAuth } from '@angular/fire/auth'
 
 import { UiService } from '../common/ui.service'
-import { AuthService } from './auth.firebase.service'
+import { FirebaseAuthService } from './auth.firebase.service'
 
 const angularFireStub = {
   user: jasmine.createSpyObj('user', ['subscribe']),
@@ -15,15 +15,17 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        AuthService,
+        FirebaseAuthService,
         UiService,
         { provide: AngularFireAuth, useValue: angularFireStub },
       ],
     })
   })
 
-  it('should be created', inject([AuthService], (service: AuthService) => {
-    expect(service).toBeTruthy()
-    expect(angularFireStub.user.subscribe).toHaveBeenCalledTimes(1)
-  }))
+  it('should be created', inject(
+    [FirebaseAuthService],
+    (service: FirebaseAuthService) => {
+      expect(service).toBeTruthy()
+    }
+  ))
 })

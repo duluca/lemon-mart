@@ -78,7 +78,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
       tap(status => this.authStatus$.next(status)),
       filter(status => status.isAuthenticated),
       tap(status => this.getCurrentUser()),
-      flatMap(() => of(undefined)), // ensure that authStatus is not returned
+      flatMap(status => of(undefined)),
       catchError(transformError)
     )
 
