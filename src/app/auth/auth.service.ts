@@ -77,8 +77,8 @@ export abstract class AuthService extends CacheService implements IAuthService {
       }),
       tap(status => this.authStatus$.next(status)),
       filter(status => status.isAuthenticated),
-      tap(status => this.getCurrentUser()),
-      flatMap(status => of(undefined)),
+      flatMap(() => this.getCurrentUser()),
+      map(user => this.currentUser$.next(user)),
       catchError(transformError)
     )
 
@@ -96,7 +96,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
     if (clearToken) {
       this.clearToken()
     }
-    this.authStatus$.next(defaultAuthStatus)
+    setTimeout(() => this.authStatus$.next(defaultAuthStatus), 0)
   }
 
   protected setToken(jwt: string) {
