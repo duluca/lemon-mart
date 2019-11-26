@@ -9,21 +9,26 @@
         <ng-template matStepLabel>Account Information</ng-template>
         <div class="stepContent">
           <div *ngIf="useAppNameInputComponent; else localFormImplementation">
-            <app-name-input [initialData]="nameInitialData$ | async" (formReady)="registerForm('name', $event)">
+            <app-name-input [initialData]="nameInitialData$ | async"
+              (formReady)="registerForm('name', $event)">
             </app-name-input>
           </div>
           <ng-template #localFormImplementation>
-            <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('name')" fxLayoutGap="10px">
+            <div fxLayout="row" fxLayout.lt-sm="column"
+              [formGroup]="formGroup.get('name')" fxLayoutGap="10px">
               <mat-form-field appearance="outline" fxFlex="40%">
                 <mat-label>First Name</mat-label>
                 <input matInput aria-label="First Name" formControlName="first" />
-                <mat-error *ngIf="formGroup.get('name').get('first').hasError('required')">
+                <mat-error
+                  *ngIf="formGroup.get('name').get('first').hasError('required')">
                   First Name is required
                 </mat-error>
-                <mat-error *ngIf="formGroup.get('name').get('first').hasError('minLength')">
+                <mat-error
+                  *ngIf="formGroup.get('name').get('first').hasError('minLength')">
                   Must be at least 2 characters
                 </mat-error>
-                <mat-error *ngIf="formGroup.get('name').get('first').hasError('maxLength')">
+                <mat-error
+                  *ngIf="formGroup.get('name').get('first').hasError('maxLength')">
                   Can't exceed 50 characters
                 </mat-error>
               </mat-form-field>
@@ -40,10 +45,12 @@
                 <mat-error *ngIf="formGroup.get('name').get('last').hasError('required')">
                   Last Name is required
                 </mat-error>
-                <mat-error *ngIf="formGroup.get('name').get('last').hasError('minLength')">
+                <mat-error
+                  *ngIf="formGroup.get('name').get('last').hasError('minLength')">
                   Must be at least 2 characters
                 </mat-error>
-                <mat-error *ngIf="formGroup.get('name').get('last').hasError('maxLength')">
+                <mat-error
+                  *ngIf="formGroup.get('name').get('last').hasError('maxLength')">
                   Can't exceed 50 characters
                 </mat-error>
               </mat-form-field>
@@ -73,7 +80,8 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top"
+            fxLayoutGap="10px">
             <mat-label class="mat-body-1">Role</mat-label>
             <mat-radio-group formControlName="role">
               <mat-radio-button style="margin-right: 10px;" [value]="Role.None">
@@ -95,7 +103,8 @@
               <span class="mat-caption">Role is required</span>
             </mat-error>
           </div>
-          <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top"
+            fxLayoutGap="10px">
             <mat-label class="mat-body-1">Select the Limoncu level:
               <app-lemon-rater formControlName="level">
               </app-lemon-rater>
@@ -115,57 +124,70 @@
       <form [formGroup]="formGroup">
         <ng-template matStepLabel>Contact Information</ng-template>
         <div class="stepContent">
-          <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-sm="column"
+            [formGroup]="formGroup.get('address')" fxLayoutGap="10px">
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Address Line 1</mat-label>
               <input matInput aria-label="Address Line 1" formControlName="line1" />
-              <mat-error *ngIf=" formGroup.get('address').get('line1').hasError('required')">
+              <mat-error
+                *ngIf=" formGroup.get('address').get('line1').hasError('required')">
                 Line 1 is required
               </mat-error>
-              <mat-error *ngIf="formGroup.get('address').get('line1').hasError('minLength')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('line1').hasError('minLength')">
                 Must be at least 2 characters
               </mat-error>
-              <mat-error *ngIf="formGroup.get('address').get('line1').hasError('maxLength')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('line1').hasError('maxLength')">
                 Can't exceed 50 characters
               </mat-error>
             </mat-form-field>
           </div>
-          <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-sm="column"
+            [formGroup]="formGroup.get('address')" fxLayoutGap="10px">
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Line 2</mat-label>
               <input matInput aria-label="Address Line 2" formControlName="line2" />
               <mat-hint>Optional</mat-hint>
-              <mat-error *ngIf="formGroup.get('address').get('line2').hasError('minLength')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('line2').hasError('minLength')">
                 Must be at least 2 characters
               </mat-error>
-              <mat-error *ngIf="formGroup.get('address').get('line2').hasError('maxLength')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('line2').hasError('maxLength')">
                 Can't exceed 50 characters
               </mat-error>
             </mat-form-field>
           </div>
-          <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-sm="column"
+            [formGroup]="formGroup.get('address')" fxLayoutGap="10px">
             <mat-form-field appearance="outline" fxFlex="40%">
               <mat-label>City</mat-label>
               <input matInput aria-label="City" formControlName="city" />
-              <mat-error *ngIf="formGroup.get('address').get('city').hasError('required')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('city').hasError('required')">
                 City is required
               </mat-error>
-              <mat-error *ngIf="formGroup.get('address').get('city').hasError('minLength')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('city').hasError('minLength')">
                 Must be at least 2 characters
               </mat-error>
-              <mat-error *ngIf="formGroup.get('address').get('city').hasError('maxLength')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('city').hasError('maxLength')">
                 Can't exceed 50 characters
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex="30%">
               <mat-label>State</mat-label>
-              <input type="text" aria-label="State" matInput formControlName="state" [matAutocomplete]="stateAuto" />
+              <input type="text" aria-label="State" matInput formControlName="state"
+                [matAutocomplete]="stateAuto" />
               <mat-autocomplete #stateAuto="matAutocomplete">
                 <mat-option *ngFor="let state of (states$ | async)" [value]="state.name">
                   {{ state.name }}
                 </mat-option>
               </mat-autocomplete>
-              <mat-error *ngIf="formGroup.get('address').get('state').hasError('required')">
+              <mat-error
+                *ngIf="formGroup.get('address').get('state').hasError('required')">
                 State is required
               </mat-error>
             </mat-form-field>
@@ -185,24 +207,28 @@
                   Add Phone
                 </button>
               </h2>
-              <mat-list-item style="margin-top: 36px;" *ngFor="let position of this.phonesArray.controls; let i = index"
+              <mat-list-item style="margin-top: 36px;"
+                *ngFor="let position of this.phonesArray.controls; let i = index"
                 [formGroupName]="i">
                 <mat-form-field appearance="outline" fxFlex="100px">
                   <mat-label>Type</mat-label>
                   <mat-select formControlName="type">
-                    <mat-option *ngFor="let type of this.PhoneTypes" [value]="PhoneType[type]">
+                    <mat-option *ngFor="let type of this.PhoneTypes"
+                      [value]="PhoneType[type]">
                       {{ type }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex fxFlexOffset="10px">
                   <mat-label>Number</mat-label>
-                  <input matInput type="text" formControlName="digits" mask="(000) 000-0000" prefix="+1" />
+                  <input matInput type="text" formControlName="digits"
+                    mask="(000) 000-0000" prefix="+1" />
                   <mat-error *ngIf="this.phonesArray.controls[i].invalid">
                     A valid phone number is required
                   </mat-error>
                 </mat-form-field>
-                <button fxFlex="33px" mat-icon-button (click)="this.phonesArray.removeAt(i)">
+                <button fxFlex="33px" mat-icon-button
+                  (click)="this.phonesArray.removeAt(i)">
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-list-item>
@@ -229,7 +255,8 @@
           <div class="flex-spacer"></div>
           <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
           <button mat-button color="warn" (click)="stepper.reset()">Reset</button>
-          <button mat-raised-button matStepperNext color="primary" type="submit" [disabled]="this.formGroup.invalid">
+          <button mat-raised-button matStepperNext color="primary" type="submit"
+            [disabled]="this.formGroup.invalid">
             Update
           </button>
         </div>
