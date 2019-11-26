@@ -101,6 +101,7 @@
     "@types/node": "^12.12.7",
     "angular-unit-test-helper": "^1.4.1",
     "codelyzer": "^5.2.0",
+    "cypress": "3.6.1",
     "cross-conf-env": "^1.1.2",
     "dev-norms": "^1.7.0",
     "fake-jwt-sign": "^1.1.1",
@@ -126,6 +127,7 @@
     "protractor": "^5.4.2",
     "ts-node": "~8.5.0",
     "tslint": "^5.20.1",
+    "cypress": "3.6.1"
     "tslint-config-prettier": "^1.18.0",
     "tslint-etc": "^1.9.2",
     "tslint-plugin-prettier": "^2.0.1",
