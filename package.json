@@ -34,6 +34,7 @@
     "mock:stop": "docker-compose down",
     "test:prod": "ng test --browsers ChromiumNoSandbox --watch=false",
     "test:prod:e2e": "npm run e2e",
+    "cypress:run": "cypress run --record",
     "test:coverage": "ng test --browsers ChromiumNoSandbox --watch=false --code-coverage",
     "posttest:coverage": "http-server -c-1 -o -p 9875 ./coverage",
     "predocker:build": "npm run build:prod && npm run test:prod",
