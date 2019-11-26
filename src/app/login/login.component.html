@@ -10,7 +10,8 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <mat-icon>email</mat-icon>
           <mat-form-field fxFlex>
-            <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email" />
+            <input matInput placeholder="E-mail" aria-label="E-mail"
+              formControlName="email" />
             <mat-error *ngIf="loginForm.get('email').hasError('required')">
               E-mail is required
             </mat-error>
@@ -22,7 +23,8 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <mat-icon matPrefix>vpn_key</mat-icon>
           <mat-form-field fxFlex>
-            <input matInput placeholder="Password" aria-label="Password" type="password" formControlName="password" />
+            <input matInput placeholder="Password" aria-label="Password" type="password"
+              formControlName="password" />
             <mat-hint>Minimum 8 characters</mat-hint>
             <mat-error *ngIf="loginForm.get('password').hasError('required')">
               Password is required
@@ -38,7 +40,8 @@
         <div fxLayout="row" class="margin-top">
           <div *ngIf="loginError" class="mat-caption error">{{ loginError }}</div>
           <div class="flex-spacer"></div>
-          <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">
+          <button mat-raised-button type="submit" color="primary"
+            [disabled]="loginForm.invalid">
             Login
           </button>
         </div>
@@ -48,7 +51,8 @@
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
         <span>Authentication Mode: </span><i>{{ authMode }}</i>
       </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" *ngIf="authMode !== AuthMode.InMemory">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"
+        *ngIf="authMode !== AuthMode.InMemory">
         <span>Demo Credentials: </span><button mat-button
           (click)="this.loginForm.patchValue({ email: 'duluca@gmail.com', password: 'l0l1pop!!' })">Fill</button>
       </div>
@@ -74,10 +78,12 @@
             <mat-grid-tile>
             </mat-grid-tile>
             <div *ngFor="let role of roles; odd as oddRow">
-              <mat-grid-tile role="listitem" [style.background]="oddRow ? 'lightGray': 'white'">
+              <mat-grid-tile role="listitem"
+                [style.background]="oddRow ? 'lightGray': 'white'">
                 {{role}}
               </mat-grid-tile>
-              <mat-grid-tile role="listitem" [style.background]="oddRow ? 'lightGray': 'white'">
+              <mat-grid-tile role="listitem"
+                [style.background]="oddRow ? 'lightGray': 'white'">
                 <div *ngIf="role.toLowerCase() === 'none'; else otherRoles">
                   Any @test.com email
                 </div>

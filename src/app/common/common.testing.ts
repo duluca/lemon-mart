@@ -10,7 +10,6 @@ import { Observable, Subscription, of } from 'rxjs'
 import { AuthService } from '../auth/auth.service'
 import { AuthServiceFake } from '../auth/auth.service.fake'
 import { MaterialModule } from '../material.module'
-import { SharedComponentsModule } from '../shared-components.module'
 import { UserService } from '../user/user/user.service'
 import { UserServiceFake } from '../user/user/user.service.fake'
 import { UiService } from './ui.service'
@@ -38,6 +37,7 @@ export class MediaObserverFake {
 }
 
 export class MatIconRegistryFake {
+  // tslint:disable-next-line: variable-name
   _document = document
   addSvgIcon(iconName: string, url: SafeResourceUrl): this {
     // this.addSvgIcon('lemon', 'lemon.svg')

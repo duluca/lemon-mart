@@ -19,7 +19,7 @@ import {
   USAPhoneNumberValidation,
   USAZipCodeValidation,
 } from '../../common/validations'
-import { IName, IPhone, IUser, PhoneType, User } from '../user/user'
+import { IName, IPhone, IUser, PhoneType } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, USStateFilter } from './data'
 

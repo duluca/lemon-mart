@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import * as decode from 'jwt-decode'
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs'
+import { BehaviorSubject, Observable, throwError } from 'rxjs'
 import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
 
 import { transformError } from '../common/common'

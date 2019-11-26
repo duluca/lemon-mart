@@ -1,8 +1,9 @@
 <i #displayText></i>
 <div class="lemons" [ngClass]="{'disabled': disabled}">
   <ng-container *ngFor="let lemon of ratings">
-    <svg width="24px" height="24px" viewBox="0 0 513 513" [attr.title]="lemon.text" class="lemon rating"
-      [ngClass]="{'selected': lemon.value <= value}" (mouseover)="displayText.textContent = !disabled ? lemon.text : ''"
+    <svg width="24px" height="24px" viewBox="0 0 513 513" [attr.title]="lemon.text"
+      class="lemon rating" [ngClass]="{'selected': lemon.value <= value}"
+      (mouseover)="displayText.textContent = !disabled ? lemon.text : ''"
       (mouseout)="setDisplayText()" (click)="setRating(lemon)">
       <path
         d="M427.497,392.197 C425.79,394.16 423.998,396.122 422.206,398.085 C418.622,402.01 414.867,406.02 410.942,409.945 C407.017,413.87 403.006,417.626 399.081,421.21 C397.118,423.002 395.156,424.794 393.193,426.501 C259.988,541.36 134.036,451.674 99.049,486.576 C82.54,505.068 54.625,507.848 34.793,492.976 C33.722,491.331 32.753,489.621 31.892,487.856 C25.492,474.8 21.652,453.637 43.839,431.364 C80.362,394.928 -7.276,270.938 132.33,131.333 C271.936,-8.272 395.925,79.364 432.362,42.842 C443.177,30.243 459.725,24.113 476.138,26.629 C482.491,27.84 488.549,30.275 493.973,33.798 C508.845,53.63 506.064,81.544 487.573,98.053 C452.67,133.039 542.355,258.991 427.497,392.197 Z"

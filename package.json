@@ -17,13 +17,14 @@
   },
   "scripts": {
     "ng": "ng",
-    "standardize": "import-sort --write \"**/*.ts\" && prettier-tslint fix \"**/*.ts\" && js-beautify --editorconfig \"src/**/*.html\"",
-    "standardize:ci": "import-sort -l \"**/*.ts\" && prettier-tslint check \"**/*.ts\"",
+    "style:fix": "import-sort --write \"**/*.ts\" && prettier --write \"**/*.ts\"",
+    "style": "import-sort -l \"**/*.ts\" && prettier --check \"**/*.ts\"",
     "start": "ng serve --port 5000",
     "build": "ng build",
     "test": "ng test --browsers Chrome",
     "test:debug": "ng test --browsers Chrome --source-map",
-    "lint": "ng lint",
+    "lint": "tslint --config tslint.json --project . -e \"**/{test,polyfills}.ts\"",
+    "lint:fix": "tslint --config tslint.json --fix --project . -e \"**/{test,polyfills}.ts\"",
     "e2e": "ng e2e",
     "build:prod": "ng build --prod",
     "build:integration": "cross-conf-env docker build -f integration.Dockerfile . -t $npm_package_config_imageRepo:latest --build-arg CACHEBUST=$(date +%s)",
@@ -123,12 +124,14 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
-    "prettier-tslint": "^0.4.2",
     "protractor": "^5.4.2",
     "ts-node": "~8.5.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.6.4",
     "cypress": "3.6.1"
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-etc": "^1.9.2",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.6.4"
   },
   "importSort": {
     ".ts, .tsx": {

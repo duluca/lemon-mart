@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { sign } from 'fake-jwt-sign' // For InMemoryAuthService only
 import { Observable, of, throwError } from 'rxjs'
 
-import { IUser, PhoneType, User } from '../user/user/user'
+import { PhoneType, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import { AuthService, IAuthStatus, IServerAuthResponse } from './auth.service'
 
@@ -36,7 +36,7 @@ export class InMemoryAuthService extends AuthService {
   constructor() {
     super()
     console.warn(
-      'You\'re using the InMemoryAuthService. Do not use this service in production.'
+      "You're using the InMemoryAuthService. Do not use this service in production."
     )
   }
 
