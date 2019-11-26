@@ -36,7 +36,7 @@ export class InMemoryAuthService extends AuthService {
   constructor() {
     super()
     console.warn(
-      'You\'re using the InMemoryAuthService. Do not use this service in production.'
+      "You're using the InMemoryAuthService. Do not use this service in production."
     )
   }
 

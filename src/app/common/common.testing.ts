@@ -37,6 +37,7 @@ export class MediaObserverFake {
 }
 
 export class MatIconRegistryFake {
+  // tslint:disable-next-line: variable-name
   _document = document
   addSvgIcon(iconName: string, url: SafeResourceUrl): this {
     // this.addSvgIcon('lemon', 'lemon.svg')
