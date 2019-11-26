@@ -8,12 +8,12 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router'
-import { Observable, OperatorFunction, defer } from 'rxjs'
-import { filter, map, take } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { map, take } from 'rxjs/operators'
 
 import { UiService } from '../common/ui.service'
 import { Role } from './auth.enum'
-import { AuthService, IAuthStatus } from './auth.service'
+import { AuthService } from './auth.service'
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
