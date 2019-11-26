@@ -93,7 +93,7 @@ jobs:
           at: ~/
       - run:
           name: Run Cypress tests
-          command: 'npx cypress run'
+          command: 'npx cypress run --record'
 workflows:
   version: 2
   build-test-and-approval-deploy:
