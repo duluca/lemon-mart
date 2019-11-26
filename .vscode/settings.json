@@ -45,7 +45,10 @@
     "statusBarItem.hoverBackground": "#3ca241",
     "statusBar.foreground": "#e7e7e7"
   },
-  "ng-evergreen.checkFrequency": "Daily",
-  "ng-evergreen.upgradeChannel": "Latest",
-  "peacock.color": "#2e7d32"
+  "peacock.color": "#2e7d32",
+
+  "gitlens.menus": {
+    "editorGroup": false
+  },
+  "ng-evergreen.upgradeChannel": "Latest"
 }
