@@ -45,3 +45,4 @@ Thumbs.db
 /tests
 cache
 .firebase
+cypress

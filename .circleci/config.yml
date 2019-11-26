@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   coveralls: coveralls/coveralls@1.0.4
+  cypress: cypress-io/cypress@1
 jobs:
   build:
     docker:
@@ -64,11 +65,40 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: npx now --token $NOW_TOKEN --platform-version 2 --prod --name lemon-mart /tmp/workspace/dist/lemon-mart
-
+  cypress/run:
+    docker:
+      - image: cypress/base:10
+    parallelism: 1
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - cache-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Npm CI
+          command: npm ci
+      - run:
+          command: npx cypress verify
+      - save_cache:
+          key: cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+            - .cache/Cypress
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run Cypress tests
+          command: 'npx cypress run'
 workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
+      - cypress/run
       - build
       - hold:
           type: approval
