@@ -7,6 +7,7 @@
   ],
   "rules": {
     "prettier": true,
+    "no-unused-declaration": true,
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
@@ -53,8 +54,7 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true,
-    "no-unused-declaration": true
+    "use-pipe-transform-interface": true
   },
   "rulesDirectory": ["codelyzer"]
 }
