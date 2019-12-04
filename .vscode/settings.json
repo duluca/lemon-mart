@@ -11,7 +11,12 @@
   "editor.minimap.enabled": false,
   "editor.codeActionsOnSave": {
     "source.organizeImports": false,
-    "source.fixAll.tslint": true,
+    "source.fixAll.tslint": true
+  },
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
   },
 
   "explorer.openEditors.visible": 0,

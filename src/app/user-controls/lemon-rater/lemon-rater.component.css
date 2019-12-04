@@ -23,7 +23,7 @@
   fill: #d8d8d8;
 }
 
-.lemons .lemon:hover~.lemon #fill-area {
+.lemons .lemon:hover ~ .lemon #fill-area {
   fill: #d8d8d8 !important;
 }
 
