@@ -52,7 +52,7 @@
     "docker:open:win": "echo Trying to launch on Windows && timeout 2 && start http://localhost:%npm_package_config_imagePort%",
     "docker:open:mac": "echo Trying to launch on MacOS && sleep 2 && URL=http://localhost:$npm_package_config_imagePort && open $URL",
     "docker:debugmessage": "echo Docker Debug Completed Successfully! Hit Ctrl+C to terminate log tailing.",
-    "predocker:debug": "run-s -c docker:build docker:run",
+    "predocker:debug": "run-s docker:build docker:run",
     "docker:debug": "run-s -cs docker:open:win docker:open:mac docker:debugmessage docker:taillogs",
     "aws:login:win": "cross-conf-env aws ecr get-login --no-include-email --region $npm_package_config_awsRegion > dockerLogin.cmd && call dockerLogin.cmd && del dockerLogin.cmd",
     "aws:login:mac": "eval $(aws ecr get-login --no-include-email --region $npm_package_config_awsRegion)",
