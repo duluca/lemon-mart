@@ -6,6 +6,19 @@ export interface IName {
   last: string
 }
 
+export enum PhoneType {
+  None = 'none',
+  Mobile = 'mobile',
+  Home = 'home',
+  Work = 'work',
+}
+
+export interface IPhone {
+  type: PhoneType
+  digits: string
+  id: number
+}
+
 export interface IUser {
   _id: string
   email: string
@@ -23,19 +36,6 @@ export interface IUser {
     zip: string
   }
   phones: IPhone[]
-}
-
-export enum PhoneType {
-  None = 'none',
-  Mobile = 'mobile',
-  Home = 'home',
-  Work = 'work',
-}
-
-export interface IPhone {
-  type: PhoneType
-  digits: string
-  id: number
 }
 
 export class User implements IUser {
