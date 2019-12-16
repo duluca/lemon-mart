@@ -4,7 +4,6 @@
   "editor.rulers": [
     90
   ],
-  "editor.autoIndent": true,
   "editor.cursorBlinking": "solid",
   "editor.formatOnType": false,
   "editor.formatOnPaste": false,
@@ -46,5 +45,6 @@
   "gitlens.menus": {
     "editorGroup": false
   },
-  "ng-evergreen.upgradeChannel": "Latest"
+  "ng-evergreen.upgradeChannel": "Latest",
+  "editor.autoIndent": "full"
 }
