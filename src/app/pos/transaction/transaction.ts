@@ -1,4 +1,4 @@
-import { TransactionType } from './transactionType.enum'
+import { TransactionType } from './transaction.enum'
 
 export interface ITransaction {
   paymentType: TransactionType
