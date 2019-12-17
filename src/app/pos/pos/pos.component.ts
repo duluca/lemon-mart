@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { filter, tap } from 'rxjs/operators'
 import { UiService } from 'src/app/common/ui.service'
 import { SubSink } from 'subsink'
 
 import { ITransaction } from '../transaction/transaction'
+import { TransactionType } from '../transaction/transaction.enum'
 import { TransactionService } from '../transaction/transaction.service'
-import { TransactionType } from '../transaction/transactionType.enum'
 
 interface IEvent {
   event: 'checkoutCompleted' | 'checkoutInitiated'
@@ -38,14 +39,16 @@ export class PosComponent implements OnInit, OnDestroy {
     })
     this.subs.sink = this.transactionService
       .processTransaction(transaction)
-      .subscribe(transactionId => {
-        if (transactionId) {
+      .pipe(
+        filter(tx => !tx),
+        tap(transactionId => {
           this.uiService.showToast('Checkout completed')
           dataLayer.push({
             event: 'checkoutCompleted',
           })
-        }
-      })
+        })
+      )
+      .subscribe()
   }
 
   ngOnDestroy() {
