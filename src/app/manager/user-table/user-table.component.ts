@@ -18,7 +18,7 @@ import { IUsers, UserService } from '../../user/user/user.service'
 })
 export class UserTableComponent implements OnDestroy, AfterViewInit {
   displayedColumns = ['name', 'email', 'role', '_id']
-  items: IUser[]
+  items$: Observable<IUser[]>
   resultsLength = 0
   hasError = false
   errorText = ''
@@ -83,39 +83,36 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
       return
     }
 
-    this.subs.add(
-      merge(
-        this.sort.sortChange,
-        this.paginator.page,
-        this.search.valueChanges.pipe(debounceTime(1000))
-      )
-        .pipe(
-          startWith({}),
-          switchMap(() => {
-            this.isLoadingResults$.next(true)
-            return this.getUsers(
-              this.paginator.pageSize,
-              this.search.value,
-              this.paginator.pageIndex,
-              this.sort.active,
-              this.sort.direction
-            )
-          }),
-          map((results: { total: number; data: IUser[] }) => {
-            this.isLoadingResults$.next(false)
-            this.hasError = false
-            this.resultsLength = results.total
-
-            return results.data
-          }),
-          catchError(err => {
-            this.isLoadingResults$.next(false)
-            this.hasError = true
-            this.errorText = err
-            return of([])
-          })
+    this.items$ = merge(
+      this.sort.sortChange,
+      this.paginator.page,
+      this.search.valueChanges.pipe(debounceTime(1000))
+    ).pipe(
+      startWith({}),
+      switchMap(() => {
+        this.isLoadingResults$.next(true)
+        return this.getUsers(
+          this.paginator.pageSize,
+          this.search.value,
+          this.paginator.pageIndex,
+          this.sort.active,
+          this.sort.direction
         )
-        .subscribe(data => (this.items = data))
+      }),
+      map((results: { total: number; data: IUser[] }) => {
+        this.isLoadingResults$.next(false)
+        this.hasError = false
+        this.resultsLength = results.total
+
+        return results.data
+      }),
+      catchError(err => {
+        this.isLoadingResults$.next(false)
+        this.hasError = true
+        this.errorText = err
+        return of([])
+      })
     )
+    this.items$.subscribe()
   }
 }
