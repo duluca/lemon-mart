@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.19
 jobs:
   build:
     docker:
@@ -22,9 +24,7 @@ jobs:
           destination: built-image.tar
 
   deploy:
-    docker:
-      - image: circleci/node:lts
-    working_directory: /usr/src
+    executor: aws-cli/default
     steps:
       - restore_cache:
           keys:
