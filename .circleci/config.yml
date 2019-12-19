@@ -27,9 +27,9 @@ jobs:
     working_directory: /usr/src
     steps:
       - restore_cache:
-        keys:
-          - built-image-{{ .BuildNum }}
-          - built-image
+          keys:
+            - built-image-{{ .BuildNum }}
+            - built-image
       - setup_remote_docker
       - run:
           name: Sign into AWS ecr
