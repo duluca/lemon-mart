@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.19
 jobs:
   build:
     docker:
@@ -9,8 +11,6 @@ jobs:
       - setup_remote_docker
       - run:
           name: Execute Pipeline (Build Source -> Test -> Build Web Server)
-          # code is checked out in the pipeline, consider copying from CI to Pipeline
-          # consider caching node_modules or switching to npm ci option when it becomes stable
           command: |
             docker build -f integration.Dockerfile . -t lemon-mart:$CIRCLE_BRANCH
             mkdir -p docker-cache
@@ -24,9 +24,8 @@ jobs:
           destination: built-image.tar
 
   deploy:
-    docker:
-      - image: docker:17.12.0-ce-git
-    working_directory: /usr/src
+    executor: aws-cli/default
+    working_directory: ~/repo
     steps:
       - restore_cache:
         keys:
@@ -55,7 +54,6 @@ workflows:
       - deploy:
           requires:
             - hold
-# Consider tagging images with $CIRCLE_BRANCH
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
