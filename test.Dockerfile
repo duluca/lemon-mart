@@ -1,15 +1,20 @@
-# FROM duluca/minimal-node-chromium:lts-alpine as tester
+FROM duluca/minimal-node-chromium:lts-alpine as tester
+#FROM circleci/node:lts-browsers
+#FROM chromium
 
-FROM chromium
-
-ENV TESTER_SRC_DIR=/usr/src
-
-WORKDIR $TESTER_SRC_DIR
+WORKDIR /usr/src
 
 COPY . .
 
-ADD ./cache/node_modules ./node_modules
-ADD ./cache/dist ./dist
+# install dependencies and build
+RUN npm ci
+
+# force update the webdriver, so it runs with latest version of Chrome
+RUN cd ./node_modules/protractor && npm i webdriver-manager@latest
+
+WORKDIR /usr/src
 
 RUN npm run test:prod
 # RUN npm run test:prod:e2e
+
+

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { EntityDataModule } from '@ngrx/data'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
+import { of } from 'rxjs'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { entityConfig } from '../../entity-metadata'
@@ -29,7 +30,7 @@ describe('UserTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserTableComponent)
     component = fixture.componentInstance
-    component.items = [new User()]
+    component.items$ = of([new User()])
     Object.assign(component, { skipLoading: true })
     fixture.detectChanges()
   })
