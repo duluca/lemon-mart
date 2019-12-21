@@ -11,6 +11,8 @@
     "esbenp.prettier-vscode",
     "HookyQR.beautify",
     "expertly-simple.ng-evergreen",
-    "msjsdiag.debugger-for-edge"
+    "msjsdiag.debugger-for-edge",
+    "johnpapa.vscode-peacock",
+    "ms-vscode.vscode-typescript-tslint-plugin"
   ]
 }
