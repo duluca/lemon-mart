@@ -49,9 +49,6 @@ export class ViewUserComponent implements OnInit, OnChanges {
   ngOnInit() {
     if (this.route.snapshot.data.user) {
       const snapshotUser = User.Build(this.route.snapshot.data.user)
-      // if (!snapshotUser.dateOfBirth) {
-      //   snapshotUser.dateOfBirth = Date.now() // for data mocking purposes only
-      // }
       this.currentUser$.next(snapshotUser)
     }
   }

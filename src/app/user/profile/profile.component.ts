@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { BehaviorSubject, Observable, merge, of } from 'rxjs'
-import { map, startWith } from 'rxjs/operators'
+import { filter, map, startWith, tap } from 'rxjs/operators'
 import { BaseFormComponent } from 'src/app/common/base-form.class'
 import { UiService } from 'src/app/common/ui.service'
 import { SubSink } from 'subsink'
@@ -70,10 +70,12 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     } else {
       // loadFromCacheForDemo is for ad-hoc cache loading, demo purposes only
       this.subs.add(
-        merge(
-          this.loadFromCacheForDemo(),
-          this.authService.currentUser$
-        ).subscribe(user => this.patchUser(user))
+        merge(this.loadFromCacheForDemo(), this.authService.currentUser$)
+          .pipe(
+            filter(user => user !== null || user !== undefined),
+            tap(user => this.patchUser(user))
+          )
+          .subscribe()
       )
     }
   }
@@ -198,7 +200,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     this.subs.add(
       this.userService.updateUser(this.currentUserId, form.value).subscribe(
         res => {
-          this.patchUpdatedData(res)
+          this.patchUser(res)
           this.uiService.showToast('Updated user')
         },
         err => (this.userError = err)
