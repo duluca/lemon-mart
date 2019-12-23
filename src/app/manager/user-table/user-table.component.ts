@@ -8,7 +8,7 @@ import { UserEntityService } from 'src/app/user/user/user.entity.service'
 import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
-import { IUser, User } from '../../user/user/user'
+import { IUser } from '../../user/user/user'
 import { IUsers, UserService } from '../../user/user/user.service'
 
 @Component({
@@ -38,14 +38,6 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
     private userEntityService: UserEntityService
   ) {
     this.loading$ = merge(this.userEntityService.loading$, this.isLoadingResults$)
-  }
-
-  add(user: User) {
-    this.userEntityService.add(user)
-  }
-
-  delete(user: User) {
-    this.userEntityService.delete(user._id)
   }
 
   getUsers(
