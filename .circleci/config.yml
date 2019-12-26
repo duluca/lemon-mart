@@ -20,9 +20,14 @@ jobs:
       # force update the webdriver, so it runs with latest version of Chrome
       - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
 
+      # because we use "npm ci" to install NPM dependencies
+      # we cache "~/.npm" folder
+      # because Cypress is a dev dependency
+      # we should also cache "~/.cache/Cypress" folder
       - save_cache:
           paths:
-            - node_modules
+            - ~/.npm
+            - ~/.cache/Cypress
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm run style
