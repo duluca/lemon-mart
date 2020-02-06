@@ -72,7 +72,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       this.subs.add(
         merge(this.loadFromCacheForDemo(), this.authService.currentUser$)
           .pipe(
-            filter(user => user !== null || user !== undefined),
+            filter(user => user != null || user !== undefined),
             tap(user => this.patchUser(user))
           )
           .subscribe()
