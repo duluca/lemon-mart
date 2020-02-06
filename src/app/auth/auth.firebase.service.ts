@@ -32,7 +32,7 @@ export class FirebaseAuthService extends AuthService {
   ): Observable<IServerAuthResponse> {
     const serverResponse$ = new Subject<IServerAuthResponse>()
 
-    this.afAuth.auth.signInWithEmailAndPassword(email, password).then(
+    this.afAuth.signInWithEmailAndPassword(email, password).then(
       res => {
         const firebaseUser: FirebaseUser = res.user
         firebaseUser.getIdToken().then(
@@ -82,8 +82,8 @@ export class FirebaseAuthService extends AuthService {
   }
 
   logout() {
-    if (this.afAuth && this.afAuth.auth) {
-      this.afAuth.auth.signOut()
+    if (this.afAuth) {
+      this.afAuth.signOut()
     }
     this.clearToken()
     this.authStatus$.next(defaultAuthStatus)
