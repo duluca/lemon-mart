@@ -1,65 +1,112 @@
-version: 2
+version: 2.1
+orbs:
+  coveralls: coveralls/coveralls@1.0.4
+  cypress: cypress-io/cypress@1
 jobs:
   build:
     docker:
-      - image: docker:17.12.0-ce-git
-    working_directory: /usr/src
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
     steps:
       - checkout
-      - setup_remote_docker
-      - run:
-          name: Execute Pipeline (Build Source -> Test -> Build Web Server)
-          # code is checked out in the pipeline, consider copying from CI to Pipeline
-          # consider caching node_modules or switching to npm ci option when it becomes stable
-          command: |
-            docker build -f integration.Dockerfile . -t lemon-mart:$CIRCLE_BRANCH --build-arg CACHEBUST=$(date +%s)
-            mkdir -p docker-cache
-            docker save -o docker-cache/built-image.tar lemon-mart:$CIRCLE_BRANCH
-      - save_cache:
-          key: built-image-{{ .BuildNum }}
-          paths:
-            - docker-cache
-      - store_artifacts:
-          path: docker-cache/built-image.tar
-          destination: built-image.tar
-      - store_test_results:
-          path: tests/units.html
-
-  publish:
-    docker:
-      - image: docker:17.12.0-ce-git
-    working_directory: /usr/src
-    steps:
       - restore_cache:
-        keys:
-          - built-image-{{ .BuildNum }}
-          - built-image
-      - setup_remote_docker
-      - run:
-          name: Sign into AWS ecr
-          command: $(aws ecr get-login --no-include-email --region us-east-1)
-      - run:
-          name: Push it to ECR
-          command: |
-            docker load < docker-cache/built-image.tar
-            docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
+      - run: npm ci
+
+      # force update the webdriver, so it runs with latest version of Chrome
+      - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm run style
+      - run: npm run lint
+      - run: npm run build:prod
+      - run: npm test -- --watch=false --code-coverage
+      - run: npm run e2e
+
+      - store_test_results:
+          path: ./test_results
+      - store_artifacts:
+          path: ./coverage
+
+      # upload coverage report to coveralls for readme badge support
+      # requires config.yml version 2.1 and orbs: coveralls: coveralls/coveralls@1.0.4
+      # requires coveralls account and token named COVERALLS_REPO_TOKEN specific to repo to be stored in CircleCI
+      - coveralls/upload
+
+      - run:
+          name: Tar & Gzip compiled app
+          command: tar zcf dist.tar.gz dist/lemon-mart
+      - store_artifacts:
+          path: dist.tar.gz
+
+      - run:
+          name: Move compiled app to workspace
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/dist
+            mv dist/lemon-mart /tmp/workspace/dist/
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - dist/lemon-mart
+  deploy:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: npx now --token $NOW_TOKEN --platform-version 2 --prod --name lemon-mart /tmp/workspace/dist/lemon-mart
+  cypress/run:
+    docker:
+      - image: cypress/base:10
+    parallelism: 1
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - cache-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Npm CI
+          command: npm ci
+      - run:
+          command: npx cypress verify
+      - save_cache:
+          key: cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+            - .cache/Cypress
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run Cypress tests
+          command: 'npx cypress run --record'
 workflows:
   version: 2
-  build-and-deploy:
+  build-test-and-approval-deploy:
     jobs:
+      - cypress/run
       - build
-      - publish:
+      - hold:
+          type: approval
           requires:
             - build
           filters:
             branches:
-              only: sequential-branch-filter
-# *restore_repo
-# Consider tagging images with $CIRCLE_BRANCH
-# Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
-# For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
-# For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
-# For Heroku see https://devcenter.heroku.com/articles/container-registry-and-runtime#pushing-an-image-s
-# For cache optimization read https://medium.com/@gajus/making-docker-in-docker-builds-x2-faster-using-docker-cache-from-option-c01febd8ef84
+              only: master
+      - deploy:
+          requires:
+            - hold

@@ -1,5 +1,5 @@
-FROM duluca/minimal-node-web-server:10.14.2
+FROM duluca/minimal-node-web-server:lts-alpine
 
 WORKDIR /usr/src/app
 
-COPY dist public
+COPY dist/lemon-mart public

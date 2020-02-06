@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/lemon-mart",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

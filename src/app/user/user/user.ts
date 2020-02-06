@@ -1,20 +1,36 @@
-import { Role } from '../../auth/role.enum'
+import { Role } from '../../auth/auth.enum'
+
+export interface IName {
+  first: string
+  middle?: string
+  last: string
+}
+
+export enum PhoneType {
+  None = 'none',
+  Mobile = 'mobile',
+  Home = 'home',
+  Work = 'work',
+}
+
+export interface IPhone {
+  type: PhoneType
+  digits: string
+  id: number
+}
 
 export interface IUser {
-  id: string
+  _id: string
   email: string
-  name: {
-    first: string
-    middle: string
-    last: string
-  }
+  name: IName
   picture: string
-  role: Role
+  role: Role | string
   userStatus: boolean
-  dateOfBirth: Date
+  dateOfBirth: Date | string
+  level: number
   address: {
     line1: string
-    line2: string
+    line2?: string
     city: string
     state: string
     zip: string
@@ -22,24 +38,19 @@ export interface IUser {
   phones: IPhone[]
 }
 
-export interface IPhone {
-  type: string
-  number: string
-  id: number
-}
-
 export class User implements IUser {
   constructor(
-    public id = '',
+    // tslint:disable-next-line: variable-name
+    public _id = '',
     public email = '',
-    public name = { first: '', middle: '', last: '' },
+    public name = { first: '', middle: '', last: '' } as IName,
     public picture = '',
     public role = Role.None,
     public dateOfBirth = null,
     public userStatus = false,
+    public level = 0,
     public address = {
       line1: '',
-      line2: '',
       city: '',
       state: '',
       zip: '',
@@ -47,25 +58,44 @@ export class User implements IUser {
     public phones = []
   ) {}
 
-  static BuildUser(user: IUser) {
+  static Build(user: IUser) {
     if (!user) {
       return new User()
     }
 
+    if (typeof user.dateOfBirth === 'string') {
+      user.dateOfBirth = new Date(user.dateOfBirth)
+    }
+
     return new User(
-      user.id,
+      user._id,
       user.email,
       user.name,
       user.picture,
-      user.role,
+      user.role as Role,
       user.dateOfBirth,
       user.userStatus,
+      user.level,
       user.address,
       user.phones
     )
   }
 
-  get fullName() {
-    return `${this.name.first} ${this.name.middle} ${this.name.last}`
+  public get fullName(): string {
+    if (!this.name) {
+      return null
+    }
+
+    if (this.name.middle) {
+      return `${this.name.first} ${this.name.middle} ${this.name.last}`
+    }
+    return `${this.name.first} ${this.name.last}`
+  }
+
+  toJSON(): object {
+    const serialized = Object.assign(this)
+    delete serialized._id
+    delete serialized.fullName
+    return serialized
   }
 }

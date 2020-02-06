@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
 import { AuthGuard } from '../auth/auth-guard.service'
-import { Role } from '../auth/role.enum'
+import { Role } from '../auth/auth.enum'
 import { UserResolve } from '../user/user/user.resolve'
 import { ViewUserComponent } from '../user/view-user/view-user.component'
 import { ManagerHomeComponent } from './manager-home/manager-home.component'

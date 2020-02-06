@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { combineLatest } from 'rxjs'
+import { catchError, filter, tap } from 'rxjs/operators'
+import { environment } from 'src/environments/environment'
+import { SubSink } from 'subsink'
+import { $enum } from 'ts-enum-util'
 
+import { AuthMode, Role } from '../auth/auth.enum'
 import { AuthService } from '../auth/auth.service'
-import { Role } from '../auth/role.enum'
 import { UiService } from '../common/ui.service'
 import { EmailValidation, PasswordValidation } from '../common/validations'
 
@@ -23,22 +28,33 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
     `,
   ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  private subs = new SubSink()
   loginForm: FormGroup
   loginError = ''
-  redirectUrl
+  redirectUrl: string
+  roles = $enum(Role).getKeys()
+  authMode = environment.authMode
+  AuthMode = AuthMode
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
+    route: ActivatedRoute,
     private uiService: UiService
   ) {
-    route.paramMap.subscribe(params => (this.redirectUrl = params.get('redirectUrl')))
+    this.subs.sink = route.paramMap.subscribe(
+      params => (this.redirectUrl = params.get('redirectUrl'))
+    )
   }
 
   ngOnInit() {
+    this.authService.logout()
     this.buildLoginForm()
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe()
   }
 
   buildLoginForm() {
@@ -51,17 +67,23 @@ export class LoginComponent implements OnInit {
   async login(submittedForm: FormGroup) {
     this.authService
       .login(submittedForm.value.email, submittedForm.value.password)
-      .subscribe(
-        authStatus => {
-          if (authStatus.isAuthenticated) {
-            this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
-            this.router.navigate([
-              this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
-            ])
-          }
-        },
-        error => (this.loginError = error)
+      .pipe(catchError(err => (this.loginError = err)))
+
+    this.subs.sink = combineLatest([
+      this.authService.authStatus$,
+      this.authService.currentUser$,
+    ])
+      .pipe(
+        filter(
+          ([authStatus, user]) =>
+            authStatus.isAuthenticated && user !== null && user._id !== ''
+        ),
+        tap(([authStatus, user]) => {
+          this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)
+          this.router.navigate([this.redirectUrl || this.homeRoutePerRole(user.role)])
+        })
       )
+      .subscribe()
   }
 
   homeRoutePerRole(role: Role) {

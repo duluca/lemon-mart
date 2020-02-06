@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { createComponentMock } from 'angular-unit-test-helper'
+import { LemonRaterModule } from 'src/app/user-controls/lemon-rater/lemon-rater.module'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { UserMaterialModule } from '../user.material.module'
@@ -11,18 +13,19 @@ describe('ProfileComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: commonTestingProviders,
-      imports: commonTestingModules.concat([UserMaterialModule]),
-      declarations: [ProfileComponent],
+      imports: commonTestingModules.concat([UserMaterialModule, LemonRaterModule]),
+      declarations: [
+        ProfileComponent,
+        createComponentMock('NameInputComponent'),
+        createComponentMock('ViewUserComponent'),
+      ],
     }).compileComponents()
+    fixture = TestBed.createComponent(ProfileComponent)
+    component = fixture.debugElement.componentInstance
   }))
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-  })
-
   it('should create', () => {
+    // fixture.detectChanges()
     expect(component).toBeTruthy()
   })
 })

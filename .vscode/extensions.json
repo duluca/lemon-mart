@@ -3,12 +3,16 @@
     "johnpapa.angular-essentials",
     "PKief.material-icon-theme",
     "formulahendry.auto-close-tag",
-    "PeterJausovec.vscode-docker",
+    "ms-azuretools.vscode-docker",
     "eamodio.gitlens",
     "WallabyJs.quokka-vscode",
     "amatiasq.sort-imports",
     "DSKWRK.vscode-generate-getter-setter",
     "esbenp.prettier-vscode",
-    "HookyQR.beautify"
+    "HookyQR.beautify",
+    "expertly-simple.ng-evergreen",
+    "msjsdiag.debugger-for-edge",
+    "johnpapa.vscode-peacock",
+    "ms-vscode.vscode-typescript-tslint-plugin"
   ]
 }

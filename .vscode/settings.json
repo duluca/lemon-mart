@@ -1,31 +1,50 @@
 {
+  "debug.openExplorerOnEnd": true,
   "editor.tabSize": 2,
-  "editor.rulers": [90],
+  "editor.rulers": [
+    90
+  ],
+  "editor.cursorBlinking": "solid",
+  "editor.formatOnType": false,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false,
+    "source.fixAll.tslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "explorer.openEditors.visible": 0,
   "files.trimTrailingWhitespace": true,
   "files.autoSave": "onFocusChange",
-  "editor.cursorBlinking": "solid",
-  "workbench.iconTheme": "material-icon-theme",
-  "git.enableSmartCommit": true,
-  "editor.autoIndent": true,
-  "debug.openExplorerOnEnd": true,
-  "auto-close-tag.SublimeText3Mode": true,
-  "explorer.openEditors.visible": 0,
-  "editor.minimap.enabled": false,
-  "html.autoClosingTags": false,
   "git.confirmSync": false,
-  "editor.formatOnType": true,
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
-  "prettier.printWidth": 90,
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "es5",
-  "prettier.disableLanguages": ["html"],
-  "typescriptHero.imports.insertSemicolons": false,
-  "typescriptHero.imports.multiLineWrapThreshold": 90,
-  "typescriptHero.imports.organizeOnSave": true,
+  "git.enableSmartCommit": true,
+  "npm.enableScriptExplorer": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "beautify.language": {
-    "html": ["html"]
-  }
+  "workbench.iconTheme": "material-icon-theme",
+  "auto-close-tag.SublimeText3Mode": true,
+  "html.autoClosingTags": false,
+  "peacock.affectActivityBar": true,
+  "peacock.affectStatusBar": true,
+  "peacock.affectTitleBar": false,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#3ca241",
+    "activityBar.activeBorder": "#d2d0ee",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#d2d0ee",
+    "activityBarBadge.foreground": "#15202b",
+    "statusBar.background": "#2e7d32",
+    "statusBarItem.hoverBackground": "#3ca241",
+    "statusBar.foreground": "#e7e7e7"
+  },
+  "peacock.color": "#2e7d32",
+  "gitlens.menus": {
+    "editorGroup": false
+  },
+  "ng-evergreen.upgradeChannel": "Latest",
+  "editor.autoIndent": "full"
 }

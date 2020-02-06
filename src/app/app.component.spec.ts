@@ -1,13 +1,15 @@
 import { TestBed, async } from '@angular/core/testing'
-import { ObservableMedia } from '@angular/flex-layout'
-import { MatIconRegistry } from '@angular/material'
+import { MediaObserver } from '@angular/flex-layout'
+import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 
 import { AppComponent } from './app.component'
+import { AuthService } from './auth/auth.service'
+import { AuthServiceFake } from './auth/auth.service.fake'
 import {
   DomSanitizerFake,
   MatIconRegistryFake,
-  ObservableMediaFake,
+  MediaObserverFake,
   commonTestingModules,
   commonTestingProviders,
 } from './common/common.testing'
@@ -18,9 +20,10 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: commonTestingModules,
       providers: commonTestingProviders.concat([
-        { provide: ObservableMedia, useClass: ObservableMediaFake },
+        { provide: MediaObserver, useClass: MediaObserverFake },
         { provide: MatIconRegistry, useClass: MatIconRegistryFake },
         { provide: DomSanitizer, useClass: DomSanitizerFake },
+        { provide: AuthService, useClass: AuthServiceFake },
       ]),
       declarations: [AppComponent, NavigationMenuComponent],
     }).compileComponents()

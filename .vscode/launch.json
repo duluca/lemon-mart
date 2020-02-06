@@ -2,26 +2,42 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "npm start",
+      "name": "Debug npm start with Chrome",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:5000/#",
       "webRoot": "${workspaceRoot}",
-      "runtimeArgs": [
-        "--remote-debugging-port=9222"
-        ],
-      "sourceMaps": true
+      "runtimeArgs": ["--remote-debugging-port=9222"],
+      "sourceMaps": true,
+      "preLaunchTask": "npm: start"
     },
     {
-      "name": "npm test",
+      "name": "Debug npm start with Edge",
+      "type": "edge",
+      "request": "launch",
+      "url": "http://localhost:5000/#",
+      "webRoot": "${workspaceRoot}",
+      "sourceMaps": true,
+      "preLaunchTask": "npm: start"
+    },
+    {
+      "name": "Debug npm test with Chrome",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:9876/debug.html",
       "webRoot": "${workspaceRoot}",
-      "runtimeArgs": [
-        "--remote-debugging-port=9222"
-        ],
-      "sourceMaps": true
+      "runtimeArgs": ["--remote-debugging-port=9222"],
+      "sourceMaps": true,
+      "preLaunchTask": "npm: test"
+    },
+    {
+      "name": "Debug npm test with Edge",
+      "type": "edge",
+      "request": "launch",
+      "url": "http://localhost:9876/debug.html",
+      "webRoot": "${workspaceRoot}",
+      "sourceMaps": true,
+      "preLaunchTask": "npm: test"
     },
     {
       "name": "npm run e2e",

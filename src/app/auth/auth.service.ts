@@ -1,19 +1,18 @@
-import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { sign } from 'fake-jwt-sign' // For fakeAuthProvider only
 import * as decode from 'jwt-decode'
-import { BehaviorSubject, Observable, throwError as observableThrowError, of } from 'rxjs'
-import { catchError, map } from 'rxjs/operators'
+import { BehaviorSubject, Observable, throwError } from 'rxjs'
+import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
 
-import { environment } from '../../environments/environment'
 import { transformError } from '../common/common'
+import { IUser, User } from '../user/user/user'
+import { Role } from './auth.enum'
 import { CacheService } from './cache.service'
-import { Role } from './role.enum'
 
 export interface IAuthService {
-  authStatus: BehaviorSubject<IAuthStatus>
-  login(email: string, password: string): Observable<IAuthStatus>
-  logout()
+  readonly authStatus$: BehaviorSubject<IAuthStatus>
+  readonly currentUser$: BehaviorSubject<IUser>
+  login(email: string, password: string): Observable<void>
+  logout(clearToken: boolean): void
   getToken(): string
 }
 
@@ -23,7 +22,7 @@ export interface IAuthStatus {
   userId: string
 }
 
-interface IServerAuthResponse {
+export interface IServerAuthResponse {
   accessToken: string
 }
 
@@ -34,106 +33,95 @@ export const defaultAuthStatus = {
 }
 
 @Injectable()
-export class AuthService extends CacheService implements IAuthService {
-  private readonly authProvider: (
-    email: string,
-    password: string
-  ) => Observable<IServerAuthResponse>
-  authStatus = new BehaviorSubject<IAuthStatus>(
-    this.getItem('authStatus') || defaultAuthStatus
+export abstract class AuthService extends CacheService implements IAuthService {
+  readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
+  readonly currentUser$ = new BehaviorSubject<User>(new User())
+  protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
+    filter(status => status.isAuthenticated),
+    flatMap(() => this.getCurrentUser()),
+    map(user => this.currentUser$.next(user)),
+    catchError(transformError)
   )
 
-  constructor(private httpClient: HttpClient) {
+  constructor() {
     super()
-    this.authStatus.subscribe(authStatus => this.setItem('authStatus', authStatus))
-    // Fake login function to simulate roles
-    this.authProvider = this.fakeAuthProvider
-    // Example of a real login call to server-side
-    // this.authProvider = this.exampleAuthProvider
+
+    if (this.hasExpiredToken()) {
+      this.logout(true)
+    } else {
+      this.authStatus$.next(this.getAuthStatusFromToken())
+      // To load user on browser refresh, resume pipeline must activate on the next cycle
+      // Which allows for all services to constructed properly
+      setTimeout(() => this.resumeCurrentUser$.subscribe(), 0)
+    }
   }
 
-  login(email: string, password: string): Observable<IAuthStatus> {
-    this.logout()
+  protected abstract authProvider(
+    email: string,
+    password: string
+  ): Observable<IServerAuthResponse>
 
-    const loginResponse = this.authProvider(email, password).pipe(
+  protected abstract transformJwtToken(token: unknown): IAuthStatus
+
+  protected abstract getCurrentUser(): Observable<User>
+
+  login(email: string, password: string): Observable<void> {
+    this.clearToken()
+
+    const loginResponse$ = this.authProvider(email, password).pipe(
       map(value => {
         this.setToken(value.accessToken)
-        return decode(value.accessToken) as IAuthStatus
+        const token = decode(value.accessToken)
+        return this.transformJwtToken(token)
       }),
+      tap(status => this.authStatus$.next(status)),
+      filter(status => status.isAuthenticated),
+      flatMap(() => this.getCurrentUser()),
+      map(user => this.currentUser$.next(user)),
       catchError(transformError)
     )
 
-    loginResponse.subscribe(
-      res => {
-        this.authStatus.next(res)
-      },
-      err => {
+    loginResponse$.subscribe({
+      error: err => {
         this.logout()
-        return observableThrowError(err)
-      }
-    )
-
-    return loginResponse
-  }
-
-  private exampleAuthProvider(
-    email: string,
-    password: string
-  ): Observable<IServerAuthResponse> {
-    return this.httpClient.post<IServerAuthResponse>(`${environment.baseUrl}/v1/login`, {
-      email: email,
-      password: password,
+        return throwError(err)
+      },
     })
+
+    return loginResponse$
   }
 
-  private fakeAuthProvider(
-    email: string,
-    password: string
-  ): Observable<IServerAuthResponse> {
-    if (!email.toLowerCase().endsWith('@test.com')) {
-      return observableThrowError('Failed to login! Email needs to end with @test.com.')
+  logout(clearToken = false) {
+    if (clearToken) {
+      this.clearToken()
     }
-
-    const authStatus = {
-      isAuthenticated: true,
-      userId: 'e4d1bc2ab25c',
-      userRole: email.toLowerCase().includes('cashier')
-        ? Role.Cashier
-        : email.toLowerCase().includes('clerk')
-        ? Role.Clerk
-        : email.toLowerCase().includes('manager')
-        ? Role.Manager
-        : Role.None,
-    } as IAuthStatus
-
-    const authResponse = {
-      accessToken: sign(authStatus, 'secret', {
-        expiresIn: '1h',
-        algorithm: 'none',
-      }),
-    } as IServerAuthResponse
-
-    return of(authResponse)
+    setTimeout(() => this.authStatus$.next(defaultAuthStatus), 0)
   }
 
-  logout() {
-    this.clearToken()
-    this.authStatus.next(defaultAuthStatus)
-  }
-
-  private setToken(jwt: string) {
+  protected setToken(jwt: string) {
     this.setItem('jwt', jwt)
-  }
-
-  private getDecodedToken(): IAuthStatus {
-    return decode(this.getItem('jwt'))
   }
 
   getToken(): string {
     return this.getItem('jwt') || ''
   }
 
-  private clearToken() {
+  protected clearToken() {
     this.removeItem('jwt')
+  }
+
+  protected hasExpiredToken(): boolean {
+    const jwt = this.getToken()
+
+    if (jwt) {
+      const payload = decode(jwt) as any
+      return Date.now() >= payload.exp * 1000
+    }
+
+    return true
+  }
+
+  protected getAuthStatusFromToken(): IAuthStatus {
+    return this.transformJwtToken(decode(this.getToken()))
   }
 }

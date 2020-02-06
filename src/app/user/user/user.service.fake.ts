@@ -6,7 +6,7 @@ import { IUserService, IUsers } from './user.service'
 
 @Injectable()
 export class UserServiceFake implements IUserService {
-  currentUser = new BehaviorSubject<IUser>(new User())
+  currentUser$ = new BehaviorSubject<IUser>(new User())
 
   constructor() {}
 
@@ -18,14 +18,14 @@ export class UserServiceFake implements IUserService {
     return of(new User((id = id)))
   }
 
-  updateUser(user: IUser): Observable<IUser> {
+  updateUser(id: string, user: IUser): Observable<IUser> {
     return of(user)
   }
 
   getUsers(pageSize: number, searchText = '', pagesToSkip = 0): Observable<IUsers> {
     return of({
       total: 1,
-      items: [new User()],
+      data: [new User()],
     } as IUsers)
   }
 }

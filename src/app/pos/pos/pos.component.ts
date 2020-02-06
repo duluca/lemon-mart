@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { filter, tap } from 'rxjs/operators'
+import { UiService } from 'src/app/common/ui.service'
+import { SubSink } from 'subsink'
 
 import { ITransaction } from '../transaction/transaction'
+import { TransactionType } from '../transaction/transaction.enum'
 import { TransactionService } from '../transaction/transaction.service'
-import { TransactionType } from '../transaction/transactionType.enum'
 
 interface IEvent {
   event: 'checkoutCompleted' | 'checkoutInitiated'
@@ -14,9 +17,13 @@ declare let dataLayer: IEvent[]
   templateUrl: './pos.component.html',
   styleUrls: ['./pos.component.css'],
 })
-export class PosComponent implements OnInit {
+export class PosComponent implements OnInit, OnDestroy {
+  private subs = new SubSink()
   currentTransaction: ITransaction
-  constructor(private transactionService: TransactionService) {}
+  constructor(
+    private transactionService: TransactionService,
+    private uiService: UiService
+  ) {}
 
   ngOnInit() {
     this.currentTransaction = {
@@ -26,15 +33,25 @@ export class PosComponent implements OnInit {
   }
 
   checkout(transaction: ITransaction) {
+    this.uiService.showToast('Checkout initiated')
     dataLayer.push({
       event: 'checkoutInitiated',
     })
-    this.transactionService.processTransaction(transaction).subscribe(transactionId => {
-      if (transactionId) {
-        dataLayer.push({
-          event: 'checkoutCompleted',
+    this.subs.sink = this.transactionService
+      .processTransaction(transaction)
+      .pipe(
+        filter(tx => tx != null || tx !== undefined),
+        tap(transactionId => {
+          this.uiService.showToast('Checkout completed')
+          dataLayer.push({
+            event: 'checkoutCompleted',
+          })
         })
-      }
-    })
+      )
+      .subscribe()
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe()
   }
 }
