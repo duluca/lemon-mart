@@ -78,7 +78,6 @@
     "@ngrx/store": "^8.6.0",
     "@ngrx/store-devtools": "^8.6.0",
     "firebase": "^7.8.0",
-    "hammerjs": "^2.0.8",
     "jwt-decode": "^2.2.0",
     "ngx-mask": "^8.1.7",
     "rxjs": "^6.5.4",
@@ -88,8 +87,8 @@
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.900.0",
-    "@angular/cli": "9.0.0",
+    "@angular-devkit/build-angular": "~0.900.1",
+    "@angular/cli": "9.0.1",
     "@angular/compiler-cli": "9.0.0",
     "@angular/language-service": "9.0.0",
     "@types/jasmine": "~3.5.3",
