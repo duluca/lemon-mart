@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort, SortDirection } from '@angular/material/sort'
-import { BehaviorSubject, Observable, merge, of } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
 import { UserEntityService } from 'src/app/user/user/user.entity.service'
 import { SubSink } from 'subsink'
@@ -27,6 +27,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   useNgRxData = false
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
+  refresh$ = new Subject()
 
   search = new FormControl('', OptionalTextValidation)
 
@@ -76,6 +77,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
     }
 
     this.items$ = merge(
+      this.refresh$,
       this.sort.sortChange,
       this.paginator.page,
       this.search.valueChanges.pipe(debounceTime(1000))

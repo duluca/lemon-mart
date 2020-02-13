@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core'
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { EntityDataModule } from '@ngrx/data'
@@ -48,7 +48,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     MaterialModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxMaskModule.forRoot(options),

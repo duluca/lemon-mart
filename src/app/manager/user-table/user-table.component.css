@@ -19,3 +19,7 @@
 .full-width {
   width: 100%;
 }
+
+.mat-paginator {
+  background: transparent;
+}

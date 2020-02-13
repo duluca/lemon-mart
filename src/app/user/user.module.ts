@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { NgxMaskModule } from 'ngx-mask'
 
 import { AuthGuard } from '../auth/auth-guard.service'
@@ -21,7 +21,6 @@ import { UserService } from './user/user.service'
     CommonModule,
     UserRoutingModule,
     MaterialModule,
-    FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     UserMaterialModule,

@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { SecurityContext } from '@angular/core'
 import { MediaChange } from '@angular/flex-layout'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { SafeResourceUrl, SafeValue } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
@@ -77,7 +77,6 @@ export const commonTestingProviders: any[] = [
 ]
 
 export const commonTestingModules: any[] = [
-  FormsModule,
   ReactiveFormsModule,
   MaterialModule,
   NoopAnimationsModule,

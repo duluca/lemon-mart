@@ -1,6 +1,7 @@
 <div class="filter-row">
   <div class="center" style="margin-bottom: 32px">
-    <mat-slide-toggle color="accent" [(ngModel)]="useNgRxData">
+    <mat-slide-toggle color="accent" [(ngModel)]="useNgRxData"
+      (ngModelChange)="refresh$.next()">
       {{useNgRxData ? 'Using NgRX Data' : 'Using BehaviorSubject'}}
     </mat-slide-toggle>
   </div>
@@ -56,6 +57,14 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"> </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="resultsLength">
-  </mat-paginator>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="refresh$.next()">
+        <mat-icon title="Refresh">refresh</mat-icon>
+      </button>
+      <span class="flex-spacer"></span>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="resultsLength">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>

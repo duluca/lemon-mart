@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { FormsModule } from '@angular/forms'
 import { EntityDataModule } from '@ngrx/data'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
@@ -19,6 +20,7 @@ describe('UserTableComponent', () => {
       declarations: [UserTableComponent],
       providers: commonTestingProviders,
       imports: commonTestingModules.concat([
+        FormsModule,
         ManagerMaterialModule,
         EntityDataModule.forRoot(entityConfig),
         EffectsModule.forRoot([]),
