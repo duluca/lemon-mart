@@ -6,33 +6,33 @@ import { PhoneType, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import { AuthService, IAuthStatus, IServerAuthResponse } from './auth.service'
 
-// LemonMart Server User Id: 5da01751da27cc462d265913
-const defaultUser = User.Build({
-  _id: '5da01751da27cc462d265913',
-  email: 'duluca@gmail.com',
-  name: { first: 'Doguhan', last: 'Uluca' },
-  picture: 'https://secure.gravatar.com/avatar/7cbaa9afb5ca78d97f3c689f8ce6c985',
-  role: Role.Manager,
-  dateOfBirth: new Date(1980, 1, 1),
-  userStatus: true,
-  address: {
-    line1: '101 Sesame St.',
-    city: 'Bethesda',
-    state: 'Maryland',
-    zip: '20810',
-  },
-  level: 2,
-  phones: [
-    {
-      id: 0,
-      type: PhoneType.Mobile,
-      digits: '5555550717',
-    },
-  ],
-})
-
 @Injectable()
 export class InMemoryAuthService extends AuthService {
+  // LemonMart Server User Id: 5da01751da27cc462d265913
+  private defaultUser = User.Build({
+    _id: '5da01751da27cc462d265913',
+    email: 'duluca@gmail.com',
+    name: { first: 'Doguhan', last: 'Uluca' },
+    picture: 'https://secure.gravatar.com/avatar/7cbaa9afb5ca78d97f3c689f8ce6c985',
+    role: Role.Manager,
+    dateOfBirth: new Date(1980, 1, 1),
+    userStatus: true,
+    address: {
+      line1: '101 Sesame St.',
+      city: 'Bethesda',
+      state: 'Maryland',
+      zip: '20810',
+    },
+    level: 2,
+    phones: [
+      {
+        id: 0,
+        type: PhoneType.Mobile,
+        digits: '5555550717',
+      },
+    ],
+  })
+
   constructor() {
     super()
     console.warn(
@@ -50,7 +50,7 @@ export class InMemoryAuthService extends AuthService {
 
     const authStatus = {
       isAuthenticated: true,
-      userId: '5da01751da27cc462d265913',
+      userId: this.defaultUser._id,
       userRole: email.toLowerCase().includes('cashier')
         ? Role.Cashier
         : email.toLowerCase().includes('clerk')
@@ -59,6 +59,8 @@ export class InMemoryAuthService extends AuthService {
         ? Role.Manager
         : Role.None,
     } as IAuthStatus
+
+    this.defaultUser.role = authStatus.userRole
 
     const authResponse = {
       accessToken: sign(authStatus, 'secret', {
@@ -75,6 +77,6 @@ export class InMemoryAuthService extends AuthService {
   }
 
   protected getCurrentUser(): Observable<User> {
-    return of(defaultUser)
+    return of(this.defaultUser)
   }
 }
