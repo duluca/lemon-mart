@@ -38,8 +38,8 @@ jobs:
       - run: npm test -- --watch=false --code-coverage
       - run: npm run e2e
       - run:
-        name: Run Cypress tests
-        command: 'npx cypress run --record'
+          name: Run Cypress tests
+          command: 'npx cypress run --record'
 
       - store_test_results:
           path: ./test_results
