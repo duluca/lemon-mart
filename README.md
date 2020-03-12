@@ -35,33 +35,56 @@ In order to pull off a router-first implementation, you need to:
 Head over to the Wiki for user roles, site maps, data entity diagrams and user mock ups:
 https://github.com/duluca/lemon-mart/wiki.
 
-## Build
+## Building Lemon Mart
 
 - `npm run build:prod` to build a production optimized version of the app.
 - `npm run docker:debug` to run tests and build a containerized version of the app.
 - integration.Dockerfile is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Zeit Now and Azure.
 
-### Swagger Mock Server
+### Lemon Mart Server
 
-Swagger, in a yaml/json format, establishes a data contract between the front-end and back-end. Using code generators, you can create a mock server that responds to requests with auto-generated or customized data. A sample server can be found here:
-https://github.com/duluca/lemon-mart-swagger-server.
+Lemon Mart Server is an easy to learn and use TypeScript Node.js server using [Minimal MEAN](https://github.com/duluca/minimal-mean) for [Lemon Mart](https://github.com/duluca/lemon-mart). 
 
-- `npm run mock:start` to build a production optimized version of the app, running on port 8080, connected to the mock server.
-- `npm run mock:stop` to stop
+In order to run Lemon Mart in a full-stack set up, visit https://github.com/duluca/lemon-mart-server.
 
 ## Developers
+
+This project is a sample implementation, which contains numerous recipes and design patterns useful to develop an Angular application.
+
+If you'd like to use this project as a starter or a template project for your project, you can get a lot of benefit out of using a pre-configured project. Some the benefits are:
+ - Optimized development experience for VS Code
+ - Lazy loading feature module configuration
+ - A responsive landing, login, and user profile experience
+ - Angular Material and Angular Flex Layout configured for UI development
+ - npm scripts for `style` and `lint` checks, building docker containers, testing, or deploying your app
+ - CircleCI configuration for Continuous Integration
+ - Pre-wired extensible authentication and authorization module
+ - And many more.
 
 ### Pre-requisites
 
 - Do NOT install `@angular/cli` or `typescript` globally to avoid version mismatch issues across multiple projects.
-- Run `npx @angular/cli new app-name --routing` to create a new Angular app with basic routing wired.
+  - Note: When creating new projects in the future, execute `npx @angular/cli new app-name --routing` to create a new Angular app with basic routing wired.
   - If you have trouble with this command, try `npx -p @angular/cli new app-name --routing`
 - To run `ng` commands from within the project directory, preprend `npx` to commands, like `npx ng build`.
 - To continue using `ng` without having to prepend `npx`, configure shell autofallback as described here: https://www.npmjs.com/package/npx#shell-auto-fallback.
 
+### Adapting the template
+
+- Fork and clone this repo. 
+- Rename the repo on GitHub to match the name of your project.
+- Search and replace references to `lemon-mart` with your project name and git repo.
+- Remove `manager`, `pos`, and `inventory` folders and references to them from `app-routing.module.ts`.
+- You may modify `profile.component.ts` and `view-user.component.ts` under the `user` folder to fit your needs.
+- Edit `lemonmart-theme.scss` to match your desired color scheme.
+- Now you may begin implementing your own feature modules.
+  - Questions? Consider creating an issue on this repo and buying my book at http://AngularForEnterprise.com.
+
 ### During Development
 
-- Run `npm start` for a developmenet server. Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.
+- Run `npm start` for a developmenet web server. 
+- Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.
+  - Note that the port is different than the default Angular port of `4200` intentionally, so you can run test projects or proof of concepts side-by-side without the hassle of specifiying a new port.
 - Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 - Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
@@ -75,4 +98,4 @@ https://github.com/duluca/lemon-mart-swagger-server.
 
 ### Full-Stack Setup with Docker Compose and Deploying to AWS
 
-See my example project here https://github.com/excellalabs/minimal-mean
+See the example project here https://github.com/duluca/lemon-mart-server
