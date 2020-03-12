@@ -8,9 +8,13 @@
 
 ![lemon-mart-login](https://user-images.githubusercontent.com/822159/36320811-80a9c5f8-1315-11e8-8ba1-d7a62c31ec79.png)
 
-## Get the book
+## Get the book & watch the talk
 
-LemontMart has been developed in support of my book _Angular 6 for Enterprise-Ready Web Applications_. You can get the book on http://AngularForEnterprise.com.
+LemontMart has been developed in support of my book _Angular for Enterprise-Ready Web Applications_. You can get the book at any major bookstore or find the links at http://AngularForEnterprise.com.
+
+Watch the talk on `Architecture for Scalable Angular Apps` on [Pluralsight](https://www.pluralsight.com/courses/angular-denver-2019-session-28). 
+
+Check out the slides for `Architecture for Scalable Angular Apps` _free_ at [Slides.com](https://slides.com/doguhanuluca/architecture-for-scalable-angular-apps#).
 
 Check out **LocalCast Weather**, to learn Angular, Material, RxJS fundemantals using OpenWeatherMap.org APIs, at https://github.com/duluca/local-weather-app.
 
