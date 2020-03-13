@@ -96,7 +96,7 @@
     "@types/jsonwebtoken": "^8.3.7",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^13.7.0",
-    "angular-unit-test-helper": "^1.4.1",
+    "angular-unit-test-helper": "^9.2.2",
     "codelyzer": "^5.2.1",
     "cross-conf-env": "^1.1.2",
     "cypress": "^4.0.0",
