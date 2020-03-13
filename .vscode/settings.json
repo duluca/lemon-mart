@@ -32,6 +32,7 @@
   "peacock.affectTitleBar": false,
   "workbench.colorCustomizations": {
     "activityBar.background": "#3ca241",
+    "activityBar.activeBackground": "#3ca241",
     "activityBar.activeBorder": "#d2d0ee",
     "activityBar.foreground": "#e7e7e7",
     "activityBar.inactiveForeground": "#e7e7e799",
