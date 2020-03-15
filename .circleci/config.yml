@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   coveralls: coveralls/coveralls@1.0.4
+  # Cypress Orb, see
+  # https://github.com/cypress-io/circleci-orb
   cypress: cypress-io/cypress@1
 jobs:
   build:
@@ -20,9 +22,14 @@ jobs:
       # force update the webdriver, so it runs with latest version of Chrome
       - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
 
+      # because we use "npm ci" to install NPM dependencies
+      # we cache "~/.npm" folder
+      # because Cypress is a dev dependency
+      # we should also cache "~/.cache/Cypress" folder
       - save_cache:
           paths:
-            - node_modules
+            - ~/.npm
+            - ~/.cache/Cypress
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm run style
@@ -30,6 +37,9 @@ jobs:
       - run: npm run build:prod
       - run: npm test -- --watch=false --code-coverage
       - run: npm run e2e
+      - run:
+          name: Run Cypress tests
+          command: 'npx cypress run --record'
 
       - store_test_results:
           path: ./test_results
@@ -65,40 +75,10 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: npx now --token $NOW_TOKEN --platform-version 2 --prod --name lemon-mart /tmp/workspace/dist/lemon-mart
-  cypress/run:
-    docker:
-      - image: cypress/base:10
-    parallelism: 1
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - cache-{{ .Branch }}-{{ checksum "package.json" }}
-      - run:
-          name: Npm CI
-          command: npm ci
-      - run:
-          command: npx cypress verify
-      - save_cache:
-          key: cache-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - project
-            - .cache/Cypress
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: Run Cypress tests
-          command: 'npx cypress run --record'
 workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - cypress/run
       - build
       - hold:
           type: approval
