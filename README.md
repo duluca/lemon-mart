@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=master)](https://coveralls.io/github/duluca/lemon-mart?branch=master)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)
 
-![lemon-mart-login](https://user-images.githubusercontent.com/822159/36320811-80a9c5f8-1315-11e8-8ba1-d7a62c31ec79.png)
+![lemon-mart-login](https://user-images.githubusercontent.com/822159/77232462-694aa000-6b77-11ea-9a45-470f252d7e18.png)
 
 ## Get the book & watch the talk
 
@@ -44,6 +44,17 @@ https://github.com/duluca/lemon-mart/wiki.
 - `npm run build:prod` to build a production optimized version of the app.
 - `npm run docker:debug` to run tests and build a containerized version of the app.
 - integration.Dockerfile is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Zeit Now and Azure.
+
+### Authentication
+
+For demonstration purposes the login screen shows the _Authentication Mode_ of the app. There are three modes: 
+- In Memory
+- Custom
+- Firebase
+
+The current mode can be adjusted in `environment.ts`.
+
+> This is covered in more detail in [Angular for Enterprise, 2nd Edition](https://expertlysimple.io/angular-for-enterprise-2nd-edition/).
 
 ### Lemon Mart Server
 
