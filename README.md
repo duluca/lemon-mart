@@ -48,9 +48,9 @@ https://github.com/duluca/lemon-mart/wiki.
 ### Authentication
 
 For demonstration purposes the login screen shows the _Authentication Mode_ of the app. There are three modes: 
-- In Memory
-- Custom
-- Firebase
+- InMemory: [auth.inmemory.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.inmemory.service.ts)
+- Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.custom.service.ts)
+- Firebase: [auth.firebase.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.firebase.service.ts)
 
 The current mode can be adjusted in `environment.ts`.
 
