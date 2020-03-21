@@ -52,7 +52,7 @@ For demonstration purposes the login screen shows the _Authentication Mode_ of t
 - Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.custom.service.ts)
 - Firebase: [auth.firebase.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.firebase.service.ts)
 
-The current mode can be adjusted in `environment.ts`.
+The current mode can be adjusted in `environment.ts`. You can see how each mode is implemented in the link source files above.
 
 > This is covered in more detail in [Angular for Enterprise, 2nd Edition](https://expertlysimple.io/angular-for-enterprise-2nd-edition/).
 
