@@ -35,19 +35,18 @@
               "src/safari-pinned-tab.svg",
               "src/mstile-150x150.png"
             ],
-            "styles": [
-              "src/lemonmart-theme.scss",
-              "src/styles.css"
-            ],
+            "styles": ["src/lemonmart-theme.scss", "src/styles.css"],
             "scripts": [],
             "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -114,24 +113,15 @@
               "src/safari-pinned-tab.svg",
               "src/mstile-150x150.png"
             ],
-            "styles": [
-              "src/lemonmart-theme.scss",
-              "src/styles.css"
-            ],
+            "styles": ["src/lemonmart-theme.scss", "src/styles.css"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -166,9 +156,23 @@
             "aot": true,
             "assets": [
               "projects/ch7/src/favicon.ico",
-              "projects/ch7/src/assets"
+              "projects/ch7/src/assets",
+              "projects/ch7/src/android-chrome-192x192.png",
+              "projects/ch7/src/favicon-16x16.png",
+              "projects/ch7/src/mstile-310x150.png",
+              "projects/ch7/src/android-chrome-512x512.png",
+              "projects/ch7/src/favicon-32x32.png",
+              "projects/ch7/src/mstile-310x310.png",
+              "projects/ch7/src/apple-touch-icon.png",
+              "projects/ch7/src/manifest.json",
+              "projects/ch7/src/mstile-70x70.png",
+              "projects/ch7/src/browserconfig.xml",
+              "projects/ch7/src/mstile-144x144.png",
+              "projects/ch7/src/safari-pinned-tab.svg",
+              "projects/ch7/src/mstile-150x150.png"
             ],
             "styles": [
+              "projects/ch7/src/lemonmart-theme.scss",
               "projects/ch7/src/styles.css"
             ],
             "scripts": []
@@ -228,11 +232,9 @@
             "polyfills": "projects/ch7/src/polyfills.ts",
             "tsConfig": "projects/ch7/tsconfig.spec.json",
             "karmaConfig": "projects/ch7/karma.conf.js",
-            "assets": [
-              "projects/ch7/src/favicon.ico",
-              "projects/ch7/src/assets"
-            ],
+            "assets": ["projects/ch7/src/favicon.ico", "projects/ch7/src/assets"],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/ch7/src/styles.css"
             ],
             "scripts": []
@@ -246,9 +248,7 @@
               "projects/ch7/tsconfig.spec.json",
               "projects/ch7/e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {

@@ -13,18 +13,21 @@ const routes: Routes = [
   { path: 'login/:redirectUrl', component: LoginComponent },
   {
     path: 'manager',
-    loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule),
+    loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule),
     canLoad: [AuthGuard],
   },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
-  { path: 'pos', loadChildren: () => import('./pos/pos.module').then(m => m.PosModule) },
+  {
+    path: 'pos',
+    loadChildren: () => import('./pos/pos.module').then((m) => m.PosModule),
+  },
   {
     path: 'inventory',
     loadChildren: () =>
-      import('./inventory/inventory.module').then(m => m.InventoryModule),
+      import('./inventory/inventory.module').then((m) => m.InventoryModule),
   },
   { path: '**', component: PageNotFoundComponent },
 ]

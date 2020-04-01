@@ -33,14 +33,14 @@ export class FirebaseAuthService extends AuthService {
     const serverResponse$ = new Subject<IServerAuthResponse>()
 
     this.afAuth.signInWithEmailAndPassword(email, password).then(
-      res => {
+      (res) => {
         const firebaseUser: FirebaseUser = res.user
         firebaseUser.getIdToken().then(
-          token => serverResponse$.next({ accessToken: token } as IServerAuthResponse),
-          err => serverResponse$.error(err)
+          (token) => serverResponse$.next({ accessToken: token } as IServerAuthResponse),
+          (err) => serverResponse$.error(err)
         )
       },
-      err => serverResponse$.error(err)
+      (err) => serverResponse$.error(err)
     )
 
     return serverResponse$

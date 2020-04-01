@@ -72,8 +72,8 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       this.subs.add(
         merge(this.loadFromCacheForDemo(), this.authService.currentUser$)
           .pipe(
-            filter(user => user != null || user !== undefined),
-            tap(user => this.patchUser(user))
+            filter((user) => user != null || user !== undefined),
+            tap((user) => this.patchUser(user))
           )
           .subscribe()
       )
@@ -147,7 +147,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       .get('state')
       .valueChanges.pipe(
         startWith(''),
-        map(value => USStateFilter(value))
+        map((value) => USStateFilter(value))
       )
 
     this.cacheChangesForDemo(form)
@@ -173,7 +173,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     if (!phones || (phones && phones.length === 0)) {
       groups.push(this.buildPhoneFormControl(1))
     } else {
-      phones.forEach(p => {
+      phones.forEach((p) => {
         groups.push(this.buildPhoneFormControl(p.id, p.type, p.digits))
       })
     }
@@ -199,11 +199,11 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   async save(form: FormGroup) {
     this.subs.add(
       this.userService.updateUser(this.currentUserId, form.value).subscribe(
-        res => {
+        (res) => {
           this.patchUser(res)
           this.uiService.showToast('Updated user')
         },
-        err => (this.userError = err)
+        (err) => (this.userError = err)
       )
     )
   }

@@ -43,7 +43,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   protected checkLogin(route?: ActivatedRouteSnapshot): Observable<boolean> {
     return this.authService.authStatus$.pipe(
-      map(authStatus => {
+      map((authStatus) => {
         const roleMatch = this.checkRoleMatch(route, authStatus.userRole)
         const allowLogin = authStatus.isAuthenticated && roleMatch
         if (!allowLogin) {
@@ -83,7 +83,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     return route.pathFromRoot
-      .map(r => r.url.map(segment => segment.toString()).join('/'))
+      .map((r) => r.url.map((segment) => segment.toString()).join('/'))
       .join('/')
       .replace('//', '/')
   }

@@ -81,6 +81,6 @@ export class LemonRaterComponent implements ControlValueAccessor, AfterViewInit 
   }
 
   private getSelectedText(value: number) {
-    return value ? this.ratings.find(i => i.value === value).text : ''
+    return value ? this.ratings.find((i) => i.value === value).text : ''
   }
 }

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private uiService: UiService
   ) {
     this.subs.sink = route.paramMap.subscribe(
-      params => (this.redirectUrl = params.get('redirectUrl'))
+      (params) => (this.redirectUrl = params.get('redirectUrl'))
     )
   }
 
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   async login(submittedForm: FormGroup) {
     this.authService
       .login(submittedForm.value.email, submittedForm.value.password)
-      .pipe(catchError(err => (this.loginError = err)))
+      .pipe(catchError((err) => (this.loginError = err)))
 
     this.subs.sink = combineLatest([
       this.authService.authStatus$,

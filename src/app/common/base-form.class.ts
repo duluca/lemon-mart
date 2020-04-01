@@ -41,7 +41,7 @@ export abstract class BaseFormComponent<TFormData> {
   }
 
   protected deregisterAllForms() {
-    this.registeredForms.forEach(form => this.deregisterForm(name))
+    this.registeredForms.forEach((form) => this.deregisterForm(name))
   }
 
   protected hasChanged(change: SimpleChange): boolean {

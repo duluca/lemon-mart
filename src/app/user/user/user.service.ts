@@ -38,11 +38,11 @@ export class UserService extends CacheService implements IUserService {
 
     updateResponse.pipe(
       tap(
-        res => {
+        (res) => {
           this.authService.currentUser$.next(res)
           this.removeItem('draft-user')
         },
-        err => throwError(err)
+        (err) => throwError(err)
       )
     )
 

@@ -37,9 +37,9 @@ export abstract class AuthService extends CacheService implements IAuthService {
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
   readonly currentUser$ = new BehaviorSubject<User>(new User())
   protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
-    filter(status => status.isAuthenticated),
+    filter((status) => status.isAuthenticated),
     flatMap(() => this.getCurrentUser()),
-    map(user => this.currentUser$.next(user)),
+    map((user) => this.currentUser$.next(user)),
     catchError(transformError)
   )
 
@@ -69,20 +69,20 @@ export abstract class AuthService extends CacheService implements IAuthService {
     this.clearToken()
 
     const loginResponse$ = this.authProvider(email, password).pipe(
-      map(value => {
+      map((value) => {
         this.setToken(value.accessToken)
         const token = decode(value.accessToken)
         return this.transformJwtToken(token)
       }),
-      tap(status => this.authStatus$.next(status)),
-      filter(status => status.isAuthenticated),
+      tap((status) => this.authStatus$.next(status)),
+      filter((status) => status.isAuthenticated),
       flatMap(() => this.getCurrentUser()),
-      map(user => this.currentUser$.next(user)),
+      map((user) => this.currentUser$.next(user)),
       catchError(transformError)
     )
 
     loginResponse$.subscribe({
-      error: err => {
+      error: (err) => {
         this.logout()
         return throwError(err)
       },

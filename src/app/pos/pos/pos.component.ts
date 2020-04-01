@@ -40,8 +40,8 @@ export class PosComponent implements OnInit, OnDestroy {
     this.subs.sink = this.transactionService
       .processTransaction(transaction)
       .pipe(
-        filter(tx => tx != null || tx !== undefined),
-        tap(transactionId => {
+        filter((tx) => tx != null || tx !== undefined),
+        tap((transactionId) => {
           this.uiService.showToast('Checkout completed')
           dataLayer.push({
             event: 'checkoutCompleted',

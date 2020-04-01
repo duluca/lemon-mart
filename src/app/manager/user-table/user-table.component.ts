@@ -50,7 +50,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   ): Observable<IUsers> {
     if (this.useNgRxData) {
       return this.userEntityService.getAll().pipe(
-        map(value => {
+        map((value) => {
           return { total: 0, data: value }
         })
       )
@@ -100,7 +100,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
 
         return results.data
       }),
-      catchError(err => {
+      catchError((err) => {
         this.isLoadingResults$.next(false)
         this.hasError = true
         this.errorText = err
