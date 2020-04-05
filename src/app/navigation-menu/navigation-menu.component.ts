@@ -20,7 +20,7 @@ import { Component, OnInit } from '@angular/core'
         Receipts
       </a>
       <h3 matSubheader>Inventory</h3>
-      <a mat-list-item routerLinkActive="active-link" routerLink="/inventory/stockEntry">
+      <a mat-list-item routerLinkActive="active-link" routerLink="/inventory/stock-entry">
         Stock Entry
       </a>
       <a mat-list-item routerLinkActive="active-link" routerLink="/inventory/products">

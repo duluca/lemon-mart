@@ -31,5 +31,5 @@ import { Component, OnInit } from '@angular/core'
 export class InventoryComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }
