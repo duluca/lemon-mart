@@ -234,7 +234,7 @@
             "karmaConfig": "projects/ch7/karma.conf.js",
             "assets": ["projects/ch7/src/favicon.ico", "projects/ch7/src/assets"],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/ch7/src/lemonmart-theme.scss",
               "projects/ch7/src/styles.css"
             ],
             "scripts": []
