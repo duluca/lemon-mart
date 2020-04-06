@@ -264,6 +264,641 @@
           }
         }
       }
+    },
+    "ch8": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ch8",
+      "sourceRoot": "projects/ch8/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ch8",
+            "index": "projects/ch8/src/index.html",
+            "main": "projects/ch8/src/main.ts",
+            "polyfills": "projects/ch8/src/polyfills.ts",
+            "tsConfig": "projects/ch8/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ch8/src/favicon.ico",
+              "projects/ch8/src/assets",
+              "projects/ch8/src/android-chrome-192x192.png",
+              "projects/ch8/src/favicon-16x16.png",
+              "projects/ch8/src/mstile-310x150.png",
+              "projects/ch8/src/android-chrome-512x512.png",
+              "projects/ch8/src/favicon-32x32.png",
+              "projects/ch8/src/mstile-310x310.png",
+              "projects/ch8/src/apple-touch-icon.png",
+              "projects/ch8/src/manifest.json",
+              "projects/ch8/src/mstile-70x70.png",
+              "projects/ch8/src/browserconfig.xml",
+              "projects/ch8/src/mstile-144x144.png",
+              "projects/ch8/src/safari-pinned-tab.svg",
+              "projects/ch8/src/mstile-150x150.png"
+            ],
+            "styles": [
+              "projects/ch8/src/lemonmart-theme.scss",
+              "projects/ch8/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ch8/src/environments/environment.ts",
+                  "with": "projects/ch8/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ch8:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ch8:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ch8:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ch8/src/test.ts",
+            "polyfills": "projects/ch8/src/polyfills.ts",
+            "tsConfig": "projects/ch8/tsconfig.spec.json",
+            "karmaConfig": "projects/ch8/karma.conf.js",
+            "assets": ["projects/ch8/src/favicon.ico", "projects/ch8/src/assets"],
+            "styles": [
+              "projects/ch8/src/lemonmart-theme.scss",
+              "projects/ch8/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ch8/tsconfig.app.json",
+              "projects/ch8/tsconfig.spec.json",
+              "projects/ch8/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ch8/e2e/protractor.conf.js",
+            "devServerTarget": "ch8:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ch8:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ch10": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ch10",
+      "sourceRoot": "projects/ch10/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ch10",
+            "index": "projects/ch10/src/index.html",
+            "main": "projects/ch10/src/main.ts",
+            "polyfills": "projects/ch10/src/polyfills.ts",
+            "tsConfig": "projects/ch10/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ch10/src/favicon.ico",
+              "projects/ch10/src/assets",
+              "projects/ch10/src/android-chrome-192x192.png",
+              "projects/ch10/src/favicon-16x16.png",
+              "projects/ch10/src/mstile-310x150.png",
+              "projects/ch10/src/android-chrome-512x512.png",
+              "projects/ch10/src/favicon-32x32.png",
+              "projects/ch10/src/mstile-310x310.png",
+              "projects/ch10/src/apple-touch-icon.png",
+              "projects/ch10/src/manifest.json",
+              "projects/ch10/src/mstile-70x70.png",
+              "projects/ch10/src/browserconfig.xml",
+              "projects/ch10/src/mstile-144x144.png",
+              "projects/ch10/src/safari-pinned-tab.svg",
+              "projects/ch10/src/mstile-150x150.png"
+            ],
+            "styles": [
+              "projects/ch10/src/lemonmart-theme.scss",
+              "projects/ch10/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ch10/src/environments/environment.ts",
+                  "with": "projects/ch10/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ch10:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ch10:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ch10:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ch10/src/test.ts",
+            "polyfills": "projects/ch10/src/polyfills.ts",
+            "tsConfig": "projects/ch10/tsconfig.spec.json",
+            "karmaConfig": "projects/ch10/karma.conf.js",
+            "assets": ["projects/ch10/src/favicon.ico", "projects/ch10/src/assets"],
+            "styles": [
+              "projects/ch10/src/lemonmart-theme.scss",
+              "projects/ch10/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ch10/tsconfig.app.json",
+              "projects/ch10/tsconfig.spec.json",
+              "projects/ch10/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ch10/e2e/protractor.conf.js",
+            "devServerTarget": "ch10:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ch10:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ch11": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ch11",
+      "sourceRoot": "projects/ch11/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ch11",
+            "index": "projects/ch11/src/index.html",
+            "main": "projects/ch11/src/main.ts",
+            "polyfills": "projects/ch11/src/polyfills.ts",
+            "tsConfig": "projects/ch11/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ch11/src/favicon.ico",
+              "projects/ch11/src/assets",
+              "projects/ch11/src/android-chrome-192x192.png",
+              "projects/ch11/src/favicon-16x16.png",
+              "projects/ch11/src/mstile-310x150.png",
+              "projects/ch11/src/android-chrome-512x512.png",
+              "projects/ch11/src/favicon-32x32.png",
+              "projects/ch11/src/mstile-310x310.png",
+              "projects/ch11/src/apple-touch-icon.png",
+              "projects/ch11/src/manifest.json",
+              "projects/ch11/src/mstile-70x70.png",
+              "projects/ch11/src/browserconfig.xml",
+              "projects/ch11/src/mstile-144x144.png",
+              "projects/ch11/src/safari-pinned-tab.svg",
+              "projects/ch11/src/mstile-150x150.png"
+            ],
+            "styles": [
+              "projects/ch11/src/lemonmart-theme.scss",
+              "projects/ch11/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ch11/src/environments/environment.ts",
+                  "with": "projects/ch11/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ch11:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ch11:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ch11:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ch11/src/test.ts",
+            "polyfills": "projects/ch11/src/polyfills.ts",
+            "tsConfig": "projects/ch11/tsconfig.spec.json",
+            "karmaConfig": "projects/ch11/karma.conf.js",
+            "assets": ["projects/ch11/src/favicon.ico", "projects/ch11/src/assets"],
+            "styles": [
+              "projects/ch11/src/lemonmart-theme.scss",
+              "projects/ch11/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ch11/tsconfig.app.json",
+              "projects/ch11/tsconfig.spec.json",
+              "projects/ch11/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ch11/e2e/protractor.conf.js",
+            "devServerTarget": "ch11:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ch11:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ch12": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ch12",
+      "sourceRoot": "projects/ch12/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ch12",
+            "index": "projects/ch12/src/index.html",
+            "main": "projects/ch12/src/main.ts",
+            "polyfills": "projects/ch12/src/polyfills.ts",
+            "tsConfig": "projects/ch12/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ch12/src/favicon.ico",
+              "projects/ch12/src/assets",
+              "projects/ch12/src/android-chrome-192x192.png",
+              "projects/ch12/src/favicon-16x16.png",
+              "projects/ch12/src/mstile-310x150.png",
+              "projects/ch12/src/android-chrome-512x512.png",
+              "projects/ch12/src/favicon-32x32.png",
+              "projects/ch12/src/mstile-310x310.png",
+              "projects/ch12/src/apple-touch-icon.png",
+              "projects/ch12/src/manifest.json",
+              "projects/ch12/src/mstile-70x70.png",
+              "projects/ch12/src/browserconfig.xml",
+              "projects/ch12/src/mstile-144x144.png",
+              "projects/ch12/src/safari-pinned-tab.svg",
+              "projects/ch12/src/mstile-150x150.png"
+            ],
+            "styles": [
+              "projects/ch12/src/lemonmart-theme.scss",
+              "projects/ch12/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ch12/src/environments/environment.ts",
+                  "with": "projects/ch12/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ch12:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ch12:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ch12:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ch12/src/test.ts",
+            "polyfills": "projects/ch12/src/polyfills.ts",
+            "tsConfig": "projects/ch12/tsconfig.spec.json",
+            "karmaConfig": "projects/ch12/karma.conf.js",
+            "assets": ["projects/ch12/src/favicon.ico", "projects/ch12/src/assets"],
+            "styles": [
+              "projects/ch12/src/lemonmart-theme.scss",
+              "projects/ch12/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ch12/tsconfig.app.json",
+              "projects/ch12/tsconfig.spec.json",
+              "projects/ch12/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ch12/e2e/protractor.conf.js",
+            "devServerTarget": "ch12:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ch12:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ch14": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ch14",
+      "sourceRoot": "projects/ch14/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ch14",
+            "index": "projects/ch14/src/index.html",
+            "main": "projects/ch14/src/main.ts",
+            "polyfills": "projects/ch14/src/polyfills.ts",
+            "tsConfig": "projects/ch14/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ch14/src/favicon.ico",
+              "projects/ch14/src/assets",
+              "projects/ch14/src/android-chrome-192x192.png",
+              "projects/ch14/src/favicon-16x16.png",
+              "projects/ch14/src/mstile-310x150.png",
+              "projects/ch14/src/android-chrome-512x512.png",
+              "projects/ch14/src/favicon-32x32.png",
+              "projects/ch14/src/mstile-310x310.png",
+              "projects/ch14/src/apple-touch-icon.png",
+              "projects/ch14/src/manifest.json",
+              "projects/ch14/src/mstile-70x70.png",
+              "projects/ch14/src/browserconfig.xml",
+              "projects/ch14/src/mstile-144x144.png",
+              "projects/ch14/src/safari-pinned-tab.svg",
+              "projects/ch14/src/mstile-150x150.png"
+            ],
+            "styles": [
+              "projects/ch14/src/lemonmart-theme.scss",
+              "projects/ch14/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ch14/src/environments/environment.ts",
+                  "with": "projects/ch14/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ch14:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ch14:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ch14:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ch14/src/test.ts",
+            "polyfills": "projects/ch14/src/polyfills.ts",
+            "tsConfig": "projects/ch14/tsconfig.spec.json",
+            "karmaConfig": "projects/ch14/karma.conf.js",
+            "assets": ["projects/ch14/src/favicon.ico", "projects/ch14/src/assets"],
+            "styles": [
+              "projects/ch14/src/lemonmart-theme.scss",
+              "projects/ch14/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ch14/tsconfig.app.json",
+              "projects/ch14/tsconfig.spec.json",
+              "projects/ch14/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ch14/e2e/protractor.conf.js",
+            "devServerTarget": "ch14:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ch14:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "lemon-mart"
