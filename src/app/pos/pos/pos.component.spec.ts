@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { commonTestingProviders } from 'src/app/common/common.testing'
 
+import { commonTestingProviders } from '../../common/common.testing'
 import { MaterialModule } from '../../material.module'
 import { TransactionService } from '../transaction/transaction.service'
 import { TransactionServiceFake } from '../transaction/transaction.service.fake'

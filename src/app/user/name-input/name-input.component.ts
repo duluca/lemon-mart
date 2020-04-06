@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { BaseFormComponent } from 'src/app/common/base-form.class'
 
+import { BaseFormComponent } from '../../common/base-form.class'
 import { OneCharValidation, RequiredTextValidation } from '../../common/validations'
 import { IName } from '../user/user'
 

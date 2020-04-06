@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { AngularFireAuth } from '@angular/fire/auth'
-import { environment } from 'src/environments/environment'
 
+import { environment } from '../../environments/environment'
 import { CustomAuthService } from './auth.custom.service'
 import { AuthMode } from './auth.enum'
 import { FirebaseAuthService } from './auth.firebase.service'

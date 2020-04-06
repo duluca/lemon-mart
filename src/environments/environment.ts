@@ -1,4 +1,4 @@
-import { AuthMode } from 'src/app/auth/auth.enum'
+import { AuthMode } from '../app/auth/auth.enum'
 
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`,

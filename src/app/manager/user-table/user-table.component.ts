@@ -4,11 +4,11 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatSort, SortDirection } from '@angular/material/sort'
 import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
-import { UserEntityService } from 'src/app/user/user/user.entity.service'
 import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
+import { UserEntityService } from '../../user/user/user.entity.service'
 import { IUsers, UserService } from '../../user/user/user.service'
 
 @Component({

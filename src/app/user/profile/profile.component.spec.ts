@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { createComponentMock } from 'angular-unit-test-helper'
-import { LemonRaterModule } from 'src/app/user-controls/lemon-rater/lemon-rater.module'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
+import { LemonRaterModule } from '../../user-controls/lemon-rater/lemon-rater.module'
 import { UserMaterialModule } from '../user.material.module'
 import { ProfileComponent } from './profile.component'
 

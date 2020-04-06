@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { filter, tap } from 'rxjs/operators'
-import { UiService } from 'src/app/common/ui.service'
 import { SubSink } from 'subsink'
 
+import { UiService } from '../../common/ui.service'
 import { ITransaction } from '../transaction/transaction'
 import { TransactionType } from '../transaction/transaction.enum'
 import { TransactionService } from '../transaction/transaction.service'

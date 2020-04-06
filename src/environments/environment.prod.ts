@@ -1,4 +1,4 @@
-import { AuthMode } from 'src/app/auth/auth.enum'
+import { AuthMode } from '../app/auth/auth.enum'
 
 export const environment = {
   production: true,
