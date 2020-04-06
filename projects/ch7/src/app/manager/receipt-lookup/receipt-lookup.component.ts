@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-receipt-lookup',
   templateUrl: './receipt-lookup.component.html',
-  styleUrls: ['./receipt-lookup.component.css']
+  styleUrls: ['./receipt-lookup.component.css'],
 })
 export class ReceiptLookupComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
