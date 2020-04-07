@@ -5,7 +5,7 @@ export class AppPage {
     return browser.get('/')
   }
 
-  getParagraphText() {
-    return element(by.css('app-root mat-toolbar .mat-h2')).getText()
+  getTitleText(): Promise<string> {
+    return element(by.css('app-root mat-toolbar .mat-h2')).getText() as Promise<string>
   }
 }
