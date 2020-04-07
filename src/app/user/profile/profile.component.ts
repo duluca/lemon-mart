@@ -3,13 +3,13 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { BehaviorSubject, Observable, merge, of } from 'rxjs'
 import { filter, map, startWith, tap } from 'rxjs/operators'
-import { BaseFormComponent } from '../../common/base-form.class'
-import { UiService } from '../../common/ui.service'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
 
 import { Role } from '../../auth/auth.enum'
 import { AuthService } from '../../auth/auth.service'
+import { BaseFormComponent } from '../../common/base-form.class'
+import { UiService } from '../../common/ui.service'
 import {
   BirthDateValidation,
   EmailValidation,
