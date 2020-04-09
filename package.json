@@ -24,7 +24,7 @@
     "test": "ng test lemon-mart --browsers Chrome",
     "test:debug": "npm test -- --browsers Chrome --source-map",
     "lint": "run-p lint:ts lint:tsc",
-    "lint:fix": "run-p lint:ts:fix lint:tsc",
+    "lint:fix": "run-s lint:ts:fix lint:tsc",
     "e2e": "ng e2e lemon-mart",
     "build:prod": "ng build --prod",
     "build:integration": "cross-conf-env docker image build -f integration.Dockerfile . -t $npm_package_config_imageRepo:latest",
