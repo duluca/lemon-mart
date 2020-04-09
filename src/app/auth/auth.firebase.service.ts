@@ -34,8 +34,8 @@ export class FirebaseAuthService extends AuthService {
 
     this.afAuth.signInWithEmailAndPassword(email, password).then(
       (res) => {
-        const firebaseUser: FirebaseUser = res.user
-        firebaseUser.getIdToken().then(
+        const firebaseUser: FirebaseUser | null = res.user
+        firebaseUser?.getIdToken().then(
           (token) => serverResponse$.next({ accessToken: token } as IServerAuthResponse),
           (err) => serverResponse$.error(err)
         )
@@ -69,10 +69,8 @@ export class FirebaseAuthService extends AuthService {
 
     return User.Build({
       name: {
-        first: firebaseUser.displayName
-          ? firebaseUser.displayName.split(' ')[0]
-          : 'Firebase',
-        last: firebaseUser.displayName ? firebaseUser.displayName.split(' ')[1] : 'User',
+        first: firebaseUser?.displayName?.split(' ')[0] || 'Firebase',
+        last: firebaseUser?.displayName?.split(' ')[1] || 'User',
       },
       picture: firebaseUser.photoURL,
       email: firebaseUser.email,

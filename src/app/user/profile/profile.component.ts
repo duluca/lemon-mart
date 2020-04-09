@@ -72,7 +72,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       this.subs.add(
         merge(this.loadFromCacheForDemo(), this.authService.currentUser$)
           .pipe(
-            filter((user) => user != null || user !== undefined),
+            filter((user) => user != null),
             tap((user) => this.patchUser(user))
           )
           .subscribe()
@@ -95,11 +95,11 @@ export class ProfileComponent extends BaseFormComponent<IUser>
 
   buildForm(initialData?: IUser): FormGroup {
     const user = initialData
-    this.currentUserId = user ? user._id : null
+    this.currentUserId = user?._id || ''
     const form = this.formBuilder.group({
       email: [
         {
-          value: (user && user.email) || '',
+          value: user?.email || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
         EmailValidation,
@@ -108,47 +108,39 @@ export class ProfileComponent extends BaseFormComponent<IUser>
         ? null
         : this.formBuilder.group({
             // this will get overwritten if useAppNameInputComponent is set to true
-            first: [user && user.name ? user.name.first : '', RequiredTextValidation],
-            middle: [user && user.name ? user.name.middle : '', OneCharValidation],
-            last: [user && user.name ? user.name.last : '', RequiredTextValidation],
+            first: [user?.name?.first || '', RequiredTextValidation],
+            middle: [user?.name?.middle || '', OneCharValidation],
+            last: [user?.name?.last || '', RequiredTextValidation],
           }),
       role: [
         {
-          value: (user && user.role) || '',
+          value: user?.role || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
         [Validators.required],
       ],
-      level: [(user && user.level) || 0, Validators.required],
+      level: [user?.level || 0, Validators.required],
       // use the code below to test disabled condition of <app-lemon-rater>
       // level: [{ value: 2, disabled: true }, [Validators.required]],
-      dateOfBirth: [(user && user.dateOfBirth) || '', BirthDateValidation],
+      dateOfBirth: [user?.dateOfBirth || '', BirthDateValidation],
       address: this.formBuilder.group({
-        line1: [
-          (user && user.address && user.address.line1) || '',
-          RequiredTextValidation,
-        ],
-        line2: [
-          (user && user.address && user.address.line2) || '',
-          OptionalTextValidation,
-        ],
-        city: [(user && user.address && user.address.city) || '', RequiredTextValidation],
-        state: [
-          (user && user.address && user.address.state) || '',
-          RequiredTextValidation,
-        ],
-        zip: [(user && user.address && user.address.zip) || '', USAZipCodeValidation],
+        line1: [user?.address?.line1 || '', RequiredTextValidation],
+        line2: [user?.address?.line2 || '', OptionalTextValidation],
+        city: [user?.address?.city || '', RequiredTextValidation],
+        state: [user?.address?.state || '', RequiredTextValidation],
+        zip: [user?.address?.zip || '', USAZipCodeValidation],
       }),
-      phones: this.formBuilder.array(this.buildPhoneArray(user ? user.phones : [])),
+      phones: this.formBuilder.array(this.buildPhoneArray(user?.phones || [])),
     })
 
-    this.states$ = form
-      .get('address')
-      .get('state')
-      .valueChanges.pipe(
+    const state = form.get('address')?.get('state')
+
+    if (state != null) {
+      this.states$ = state.valueChanges.pipe(
         startWith(''),
         map((value) => USStateFilter(value))
       )
+    }
 
     this.cacheChangesForDemo(form)
 
@@ -170,7 +162,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   private buildPhoneArray(phones: IPhone[]) {
     const groups = []
 
-    if (!phones || (phones && phones.length === 0)) {
+    if (phones?.length === 0) {
       groups.push(this.buildPhoneFormControl(1))
     } else {
       phones.forEach((p) => {
@@ -180,7 +172,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     return groups
   }
 
-  private buildPhoneFormControl(id, type?: string, phoneNumber?: string) {
+  private buildPhoneFormControl(id: number, type?: string, phoneNumber?: string) {
     return this.formBuilder.group({
       id: [id],
       type: [type || '', Validators.required],
@@ -189,7 +181,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   }
 
   get dateOfBirth() {
-    return this.formGroup.get('dateOfBirth').value || new Date()
+    return this.formGroup.get('dateOfBirth')?.value || new Date()
   }
 
   get age() {
@@ -199,11 +191,11 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   async save(form: FormGroup) {
     this.subs.add(
       this.userService.updateUser(this.currentUserId, form.value).subscribe(
-        (res) => {
+        (res: IUser) => {
           this.patchUser(res)
           this.uiService.showToast('Updated user')
         },
-        (err) => (this.userError = err)
+        (err: string) => (this.userError = err)
       )
     )
   }
@@ -232,7 +224,12 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     let data = null
 
     try {
-      data = JSON.parse(localStorage.getItem('draft-user'))
+      const draftUser = localStorage.getItem('draft-user')
+
+      if (draftUser != null) {
+        data = JSON.parse(draftUser)
+      }
+
       if (data) {
         this.uiService.showToast('Loaded data from cache')
       }

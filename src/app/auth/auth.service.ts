@@ -26,10 +26,10 @@ export interface IServerAuthResponse {
   accessToken: string
 }
 
-export const defaultAuthStatus = {
+export const defaultAuthStatus: IAuthStatus = {
   isAuthenticated: false,
   userRole: Role.None,
-  userId: null,
+  userId: '',
 }
 
 @Injectable()

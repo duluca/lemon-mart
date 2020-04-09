@@ -14,7 +14,7 @@ export class UserServiceFake implements IUserService {
     return of(new User())
   }
 
-  getUser(id): Observable<IUser> {
+  getUser(id: string): Observable<IUser> {
     return of(new User((id = id)))
   }
 

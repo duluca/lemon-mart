@@ -26,11 +26,19 @@ export class UserService extends CacheService implements IUserService {
     super()
   }
 
-  getUser(id: string): Observable<IUser> {
+  getUser(id: string | null): Observable<IUser> {
+    if (id === null) {
+      return throwError('User id is not set')
+    }
+
     return this.httpClient.get<IUser>(`${environment.baseUrl}/v2/user/${id}`)
   }
 
   updateUser(id: string, user: IUser): Observable<IUser> {
+    if (id === '') {
+      return throwError('User id is not set')
+    }
+
     this.setItem('draft-user', user) // cache user data in case of errors
     const updateResponse = this.httpClient
       .put<IUser>(`${environment.baseUrl}/v2/user/${id}`, user)

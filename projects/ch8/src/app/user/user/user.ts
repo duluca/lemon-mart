@@ -55,7 +55,7 @@ export class User implements IUser {
       state: '',
       zip: '',
     },
-    public phones = []
+    public phones: IPhone[] = []
   ) {}
 
   static Build(user: IUser) {

@@ -8,7 +8,7 @@ interface ITestData {
 
 class TestFormComponent extends BaseFormComponent<ITestData> {
   buildForm(): FormGroup {
-    return null
+    return jasmine.createSpyObj('form', [])
   }
 }
 

@@ -44,18 +44,20 @@ export class InMemoryAuthService extends AuthService {
     email: string,
     password: string
   ): Observable<IServerAuthResponse> {
-    if (!email.toLowerCase().endsWith('@test.com')) {
+    email = email.toLowerCase()
+
+    if (!email.endsWith('@test.com')) {
       return throwError('Failed to login! Email needs to end with @test.com.')
     }
 
     const authStatus = {
       isAuthenticated: true,
       userId: this.defaultUser._id,
-      userRole: email.toLowerCase().includes('cashier')
+      userRole: email.includes('cashier')
         ? Role.Cashier
-        : email.toLowerCase().includes('clerk')
+        : email.includes('clerk')
         ? Role.Clerk
-        : email.toLowerCase().includes('manager')
+        : email.includes('manager')
         ? Role.Manager
         : Role.None,
     } as IAuthStatus

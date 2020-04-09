@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private uiService: UiService
   ) {
     this.subs.sink = route.paramMap.subscribe(
-      (params) => (this.redirectUrl = params.get('redirectUrl'))
+      (params) => (this.redirectUrl = params.get('redirectUrl') || '')
     )
   }
 
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(
         filter(
           ([authStatus, user]) =>
-            authStatus.isAuthenticated && user !== null && user._id !== ''
+            authStatus.isAuthenticated && user != null && user._id !== ''
         ),
         tap(([authStatus, user]) => {
           this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)

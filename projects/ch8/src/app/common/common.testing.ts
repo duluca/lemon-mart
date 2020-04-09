@@ -59,7 +59,7 @@ export class DomSanitizerFake {
     return {} as SafeResourceUrl
   }
   sanitize(context: SecurityContext, value: SafeValue | string | null): string | null {
-    return value ? value.toString() : null
+    return value?.toString() || null
   }
 }
 

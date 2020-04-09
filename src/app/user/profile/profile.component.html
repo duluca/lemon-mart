@@ -98,7 +98,7 @@
               </mat-radio-button>
             </mat-radio-group>
             <mat-error *ngIf="
-          formGroup.get('role').hasError('required') && formGroup.get('role').touched
+          formGroup.get('role')?.hasError('required') && formGroup.get('role')?.touched
         ">
               <span class="mat-caption">Role is required</span>
             </mat-error>

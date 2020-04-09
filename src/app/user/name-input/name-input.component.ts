@@ -68,9 +68,9 @@ export class NameInputComponent extends BaseFormComponent<IName>
   buildForm(initialData?: IName): FormGroup {
     const name = initialData
     return this.formBuilder.group({
-      first: [name ? name.first : '', RequiredTextValidation],
-      middle: [name ? name.middle : '', OneCharValidation],
-      last: [name ? name.last : '', RequiredTextValidation],
+      first: [name?.first || '', RequiredTextValidation],
+      middle: [name?.middle || '', OneCharValidation],
+      last: [name?.last || '', RequiredTextValidation],
     })
   }
 

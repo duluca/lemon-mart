@@ -1,7 +1,7 @@
 import { EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core'
 import { AbstractControl, FormGroup } from '@angular/forms'
 
-export abstract class BaseFormComponent<TFormData> {
+export abstract class BaseFormComponent<TFormData extends object> {
   @Input() initialData: TFormData
   @Input() disable: boolean
   @Output() formReady: EventEmitter<AbstractControl>
@@ -15,7 +15,7 @@ export abstract class BaseFormComponent<TFormData> {
 
   abstract buildForm(initialData?: TFormData): FormGroup
 
-  patchUpdatedData(data) {
+  patchUpdatedData(data: object) {
     this.formGroup.patchValue(data, { onlySelf: false })
   }
 
@@ -25,8 +25,8 @@ export abstract class BaseFormComponent<TFormData> {
     }
   }
 
-  emitFormReady(control: AbstractControl = null) {
-    this.formReady.emit(control ? control : this.formGroup)
+  emitFormReady(control: AbstractControl | null = null) {
+    this.formReady.emit(control || this.formGroup)
   }
 
   registerForm(name: string, control: AbstractControl) {
@@ -41,10 +41,10 @@ export abstract class BaseFormComponent<TFormData> {
   }
 
   protected deregisterAllForms() {
-    this.registeredForms.forEach((form) => this.deregisterForm(name))
+    this.registeredForms.forEach(() => this.deregisterForm(name))
   }
 
   protected hasChanged(change: SimpleChange): boolean {
-    return change && change.previousValue !== change.currentValue
+    return change?.previousValue !== change?.currentValue
   }
 }
