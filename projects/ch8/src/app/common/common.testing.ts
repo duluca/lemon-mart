@@ -44,15 +44,13 @@ export class MatIconRegistryFake {
   }
 
   private _svgElementFromString(str: string): SVGElement {
-    if (this._document || typeof document !== 'undefined') {
-      const div = (this._document || document).createElement('DIV')
-      div.innerHTML = str
-      const svg = div.querySelector('svg') as SVGElement
-      if (!svg) {
-        throw Error('<svg> tag not found')
-      }
-      return svg
+    const div = (this._document || document).createElement('DIV')
+    div.innerHTML = str
+    const svg = div.querySelector('svg') as SVGElement
+    if (!svg) {
+      throw Error('<svg> tag not found')
     }
+    return svg
   }
 }
 
