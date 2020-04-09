@@ -23,8 +23,8 @@
     "build": "ng build",
     "test": "ng test lemon-mart --browsers Chrome",
     "test:debug": "npm test -- --browsers Chrome --source-map",
-    "lint": "tslint --config tslint.json --project . -e \"**/{test,polyfills}.ts\"",
-    "lint:fix": "tslint --config tslint.json --fix --project . -e \"**/{test,polyfills}.ts\"",
+    "lint": "run-p lint:ts lint:tsc",
+    "lint:fix": "run-p lint:ts:fix lint:tsc",
     "e2e": "ng e2e lemon-mart",
     "build:prod": "ng build --prod",
     "build:integration": "cross-conf-env docker image build -f integration.Dockerfile . -t $npm_package_config_imageRepo:latest",
@@ -56,7 +56,10 @@
     "aws:deploy": "cross-conf-env docker run --env-file ./.env duluca/ecs-deploy-fargate -c $npm_package_config_awsEcsCluster -n $npm_package_config_awsService -i $npm_package_config_imageRepo:latest -r $npm_package_config_awsRegion --timeout 1000",
     "aws:release": "run-s -cs aws:login docker:publish aws:deploy",
     "aws:fargate-release": "run-s -cs aws:login docker:publish",
-    "init:env": "init-dev-env generate-dot-env example.env -f"
+    "init:env": "init-dev-env generate-dot-env example.env -f",
+    "lint:ts": "tslint --config tslint.json --project . -e \"**/{test,polyfills}.ts\"",
+    "lint:ts:fix": "tslint --config tslint.json --fix --project . -e \"**/{test,polyfills}.ts\"",
+    "lint:tsc": "tsc --noEmit --skipLibCheck"
   },
   "private": true,
   "dependencies": {
