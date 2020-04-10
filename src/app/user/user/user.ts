@@ -36,6 +36,7 @@ export interface IUser {
     zip: string
   }
   phones: IPhone[]
+  readonly fullName?: string
 }
 
 export class User implements IUser {

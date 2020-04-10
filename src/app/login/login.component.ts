@@ -80,7 +80,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         ),
         tap(([authStatus, user]) => {
           this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)
-          this.router.navigate([this.redirectUrl || this.homeRoutePerRole(user.role)])
+          this.router.navigate([
+            this.redirectUrl || this.homeRoutePerRole(user.role as Role),
+          ])
         })
       )
       .subscribe()
