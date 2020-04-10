@@ -80,7 +80,7 @@
     "@ngrx/entity": "^9.1.0",
     "@ngrx/store": "^9.1.0",
     "@ngrx/store-devtools": "^9.1.0",
-    "firebase": "^7.13.2",
+    "firebase": "^7.14.0",
     "jwt-decode": "^2.2.0",
     "ngx-mask": "^9.0.0",
     "rxjs": "^6.5.5",
