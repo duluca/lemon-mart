@@ -20,7 +20,9 @@ export interface IUserService {
   getUsers(pageSize: number, searchText: string, pagesToSkip: number): Observable<IUsers>
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService extends CacheService implements IUserService {
   constructor(private httpClient: HttpClient, private authService: AuthService) {
     super()

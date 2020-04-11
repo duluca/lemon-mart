@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import * as decode from 'jwt-decode'
-import { BehaviorSubject, Observable, throwError } from 'rxjs'
+import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
 import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
 
 import { transformError } from '../common/common'
@@ -34,13 +34,17 @@ export const defaultAuthStatus: IAuthStatus = {
 
 @Injectable()
 export abstract class AuthService extends CacheService implements IAuthService {
+  private getAndUpdateUserIfAuthenticated = pipe(
+    filter((status: IAuthStatus) => status.isAuthenticated),
+    flatMap(() => this.getCurrentUser()),
+    map((user: IUser) => this.currentUser$.next(user)),
+    catchError(transformError)
+  )
+
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
   readonly currentUser$ = new BehaviorSubject<IUser>(new User())
   protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
-    filter((status) => status.isAuthenticated),
-    flatMap(() => this.getCurrentUser()),
-    map((user) => this.currentUser$.next(user)),
-    catchError(transformError)
+    this.getAndUpdateUserIfAuthenticated
   )
 
   constructor() {
@@ -75,10 +79,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
         return this.transformJwtToken(token)
       }),
       tap((status) => this.authStatus$.next(status)),
-      filter((status) => status.isAuthenticated),
-      flatMap(() => this.getCurrentUser()),
-      map((user) => this.currentUser$.next(user)),
-      catchError(transformError)
+      this.getAndUpdateUserIfAuthenticated
     )
 
     loginResponse$.subscribe({

@@ -7,8 +7,6 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 const modules = [MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule]
 
 @NgModule({
-  declarations: [],
-  imports: [modules],
-  exports: [modules],
+  exports: modules,
 })
 export class MaterialModule {}

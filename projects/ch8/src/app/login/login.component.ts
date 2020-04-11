@@ -1,13 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { catchError, filter, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
-import { $enum } from 'ts-enum-util'
 
-import { environment } from '../../environments/environment'
-import { AuthMode, Role } from '../auth/auth.enum'
+import { Role } from '../auth/auth.enum'
 import { AuthService } from '../auth/auth.service'
 import { UiService } from '../common/ui.service'
 import { EmailValidation, PasswordValidation } from '../common/validations'
@@ -28,19 +26,16 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
     `,
   ],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   private subs = new SubSink()
   loginForm: FormGroup
   loginError = ''
   redirectUrl: string
-  roles = $enum(Role).getKeys()
-  authMode = environment.authMode
-  AuthMode = AuthMode
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    route: ActivatedRoute,
+    private route: ActivatedRoute,
     private uiService: UiService
   ) {
     this.subs.sink = route.paramMap.subscribe(
@@ -53,14 +48,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.buildLoginForm()
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe()
-  }
-
   buildLoginForm() {
     this.loginForm = this.formBuilder.group({
       email: ['', EmailValidation],
       password: ['', PasswordValidation],
+      // email: ['', [Validators.required, Validators.email]],
+      // password: [
+      //   '',
+      //   [Validators.required, Validators.minLength(8), Validators.maxLength(50)],
+      // ],
     })
   }
 
@@ -77,6 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         filter(([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''),
         tap(([authStatus, user]) => {
           this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)
+          // this.uiService.showDialog(`Welcome ${user.fullName}!`, `Role: ${user.role}`)
           this.router.navigate([
             this.redirectUrl || this.homeRoutePerRole(user.role as Role),
           ])

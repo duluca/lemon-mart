@@ -52,7 +52,7 @@ import { AuthService } from './auth/auth.service'
           status: authService.authStatus$ | async,
           user: authService.currentUser$ | async
         } as auth;">
-        <button *ngIf="auth.status.isAuthenticated" mat-icon-button (click)="sidenav.toggle()">
+        <button *ngIf="auth?.status?.isAuthenticated" mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
         <a mat-icon-button routerLink="/home">
@@ -60,12 +60,12 @@ import { AuthService } from './auth/auth.service'
           <span class="mat-h2">LemonMart</span>
         </a>
         <span class="flex-spacer"></span>
-        <button *ngIf="auth.status.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
+        <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
           aria-label="User Profile">
-          <img *ngIf="auth.user.picture" class="image-cropper" [src]="auth.user.picture" />
-          <mat-icon *ngIf="!auth.user.picture">account_circle</mat-icon>
+          <img *ngIf="auth?.user?.picture" class="image-cropper" [src]="auth?.user?.picture" />
+          <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
         </button>
-        <button *ngIf="auth.status.isAuthenticated" mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
+        <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
           aria-label="Logout">
           <mat-icon>lock_open</mat-icon>
         </button>
@@ -105,7 +105,7 @@ export class AppComponent implements OnInit, OnDestroy {
     ])
       .pipe(
         tap(([mediaValue, authStatus]) => {
-          if (!authStatus.isAuthenticated) {
+          if (!authStatus?.isAuthenticated) {
             this.opened = false
           } else {
             if (mediaValue[0].mqAlias === 'xs') {
