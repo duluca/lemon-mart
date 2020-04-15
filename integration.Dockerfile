@@ -12,7 +12,8 @@ RUN npm ci
 RUN npm run style
 RUN npm run lint
 
-RUN npm run build:prod
+# RUN npm run build:prod
+RUN npx ng build ch8 --prod
 
 FROM duluca/minimal-node-chromium:lts-alpine as tester
 
@@ -27,7 +28,8 @@ RUN cd ./node_modules/protractor && npm i webdriver-manager@latest
 
 WORKDIR $TESTER_SRC_DIR
 
-RUN npm run test:prod
+# RUN npm run test:prod
+RUN npx ng test --watch=false --browsers=ChromeHeadless --project ch8
 # RUN npm run test:prod:e2e
 
 FROM duluca/minimal-nginx-web-server:1-alpine as webserver
