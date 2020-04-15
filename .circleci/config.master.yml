@@ -1,0 +1,161 @@
+version: 2.1
+orbs:
+  coveralls: coveralls/coveralls@1.0.4
+  cypress: cypress-io/cypress@1
+commands:
+  install:
+    description: 'Install project dependencies'
+    parameters:
+      warm-cache:
+        type: boolean
+        default: false
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node_modules-{{ checksum "package-lock.json" }}
+      - when:
+          condition: << parameters.warm-cache >>
+          steps:
+            - run: npm install
+            # Pre-build Angular modules
+            - run: npx ngcc --properties es2015 --async false # async false is temp CI build fix
+            # force update the webdriver, so it runs with latest version of Chrome
+            - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
+            - save_cache:
+                key: node_modules-{{ checksum "package-lock.json" }}
+                paths:
+                  - node_modules
+                  - ~/.cache/Cypress
+  lint:
+    description: 'Check for code style and linting errors'
+    steps:
+      - run: npm run style
+      - run: npm run lint
+  build_and_test:
+    description: 'Build command that accepts Angular project name as parameter'
+    parameters:
+      project:
+        type: string
+        default: 'lemon-mart'
+      run-tests:
+        type: boolean
+        default: true
+    steps:
+      - run: npx ng build --prod --project << parameters.project >>
+      - when:
+          condition: << parameters.run-tests >>
+          steps:
+            - run: npx ng test --code-coverage --watch=false --project << parameters.project >>
+            - run: npx ng e2e << parameters.project >>
+  store:
+    description: 'Stores build_and_test artifacts'
+    parameters:
+      project:
+        type: string
+        default: 'lemon-mart'
+    steps:
+      - run:
+          name: Run Cypress tests
+          command: 'npx cypress run --record'
+
+      - store_test_results:
+          path: ./test_results
+      - store_artifacts:
+          path: ./coverage
+
+      # upload coverage report to coveralls for readme badge support
+      # requires config.yml version 2.1 and orbs: coveralls: coveralls/coveralls@1.0.4
+      # requires coveralls account and token named COVERALLS_REPO_TOKEN specific to repo to be stored in CircleCI
+      - coveralls/upload
+
+      - run:
+          name: Tar & Gzip compiled app
+          command: tar zcf dist.tar.gz dist/<< parameters.project >>
+      - store_artifacts:
+          path: dist.tar.gz
+
+      - run:
+          name: Move compiled app to workspace
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/dist
+            mv dist/<< parameters.project >> /tmp/workspace/dist/
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - dist/<< parameters.project >>
+  deploy_now:
+    description: 'Deploys project to Zeit Now --> https://now.sh'
+    parameters:
+      project:
+        type: string
+        default: 'lemon-mart'
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: npx now --token $NOW_TOKEN --platform-version 2 --prod /tmp/workspace/dist/<< parameters.project >> --confirm
+jobs:
+  initialize:
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install:
+          warm-cache: true
+  default:
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - lint
+      - build_and_test
+      - store
+  deploy:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/repo
+    steps:
+      - deploy_now
+
+  ch7: # this job is only here to verify sample code from the book, remove it in your own projects
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - build_and_test:
+          project: 'ch7'
+  ch8: # this job is only here to verify sample code from the book, remove it in your own projects
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - build_and_test:
+          project: 'ch8'
+workflows:
+  version: 2
+  build-test-and-approval-deploy:
+    jobs:
+      - initialize
+      - default:
+          requires:
+            - initialize
+      - ch7: # this job is only here to verify sample code from the book, remove it in your own projects
+          requires:
+            - initialize
+      - ch8: # this job is only here to verify sample code from the book, remove it in your own projects
+          requires:
+            - initialize
+      - hold:
+          type: approval
+          requires:
+            - default
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - hold
