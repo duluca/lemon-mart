@@ -46,3 +46,4 @@ Thumbs.db
 cache
 .firebase
 cypress
+*.tar**

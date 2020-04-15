@@ -14,14 +14,14 @@ jobs:
           command: |
             docker build -f integration.Dockerfile . -t lemon-mart:$CIRCLE_BRANCH
             mkdir -p docker-cache
-            docker save -o docker-cache/built-image.tar lemon-mart:$CIRCLE_BRANCH
+            docker save lemon-mart:$CIRCLE_BRANCH | gzip > docker-cache/built-image.tar.gz
       - save_cache:
           key: built-image-{{ .BuildNum }}
           paths:
             - docker-cache
       - store_artifacts:
-          path: docker-cache/built-image.tar
-          destination: built-image.tar
+          path: docker-cache/built-image.tar.gz
+          destination: built-image.tar.gz
 
   deploy:
     executor: aws-cli/default
@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Push it to ECR
           command: |
-            docker load < docker-cache/built-image.tar
+            docker load < docker-cache/built-image.tar.gz
             docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
       - run: echo 'do deployment here'
