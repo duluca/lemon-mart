@@ -36,5 +36,5 @@ FROM duluca/minimal-nginx-web-server:1-alpine as webserver
 
 ENV BUILDER_SRC_DIR=/usr/src
 
-COPY --from=builder $BUILDER_SRC_DIR/dist/lemon-mart /var/www
+COPY --from=builder $BUILDER_SRC_DIR/dist/ch8 /var/www
 CMD 'nginx'
