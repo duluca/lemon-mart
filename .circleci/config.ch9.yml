@@ -1,9 +1,6 @@
 version: 2.1
 orbs:
   coveralls: coveralls/coveralls@1.0.4
-  # Cypress Orb, see
-  # https://github.com/cypress-io/circleci-orb
-  cypress: cypress-io/cypress@1
 jobs:
   build:
     docker:
@@ -24,12 +21,9 @@ jobs:
 
       # because we use "npm ci" to install NPM dependencies
       # we cache "~/.npm" folder
-      # because Cypress is a dev dependency
-      # we should also cache "~/.cache/Cypress" folder
       - save_cache:
           paths:
             - ~/.npm
-            - ~/.cache/Cypress
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - run: npm run style
@@ -37,9 +31,6 @@ jobs:
       - run: npm run build:prod
       - run: npm test -- --watch=false --code-coverage
       - run: npm run e2e
-      - run:
-          name: Run Cypress tests
-          command: 'npx cypress run --record'
 
       - store_test_results:
           path: ./test_results
