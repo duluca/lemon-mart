@@ -39,12 +39,12 @@
           </mat-form-field>
         </div>
         <div fxLayout="row" class="margin-top">
-          <div *ngIf="loginError" class="mat-caption
-
-  error">{{loginError}}</div>
+          <div *ngIf="loginError" class="mat-caption error">{{ loginError }}</div>
           <div class="flex-spacer"></div>
           <button mat-raised-button type="submit" color="primary"
-            [disabled]="loginForm.invalid">Login</button>
+            [disabled]="loginForm.invalid">
+            Login
+          </button>
         </div>
       </form>
     </mat-card-content>

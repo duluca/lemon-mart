@@ -133,7 +133,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       phones: this.formBuilder.array(this.buildPhoneArray(user?.phones || [])),
     })
 
-    const state = form.get('address')?.get('state')
+    const state = form.get('address.state')
 
     if (state != null) {
       this.states$ = state.valueChanges.pipe(
