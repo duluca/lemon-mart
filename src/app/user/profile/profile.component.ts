@@ -31,7 +31,7 @@ import { IUSState, USStateFilter } from './data'
 export class ProfileComponent extends BaseFormComponent<IUser>
   implements OnInit, OnDestroy {
   Role = Role
-  PhoneTypes = $enum(PhoneType).getKeys()
+  PhoneTypes = $enum(PhoneType).getValues()
 
   states$: Observable<IUSState[]>
   userError = ''
