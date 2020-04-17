@@ -31,7 +31,6 @@ import { IUSState, USStateFilter } from './data'
 export class ProfileComponent extends BaseFormComponent<IUser>
   implements OnInit, OnDestroy {
   Role = Role
-  PhoneType = PhoneType
   PhoneTypes = $enum(PhoneType).getKeys()
 
   states$: Observable<IUSState[]>
@@ -198,6 +197,10 @@ export class ProfileComponent extends BaseFormComponent<IUser>
         (err: string) => (this.userError = err)
       )
     )
+  }
+
+  convertTypeToPhoneType(type: string): PhoneType {
+    return $enum(PhoneType).asValueOrThrow(type)
   }
 
   simulateLazyLoadedInitData() {

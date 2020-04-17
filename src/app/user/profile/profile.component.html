@@ -45,7 +45,7 @@
               <input matInput aria-label="Date of Birth" formControlName="dateOfBirth"
                 [matDatepicker]="dateOfBirthPicker" />
               <mat-hint *ngIf="formGroup.get('dateOfBirth')?.touched">
-                {{ this.age }} year(s) old
+                {{ age }} year(s) old
               </mat-hint>
               <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker">
               </mat-datepicker-toggle>
@@ -161,19 +161,19 @@
           <div fxLayout="row" fxLayout.lt-sm="column">
             <mat-list formArrayName="phones">
               <h2 mat-subheader>Phone Number(s)
-                <button mat-button (click)="this.addPhone()">
+                <button mat-button (click)="addPhone()">
                   <mat-icon>add</mat-icon>
                   Add Phone
                 </button>
               </h2>
               <mat-list-item style="margin-top: 36px;"
-                *ngFor="let position of this.phonesArray.controls; let i = index"
+                *ngFor="let position of phonesArray.controls; let i = index"
                 [formGroupName]="i">
                 <mat-form-field appearance="outline" fxFlex="100px">
                   <mat-label>Type</mat-label>
                   <mat-select formControlName="type">
-                    <mat-option *ngFor="let type of this.PhoneTypes"
-                      [value]="PhoneType[type]">
+                    <mat-option *ngFor="let type of PhoneTypes"
+                      [value]="convertTypeToPhoneType(type)">
                       {{ type }}
                     </mat-option>
                   </mat-select>
@@ -182,12 +182,11 @@
                   <mat-label>Number</mat-label>
                   <input matInput type="text" formControlName="digits"
                     mask="(000) 000-0000" prefix="+1" />
-                  <mat-error *ngIf="this.phonesArray.controls[i].invalid">
+                  <mat-error *ngIf="phonesArray.controls[i].invalid">
                     A valid phone number is required
                   </mat-error>
                 </mat-form-field>
-                <button fxFlex="33px" mat-icon-button
-                  (click)="this.phonesArray.removeAt(i)">
+                <button fxFlex="33px" mat-icon-button (click)="phonesArray.removeAt(i)">
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-list-item>
@@ -215,7 +214,7 @@
           <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
           <button mat-button color="warn" (click)="stepper.reset()">Reset</button>
           <button mat-raised-button matStepperNext color="primary" type="submit"
-            [disabled]="this.formGroup.invalid">
+            [disabled]="formGroup.invalid">
             Update
           </button>
         </div>
