@@ -71,14 +71,15 @@ export class FormErrorDirective implements OnDestroy, OnChanges {
 
   getStandardErrorMessage(error: ValidationError): string {
     const label = this.fieldLabel || 'Input'
+    const errorDetails = this.fieldControl?.getError(error) // {requiredLength: number, minLength: number}
 
     switch (error) {
       case 'required':
         return `${label} is required`
       case 'minlength':
-        return `${label} must be at least 2 characters`
+        return `${label} must be at least ${errorDetails?.requiredLength ?? 2} characters`
       case 'maxlength':
-        return `${label} can\'t exceed 50 characters`
+        return `${label} can\'t exceed ${errorDetails?.requiredLength ?? 50} characters`
       case 'invalid':
         return `A valid ${label} is required`
     }
