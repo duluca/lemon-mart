@@ -200,7 +200,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   }
 
   convertTypeToPhoneType(type: string): PhoneType {
-    return $enum(PhoneType).asValueOrThrow(type)
+    return PhoneType[$enum(PhoneType).asKeyOrThrow(type)]
   }
 
   simulateLazyLoadedInitData() {
