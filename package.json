@@ -100,7 +100,6 @@
     "angular-unit-test-helper": "^9.4.0",
     "codelyzer": "^5.2.2",
     "cross-conf-env": "^1.1.2",
-    "cypress": "^4.3.0",
     "dev-norms": "^1.7.0",
     "fake-jwt-sign": "^1.1.1",
     "http-server": "^0.12.1",
