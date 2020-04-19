@@ -14,21 +14,21 @@ import { IName } from '../user/user'
         <mat-form-field appearance="outline" fxFlex="40%">
           <mat-label>First Name</mat-label>
           <input matInput aria-label="First Name" formControlName="first" />
-          <mat-error [appFormError]="['required', 'minlength', 'maxlength']"
+          <mat-error [appFieldError]="['required', 'minlength', 'maxlength']"
                   fieldLabel="First name" [fieldControl]="formGroup.get('first')">
                 </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="20%">
           <mat-label>MI</mat-label>
           <input matInput aria-label="Middle Initial" formControlName="middle" />
-          <mat-error [appFormError]="[{error: 'invalid', message: 'Only initial'}]"
+          <mat-error [appFieldError]="[{error: 'invalid', message: 'Only initial'}]"
                   [fieldControl]="formGroup.get('middle')">
                 </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="40%">
           <mat-label>Last Name</mat-label>
           <input matInput aria-label="Last Name" formControlName="last" />
-          <mat-error [appFormError]="['required', 'minlength', 'maxlength']"
+          <mat-error [appFieldError]="['required', 'minlength', 'maxlength']"
                   fieldLabel="Last name" [fieldControl]="formGroup.get('last')">
                 </mat-error>
         </mat-form-field>

@@ -7,11 +7,13 @@ import { filter, tap } from 'rxjs/operators'
 type ValidationError = 'required' | 'minlength' | 'maxlength' | 'invalid'
 
 @Directive({
-  selector: '[appFormError]',
+  selector: '[appFieldError]',
 })
 export class FormErrorDirective implements OnDestroy, OnChanges {
   @Input() fieldControl: AbstractControl | null
-  @Input() appFormError: ValidationError[] | { error: ValidationError; message: string }[]
+  @Input() appFieldError:
+    | ValidationError[]
+    | { error: ValidationError; message: string }[]
   @Input() fieldLabel: string
 
   private controlSubscription: Subscription | undefined
@@ -22,7 +24,7 @@ export class FormErrorDirective implements OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.fieldControl) {
-      console.error(`appFormError couldn't map to a control.`)
+      console.error(`appFieldError couldn't map to a control.`)
     }
 
     this.unsubscribe()
@@ -46,7 +48,7 @@ export class FormErrorDirective implements OnDestroy, OnChanges {
   updateErrorMessage() {
     const errorsToDisplay: string[] = []
 
-    this.appFormError.forEach(
+    this.appFieldError.forEach(
       (error: ValidationError | { error: ValidationError; message: string }) => {
         const errorCode = typeof error === 'object' ? error.error : error
         const message =

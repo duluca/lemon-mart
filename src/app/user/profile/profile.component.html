@@ -19,21 +19,21 @@
               <mat-form-field appearance="outline" fxFlex="40%">
                 <mat-label>First Name</mat-label>
                 <input matInput aria-label="First Name" formControlName="first" />
-                <mat-error [appFormError]="['required', 'minlength', 'maxlength']"
+                <mat-error [appFieldError]="['required', 'minlength', 'maxlength']"
                   fieldLabel="First name" [fieldControl]="formGroup.get('name.first')">
                 </mat-error>
               </mat-form-field>
               <mat-form-field appearance=" outline" fxFlex="20%">
                 <mat-label>MI</mat-label>
                 <input matInput aria-label="Middle Initial" formControlName="middle" />
-                <mat-error [appFormError]="[{error: 'invalid', message: 'Only initial'}]"
+                <mat-error [appFieldError]="[{error: 'invalid', message: 'Only initial'}]"
                   [fieldControl]="formGroup.get('name.middle')">
                 </mat-error>
               </mat-form-field>
               <mat-form-field appearance="outline" fxFlex="40%">
                 <mat-label>Last Name</mat-label>
                 <input matInput aria-label="Last Name" formControlName="last" />
-                <mat-error [appFormError]="['required', 'minlength', 'maxlength']"
+                <mat-error [appFieldError]="['required', 'minlength', 'maxlength']"
                   fieldLabel="Last name" [fieldControl]="formGroup.get('name.last')">
                 </mat-error>
               </mat-form-field>
@@ -58,7 +58,7 @@
               <mat-label>E-mail</mat-label>
               <input matInput aria-label="E-mail" formControlName="email" />
               <mat-hint>Only your manager can update your e-mail.</mat-hint>
-              <mat-error [appFormError]="['invalid']" fieldLabel="E-mail"
+              <mat-error [appFieldError]="['invalid']" fieldLabel="E-mail"
                 [fieldControl]="formGroup.get('email')">
               </mat-error>
             </mat-form-field>
@@ -112,7 +112,7 @@
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Address Line 1</mat-label>
               <input matInput aria-label="Address Line 1" formControlName="line1" />
-              <mat-error [appFormError]="['required', 'minlength', 'maxlength']"
+              <mat-error [appFieldError]="['required', 'minlength', 'maxlength']"
                 fieldLabel="Line 1" [fieldControl]="formGroup.get('address.line1')">
               </mat-error>
             </mat-form-field>
@@ -123,7 +123,7 @@
               <mat-label>Line 2</mat-label>
               <input matInput aria-label="Address Line 2" formControlName="line2" />
               <mat-hint>Optional</mat-hint>
-              <mat-error [appFormError]="['minlength', 'maxlength']" fieldLabel="Line 2"
+              <mat-error [appFieldError]="['minlength', 'maxlength']" fieldLabel="Line 2"
                 [fieldControl]="formGroup.get('address.line2')">
               </mat-error>
             </mat-form-field>
@@ -133,7 +133,7 @@
             <mat-form-field appearance="outline" fxFlex="40%">
               <mat-label>City</mat-label>
               <input matInput aria-label="City" formControlName="city" />
-              <mat-error [appFormError]="['required', 'minlength', 'maxlength']"
+              <mat-error [appFieldError]="['required', 'minlength', 'maxlength']"
                 fieldLabel="City" [fieldControl]="formGroup.get('address.city')">
               </mat-error>
             </mat-form-field>
@@ -146,14 +146,14 @@
                   {{ state.name }}
                 </mat-option>
               </mat-autocomplete>
-              <mat-error [appFormError]="['required']" fieldLabel="State"
+              <mat-error [appFieldError]="['required']" fieldLabel="State"
                 [fieldControl]="formGroup.get('address.state')">
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex="30%">
               <mat-label>Zip Code</mat-label>
               <input matInput aria-label="Zip Code" formControlName="zip" />
-              <mat-error [appFormError]="['invalid']" fieldLabel="Zip code"
+              <mat-error [appFieldError]="['invalid']" fieldLabel="Zip code"
                 [fieldControl]="formGroup.get('address.zip')">
               </mat-error>
             </mat-form-field>
