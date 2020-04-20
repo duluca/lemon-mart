@@ -9,7 +9,7 @@ type ValidationError = 'required' | 'minlength' | 'maxlength' | 'invalid'
 @Directive({
   selector: '[appFieldError]',
 })
-export class FormErrorDirective implements OnDestroy, OnChanges {
+export class FieldErrorDirective implements OnDestroy, OnChanges {
   @Input() fieldControl: AbstractControl | null
   @Input() appFieldError:
     | ValidationError[]

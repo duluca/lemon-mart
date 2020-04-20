@@ -1,11 +1,11 @@
 import { ElementRef } from '@angular/core'
 import { autoSpyObj } from 'angular-unit-test-helper'
 
-import { FormErrorDirective } from './form-error.directive'
+import { FieldErrorDirective } from './field-error.directive'
 
 describe('FormErrorDirective', () => {
   it('should create an instance', () => {
-    const directive = new FormErrorDirective(autoSpyObj(ElementRef))
+    const directive = new FieldErrorDirective(autoSpyObj(ElementRef))
     expect(directive).toBeTruthy()
   })
 })
