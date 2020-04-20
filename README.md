@@ -12,7 +12,7 @@
 
 LemontMart has been developed in support of my book _Angular for Enterprise-Ready Web Applications_. You can get the book at any major bookstore or find the links at http://AngularForEnterprise.com.
 
-Watch the talk on `Architecture for Scalable Angular Apps` on [Pluralsight](https://www.pluralsight.com/courses/angular-denver-2019-session-28). 
+Watch the talk on `Architecture for Scalable Angular Apps` on [Pluralsight](https://www.pluralsight.com/courses/angular-denver-2019-session-28).
 
 Check out the slides for `Architecture for Scalable Angular Apps` _free_ at [Slides.com](https://slides.com/doguhanuluca/architecture-for-scalable-angular-apps#).
 
@@ -43,11 +43,12 @@ https://github.com/duluca/lemon-mart/wiki.
 
 - `npm run build:prod` to build a production optimized version of the app.
 - `npm run docker:debug` to run tests and build a containerized version of the app.
-- integration.Dockerfile is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Zeit Now and Azure.
+- `integration.Dockerfile` is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Zeit Now and Azure.
 
 ### Authentication
 
-For demonstration purposes the login screen shows the _Authentication Mode_ of the app. There are three modes: 
+For demonstration purposes the login screen shows the _Authentication Mode_ of the app. There are three modes:
+
 - InMemory: [auth.inmemory.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.inmemory.service.ts)
 - Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.custom.service.ts)
 - Firebase: [auth.firebase.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.firebase.service.ts)
@@ -56,9 +57,25 @@ The current mode can be adjusted in `environment.ts`. You can see how each mode 
 
 > This is covered in more detail in [Angular for Enterprise, 2nd Edition](https://expertlysimple.io/angular-for-enterprise-2nd-edition/).
 
+### Build Configurations
+
+There are 3 build configurations that maps to authentication modes:
+
+1. Production:
+
+Executing `npm run build:prod` or `npx ng build --prod` or `npx ng build --configuration=production` leverages `InMemory` authentication. Note that the fake credentials are documented on the Login screen.
+
+2. Firebase:
+
+Executing `npx ng build --configuration=firebase` leverages `Firebase` authentication. For this to work, you must setup your own Firebase back-end and create a user in the Firebase console.
+
+3. Lemon-Mart-Server:
+
+Executing `npx ng build --configuration=lemon-mart-server` leverages `Custom` authentication. Note that this is implemented by the example projects Lemon Mart Server, which is detailed below.
+
 ### Lemon Mart Server
 
-Lemon Mart Server is an easy to learn and use TypeScript Node.js server using [Minimal MEAN](https://github.com/duluca/minimal-mean) for [Lemon Mart](https://github.com/duluca/lemon-mart). 
+Lemon Mart Server is an easy to learn and use TypeScript Node.js server using [Minimal MEAN](https://github.com/duluca/minimal-mean) for [Lemon Mart](https://github.com/duluca/lemon-mart).
 
 In order to run Lemon Mart in a full-stack set up, visit https://github.com/duluca/lemon-mart-server.
 
@@ -67,14 +84,15 @@ In order to run Lemon Mart in a full-stack set up, visit https://github.com/dulu
 This project is a sample implementation, which contains numerous recipes and design patterns useful to develop an Angular application.
 
 If you'd like to use this project as a starter or a template project for your project, you can get a lot of benefit out of using a pre-configured project. Some the benefits are:
- - Optimized development experience for VS Code
- - Lazy loading feature module configuration
- - A responsive landing, login, and user profile experience
- - Angular Material and Angular Flex Layout configured for UI development
- - npm scripts for `style` and `lint` checks, building docker containers, testing, or deploying your app
- - CircleCI configuration for Continuous Integration
- - Pre-wired extensible authentication and authorization module
- - And many more.
+
+- Optimized development experience for VS Code
+- Lazy loading feature module configuration
+- A responsive landing, login, and user profile experience
+- Angular Material and Angular Flex Layout configured for UI development
+- npm scripts for `style` and `lint` checks, building docker containers, testing, or deploying your app
+- CircleCI configuration for Continuous Integration
+- Pre-wired extensible authentication and authorization module
+- And many more.
 
 ### Pre-requisites
 
@@ -86,7 +104,7 @@ If you'd like to use this project as a starter or a template project for your pr
 
 ### Adapting the template
 
-- Fork and clone this repo. 
+- Fork and clone this repo.
 - Rename the repo on GitHub to match the name of your project.
 - Search and replace references to `lemon-mart` with your project name and git repo.
 - Remove `manager`, `pos`, and `inventory` folders and references to them from `app-routing.module.ts`.
@@ -97,7 +115,7 @@ If you'd like to use this project as a starter or a template project for your pr
 
 ### During Development
 
-- Run `npm start` for a developmenet web server. 
+- Run `npm start` for a developmenet web server.
 - Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.
   - Note that the port is different than the default Angular port of `4200` intentionally, so you can run test projects or proof of concepts side-by-side without the hassle of specifiying a new port.
 - Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
