@@ -59,7 +59,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     {
       provide: AuthService,
       useFactory: authFactory,
-      deps: [HttpClient, AngularFireAuth],
+      deps: [AngularFireAuth, HttpClient],
     },
     {
       provide: HTTP_INTERCEPTORS,
