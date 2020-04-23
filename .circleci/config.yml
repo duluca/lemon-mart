@@ -135,6 +135,39 @@ jobs:
       - install
       - build_and_test:
           project: 'ch8'
+  ch10: # this job is only here to verify sample code from the book, remove it in your own projects
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - build_and_test:
+          project: 'ch10'
+  ch11: # this job is only here to verify sample code from the book, remove it in your own projects
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - build_and_test:
+          project: 'ch11'
+  ch12: # this job is only here to verify sample code from the book, remove it in your own projects
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - build_and_test:
+          project: 'ch12'
+  ch14: # this job is only here to verify sample code from the book, remove it in your own projects
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - build_and_test:
+          project: 'ch14'
+
 workflows:
   version: 2
   build-test-and-approval-deploy:
@@ -149,6 +182,18 @@ workflows:
       - ch8: # this job is only here to verify sample code from the book, remove it in your own projects
           requires:
             - initialize
+      - ch10: # this job is only here to verify sample code from the book, remove it in your own projects
+          requires:
+            - initialize
+      - ch11: # this job is only here to verify sample code from the book, remove it in your own projects
+          requires:
+            - initialize
+      # - ch12: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
+      # - ch14: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
       - hold:
           type: approval
           requires:

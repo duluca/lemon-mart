@@ -1,0 +1,52 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="400px">
+    <mat-card-header>
+      <mat-card-title>
+        <div class="mat-headline">Hello, Lemonite!</div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon>email</mat-icon>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="E-mail" aria-label="E- mail"
+              formControlName="email">
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')"> E-mail is
+              required
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')"> E-mail is not
+              valid
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon matPrefix>vpn_key</mat-icon>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Password" aria- label="Password" type="password"
+              formControlName="password">
+            <mat-hint>Minimum 8 characters</mat-hint>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')"> Password
+              is
+              required
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')"> Password
+              is at least 8 characters long
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('maxlength')"> Password
+              cannot be longer than 50 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" class="margin-top">
+          <div *ngIf="loginError" class="mat-caption error">{{ loginError }}</div>
+          <div class="flex-spacer"></div>
+          <button mat-raised-button type="submit" color="primary"
+            [disabled]="loginForm.invalid">
+            Login
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
