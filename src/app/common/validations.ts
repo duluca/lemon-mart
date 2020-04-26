@@ -9,11 +9,6 @@ export const PasswordValidation = [
   Validators.minLength(8),
   Validators.maxLength(50),
 ]
-export const BirthDateValidation = [
-  Validators.required,
-  Validators.min(new Date().getFullYear() - 100),
-  Validators.max(new Date().getFullYear()),
-]
 export const USAZipCodeValidation = [
   Validators.required,
   Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/),

@@ -25,6 +25,7 @@ import { LoginComponent } from './login/login.component'
 import { MaterialModule } from './material.module'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+import { FieldErrorModule } from './user-controls/field-error/field-error.module'
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   showMaskTyped: true,
@@ -47,6 +48,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     HttpClientModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    FieldErrorModule,
     NgxMaskModule.forRoot(options),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

@@ -8,9 +8,60 @@
       <div class="stepContent">
         <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('name')"
           fxLayoutGap="10px">
-          <app-name-input [initialData]="nameInitialData$ | async"
-            (formReady)="registerForm('name', $event)">
-          </app-name-input>
+          <!-- Initial implementation of the name row with repeating mat-error elements -->
+          <!-- <mat-form-field appearance="outline" fxFlex="40%">
+            <input matInput placeholder="First Name" aria-label="First Name"
+              formControlName="first">
+            <mat-error *ngIf="formGroup.get('name.first')?.hasError('required')">
+              First Name is required
+            </mat-error>
+            <mat-error *ngIf="formGroup.get('name.first')?.hasError('minLength')">
+              Must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="formGroup.get('name.first')?.hasError('maxLength')">
+              Can't exceed 50 characters
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="20%">
+            <input matInput placeholder="MI" aria-label="Middle Initial"
+              formControlName="middle">
+            <mat-error *ngIf="formGroup.get('name.middle')?.invalid"> Only inital
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="40%">
+            <input matInput placeholder="Last Name" aria-label="Last Name"
+              formControlName="last">
+            <mat-error *ngIf="formGroup.get('name.last')?.hasError('required')">
+              Last Name is required
+            </mat-error>
+            <mat-error *ngIf="formGroup.get('name.last')?.hasError('minLength')">
+              Must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="formGroup.get('name.last')?.hasError('maxLength')">
+              Can't exceed 50 characters
+            </mat-error>
+          </mat-form-field> -->
+          <mat-form-field appearance="outline" fxFlex="40%">
+            <mat-label>First Name</mat-label>
+            <input matInput aria-label="First Name" formControlName="first" #name />
+            <mat-error [input]="name" [group]="formGroup.get('name')"
+              [appFieldError]="ErrorSets.RequiredText">
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="20%">
+            <mat-label>MI</mat-label>
+            <input matInput aria-label="Middle Initial" formControlName="middle" #mi />
+            <mat-error [input]="mi" [group]="formGroup.get('name')"
+              [appFieldError]="{error: 'invalid', message: 'Only initial'}">
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="40%">
+            <mat-label>Last Name</mat-label>
+            <input matInput aria-label="Last Name" formControlName="last" #last />
+            <mat-error [input]="last" [group]="formGroup.get('name')"
+              [appFieldError]="ErrorSets.RequiredText">
+            </mat-error>
+          </mat-form-field>
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
           <mat-form-field appearance="outline" fxFlex="50%">
@@ -58,8 +109,8 @@
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top" fxLayoutGap="10px">
           <mat-label class="mat-body-1">Select the Limoncu level:
-            <app-lemon-rater formControlName="level">
-            </app-lemon-rater>
+            <!-- <app-lemon-rater formControlName="level">
+            </app-lemon-rater> -->
           </mat-label>
         </div>
       </div>
@@ -148,7 +199,7 @@
               <mat-form-field appearance="outline" fxFlex fxFlexOffset="10px">
                 <mat-label>Number</mat-label>
                 <input matInput type="text" formControlName="digits"
-                  aria-label="Phone number" mask="(000) 000-0000" prefix="+1" />
+                  aria-label="Phone number" prefix="+1" />
                 <mat-error
                   *ngIf="phonesArray.controls[i].invalid && phonesArray.controls[i].touched">
                   A valid phone number is required

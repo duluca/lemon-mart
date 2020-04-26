@@ -1,62 +1,40 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ActivatedRoute } from '@angular/router'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { Observable } from 'rxjs'
 import { filter, map, startWith, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
 
 import { Role } from '../../auth/auth.enum'
 import { AuthService } from '../../auth/auth.service'
-import { BaseFormComponent } from '../../common/base-form.class'
 import { UiService } from '../../common/ui.service'
 import {
   EmailValidation,
+  OneCharValidation,
   OptionalTextValidation,
   RequiredTextValidation,
   USAPhoneNumberValidation,
   USAZipCodeValidation,
 } from '../../common/validations'
 import { ErrorSets } from '../../user-controls/field-error/field-error.directive'
-import { IName, IPhone, IUser, PhoneType } from '../user/user'
+import { IPhone, IUser, PhoneType } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, USStateFilter } from './data'
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
+  selector: 'app-profile-initial',
+  templateUrl: './profile.initial.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent extends BaseFormComponent<IUser>
-  implements OnInit, OnDestroy {
-  private get currentUserRole() {
-    return this.authService.authStatus$.value.userRole
-  }
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private authService: AuthService,
-    private uiService: UiService,
-    private route: ActivatedRoute
-  ) {
-    super()
-  }
-
-  get phonesArray(): FormArray {
-    return this.formGroup.get('phones') as FormArray
-  }
-
-  get dateOfBirth() {
-    return this.formGroup.get('dateOfBirth')?.value || this.now
-  }
-
-  get age() {
-    return this.now.getFullYear() - this.dateOfBirth.getFullYear()
-  }
-  ErrorSets = ErrorSets
+export class ProfileInitialComponent implements OnInit, OnDestroy {
   Role = Role
+  PhoneType = PhoneType
   PhoneTypes = $enum(PhoneType).getKeys()
+  formGroup: FormGroup
+  states$: Observable<IUSState[]>
+  userError = ''
+  ErrorSets = ErrorSets
+  currentUserId: string
 
   now = new Date()
   minDate = new Date(
@@ -65,81 +43,97 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     this.now.getDate()
   )
 
-  states$: Observable<IUSState[]> | undefined
-  userError = ''
-  readonly nameInitialData$ = new BehaviorSubject<IName>({
-    first: '',
-    middle: '',
-    last: '',
-  })
+  get dateOfBirth() {
+    return this.formGroup.get('dateOfBirth')?.value || this.now
+  }
 
-  private subs = new SubSink()
+  get age() {
+    return this.now.getFullYear() - this.dateOfBirth.getFullYear()
+  }
 
-  currentUserId: string
+  get phonesArray(): FormArray {
+    return this.formGroup.get('phones') as FormArray
+  }
+
+  subs = new SubSink()
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private uiService: UiService,
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.formGroup = this.buildForm()
-
+    this.buildForm()
     this.subs.sink = this.authService.currentUser$
       .pipe(
-        filter((user) => user != null),
-        tap((user) => this.patchUser(user))
+        filter((user) => user !== null),
+        tap((user) => {
+          this.currentUserId = user._id
+          this.buildForm(user)
+        })
       )
       .subscribe()
   }
 
-  patchUser(user: IUser) {
-    if (user) {
-      this.currentUserId = user._id
-      this.patchUpdatedData(user)
-      this.nameInitialData$.next(user.name)
-    }
+  private get currentUserRole() {
+    return this.authService.authStatus$.value.userRole
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe()
-    this.deregisterAllForms()
   }
 
-  buildForm(initialData?: IUser): FormGroup {
-    const user = initialData
-    this.currentUserId = user?._id || ''
-    const form = this.formBuilder.group({
+  buildForm(user?: IUser) {
+    this.formGroup = this.formBuilder.group({
       email: [
         {
-          value: user?.email || '',
+          value: (user && user.email) || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
         EmailValidation,
       ],
-      name: null,
+      name: this.formBuilder.group({
+        first: [user?.name?.first || '', RequiredTextValidation],
+        middle: [user?.name?.middle || '', OneCharValidation],
+        last: [user?.name?.last || '', RequiredTextValidation],
+      }),
       role: [
         {
-          value: user?.role || '',
+          value: (user && user.role) || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
         [Validators.required],
       ],
-      level: [user?.level || 0, Validators.required],
-      // use the code below to test disabled condition of <app-lemon-rater>
-      // level: [{ value: 2, disabled: true }, [Validators.required]],
-      dateOfBirth: [user?.dateOfBirth || '', Validators.required],
+      dateOfBirth: [(user && user.dateOfBirth) || '', Validators.required],
       address: this.formBuilder.group({
-        line1: [user?.address?.line1 || '', RequiredTextValidation],
-        line2: [user?.address?.line2 || '', OptionalTextValidation],
-        city: [user?.address?.city || '', RequiredTextValidation],
-        state: [user?.address?.state || '', RequiredTextValidation],
-        zip: [user?.address?.zip || '', USAZipCodeValidation],
+        line1: [
+          (user && user.address && user.address.line1) || '',
+          RequiredTextValidation,
+        ],
+        line2: [
+          (user && user.address && user.address.line2) || '',
+          OptionalTextValidation,
+        ],
+        city: [(user && user.address && user.address.city) || '', RequiredTextValidation],
+        state: [
+          (user && user.address && user.address.state) || '',
+          RequiredTextValidation,
+        ],
+        zip: [(user && user.address && user.address.zip) || '', USAZipCodeValidation],
       }),
       phones: this.formBuilder.array(this.buildPhoneArray(user?.phones || [])),
     })
 
-    this.states$ = form.get('address.state')?.valueChanges.pipe(
-      startWith(''),
-      map((value) => USStateFilter(value))
-    )
+    const state = this.formGroup.get('address.state')
 
-    return form
+    if (state != null) {
+      this.states$ = state.valueChanges.pipe(
+        startWith(''),
+        map((value) => USStateFilter(value))
+      )
+    }
   }
 
   addPhone() {
@@ -171,7 +165,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     this.subs.add(
       this.userService.updateUser(this.currentUserId, form.value).subscribe(
         (res: IUser) => {
-          this.patchUser(res)
+          this.formGroup.patchValue(res)
           this.uiService.showToast('Updated user')
         },
         (err: string) => (this.userError = err)

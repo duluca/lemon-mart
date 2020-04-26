@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { catchError, filter, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
-import { $enum } from 'ts-enum-util'
 
 import { environment } from '../../environments/environment'
 import { AuthMode, Role } from '../auth/auth.enum'
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup
   loginError = ''
   redirectUrl: string
-  roles = $enum(Role).getKeys()
+  roles = Object.keys(Role)
   authMode = environment.authMode
   AuthMode = AuthMode
   constructor(

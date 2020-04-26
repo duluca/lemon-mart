@@ -11,14 +11,13 @@ import { AuthService } from '../../auth/auth.service'
 import { BaseFormComponent } from '../../common/base-form.class'
 import { UiService } from '../../common/ui.service'
 import {
-  BirthDateValidation,
   EmailValidation,
-  OneCharValidation,
   OptionalTextValidation,
   RequiredTextValidation,
   USAPhoneNumberValidation,
   USAZipCodeValidation,
 } from '../../common/validations'
+import { ErrorSets } from '../../user-controls/field-error/field-error.directive'
 import { IName, IPhone, IUser, PhoneType } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, USStateFilter } from './data'
@@ -30,26 +29,9 @@ import { IUSState, USStateFilter } from './data'
 })
 export class ProfileComponent extends BaseFormComponent<IUser>
   implements OnInit, OnDestroy {
-  Role = Role
-  PhoneTypes = $enum(PhoneType).getKeys()
-
-  states$: Observable<IUSState[]>
-  userError = ''
-  readonly nameInitialData$ = new BehaviorSubject<IName>({
-    first: '',
-    middle: '',
-    last: '',
-  })
-
-  private subs = new SubSink()
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
   }
-
-  currentUserId: string
-
-  // conditional for demo purposes only
-  useAppNameInputComponent = true
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,6 +42,40 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   ) {
     super()
   }
+
+  get phonesArray(): FormArray {
+    return this.formGroup.get('phones') as FormArray
+  }
+
+  get dateOfBirth() {
+    return this.formGroup.get('dateOfBirth')?.value || this.now
+  }
+
+  get age() {
+    return this.now.getFullYear() - this.dateOfBirth.getFullYear()
+  }
+  ErrorSets = ErrorSets
+  Role = Role
+  PhoneTypes = $enum(PhoneType).getKeys()
+
+  now = new Date()
+  minDate = new Date(
+    this.now.getFullYear() - 100,
+    this.now.getMonth(),
+    this.now.getDate()
+  )
+
+  states$: Observable<IUSState[]> | undefined
+  userError = ''
+  readonly nameInitialData$ = new BehaviorSubject<IName>({
+    first: '',
+    middle: '',
+    last: '',
+  })
+
+  private subs = new SubSink()
+
+  currentUserId: string
 
   ngOnInit() {
     this.formGroup = this.buildForm()
@@ -103,14 +119,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
         },
         EmailValidation,
       ],
-      name: this.useAppNameInputComponent
-        ? null
-        : this.formBuilder.group({
-            // this will get overwritten if useAppNameInputComponent is set to true
-            first: [user?.name?.first || '', RequiredTextValidation],
-            middle: [user?.name?.middle || '', OneCharValidation],
-            last: [user?.name?.last || '', RequiredTextValidation],
-          }),
+      name: null,
       role: [
         {
           value: user?.role || '',
@@ -121,7 +130,7 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       level: [user?.level || 0, Validators.required],
       // use the code below to test disabled condition of <app-lemon-rater>
       // level: [{ value: 2, disabled: true }, [Validators.required]],
-      dateOfBirth: [user?.dateOfBirth || '', BirthDateValidation],
+      dateOfBirth: [user?.dateOfBirth || '', Validators.required],
       address: this.formBuilder.group({
         line1: [user?.address?.line1 || '', RequiredTextValidation],
         line2: [user?.address?.line2 || '', OptionalTextValidation],
@@ -132,14 +141,10 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       phones: this.formBuilder.array(this.buildPhoneArray(user?.phones || [])),
     })
 
-    const state = form.get('address.state')
-
-    if (state != null) {
-      this.states$ = state.valueChanges.pipe(
-        startWith(''),
-        map((value) => USStateFilter(value))
-      )
-    }
+    this.states$ = form.get('address.state')?.valueChanges.pipe(
+      startWith(''),
+      map((value) => USStateFilter(value))
+    )
 
     this.cacheChangesForDemo(form)
 
@@ -148,14 +153,6 @@ export class ProfileComponent extends BaseFormComponent<IUser>
 
   addPhone() {
     this.phonesArray.push(this.buildPhoneFormControl(this.phonesArray.value.length + 1))
-  }
-
-  get phonesArray(): FormArray {
-    return this.formGroup.get('phones') as FormArray
-  }
-
-  get name(): FormGroup {
-    return this.formGroup.get('name') as FormGroup
   }
 
   private buildPhoneArray(phones: IPhone[]) {
@@ -177,14 +174,6 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       type: [type || '', Validators.required],
       digits: [phoneNumber || '', USAPhoneNumberValidation],
     })
-  }
-
-  get dateOfBirth() {
-    return this.formGroup.get('dateOfBirth')?.value || new Date()
-  }
-
-  get age() {
-    return new Date().getFullYear() - this.dateOfBirth.getFullYear()
   }
 
   async save(form: FormGroup) {

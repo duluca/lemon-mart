@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { catchError, filter, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 
-import { Role } from '../auth/auth.enum'
+import { environment } from '../../environments/environment'
+import { AuthMode, Role } from '../auth/auth.enum'
 import { AuthService } from '../auth/auth.service'
 import { UiService } from '../common/ui.service'
 import { EmailValidation, PasswordValidation } from '../common/validations'
@@ -26,16 +27,19 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
     `,
   ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private subs = new SubSink()
   loginForm: FormGroup
   loginError = ''
   redirectUrl: string
+  roles = Object.keys(Role)
+  authMode = environment.authMode
+  AuthMode = AuthMode
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
+    route: ActivatedRoute,
     private uiService: UiService
   ) {
     this.subs.sink = route.paramMap.subscribe(
@@ -46,6 +50,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.authService.logout()
     this.buildLoginForm()
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe()
   }
 
   buildLoginForm() {

@@ -11,12 +11,8 @@
           <mat-icon>email</mat-icon>
           <mat-form-field fxFlex>
             <input matInput placeholder="E-mail" aria-label="E-mail"
-              formControlName="email" />
-            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
-              E-mail is required
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
-              E-mail is not valid
+              formControlName="email" #email />
+            <mat-error [input]="email" [group]="loginForm" appFieldError="invalid">
             </mat-error>
           </mat-form-field>
         </div>
@@ -24,16 +20,10 @@
           <mat-icon matPrefix>vpn_key</mat-icon>
           <mat-form-field fxFlex>
             <input matInput placeholder="Password" aria-label="Password" type="password"
-              formControlName="password" />
+              formControlName="password" #password />
             <mat-hint>Minimum 8 characters</mat-hint>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-              Password is required
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
-              Password is at least 8 characters long
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('maxlength')">
-              Password cannot be longer than 50 characters
+            <mat-error [input]="password" [group]="loginForm"
+              [appFieldError]="['required', 'minlength', 'maxlength']">
             </mat-error>
           </mat-form-field>
         </div>
@@ -64,34 +54,34 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-grid-list cols="3" rowHeight="48px" role="list">
-            <mat-grid-tile [colspan]="3" role="listitem" style="background: pink">Use
-              any
-              8 character string as
-              password
+            <mat-grid-tile [colspan]="3" role="listitem" style="background: pink">
+              Use any 8 character string as password
             </mat-grid-tile>
             <mat-grid-tile>
               <mat-grid-tile-header>Role</mat-grid-tile-header>
             </mat-grid-tile>
-            <mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
               <mat-grid-tile-header>E-mail</mat-grid-tile-header>
-            </mat-grid-tile>
-            <mat-grid-tile>
             </mat-grid-tile>
             <div *ngFor="let role of roles; odd as oddRow">
               <mat-grid-tile role="listitem"
                 [style.background]="oddRow ? 'lightGray': 'white'">
                 {{role}}
               </mat-grid-tile>
-              <mat-grid-tile role="listitem"
+              <mat-grid-tile [colspan]="2" role="listitem"
                 [style.background]="oddRow ? 'lightGray': 'white'">
-                <div *ngIf="role.toLowerCase() === 'none'; else otherRoles">
-                  Any @test.com email
+                <div fxFlex fxLayoutAlign="end center">
+                  <div *ngIf="role.toLowerCase() === 'none'; else otherRoles">
+                    Any @test.com email
+                  </div>
+                  <ng-template #otherRoles>{{role.toLowerCase()}}@test.com</ng-template>
+                  <button mat-button (click)="
+                      this.loginForm.patchValue(
+                        { email: role.toLowerCase() + '@test.com', password: 'whatever' }
+                      )">
+                    Fill
+                  </button>
                 </div>
-                <ng-template #otherRoles>{{role.toLowerCase()}}@test.com</ng-template>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <button mat-button
-                  (click)="this.loginForm.patchValue({ email: role.toLowerCase() + '@test.com', password: 'whatever' })">Fill</button>
               </mat-grid-tile>
             </div>
           </mat-grid-list>

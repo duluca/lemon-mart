@@ -54,6 +54,9 @@ export abstract class AuthService extends CacheService implements IAuthService {
       this.logout(true)
     } else {
       this.authStatus$.next(this.getAuthStatusFromToken())
+      // To load user on browser refresh, resume pipeline must activate on the next cycle
+      // Which allows for all services to constructed properly
+      setTimeout(() => this.resumeCurrentUser$.subscribe(), 0)
     }
   }
 
