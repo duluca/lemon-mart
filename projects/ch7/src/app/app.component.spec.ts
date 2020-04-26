@@ -2,6 +2,12 @@ import { TestBed, async } from '@angular/core/testing'
 import { MediaObserver } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
+import {
+  ObservablePropertyStrategy,
+  autoSpyObj,
+  createComponentMock,
+  injectSpy,
+} from 'angular-unit-test-helper'
 
 import { AppComponent } from './app.component'
 import {
@@ -9,25 +15,24 @@ import {
   MatIconRegistryFake,
   MediaObserverFake,
   commonTestingModules,
-  commonTestingProviders,
 } from './common/common.testing'
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: commonTestingModules,
-      providers: commonTestingProviders.concat([
+      providers: [
         { provide: MediaObserver, useClass: MediaObserverFake },
         { provide: MatIconRegistry, useClass: MatIconRegistryFake },
         { provide: DomSanitizer, useClass: DomSanitizerFake },
-      ]),
-      declarations: [AppComponent],
+      ],
+      declarations: [AppComponent, createComponentMock('NavigationMenuComponent')],
     }).compileComponents()
   }))
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent)
-    const app = fixture.componentInstance
+    const app = fixture.debugElement.componentInstance
     expect(app).toBeTruthy()
   })
 
