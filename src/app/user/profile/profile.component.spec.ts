@@ -3,7 +3,7 @@ import { createComponentMock } from 'angular-unit-test-helper'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { LemonRaterModule } from '../../user-controls/lemon-rater/lemon-rater.module'
-import { UserMaterialModule } from '../user.material.module'
+import { UserMaterialModule } from '../user-material.module'
 import { ProfileComponent } from './profile.component'
 
 describe('ProfileComponent', () => {

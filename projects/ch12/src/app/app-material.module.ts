@@ -17,19 +17,19 @@ const modules = [
   MatButtonModule,
   MatToolbarModule,
   MatIconModule,
+  MatTooltipModule,
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatTooltipModule,
+  MatSnackBarModule,
+  MatDialogModule,
   MatSidenavModule,
   MatListModule,
-  MatDialogModule,
-  MatSnackBarModule,
   MatExpansionModule,
   MatGridListModule,
-] as any[]
+]
 
 @NgModule({
   exports: modules,
 })
-export class MaterialModule {}
+export class AppMaterialModule {}

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
 
-import { MaterialModule } from '../material.module'
+import { AppMaterialModule } from '../app-material.module'
 import { InventoryComponent } from './inventory.component'
 
 describe('InventoryComponent', () => {
@@ -12,7 +12,7 @@ describe('InventoryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [InventoryComponent],
-      imports: [RouterTestingModule, MaterialModule, NoopAnimationsModule],
+      imports: [RouterTestingModule, AppMaterialModule, NoopAnimationsModule],
     }).compileComponents()
   }))
 

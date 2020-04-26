@@ -7,9 +7,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
 import { Observable, Subscription, of } from 'rxjs'
 
+import { AppMaterialModule } from '../app-material.module'
 import { AuthService } from '../auth/auth.service'
 import { AuthServiceFake } from '../auth/auth.service.fake'
-import { MaterialModule } from '../material.module'
 import { UserService } from '../user/user/user.service'
 import { UserServiceFake } from '../user/user/user.service.fake'
 import { UiService } from './ui.service'
@@ -76,7 +76,7 @@ export const commonTestingProviders: any[] = [
 
 export const commonTestingModules: any[] = [
   ReactiveFormsModule,
-  MaterialModule,
+  AppMaterialModule,
   NoopAnimationsModule,
   HttpClientTestingModule,
   RouterTestingModule,

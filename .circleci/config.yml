@@ -188,9 +188,9 @@ workflows:
       - ch11: # this job is only here to verify sample code from the book, remove it in your own projects
           requires:
             - initialize
-      # - ch12: # this job is only here to verify sample code from the book, remove it in your own projects
-      #     requires:
-      #       - initialize
+      - ch12: # this job is only here to verify sample code from the book, remove it in your own projects
+          requires:
+            - initialize
       # - ch14: # this job is only here to verify sample code from the book, remove it in your own projects
       #     requires:
       #       - initialize

@@ -13,6 +13,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { IConfig, NgxMaskModule } from 'ngx-mask'
 
 import { environment } from '../environments/environment'
+import { AppMaterialModule } from './app-material.module'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor'
@@ -22,7 +23,6 @@ import { SimpleDialogComponent } from './common/simple-dialog.component'
 import { entityConfig } from './entity-metadata'
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
-import { MaterialModule } from './material.module'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 import { FieldErrorModule } from './user-controls/field-error/field-error.module'
@@ -43,7 +43,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule,
+    AppMaterialModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
+import { AppMaterialModule } from '../../app-material.module'
 import { commonTestingProviders } from '../../common/common.testing'
-import { MaterialModule } from '../../material.module'
 import { TransactionService } from '../transaction/transaction.service'
 import { TransactionServiceFake } from '../transaction/transaction.service.fake'
 import { PosComponent } from './pos.component'
@@ -17,7 +17,7 @@ describe('PosComponent', () => {
       providers: commonTestingProviders.concat([
         { provide: TransactionService, useClass: TransactionServiceFake },
       ]),
-      imports: [MaterialModule, NoopAnimationsModule],
+      imports: [AppMaterialModule, NoopAnimationsModule],
     }).compileComponents()
   }))
 

@@ -3,7 +3,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
 
-import { MaterialModule } from '../../material.module'
+import { AppMaterialModule } from '../../app-material.module'
 import { ViewUserComponent } from './view-user.component'
 
 describe('ViewUserComponent', () => {
@@ -16,7 +16,7 @@ describe('ViewUserComponent', () => {
       imports: [
         ReactiveFormsModule,
         FlexLayoutModule,
-        MaterialModule,
+        AppMaterialModule,
         RouterTestingModule,
       ],
       declarations: [ViewUserComponent],
