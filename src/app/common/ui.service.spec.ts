@@ -1,19 +1,17 @@
-import { TestBed, inject } from '@angular/core/testing'
-import { ReactiveFormsModule } from '@angular/forms'
-import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { TestBed } from '@angular/core/testing'
 
-import { AppMaterialModule } from '../app-material.module'
+import { commonTestingModules } from './common.testing'
 import { UiService } from './ui.service'
 
 describe('UiService', () => {
+  let service: UiService
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [UiService],
-      imports: [ReactiveFormsModule, AppMaterialModule, NoopAnimationsModule],
-    })
+    TestBed.configureTestingModule({ imports: commonTestingModules })
+    service = TestBed.inject(UiService)
   })
 
-  it('should be created', inject([UiService], (service: UiService) => {
+  it('should be created', () => {
     expect(service).toBeTruthy()
-  }))
+  })
 })

@@ -5,13 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { SafeResourceUrl, SafeValue } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
+import { autoSpyObj } from 'angular-unit-test-helper'
 import { Observable, Subscription, of } from 'rxjs'
 
 import { AppMaterialModule } from '../app-material.module'
 import { AuthService } from '../auth/auth.service'
-import { AuthServiceFake } from '../auth/auth.service.fake'
-import { UserService } from '../user/user/user.service'
-import { UserServiceFake } from '../user/user/user.service.fake'
 import { UiService } from './ui.service'
 
 const FAKE_SVGS = {
@@ -69,9 +67,8 @@ export class DomSanitizerFake {
 }
 
 export const commonTestingProviders: any[] = [
-  { provide: AuthService, useClass: AuthServiceFake },
-  { provide: UserService, useClass: UserServiceFake },
-  UiService,
+  { provide: AuthService, useValue: autoSpyObj(AuthService) },
+  { provide: UiService, useValue: autoSpyObj(UiService) },
 ]
 
 export const commonTestingModules: any[] = [

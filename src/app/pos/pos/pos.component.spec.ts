@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { autoSpyObj } from 'angular-unit-test-helper'
 
 import { AppMaterialModule } from '../../app-material.module'
 import { commonTestingProviders } from '../../common/common.testing'
 import { TransactionService } from '../transaction/transaction.service'
-import { TransactionServiceFake } from '../transaction/transaction.service.fake'
 import { PosComponent } from './pos.component'
 
 describe('PosComponent', () => {
@@ -15,7 +15,7 @@ describe('PosComponent', () => {
     TestBed.configureTestingModule({
       declarations: [PosComponent],
       providers: commonTestingProviders.concat([
-        { provide: TransactionService, useClass: TransactionServiceFake },
+        { provide: TransactionService, useValue: autoSpyObj(TransactionService) },
       ]),
       imports: [AppMaterialModule, NoopAnimationsModule],
     }).compileComponents()
