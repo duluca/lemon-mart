@@ -2,12 +2,7 @@ import { TestBed, async } from '@angular/core/testing'
 import { MediaObserver } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
-import {
-  ObservablePropertyStrategy,
-  autoSpyObj,
-  createComponentMock,
-  injectSpy,
-} from 'angular-unit-test-helper'
+import { createComponentMock } from 'angular-unit-test-helper'
 
 import { AppComponent } from './app.component'
 import {
