@@ -1,9 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { FlexLayoutModule } from '@angular/flex-layout'
-import { ReactiveFormsModule } from '@angular/forms'
-import { RouterTestingModule } from '@angular/router/testing'
-
-import { AppMaterialModule } from '../../app-material.module'
+import { commonTestingModules } from 'projects/ch10/src/app/common/common.testing'
 import { ViewUserComponent } from './view-user.component'
 
 describe('ViewUserComponent', () => {
@@ -13,12 +9,7 @@ describe('ViewUserComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [],
-      imports: [
-        ReactiveFormsModule,
-        FlexLayoutModule,
-        AppMaterialModule,
-        RouterTestingModule,
-      ],
+      imports: commonTestingModules,
       declarations: [ViewUserComponent],
     }).compileComponents()
   }))

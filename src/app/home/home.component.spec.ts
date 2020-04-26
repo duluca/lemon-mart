@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { createComponentMock } from 'angular-unit-test-helper'
 
 import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
-import { LoginComponent } from '../login/login.component'
 import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {
@@ -10,7 +10,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, LoginComponent],
+      declarations: [HomeComponent, createComponentMock('LoginComponent')],
       providers: commonTestingProviders,
       imports: commonTestingModules,
     }).compileComponents()
