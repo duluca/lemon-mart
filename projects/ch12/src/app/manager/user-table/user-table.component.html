@@ -1,0 +1,70 @@
+<div class="filter-row">
+  <div class="center" style="margin-bottom: 32px">
+    <mat-slide-toggle color="accent" [(ngModel)]="useNgRxData"
+      (ngModelChange)="refresh$.next()">
+      {{useNgRxData ? 'Using NgRX Data' : 'Using BehaviorSubject'}}
+    </mat-slide-toggle>
+  </div>
+  <form style="margin-bottom: 32px">
+    <div fxLayout="row">
+      <mat-form-field class="full-width">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput placeholder="Search" aria-label="Search" [formControl]="search" />
+        <mat-hint>Search by e-mail or name</mat-hint>
+        <mat-error *ngIf="search.invalid">
+          Type more than one character to search
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div class="mat-elevation-z8">
+  <div class="loading-shade" *ngIf="loading$ | async as loading">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <div class="error" *ngIf="hasError">
+      {{ errorText }}
+    </div>
+  </div>
+  <table mat-table class="full-width" [dataSource]="items$ | async" matSort
+    matSortActive="name" matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.fullName }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+      <td mat-cell *matCellDef="let row"> {{ row.email }} </td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+      <td mat-cell *matCellDef="let row"> {{ row.role }} </td>
+    </ng-container>
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef>View Details
+      </th>
+      <td mat-cell *matCellDef="let row" style="margin-right: 8px">
+        <a mat-button mat-icon-button [routerLink]="[
+            '/manager/users',
+            { outlets: { detail: ['user', { userId: row._id }] } }
+          ]" skipLocationChange>
+          <mat-icon>visibility</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"> </tr>
+  </table>
+
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="refresh$.next()">
+        <mat-icon title="Refresh">refresh</mat-icon>
+      </button>
+      <span class="flex-spacer"></span>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="resultsLength">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

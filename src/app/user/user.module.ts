@@ -7,7 +7,6 @@ import { NgxMaskModule } from 'ngx-mask'
 import { AppMaterialModule } from '../app-material.module'
 import { AuthGuard } from '../auth/auth-guard.service'
 import { SharedComponentsModule } from '../shared-components.module'
-import { FieldErrorModule } from '../user-controls/field-error/field-error.module'
 import { LemonRaterModule } from '../user-controls/lemon-rater/lemon-rater.module'
 import { LogoutComponent } from './logout/logout.component'
 import { ProfileComponent } from './profile/profile.component'
@@ -27,7 +26,6 @@ import { UserService } from './user/user.service'
     UserMaterialModule,
     SharedComponentsModule,
     LemonRaterModule,
-    FieldErrorModule,
     NgxMaskModule.forChild({ showMaskTyped: true, showTemplate: true }),
   ],
   declarations: [ProfileComponent, LogoutComponent],

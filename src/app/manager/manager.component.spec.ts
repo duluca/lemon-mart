@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 
 import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
+import { ManagerMaterialModule } from './manager-material.module'
 import { ManagerComponent } from './manager.component'
-import { ManagerMaterialModule } from './manager.material.module'
 
 describe('ManagerComponent', () => {
   let component: ManagerComponent

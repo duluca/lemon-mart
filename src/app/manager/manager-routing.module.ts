@@ -45,7 +45,14 @@ const routes: Routes = [
           expectedRole: Role.Manager,
         },
       },
-      { path: 'receipts', component: ReceiptLookupComponent },
+      {
+        path: 'receipts',
+        component: ReceiptLookupComponent,
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: Role.Manager,
+        },
+      },
     ],
   },
 ]
