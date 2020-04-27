@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs'
 import { filter, map, startWith, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
@@ -18,7 +18,7 @@ import {
   USAZipCodeValidation,
 } from '../../common/validations'
 import { ErrorSets } from '../../user-controls/field-error/field-error.directive'
-import { IName, IPhone, IUser, PhoneType } from '../user/user'
+import { IName, IPhone, IUser, PhoneType, User } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, USStateFilter } from './data'
 
@@ -80,10 +80,10 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   ngOnInit() {
     this.formGroup = this.buildForm()
 
-    this.subs.sink = this.authService.currentUser$
+    this.subs.sink = combineLatest([this.loadFromCache(), this.authService.currentUser$])
       .pipe(
-        filter((user) => user != null),
-        tap((user) => this.patchUser(user))
+        filter(([cachedUser, me]) => cachedUser != null || me != null),
+        tap(([cachedUser, me]) => this.patchUser(cachedUser || me))
       )
       .subscribe()
   }
@@ -181,5 +181,29 @@ export class ProfileComponent extends BaseFormComponent<IUser>
 
   convertTypeToPhoneType(type: string): PhoneType {
     return PhoneType[$enum(PhoneType).asKeyOrThrow(type)]
+  }
+
+  private loadFromCache(): Observable<User | null> {
+    let user = null
+
+    try {
+      const draftUser = localStorage.getItem('draft-user')
+
+      if (draftUser != null) {
+        user = User.Build(JSON.parse(draftUser))
+      }
+
+      if (user) {
+        this.uiService.showToast('Loaded data from cache')
+      }
+    } catch (err) {
+      localStorage.removeItem('draft-user')
+    }
+
+    return of(user)
+  }
+
+  clearCache() {
+    localStorage.removeItem('draft-user')
   }
 }

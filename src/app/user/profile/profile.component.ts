@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { BehaviorSubject, Observable, merge, of } from 'rxjs'
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs'
 import { filter, map, startWith, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
@@ -18,7 +18,7 @@ import {
   USAZipCodeValidation,
 } from '../../common/validations'
 import { ErrorSets } from '../../user-controls/field-error/field-error.directive'
-import { IName, IPhone, IUser, PhoneType } from '../user/user'
+import { IName, IPhone, IUser, PhoneType, User } from '../user/user'
 import { UserService } from '../user/user.service'
 import { IUSState, USStateFilter } from './data'
 
@@ -83,15 +83,15 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     if (this.route.snapshot.data.user) {
       this.patchUser(this.route.snapshot.data.user)
     } else {
-      // loadFromCacheForDemo is for ad-hoc cache loading, demo purposes only
-      this.subs.add(
-        merge(this.loadFromCacheForDemo(), this.authService.currentUser$)
-          .pipe(
-            filter((user) => user != null),
-            tap((user) => this.patchUser(user))
-          )
-          .subscribe()
-      )
+      this.subs.sink = combineLatest([
+        this.loadFromCache(),
+        this.authService.currentUser$,
+      ])
+        .pipe(
+          filter(([cachedUser, me]) => cachedUser != null || me != null),
+          tap(([cachedUser, me]) => this.patchUser(cachedUser || me))
+        )
+        .subscribe()
     }
   }
 
@@ -146,8 +146,6 @@ export class ProfileComponent extends BaseFormComponent<IUser>
       map((value) => USStateFilter(value))
     )
 
-    this.cacheChangesForDemo(form)
-
     return form
   }
 
@@ -201,34 +199,27 @@ export class ProfileComponent extends BaseFormComponent<IUser>
     })
   }
 
-  private cacheChangesForDemo(form: FormGroup) {
-    // for demo purposes only
-    this.subs.add(
-      form.valueChanges.subscribe(() => {
-        localStorage.setItem('draft-user', form.value)
-        // console.log(form.value)
-      })
-    )
-  }
-
-  private loadFromCacheForDemo(): Observable<IUser> {
-    // for demo purposes only
-    let data = null
+  private loadFromCache(): Observable<User | null> {
+    let user = null
 
     try {
       const draftUser = localStorage.getItem('draft-user')
 
       if (draftUser != null) {
-        data = JSON.parse(draftUser)
+        user = User.Build(JSON.parse(draftUser))
       }
 
-      if (data) {
+      if (user) {
         this.uiService.showToast('Loaded data from cache')
       }
     } catch (err) {
-      // no-op
+      localStorage.removeItem('draft-user')
     }
 
-    return of(data)
+    return of(user)
+  }
+
+  clearCache() {
+    localStorage.removeItem('draft-user')
   }
 }

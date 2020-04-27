@@ -35,21 +35,20 @@ export class UserService extends CacheService implements IUserService {
       return throwError('User id is not set')
     }
 
-    this.setItem('draft-user', user) // cache user data in case of errors
-    const updateResponse = this.httpClient
+    // cache user data in case of errors
+    this.setItem('draft-user', Object.assign(user, { _id: id }))
+    const updateResponse$ = this.httpClient
       .put<IUser>(`${environment.baseUrl}/v2/user/${id}`, user)
       .pipe(map(User.Build), catchError(transformError))
 
-    updateResponse.pipe(
-      tap(
-        (res) => {
-          this.authService.currentUser$.next(res)
-          this.removeItem('draft-user')
-        },
-        (err) => throwError(err)
-      )
+    updateResponse$.subscribe(
+      (res) => {
+        this.authService.currentUser$.next(res)
+        this.removeItem('draft-user')
+      },
+      (err) => throwError(err)
     )
 
-    return updateResponse
+    return updateResponse$
   }
 }
