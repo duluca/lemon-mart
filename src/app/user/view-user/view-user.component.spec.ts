@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { commonTestingModules } from 'projects/ch10/src/app/common/common.testing'
 
+import { commonTestingModules } from '../../common/common.testing'
 import { ViewUserComponent } from './view-user.component'
 
 describe('ViewUserComponent', () => {
