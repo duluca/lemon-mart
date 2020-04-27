@@ -48,8 +48,7 @@ export class ViewUserComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.route.snapshot.data.user) {
-      const snapshotUser = User.Build(this.route.snapshot.data.user)
-      this.currentUser$.next(snapshotUser)
+      this.currentUser$.next(this.route.snapshot.data.user)
     }
   }
 

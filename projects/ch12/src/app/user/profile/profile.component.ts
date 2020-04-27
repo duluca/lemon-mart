@@ -80,12 +80,19 @@ export class ProfileComponent extends BaseFormComponent<IUser>
   ngOnInit() {
     this.formGroup = this.buildForm()
 
-    this.subs.sink = combineLatest([this.loadFromCache(), this.authService.currentUser$])
-      .pipe(
-        filter(([cachedUser, me]) => cachedUser != null || me != null),
-        tap(([cachedUser, me]) => this.patchUser(cachedUser || me))
-      )
-      .subscribe()
+    if (this.route.snapshot.data.user) {
+      this.patchUser(this.route.snapshot.data.user)
+    } else {
+      this.subs.sink = combineLatest([
+        this.loadFromCache(),
+        this.authService.currentUser$,
+      ])
+        .pipe(
+          filter(([cachedUser, me]) => cachedUser != null || me != null),
+          tap(([cachedUser, me]) => this.patchUser(cachedUser || me))
+        )
+        .subscribe()
+    }
   }
 
   patchUser(user: IUser) {
