@@ -16,6 +16,7 @@ export interface IUsers {
 export interface IUserService {
   getUser(id: string): Observable<IUser>
   updateUser(id: string, user: IUser): Observable<IUser>
+  getUsers(pageSize: number, searchText: string, pagesToSkip: number): Observable<IUsers>
 }
 
 @Injectable({
