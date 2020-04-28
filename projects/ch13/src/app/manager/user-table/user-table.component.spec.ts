@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
-
-import { EffectsModule } from '@ngrx/effects'
 import { FormsModule } from '@angular/forms'
-import { ManagerMaterialModule } from '../manager-material.module'
-import { User } from '../../user/user/user'
-import { UserTableComponent } from './user-table.component'
 import { of } from 'rxjs'
+
+import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
+import { User } from '../../user/user/user'
+import { ManagerMaterialModule } from '../manager-material.module'
+import { UserTableComponent } from './user-table.component'
 
 describe('UserTableComponent', () => {
   let component: UserTableComponent

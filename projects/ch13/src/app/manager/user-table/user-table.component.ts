@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
-import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
-import { IUsers, UserService } from '../../user/user/user.service'
-import { MatSort, SortDirection } from '@angular/material/sort'
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
-
 import { FormControl } from '@angular/forms'
-import { IUser } from '../../user/user/user'
 import { MatPaginator } from '@angular/material/paginator'
-import { OptionalTextValidation } from '../../common/validations'
+import { MatSort, SortDirection } from '@angular/material/sort'
+import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
+
+import { OptionalTextValidation } from '../../common/validations'
+import { IUser } from '../../user/user/user'
+import { IUsers, UserService } from '../../user/user/user.service'
 
 @Component({
   selector: 'app-user-table',
