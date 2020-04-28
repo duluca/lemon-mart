@@ -31,6 +31,7 @@ jobs:
             - built-image-{{ .BuildNum }}
             - built-image
       - setup_remote_docker
+      - aws-cli/setup
       - run:
           name: Sign into AWS ecr
           command: $(aws ecr get-login --no-include-email --region us-east-1)
@@ -49,7 +50,9 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      - deploy
+      - deploy:
+          requires:
+            - build
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
