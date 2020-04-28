@@ -26,11 +26,11 @@ jobs:
           name: Move compiled app to workspace
           command: |
             set -exu
-            mv built-image.tar.gz /tmp/workspace/
+            mv docker-cache/built-image.tar.gz /tmp/workspace/
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - dist/lemon-mart
+            - docker-cache
 
   deploy:
     executor: aws-cli/default
@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Push it to ECR
           command: |
-            docker load < /tmp/workspace/built-image.tar.gz
+            docker load < /tmp/workspace/docker-cache/built-image.tar.gz
             docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
       - run:
