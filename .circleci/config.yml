@@ -40,6 +40,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - aws-cli/setup
+          aws-access-key-id: AWS_ACCESS_KEY
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: us-east-1
       - run:
           name: Sign into AWS ecr
           command: eval $(aws ecr get-login)
