@@ -159,6 +159,14 @@ jobs:
       - install
       - build_and_test:
           project: 'ch12'
+  ch13: # this job is only here to verify sample code from the book, remove it in your own projects
+    docker:
+      - image: circleci/node:lts-browsers
+    working_directory: ~/repo
+    steps:
+      - install
+      - build_and_test:
+          project: 'ch13'
   ch14: # this job is only here to verify sample code from the book, remove it in your own projects
     docker:
       - image: circleci/node:lts-browsers
@@ -191,9 +199,12 @@ workflows:
       - ch12: # this job is only here to verify sample code from the book, remove it in your own projects
           requires:
             - initialize
-      # - ch14: # this job is only here to verify sample code from the book, remove it in your own projects
-      #     requires:
-      #       - initialize
+      - ch13: # this job is only here to verify sample code from the book, remove it in your own projects
+          requires:
+            - initialize
+      - ch14: # this job is only here to verify sample code from the book, remove it in your own projects
+          requires:
+            - initialize
       - deploy:
           requires:
             - default
