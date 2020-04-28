@@ -51,7 +51,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
     if (this.useNgRxData) {
       return this.userEntityService.getAll().pipe(
         map((value) => {
-          return { total: 0, data: value }
+          return { total: value.length, data: value }
         })
       )
     } else {

@@ -7,7 +7,8 @@ import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operat
 import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
-import { IUser } from '../../user/user/user'
+import { IUser, User } from '../../user/user/user'
+import { UserEntityService } from '../../user/user/user.entity.service'
 import { IUsers, UserService } from '../../user/user/user.service'
 
 @Component({
@@ -34,10 +35,11 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort
 
   constructor(
-    private userService: UserService // private userEntityService: UserEntityService
+    private userService: UserService,
+    private userEntityService: UserEntityService
   ) {
-    // this.loading$ = merge(this.userEntityService.loading$, this.isLoadingResults$)
-    this.loading$ = this.isLoadingResults$
+    this.loading$ = merge(this.userEntityService.loading$, this.isLoadingResults$)
+    // this.loading$ = this.isLoadingResults$ //Pre-NgRx Data
   }
 
   getUsers(
@@ -47,21 +49,33 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
     sortColumn: string,
     sortDirection: SortDirection
   ): Observable<IUsers> {
-    // if (this.useNgRxData) {
-    //   return this.userEntityService.getAll().pipe(
-    //     map((value) => {
-    //       return { total: 0, data: value }
-    //     })
-    //   )
-    // } else {
-    return this.userService.getUsers(
-      pageSize,
-      searchText,
-      pagesToSkip,
-      sortColumn,
-      sortDirection
-    )
-    // }
+    if (this.useNgRxData) {
+      return this.userEntityService.getAll().pipe(
+        map((value) => {
+          return { total: value.length, data: value }
+        })
+      )
+    } else {
+      return this.userService.getUsers(
+        pageSize,
+        searchText,
+        pagesToSkip,
+        sortColumn,
+        sortDirection
+      )
+    }
+  }
+
+  add(user: User) {
+    this.userEntityService.add(user)
+  }
+
+  delete(user: User) {
+    this.userEntityService.delete(user._id)
+  }
+
+  update(user: User) {
+    this.userEntityService.update(user)
   }
 
   ngOnDestroy(): void {
