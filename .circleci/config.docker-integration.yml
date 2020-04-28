@@ -48,15 +48,16 @@ jobs:
       - run:
           name: Sign Docker into AWS ECR
           command: |
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart
+            ECR_URI=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_URI
       - run:
           name: Push it to ECR
           command: |
             docker load < /tmp/workspace/built-image.tar.gz
-            docker image tag lemon-mart:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
-            docker image tag $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
-            docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
-            docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
+            docker image tag lemon-mart:$CIRCLE_BRANCH $ECR_URI:$CIRCLE_BRANCH
+            docker image tag $ECR_URI:$CIRCLE_BRANCH $ECR_URI:latest
+            docker image push $ECR_URI:$CIRCLE_BRANCH
+            docker image push $ECR_URI:latest
       - run:
           name: Deploy
           command: npm run aws:deploy
