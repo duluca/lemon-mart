@@ -39,8 +39,7 @@ jobs:
           at: /tmp/workspace
       - checkout
       - setup_remote_docker
-      - aws-cli/setup:
-          context: aws
+      - aws-cli/setup
       - run:
           name: Sign into AWS ecr
           command: eval $(aws ecr get-login)
@@ -69,7 +68,8 @@ workflows:
       #     path: .
       #     repo: lemon-mart
       #     tag: 'latest,${CIRCLE_BUILD_NUM}'
-      - deploy
+      - deploy:
+          context: aws
         # requires:
         #   - aws-ecr/build-and-push-image
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
