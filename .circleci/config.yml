@@ -42,7 +42,7 @@ jobs:
       - aws-cli/setup:
           aws-access-key-id: AWS_ACCESS_KEY
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: us-east-1
+          aws-region: AWS_REGION
       - run:
           name: Sign into AWS ecr
           command: eval $(aws ecr get-login)
