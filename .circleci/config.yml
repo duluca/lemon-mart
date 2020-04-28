@@ -30,7 +30,6 @@ jobs:
           root: /tmp/workspace
           paths:
             - .
-
   deploy:
     executor: aws-cli/default
     working_directory: ~/repo
@@ -41,15 +40,15 @@ jobs:
       - setup_remote_docker
       - aws-cli/setup
       - run:
-          name: Sign into AWS ecr
-          command: eval $(aws ecr get-login)
-      - run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart
-      # - run:
-      #     name: Push it to ECR
-      #     command: |
-      #       docker load < /tmp/workspace/built-image.tar.gz
-      #       docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
-      #       docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+          name: Sign Docker into AWS ECR
+          command: |
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart
+      - run:
+          name: Push it to ECR
+          command: |
+            docker load < /tmp/workspace/built-image.tar.gz
+            docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
       - run:
           name: Deploy
           command: npm run aws:deploy
@@ -58,7 +57,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      # - build
+      - build
       # - aws-ecr/build-and-push-image:
       #     account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com'
       #     region: '${AWS_DEFAULT_REGION}'
@@ -70,7 +69,8 @@ workflows:
       #     tag: 'latest,${CIRCLE_BUILD_NUM}'
       - deploy:
           context: aws
-        # requires:
+          requires:
+            - build
         #   - aws-ecr/build-and-push-image
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
