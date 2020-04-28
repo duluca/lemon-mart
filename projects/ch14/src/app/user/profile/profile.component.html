@@ -1,0 +1,192 @@
+<mat-toolbar color="accent">
+  <h5>User Profile</h5>
+</mat-toolbar>
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+  <mat-step [stepControl]="formGroup">
+    <form [formGroup]="formGroup">
+      <ng-template matStepLabel>Account Information</ng-template>
+      <div class="stepContent">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('name')"
+          fxLayoutGap="10px">
+          <app-name-input [initialData]="nameInitialData$ | async"
+            (formReady)="registerForm('name', $event)">
+          </app-name-input>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="50%">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput aria-label="Date of Birth" formControlName="dateOfBirth"
+              [min]="minDate" [max]="now" [matDatepicker]="dateOfBirthPicker" #dob />
+            <mat-hint *ngIf="formGroup.get('dateOfBirth')?.value">
+              {{ age }} year(s) old
+            </mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #dateOfBirthPicker></mat-datepicker>
+            <mat-error [input]="dob" [group]="formGroup"
+              [appFieldError]="{error: 'invalid', message: 'Date must be within the last 100 years'}">
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="50%">
+            <mat-label>E-mail</mat-label>
+            <input matInput aria-label="E-mail" formControlName="email" #email />
+            <mat-hint>Only your manager can update your e-mail.</mat-hint>
+            <mat-error [input]="email" [group]="formGroup" appFieldError="invalid">
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top" fxLayoutGap="10px">
+          <mat-label class="mat-body-1">Role</mat-label>
+          <mat-radio-group formControlName="role">
+            <mat-radio-button style="margin-right: 10px;" [value]="Role.None">
+              <span class="mat-body-1">None</span>
+            </mat-radio-button>
+            <mat-radio-button style="margin-right: 10px;" [value]="Role.Cashier">
+              <span class="mat-body-1">Cashier</span>
+            </mat-radio-button>
+            <mat-radio-button style="margin-right: 10px;" [value]="Role.Clerk">
+              <span class="mat-body-1">Clerk</span>
+            </mat-radio-button>
+            <mat-radio-button style="margin-right: 10px;" [value]="Role.Manager">
+              <span class="mat-body-1">Manager</span>
+            </mat-radio-button>
+          </mat-radio-group>
+          <mat-error
+            *ngIf="formGroup.get('role')?.hasError('required') && formGroup.get('role')?.touched">
+            <span class="mat-caption">Role is required</span>
+          </mat-error>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top" fxLayoutGap="10px">
+          <mat-label class="mat-body-1">Select the Limoncu level:
+            <app-lemon-rater formControlName="level">
+            </app-lemon-rater>
+          </mat-label>
+        </div>
+      </div>
+      <div fxLayout="row" class="margin-top">
+        <div class="flex-spacer"></div>
+        <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
+        <button mat-raised-button matStepperNext color="accent">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="formGroup">
+    <form [formGroup]="formGroup">
+      <ng-template matStepLabel>Contact Information</ng-template>
+      <div class="stepContent">
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')"
+          fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Address Line 1</mat-label>
+            <input matInput aria-label="Address Line 1" formControlName="line1" #line1 />
+            <mat-error [input]="line1" [group]="formGroup.get('address')"
+              [appFieldError]="ErrorSets.RequiredText">
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')"
+          fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Line 2</mat-label>
+            <input matInput aria-label="Address Line 2" formControlName="line2" #line2 />
+            <mat-hint>Optional</mat-hint>
+            <mat-error [input]="line2" [group]="formGroup.get('address')"
+              [appFieldError]="ErrorSets.OptionalText">
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')"
+          fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="40%">
+            <mat-label>City</mat-label>
+            <input matInput aria-label="City" formControlName="city" #city />
+            <mat-error [input]="city" [group]="formGroup.get('address')"
+              [appFieldError]="ErrorSets.RequiredText">
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="30%">
+            <mat-label>State</mat-label>
+            <input type="text" aria-label="State" matInput formControlName="state"
+              [matAutocomplete]="stateAuto" #state />
+            <mat-autocomplete #stateAuto="matAutocomplete">
+              <mat-option *ngFor="let state of (states$ | async)" [value]="state.name">
+                {{ state.name }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error [input]="state" [group]="formGroup.get('address')"
+              appFieldError="required">
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="30%">
+            <mat-label>Zip Code</mat-label>
+            <input matInput aria-label="Zip Code" formControlName="zip" #zip />
+            <mat-error [input]="zip" [group]="formGroup.get('address')"
+              appFieldError="invalid">
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column">
+          <mat-list formArrayName="phones">
+            <h2 mat-subheader>Phone Number(s)
+              <button mat-button (click)="addPhone()">
+                <mat-icon>add</mat-icon>
+                Add Phone
+              </button>
+            </h2>
+            <mat-list-item style="margin-top: 36px;"
+              *ngFor="let position of phonesArray.controls; let i = index"
+              [formGroupName]="i">
+              <mat-form-field appearance="outline" fxFlex="100px">
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option *ngFor="let type of PhoneTypes"
+                    [value]="convertTypeToPhoneType(type)">
+                    {{ type }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" fxFlex fxFlexOffset="10px">
+                <mat-label>Number</mat-label>
+                <input matInput type="text" formControlName="digits"
+                  aria-label="Phone number" mask="(000) 000-0000" prefix="+1" />
+                <mat-error
+                  *ngIf="phonesArray.controls[i].invalid && phonesArray.controls[i].touched">
+                  A valid phone number is required
+                </mat-error>
+              </mat-form-field>
+              <button fxFlex="33px" mat-icon-button (click)="phonesArray.removeAt(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+      <div fxLayout="row" class="margin-top">
+        <button mat-button matStepperPrevious>Back</button>
+        <div class="flex-spacer"></div>
+        <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
+        <button mat-raised-button matStepperNext color="accent">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="save(formGroup)">
+      <ng-template matStepLabel>Review</ng-template>
+      <div class="stepContent">
+        Review and update your user profile.
+        <app-view-user [user]="formGroup.getRawValue()"></app-view-user>
+      </div>
+      <div fxLayout="row" class="margin-top">
+        <button mat-button matStepperPrevious>Back</button>
+        <div class="flex-spacer"></div>
+        <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
+        <button mat-button color="warn"
+          (click)="stepper.reset(); clearCache()">Reset</button>
+        <button mat-raised-button matStepperNext color="primary" type="submit"
+          [disabled]="formGroup.invalid">
+          Update
+        </button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
