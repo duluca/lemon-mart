@@ -15,10 +15,7 @@ jobs:
             docker build -f integration.Dockerfile . -t lemon-mart:$CIRCLE_BRANCH
             mkdir -p docker-cache
             docker save lemon-mart:$CIRCLE_BRANCH | gzip > docker-cache/built-image.tar.gz
-      - save_cache:
-          key: built-image-{{ .BuildNum }}
-          paths:
-            - docker-cache
+
       - store_artifacts:
           path: docker-cache/built-image.tar.gz
           destination: built-image.tar.gz
@@ -26,19 +23,14 @@ jobs:
           name: Move compiled app to workspace
           command: |
             set -exu
+            mkdir -p /tmp/workspace
             mv docker-cache/built-image.tar.gz /tmp/workspace/
       - persist_to_workspace:
           root: /tmp/workspace
-          paths:
-            - docker-cache
 
   deploy:
     executor: aws-cli/default
     steps:
-      - restore_cache:
-          keys:
-            - built-image-{{ .BuildNum }}
-            - built-image
       - attach_workspace:
           at: /tmp/workspace
       - checkout
@@ -50,7 +42,7 @@ jobs:
       - run:
           name: Push it to ECR
           command: |
-            docker load < /tmp/workspace/docker-cache/built-image.tar.gz
+            docker load < /tmp/workspace/built-image.tar.gz
             docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
       - run:
