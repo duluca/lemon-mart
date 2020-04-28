@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@1.0.0
-  aws-ecr: circleci/aws-ecr@6.8.2
 jobs:
   build:
     docker:
@@ -39,6 +38,13 @@ jobs:
       - checkout
       - setup_remote_docker
       - aws-cli/setup
+      - run: npm ci
+      - run:
+        name: Restore .env files
+        command: |
+          set +H
+          DOT_ENV=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\\nAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+          echo -e $DOT_ENV > .env
       - run:
           name: Sign Docker into AWS ECR
           command: |
@@ -47,8 +53,9 @@ jobs:
           name: Push it to ECR
           command: |
             docker load < /tmp/workspace/built-image.tar.gz
-            docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+            docker image tag $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
+            docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+            docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
       - run:
           name: Deploy
           command: npm run aws:deploy
@@ -58,20 +65,10 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      # - aws-ecr/build-and-push-image:
-      #     account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com'
-      #     region: '${AWS_DEFAULT_REGION}'
-      #     aws-access-key-id: '${AWS_ACCESS_KEY}'
-      #     aws-secret-access-key: '${AWS_SECRET_ACCESS_KEY}'
-      #     dockerfile: integration.Dockerfile
-      #     path: .
-      #     repo: lemon-mart
-      #     tag: 'latest,${CIRCLE_BUILD_NUM}'
       - deploy:
           context: aws
           requires:
             - build
-        #   - aws-ecr/build-and-push-image
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
