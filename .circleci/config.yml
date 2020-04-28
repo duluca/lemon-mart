@@ -40,9 +40,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - aws-cli/setup
-      # - run:
-      #     name: Sign into AWS ecr
-      #     command: eval $(aws ecr get-login)
+      - run:
+          name: Sign into AWS ecr
+          command: eval $(aws ecr get-login)
+      - run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart
       # - run:
       #     name: Push it to ECR
       #     command: |
@@ -58,18 +59,18 @@ workflows:
   build-and-deploy:
     jobs:
       # - build
-      - aws-ecr/build-and-push-image:
-          account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com'
-          region: '${AWS_DEFAULT_REGION}'
-          aws-access-key-id: '${AWS_ACCESS_KEY}'
-          aws-secret-access-key: '${AWS_SECRET_ACCESS_KEY}'
-          dockerfile: integration.Dockerfile
-          path: .
-          repo: lemon-mart
-          tag: 'latest,${CIRCLE_BUILD_NUM}'
+      # - aws-ecr/build-and-push-image:
+      #     account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com'
+      #     region: '${AWS_DEFAULT_REGION}'
+      #     aws-access-key-id: '${AWS_ACCESS_KEY}'
+      #     aws-secret-access-key: '${AWS_SECRET_ACCESS_KEY}'
+      #     dockerfile: integration.Dockerfile
+      #     path: .
+      #     repo: lemon-mart
+      #     tag: 'latest,${CIRCLE_BUILD_NUM}'
       - deploy:
-          requires:
-            - aws-ecr/build-and-push-image
+          # requires:
+          #   - aws-ecr/build-and-push-image
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
