@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  aws-cli: circleci/aws-cli@0.1.19
+  aws-cli: circleci/aws-cli@1.0.0
 jobs:
   build:
     docker:
@@ -15,45 +15,60 @@ jobs:
             docker build -f integration.Dockerfile . -t lemon-mart:$CIRCLE_BRANCH
             mkdir -p docker-cache
             docker save lemon-mart:$CIRCLE_BRANCH | gzip > docker-cache/built-image.tar.gz
-      - save_cache:
-          key: built-image-{{ .BuildNum }}
-          paths:
-            - docker-cache
+
       - store_artifacts:
           path: docker-cache/built-image.tar.gz
           destination: built-image.tar.gz
-
+      - run:
+          name: Move compiled app to workspace
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace
+            mv docker-cache/built-image.tar.gz /tmp/workspace/
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - .
   deploy:
     executor: aws-cli/default
+    working_directory: ~/repo
     steps:
-      - restore_cache:
-          keys:
-            - built-image-{{ .BuildNum }}
-            - built-image
+      - attach_workspace:
+          at: /tmp/workspace
+      - checkout
       - setup_remote_docker
+      - aws-cli/setup
+      - run: npm ci
       - run:
-          name: Sign into AWS ecr
-          command: $(aws ecr get-login --no-include-email --region us-east-1)
+        name: Restore .env files
+        command: |
+          set +H
+          DOT_ENV=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\\nAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+          echo -e $DOT_ENV > .env
+      - run:
+          name: Sign Docker into AWS ECR
+          command: |
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart
       - run:
           name: Push it to ECR
           command: |
-            docker load < docker-cache/built-image.tar.gz
-            docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
-      - run: echo 'do deployment here'
+            docker load < /tmp/workspace/built-image.tar.gz
+            docker image tag $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
+            docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+            docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
+      - run:
+          name: Deploy
+          command: npm run aws:deploy
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - build
-      - hold:
-          type: approval
+      - deploy:
+          context: aws
           requires:
             - build
-      - deploy:
-          requires:
-            - hold
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
 # For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
 # For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
