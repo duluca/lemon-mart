@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
-import { EffectsModule } from '@ngrx/effects'
 import { of } from 'rxjs'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
