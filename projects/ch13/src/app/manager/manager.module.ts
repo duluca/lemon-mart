@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppMaterialModule } from '../app-material.module'
 import { AuthGuard } from '../auth/auth-guard.service'
@@ -23,6 +23,7 @@ import { UserTableComponent } from './user-table/user-table.component'
     SharedComponentsModule,
     AppMaterialModule,
     ManagerMaterialModule,
+    FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
