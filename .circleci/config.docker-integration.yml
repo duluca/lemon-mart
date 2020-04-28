@@ -40,11 +40,11 @@ jobs:
       - aws-cli/setup
       - run: npm ci
       - run:
-        name: Restore .env files
-        command: |
-          set +H
-          DOT_ENV=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\\nAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-          echo -e $DOT_ENV > .env
+          name: Restore .env files
+          command: |
+            set +H
+            DOT_ENV=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\\nAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            echo -e $DOT_ENV > .env
       - run:
           name: Sign Docker into AWS ECR
           command: |
