@@ -59,10 +59,12 @@ workflows:
     jobs:
       # - build
       - aws-ecr/build-and-push-image:
+          aws-access-key-id: ${AWS_ACCESS_KEY}
+          aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
           dockerfile: integration.Dockerfile
           path: .
-          repo: 073020584345.dkr.ecr.us-east-1.amazonaws.com
-          tag: 'latest'
+          repo: lemon-mart
+          tag: 'latest,${CIRCLE_BUILD_NUM}'
       - deploy:
           requires:
             - aws-ecr/build-and-push-image
