@@ -27,9 +27,12 @@ jobs:
             mv docker-cache/built-image.tar.gz /tmp/workspace/
       - persist_to_workspace:
           root: /tmp/workspace
+          paths:
+            - .
 
   deploy:
     executor: aws-cli/default
+    working_directory: ~/repo
     steps:
       - attach_workspace:
           at: /tmp/workspace
