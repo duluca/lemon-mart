@@ -3,12 +3,12 @@
   "version": "9.0.0",
   "license": "MIT",
   "config": {
-    "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
+    "imageRepo": "073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
     "imageName": "lemon-mart",
     "imagePort": "8080",
     "internalContainerPort": "80",
     "awsRegion": "us-east-1",
-    "awsEcsCluster": "fargate-cluster",
+    "awsEcsCluster": "lemon-mart-cluster",
     "awsService": "lemon-mart-service"
   },
   "engines": {
@@ -49,9 +49,8 @@
     "aws:login:win": "cross-conf-env aws ecr get-login --no-include-email --region $npm_package_config_awsRegion > dockerLogin.cmd && call dockerLogin.cmd && del dockerLogin.cmd",
     "aws:login:mac": "eval $(aws ecr get-login --no-include-email --region $npm_package_config_awsRegion)",
     "aws:login": "run-p -cs aws:login:win aws:login:mac",
-    "aws:deploy": "cross-conf-env docker run --env-file ./.env duluca/ecs-deploy-fargate -c $npm_package_config_awsEcsCluster -n $npm_package_config_awsService -i $npm_package_config_imageRepo:latest -r $npm_package_config_awsRegion --timeout 1000",
+    "aws:deploy": "cross-conf-env docker run --env-file ./.env silintl/ecs-deploy -c $npm_package_config_awsEcsCluster -n $npm_package_config_awsService -i $npm_package_config_imageRepo:latest -r $npm_package_config_awsRegion --timeout 1000",
     "aws:release": "run-s -cs aws:login docker:publish aws:deploy",
-    "aws:fargate-release": "run-s -cs aws:login docker:publish",
     "init:env": "init-dev-env generate-dot-env example.env -f",
     "lint:ts": "tslint --config tslint.json --project . -e \"**/{test,polyfills}.ts\"",
     "lint:ts:fix": "tslint --config tslint.json --fix --project . -e \"**/{test,polyfills}.ts\"",
