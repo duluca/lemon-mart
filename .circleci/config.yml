@@ -38,6 +38,7 @@ jobs:
           at: /tmp/workspace
       - checkout
       - setup_remote_docker
+      - aws-cli/install
       - aws-cli/setup
       - run:
           name: Sign into AWS ecr
