@@ -34,7 +34,7 @@ jobs:
       - aws-cli/setup
       - run:
           name: Sign into AWS ecr
-          command: $(aws ecr get-login --no-include-email --region us-east-1)
+          command: eval $(aws ecr get-login)
       - run:
           name: Push it to ECR
           command: |
