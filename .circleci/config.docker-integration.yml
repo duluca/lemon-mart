@@ -53,6 +53,7 @@ jobs:
           name: Push it to ECR
           command: |
             docker load < /tmp/workspace/built-image.tar.gz
+            docker image tag lemon-mart:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
             docker image tag $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
             docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
             docker image push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:latest
