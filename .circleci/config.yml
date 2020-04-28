@@ -1,213 +1,57 @@
 version: 2.1
 orbs:
-  coveralls: coveralls/coveralls@1.0.4
-  cypress: cypress-io/cypress@1
-commands:
-  install:
-    description: 'Install project dependencies'
-    parameters:
-      warm-cache:
-        type: boolean
-        default: false
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - node_modules-{{ checksum "package-lock.json" }}
-      - when:
-          condition: << parameters.warm-cache >>
-          steps:
-            - run: npm install
-            # Pre-build Angular modules
-            - run: npx ngcc --properties es2015 --async false # async false is temp CI build fix
-            # force update the webdriver, so it runs with latest version of Chrome
-            - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
-            - save_cache:
-                key: node_modules-{{ checksum "package-lock.json" }}
-                paths:
-                  - node_modules
-                  - ~/.cache/Cypress
-  lint:
-    description: 'Check for code style and linting errors'
-    steps:
-      - run: npm run style
-      - run: npm run lint
-  build_and_test:
-    description: 'Build command that accepts Angular project name as parameter'
-    parameters:
-      project:
-        type: string
-        default: 'lemon-mart'
-      run-tests:
-        type: boolean
-        default: true
-    steps:
-      - run: npx ng build --prod --project << parameters.project >>
-      - when:
-          condition: << parameters.run-tests >>
-          steps:
-            - run: npx ng test --code-coverage --watch=false --project << parameters.project >>
-            - run: npx ng e2e << parameters.project >>
-  store:
-    description: 'Stores build_and_test artifacts'
-    parameters:
-      project:
-        type: string
-        default: 'lemon-mart'
-    steps:
-      - run:
-          name: Run Cypress tests
-          command: 'npx cypress run --record'
-
-      - store_test_results:
-          path: ./test_results
-      - store_artifacts:
-          path: ./coverage
-
-      # upload coverage report to coveralls for readme badge support
-      # requires config.yml version 2.1 and orbs: coveralls: coveralls/coveralls@1.0.4
-      # requires coveralls account and token named COVERALLS_REPO_TOKEN specific to repo to be stored in CircleCI
-      - coveralls/upload
-
-      - run:
-          name: Tar & Gzip compiled app
-          command: tar zcf dist.tar.gz dist/<< parameters.project >>
-      - store_artifacts:
-          path: dist.tar.gz
-
-      - run:
-          name: Move compiled app to workspace
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/dist
-            mv dist/<< parameters.project >> /tmp/workspace/dist/
-      - persist_to_workspace:
-          root: /tmp/workspace
-          paths:
-            - dist/<< parameters.project >>
-  deploy_now:
-    description: 'Deploys project to Zeit Now --> https://now.sh'
-    parameters:
-      project:
-        type: string
-        default: 'lemon-mart'
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - run: npx now --token $NOW_TOKEN --platform-version 2 --prod /tmp/workspace/dist/<< parameters.project >> --confirm
+  aws-cli: circleci/aws-cli@1.0.0
 jobs:
-  initialize:
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install:
-          warm-cache: true
-  default:
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - lint
-      - build_and_test
-      - store
-  deploy:
+  build:
     docker:
       - image: circleci/node:lts
     working_directory: ~/repo
     steps:
-      - deploy_now
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Execute Pipeline (Build Source -> Test -> Build Web Server)
+          command: |
+            docker build -f integration.Dockerfile . -t lemon-mart:$CIRCLE_BRANCH
+            mkdir -p docker-cache
+            docker save lemon-mart:$CIRCLE_BRANCH | gzip > docker-cache/built-image.tar.gz
+      - save_cache:
+          key: built-image-{{ .BuildNum }}
+          paths:
+            - docker-cache
+      - store_artifacts:
+          path: docker-cache/built-image.tar.gz
+          destination: built-image.tar.gz
 
-  ch7: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
+  deploy:
+    executor: aws-cli/default
     steps:
-      - install
-      - build_and_test:
-          project: 'ch7'
-  ch8: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'ch8'
-  ch10: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'ch10'
-  ch11: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'ch11'
-  ch12: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'ch12'
-  ch13: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'ch13'
-  ch14: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: circleci/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'ch14'
+      - restore_cache:
+          keys:
+            - built-image-{{ .BuildNum }}
+            - built-image
+      - setup_remote_docker
+      - run:
+          name: Sign into AWS ecr
+          command: $(aws ecr get-login --no-include-email --region us-east-1)
+      - run:
+          name: Push it to ECR
+          command: |
+            docker load < docker-cache/built-image.tar.gz
+            docker tag my_app:$CIRCLE_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lemon-mart:$CIRCLE_BRANCH
+      - run:
+          name: Deploy
+          command: npm run aws:deploy
 
 workflows:
   version: 2
-  build-test-and-approval-deploy:
+  build-and-deploy:
     jobs:
-      - initialize
-      - default:
-          requires:
-            - initialize
-      - ch7: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch8: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch10: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch11: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch12: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch13: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch14: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - deploy:
-          requires:
-            - default
-          filters:
-            branches:
-              only: master
+      - build
+      - deploy
+# Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
+# For Docker Hub deploy see https://circleci.com/docs/2.0/building-docker-images/
+# For AWS ECS deploy see https://circleci.com/blog/how-to-build-a-docker-image-on-circleci-2-0/
+# For Heroku see https://devcenter.heroku.com/articles/container-registry-and-runtime#pushing-an-image-s
+# For cache optimization read https://medium.com/@gajus/making-docker-in-docker-builds-x2-faster-using-docker-cache-from-option-c01febd8ef84
