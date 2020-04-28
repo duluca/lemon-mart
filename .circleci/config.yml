@@ -51,6 +51,7 @@ workflows:
     jobs:
       - build
       - deploy:
+          context: aws
           requires:
             - build
 # Deployment Integrations https://circleci.com/docs/2.0/deployment-integrations
