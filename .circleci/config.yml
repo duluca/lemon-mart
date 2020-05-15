@@ -19,7 +19,7 @@ commands:
           steps:
             - run: npm install
             # Pre-build Angular modules
-            - run: npx ngcc --properties es2015 --async false # async false is temp CI build fix
+            - run: npx ngcc --properties es2015
             # force update the webdriver, so it runs with latest version of Chrome
             - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
             - save_cache:
