@@ -18,7 +18,7 @@ Check out the slides for `Architecture for Scalable Angular Apps` _free_ at [Sli
 
 Check out **LocalCast Weather**, to learn Angular, Material, RxJS fundemantals using OpenWeatherMap.org APIs, at https://github.com/duluca/local-weather-app.
 
-Build, debug and publish Docker images with [**npm Scripts for Docker**](bit.ly/npmScriptsForDocker) and achieve Blue-Green deployments on AWS Fargate with [**npm Scripts for AWS**](bit.ly/npmScriptsForAWS).
+Build, debug and publish Docker images with [**npm Scripts for Docker**](https://bit.ly/npmScriptsForDocker) and achieve Blue-Green deployments on AWS Fargate with [**npm Scripts for AWS**](https://bit.ly/npmScriptsForAWS).
 
 ## Router-first Approach
 
