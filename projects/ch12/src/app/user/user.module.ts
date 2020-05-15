@@ -26,7 +26,7 @@ import { UserResolve } from './user/user.resolve'
     UserMaterialModule,
     LemonRaterModule,
     FieldErrorModule,
-    NgxMaskModule.forChild({ showMaskTyped: true, showTemplate: true }),
+    NgxMaskModule.forChild(),
   ],
   providers: [UserResolve, AuthGuard],
   declarations: [ProfileComponent, LogoutComponent],

@@ -28,7 +28,7 @@ import { UserService } from './user/user.service'
     FieldErrorModule,
     SharedComponentsModule,
     LemonRaterModule,
-    NgxMaskModule.forChild({ showMaskTyped: true, showTemplate: true }),
+    NgxMaskModule.forChild(),
   ],
   declarations: [ProfileComponent, LogoutComponent],
   providers: [UserService, UserEntityService, AuthGuard, UserResolve],

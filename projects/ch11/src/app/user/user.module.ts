@@ -32,7 +32,7 @@ import { ViewUserComponent } from './view-user/view-user.component'
     AppMaterialModule,
     UserMaterialModule,
     LemonRaterModule,
-    NgxMaskModule.forChild({ showMaskTyped: true, showTemplate: true }),
+    NgxMaskModule.forChild(),
   ],
 })
 export class UserModule {}

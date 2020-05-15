@@ -148,7 +148,8 @@
               <mat-form-field appearance="outline" fxFlex fxFlexOffset="10px">
                 <mat-label>Number</mat-label>
                 <input matInput type="text" formControlName="digits"
-                  aria-label="Phone number" mask="(000) 000-0000" prefix="+1" />
+                  aria-label="Phone number" mask="(000) 000-0000" prefix="+1"
+                  [showMaskTyped]="true" />
                 <mat-error
                   *ngIf="phonesArray.controls[i].invalid && phonesArray.controls[i].touched">
                   A valid phone number is required
