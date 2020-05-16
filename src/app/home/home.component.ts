@@ -13,7 +13,7 @@ import { AuthService } from '../auth/auth.service'
         You get a lemon, you get a lemon, you get a lemon...
       </div>
       <div class="mat-display-4">
-        Everbody gets a lemon.
+        Everybody gets a lemon.
       </div>
     </div>
     <ng-template #doLogin>
