@@ -1,4 +1,4 @@
-# LemonMart <img src="https://user-images.githubusercontent.com/822159/76695715-1cd40180-6659-11ea-8815-00f0e1d7a209.png" alt="Minimal MEAN" width="36"/>
+# LemonMart <img src="https://user-images.githubusercontent.com/822159/76695715-1cd40180-6659-11ea-8815-00f0e1d7a209.png" alt="LemonMart" width="36"/>
 
 > LemonMart was implemented with a [Route-first approach](https://techtalkdc.com/router-first-architecture-in-spas/) to designing SPAs.
 
