@@ -20,8 +20,6 @@ export class UserEntityService extends EntityCollectionServiceBase<User> {
   }
 
   getAll(options?: EntityActionOptions): Observable<User[]> {
-    return this.userService
-      .getUsers(10)
-      .pipe(map((users) => users.data.map((u) => User.Build(u))))
+    return this.userService.getUsers(10).pipe(map((users) => users.data.map(User.Build)))
   }
 }
