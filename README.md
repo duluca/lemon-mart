@@ -2,6 +2,7 @@
 
 > LemonMart was implemented with a [Route-first approach](https://techtalkdc.com/router-first-architecture-in-spas/) to designing SPAs.
 
+![Angular Version](https://img.shields.io/badge/angular-v10-326839)
 [![CircleCI](https://circleci.com/gh/duluca/lemon-mart.svg?style=svg)](https://circleci.com/gh/duluca/lemon-mart)
 [![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=master)](https://coveralls.io/github/duluca/lemon-mart?branch=master)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)

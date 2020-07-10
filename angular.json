@@ -35,9 +35,11 @@
               "src/safari-pinned-tab.svg",
               "src/mstile-150x150.png"
             ],
-            "styles": ["src/lemonmart-theme.scss", "src/styles.css"],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "styles": [
+              "src/lemonmart-theme.scss",
+              "src/styles.css"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {

@@ -1,6 +1,14 @@
-import { EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core'
+import {
+  Directive,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChange,
+  SimpleChanges,
+} from '@angular/core'
 import { AbstractControl, FormGroup } from '@angular/forms'
 
+@Directive()
 export abstract class BaseFormComponent<TFormData extends object> {
   @Input() initialData: TFormData
   @Input() disable: boolean

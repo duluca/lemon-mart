@@ -1,25 +1,59 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true,
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "lib": ["es2018", "dom"]
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ch7/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ch7/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ch8/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ch8/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ch10/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ch10/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ch11/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ch11/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ch12/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ch12/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ch13/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ch13/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ch14/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ch14/tsconfig.spec.json"
+    }
+  ]
 }
