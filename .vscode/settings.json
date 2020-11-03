@@ -1,9 +1,7 @@
 {
   "debug.openExplorerOnEnd": true,
   "editor.tabSize": 2,
-  "editor.rulers": [
-    90
-  ],
+  "editor.rulers": [90],
   "editor.cursorBlinking": "solid",
   "editor.formatOnType": false,
   "editor.formatOnPaste": false,
@@ -22,7 +20,6 @@
   "files.autoSave": "onFocusChange",
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
-  "npm.enableScriptExplorer": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "workbench.iconTheme": "material-icon-theme",
   "auto-close-tag.SublimeText3Mode": true,
@@ -40,8 +37,7 @@
     "activityBarBadge.foreground": "#15202b",
     "statusBar.background": "#2e7d32",
     "statusBarItem.hoverBackground": "#3ca241",
-    "statusBar.foreground": "#e7e7e7",
-    "statusBar.border": "#2e7d32"
+    "statusBar.foreground": "#e7e7e7"
   },
   "peacock.color": "#2e7d32",
   "gitlens.menus": {
