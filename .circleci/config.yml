@@ -21,7 +21,7 @@ commands:
             # Pre-build Angular modules
             - run: npx ngcc --properties es2015
             # force update the webdriver, so it runs with latest version of Chrome
-            - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
+            # - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
             - save_cache:
                 key: node_modules-{{ checksum "package-lock.json" }}
                 paths:
