@@ -8,7 +8,7 @@ import { $enum } from 'ts-enum-util'
 
 import { Role } from '../../auth/auth.enum'
 import { AuthService } from '../../auth/auth.service'
-import { BaseFormComponent } from '../../common/base-form.class'
+import { BaseFormDirective } from '../../common/base-form.class'
 import { UiService } from '../../common/ui.service'
 import {
   EmailValidation,
@@ -27,7 +27,7 @@ import { IUSState, USStateFilter } from './data'
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent extends BaseFormComponent<IUser>
+export class ProfileComponent extends BaseFormDirective<IUser>
   implements OnInit, OnDestroy {
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole

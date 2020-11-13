@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 
-import { BaseFormComponent } from '../../common/base-form.class'
+import { BaseFormDirective } from '../../common/base-form.class'
 import { OneCharValidation, RequiredTextValidation } from '../../common/validations'
 import { ErrorSets } from '../../user-controls/field-error/field-error.directive'
 import { IName } from '../user/user'
@@ -38,7 +38,7 @@ import { IName } from '../user/user'
   `,
   styles: [],
 })
-export class NameInputComponent extends BaseFormComponent<IName>
+export class NameInputComponent extends BaseFormDirective<IName>
   implements OnInit, OnChanges {
   ErrorSets = ErrorSets
 

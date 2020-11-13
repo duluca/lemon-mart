@@ -9,7 +9,7 @@ import {
 import { AbstractControl, FormGroup } from '@angular/forms'
 
 @Directive()
-export abstract class BaseFormComponent<TFormData extends object> {
+export abstract class BaseFormDirective<TFormData extends object> {
   @Input() initialData: TFormData
   @Input() disable: boolean
   @Output() formReady: EventEmitter<AbstractControl>
