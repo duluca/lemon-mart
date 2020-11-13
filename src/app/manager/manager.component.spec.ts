@@ -8,13 +8,15 @@ describe('ManagerComponent', () => {
   let component: ManagerComponent
   let fixture: ComponentFixture<ManagerComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ManagerComponent],
-      providers: commonTestingProviders,
-      imports: commonTestingModules.concat([ManagerMaterialModule]),
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ManagerComponent],
+        providers: commonTestingProviders,
+        imports: commonTestingModules.concat([ManagerMaterialModule]),
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ManagerComponent)

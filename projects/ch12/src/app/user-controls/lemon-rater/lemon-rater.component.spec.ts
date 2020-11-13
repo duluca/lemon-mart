@@ -18,12 +18,14 @@ describe('LemonRaterComponent', () => {
   let hostFixture: ComponentFixture<TestHostComponent>
   let testHostComponent: TestHostComponent
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LemonRaterComponent, TestHostComponent],
-      imports: [ReactiveFormsModule],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LemonRaterComponent, TestHostComponent],
+        imports: [ReactiveFormsModule],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     hostFixture = TestBed.createComponent(TestHostComponent)

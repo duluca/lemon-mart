@@ -21,31 +21,33 @@ describe('ProfileComponent', () => {
   let fixture: ComponentFixture<ProfileComponent>
   let authServiceMock: jasmine.SpyObj<AuthService>
 
-  beforeEach(waitForAsync(() => {
-    const authServiceSpy = autoSpyObj(
-      AuthService,
-      ['currentUser$', 'authStatus$'],
-      ObservablePropertyStrategy.BehaviorSubject
-    )
+  beforeEach(
+    waitForAsync(() => {
+      const authServiceSpy = autoSpyObj(
+        AuthService,
+        ['currentUser$', 'authStatus$'],
+        ObservablePropertyStrategy.BehaviorSubject
+      )
 
-    TestBed.configureTestingModule({
-      providers: commonTestingProviders.concat({
-        provide: AuthService,
-        useValue: authServiceSpy,
-      }),
-      imports: commonTestingModules.concat([
-        UserMaterialModule,
-        FieldErrorModule,
-        LemonRaterModule,
-      ]),
-      declarations: [ProfileComponent, NameInputComponent, ViewUserComponent],
-    }).compileComponents()
+      TestBed.configureTestingModule({
+        providers: commonTestingProviders.concat({
+          provide: AuthService,
+          useValue: authServiceSpy,
+        }),
+        imports: commonTestingModules.concat([
+          UserMaterialModule,
+          FieldErrorModule,
+          LemonRaterModule,
+        ]),
+        declarations: [ProfileComponent, NameInputComponent, ViewUserComponent],
+      }).compileComponents()
 
-    authServiceMock = injectSpy(AuthService)
+      authServiceMock = injectSpy(AuthService)
 
-    fixture = TestBed.createComponent(ProfileComponent)
-    component = fixture.debugElement.componentInstance
-  }))
+      fixture = TestBed.createComponent(ProfileComponent)
+      component = fixture.debugElement.componentInstance
+    })
+  )
 
   it('should create', () => {
     authServiceMock.currentUser$.next(new User())

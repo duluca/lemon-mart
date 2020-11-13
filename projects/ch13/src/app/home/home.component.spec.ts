@@ -8,13 +8,15 @@ describe('HomeComponent', () => {
   let component: HomeComponent
   let fixture: ComponentFixture<HomeComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [HomeComponent, createComponentMock('LoginComponent')],
-      providers: commonTestingProviders,
-      imports: commonTestingModules,
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [HomeComponent, createComponentMock('LoginComponent')],
+        providers: commonTestingProviders,
+        imports: commonTestingModules,
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent)

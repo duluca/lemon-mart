@@ -7,13 +7,15 @@ describe('LogoutComponent', () => {
   let component: LogoutComponent
   let fixture: ComponentFixture<LogoutComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: commonTestingModules,
-      providers: commonTestingProviders,
-      declarations: [LogoutComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: commonTestingModules,
+        providers: commonTestingProviders,
+        declarations: [LogoutComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LogoutComponent)

@@ -7,12 +7,14 @@ describe('InventoryComponent', () => {
   let component: InventoryComponent
   let fixture: ComponentFixture<InventoryComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [InventoryComponent],
-      imports: commonTestingModules,
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [InventoryComponent],
+        imports: commonTestingModules,
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InventoryComponent)

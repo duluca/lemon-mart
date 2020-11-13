@@ -10,18 +10,20 @@ describe('ViewUserComponent', () => {
   let component: ViewUserComponent
   let fixture: ComponentFixture<ViewUserComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      providers: [],
-      imports: [
-        ReactiveFormsModule,
-        FlexLayoutModule,
-        AppMaterialModule,
-        RouterTestingModule,
-      ],
-      declarations: [ViewUserComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        providers: [],
+        imports: [
+          ReactiveFormsModule,
+          FlexLayoutModule,
+          AppMaterialModule,
+          RouterTestingModule,
+        ],
+        declarations: [ViewUserComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewUserComponent)
