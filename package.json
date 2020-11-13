@@ -96,7 +96,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^14.0.19",
-    "angular-unit-test-helper": "^11.0.1",
+    "angular-unit-test-helper": "^11.0.2",
     "codelyzer": "^6.0.0",
     "cross-conf-env": "^1.1.2",
     "dev-norms": "^1.7.1",
