@@ -38,7 +38,8 @@ import { IName } from '../user/user'
   `,
   styles: [],
 })
-export class NameInputComponent extends BaseFormDirective<IName>
+export class NameInputComponent
+  extends BaseFormDirective<IName>
   implements OnInit, OnChanges {
   ErrorSets = ErrorSets
 
