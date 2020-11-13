@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core'
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { FormControl, ReactiveFormsModule } from '@angular/forms'
 
 import { LemonRaterComponent } from './lemon-rater.component'
@@ -18,12 +18,14 @@ describe('LemonRaterComponent', () => {
   let hostFixture: ComponentFixture<TestHostComponent>
   let testHostComponent: TestHostComponent
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LemonRaterComponent, TestHostComponent],
-      imports: [ReactiveFormsModule],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LemonRaterComponent, TestHostComponent],
+        imports: [ReactiveFormsModule],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     hostFixture = TestBed.createComponent(TestHostComponent)

@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing'
+import { TestBed, waitForAsync } from '@angular/core/testing'
 import { MediaObserver } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
@@ -12,17 +12,19 @@ import {
 } from './common/common.testing'
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: commonTestingModules,
-      providers: [
-        { provide: MediaObserver, useClass: MediaObserverFake },
-        { provide: MatIconRegistry, useClass: MatIconRegistryFake },
-        { provide: DomSanitizer, useClass: DomSanitizerFake },
-      ],
-      declarations: [AppComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: commonTestingModules,
+        providers: [
+          { provide: MediaObserver, useClass: MediaObserverFake },
+          { provide: MatIconRegistry, useClass: MatIconRegistryFake },
+          { provide: DomSanitizer, useClass: DomSanitizerFake },
+        ],
+        declarations: [AppComponent],
+      }).compileComponents()
+    })
+  )
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent)

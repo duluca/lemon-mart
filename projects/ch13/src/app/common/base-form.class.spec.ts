@@ -1,21 +1,21 @@
 import { Directive } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 
-import { BaseFormComponent } from './base-form.class'
+import { BaseFormDirective } from './base-form.class'
 
 interface ITestData {
   name: string
 }
 
 @Directive()
-class TestFormComponent extends BaseFormComponent<ITestData> {
+class TestFormDirective extends BaseFormDirective<ITestData> {
   buildForm(): FormGroup {
     return jasmine.createSpyObj('form', [])
   }
 }
 
-describe('BaseFormComponent', () => {
+describe('BaseFormDirective', () => {
   it('should create an instance', () => {
-    expect(new TestFormComponent()).toBeTruthy()
+    expect(new TestFormDirective()).toBeTruthy()
   })
 })

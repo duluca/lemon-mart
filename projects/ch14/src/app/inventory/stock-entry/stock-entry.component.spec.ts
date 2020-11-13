@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { StockEntryComponent } from './stock-entry.component'
 
@@ -6,11 +6,13 @@ describe('StockEntryComponent', () => {
   let component: StockEntryComponent
   let fixture: ComponentFixture<StockEntryComponent>
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [StockEntryComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [StockEntryComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StockEntryComponent)

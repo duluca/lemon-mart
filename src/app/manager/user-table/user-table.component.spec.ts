@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
 import { EntityDataModule } from '@ngrx/data'
 import { EffectsModule } from '@ngrx/effects'
@@ -15,19 +15,21 @@ describe('UserTableComponent', () => {
   let component: UserTableComponent
   let fixture: ComponentFixture<UserTableComponent>
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [UserTableComponent],
-      providers: commonTestingProviders,
-      imports: commonTestingModules.concat([
-        FormsModule,
-        ManagerMaterialModule,
-        EntityDataModule.forRoot(entityConfig),
-        EffectsModule.forRoot([]),
-        StoreModule.forRoot({}),
-      ]),
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [UserTableComponent],
+        providers: commonTestingProviders,
+        imports: commonTestingModules.concat([
+          FormsModule,
+          ManagerMaterialModule,
+          EntityDataModule.forRoot(entityConfig),
+          EffectsModule.forRoot([]),
+          StoreModule.forRoot({}),
+        ]),
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserTableComponent)

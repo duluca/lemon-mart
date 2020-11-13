@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { autoSpyObj, injectSpy } from 'angular-unit-test-helper'
 import { of } from 'rxjs'
 
@@ -12,16 +12,18 @@ describe('PosComponent', () => {
   let fixture: ComponentFixture<PosComponent>
   let transactionServiceMock: jasmine.SpyObj<TransactionService>
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [PosComponent],
-      providers: commonTestingProviders.concat([
-        { provide: TransactionService, useValue: autoSpyObj(TransactionService) },
-      ]),
-      imports: commonTestingModules,
-    }).compileComponents(),
-      (transactionServiceMock = injectSpy(TransactionService))
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PosComponent],
+        providers: commonTestingProviders.concat([
+          { provide: TransactionService, useValue: autoSpyObj(TransactionService) },
+        ]),
+        imports: commonTestingModules,
+      }).compileComponents(),
+        (transactionServiceMock = injectSpy(TransactionService))
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PosComponent)
