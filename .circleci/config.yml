@@ -46,6 +46,7 @@ commands:
       - when:
           condition: << parameters.run-tests >>
           steps:
+            - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
             - run: npx ng test --code-coverage --watch=false --project << parameters.project >>
             - run: npx ng e2e << parameters.project >>
   store:
