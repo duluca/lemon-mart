@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import * as decode from 'jwt-decode'
+import decode from 'jwt-decode'
 import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
 import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
 
