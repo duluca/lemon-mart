@@ -79,7 +79,7 @@
     "@ngrx/store-devtools": "^10.0.1",
     "firebase": "^7.15.5",
     "jwt-decode": "^2.2.0",
-    "ngx-mask": "^9.1.2",
+    "ngx-mask": "^11.0.0",
     "rxjs": "^6.6.3",
     "subsink": "^1.0.1",
     "ts-enum-util": "^4.0.2",
