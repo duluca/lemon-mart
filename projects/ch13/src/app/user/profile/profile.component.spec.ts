@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
   ObservablePropertyStrategy,
   autoSpyObj,
@@ -21,7 +21,7 @@ describe('ProfileComponent', () => {
   let fixture: ComponentFixture<ProfileComponent>
   let authServiceMock: jasmine.SpyObj<AuthService>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const authServiceSpy = autoSpyObj(
       AuthService,
       ['currentUser$', 'authStatus$'],

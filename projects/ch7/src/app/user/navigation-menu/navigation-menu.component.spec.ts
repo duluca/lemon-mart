@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { NavigationMenuComponent } from './navigation-menu.component'
 
@@ -6,7 +6,7 @@ describe('NavigationMenuComponent', () => {
   let component: NavigationMenuComponent
   let fixture: ComponentFixture<NavigationMenuComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NavigationMenuComponent],
     }).compileComponents()

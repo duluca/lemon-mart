@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
 import { EntityDataModule } from '@ngrx/data'
 import { EffectsModule } from '@ngrx/effects'
@@ -15,7 +15,7 @@ describe('UserTableComponent', () => {
   let component: UserTableComponent
   let fixture: ComponentFixture<UserTableComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [UserTableComponent],
       providers: commonTestingProviders,

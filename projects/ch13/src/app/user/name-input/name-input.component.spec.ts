@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { commonTestingModules } from '../../common/common.testing'
 import { FieldErrorModule } from '../../user-controls/field-error/field-error.module'
@@ -10,7 +10,7 @@ describe('NameInputComponent', () => {
   describe('DOM Tests', () => {
     let fixture: ComponentFixture<NameInputComponent>
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [NameInputComponent],
         imports: commonTestingModules.concat(FieldErrorModule),

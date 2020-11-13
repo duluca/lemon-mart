@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing'
+import { TestBed, waitForAsync } from '@angular/core/testing'
 import { MediaObserver } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
@@ -21,7 +21,7 @@ import {
 describe('AppComponent', () => {
   let authServiceMock: jasmine.SpyObj<AuthService>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const authServiceSpy = autoSpyObj(
       AuthService,
       ['authStatus$'],
@@ -43,13 +43,13 @@ describe('AppComponent', () => {
     authServiceMock.authStatus$.next(defaultAuthStatus)
   }))
 
-  it('should create the app', async(() => {
+  it('should create the app', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent)
     const app = fixture.debugElement.componentInstance
     expect(app).toBeTruthy()
   }))
 
-  it('should render app-container', async(() => {
+  it('should render app-container', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent)
     fixture.detectChanges()
     const compiled = fixture.debugElement.nativeElement

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { ReceiptLookupComponent } from './receipt-lookup.component'
 
@@ -6,7 +6,7 @@ describe('ReceiptLookupComponent', () => {
   let component: ReceiptLookupComponent
   let fixture: ComponentFixture<ReceiptLookupComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReceiptLookupComponent],
     }).compileComponents()
