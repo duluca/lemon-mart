@@ -17,7 +17,7 @@ commands:
       - when:
           condition: << parameters.warm-cache >>
           steps:
-            - run: npm install
+            - run: npm ci
             # Pre-build Angular modules
             - run: npx ngcc --properties es2015
             # force update the webdriver, so it runs with latest version of Chrome
@@ -46,7 +46,6 @@ commands:
       - when:
           condition: << parameters.run-tests >>
           steps:
-            - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
             - run: npx ng test --code-coverage --watch=false --project << parameters.project >>
             - run: npx ng e2e << parameters.project >>
   store:
