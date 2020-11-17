@@ -56,6 +56,9 @@ commands:
         type: string
         default: 'lemon-mart'
     steps:
+      - run:
+          name: Run BigTest
+          command: 'npx bigtest ci'
       # - run:
       #     name: Run Cypress tests
       #     command: 'npx cypress run --record'
