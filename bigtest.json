@@ -13,5 +13,5 @@
   "testFiles": [
     "bigtest/**/*.test.{ts,js}"
   ],
-  "tsconfig": "./tsconfig.bigtest.ts"
+  "tsconfig": "./tsconfig.bigtest.json"
 }
