@@ -1,6 +1,8 @@
+import 'firebase/auth'
+
 import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
-import { User as FirebaseUser } from 'firebase'
+import firebase from 'firebase/app'
 import { Observable, Subject } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -34,7 +36,7 @@ export class FirebaseAuthService extends AuthService {
 
     this.afAuth.signInWithEmailAndPassword(email, password).then(
       (res) => {
-        const firebaseUser: FirebaseUser | null = res.user
+        const firebaseUser: firebase.User | null = res.user
         firebaseUser?.getIdToken().then(
           (token) => serverResponse$.next({ accessToken: token } as IServerAuthResponse),
           (err) => serverResponse$.error(err)
@@ -62,7 +64,7 @@ export class FirebaseAuthService extends AuthService {
     return this.afAuth.user.pipe(map(this.transformFirebaseUser))
   }
 
-  private transformFirebaseUser(firebaseUser: FirebaseUser): User {
+  private transformFirebaseUser(firebaseUser: firebase.User): User {
     if (!firebaseUser) {
       return new User()
     }

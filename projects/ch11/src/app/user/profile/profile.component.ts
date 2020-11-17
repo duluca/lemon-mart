@@ -26,7 +26,8 @@ import { IUSState, USStateFilter } from './data'
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent extends BaseFormDirective<IUser>
+export class ProfileComponent
+  extends BaseFormDirective<IUser>
   implements OnInit, OnDestroy {
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole

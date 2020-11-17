@@ -80,7 +80,7 @@ import { AuthService } from './auth/auth.service'
         </mat-sidenav-content>
       </mat-sidenav-container>
     </div>
-  `
+  `,
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subs = new SubSink()
