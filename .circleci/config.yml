@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   coveralls: coveralls/coveralls@1.0.4
-  cypress: cypress-io/cypress@1
+  # cypress: cypress-io/cypress@1
 commands:
   install:
     description: 'Install project dependencies'
@@ -26,7 +26,7 @@ commands:
                 key: node_modules-{{ checksum "package-lock.json" }}
                 paths:
                   - node_modules
-                  - ~/.cache/Cypress
+                  # - ~/.cache/Cypress
   lint:
     description: 'Check for code style and linting errors'
     steps:
@@ -56,9 +56,9 @@ commands:
         type: string
         default: 'lemon-mart'
     steps:
-      - run:
-          name: Run Cypress tests
-          command: 'npx cypress run --record'
+      # - run:
+      #     name: Run Cypress tests
+      #     command: 'npx cypress run --record'
 
       - store_test_results:
           path: ./test_results
@@ -185,27 +185,27 @@ workflows:
       - default:
           requires:
             - initialize
-      - ch7: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch8: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch10: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch11: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch12: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch13: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - ch14: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
+      # - ch7: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
+      # - ch8: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
+      # - ch10: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
+      # - ch11: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
+      # - ch12: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
+      # - ch13: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
+      # - ch14: # this job is only here to verify sample code from the book, remove it in your own projects
+      #     requires:
+      #       - initialize
       - deploy:
           requires:
             - default
