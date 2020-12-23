@@ -47,3 +47,4 @@ cache
 .firebase
 cypress
 *.tar**
+.bigtest
