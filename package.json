@@ -60,18 +60,18 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "11.0.0",
+    "@angular/animations": "12.0.0-next.8",
     "@angular/cdk": "11.0.0",
-    "@angular/common": "11.0.0",
-    "@angular/compiler": "11.0.0",
-    "@angular/core": "11.0.0",
+    "@angular/common": "12.0.0-next.8",
+    "@angular/compiler": "12.0.0-next.8",
+    "@angular/core": "12.0.0-next.8",
     "@angular/fire": "^6.1.0-rc.2",
     "@angular/flex-layout": "^11.0.0-beta.33",
-    "@angular/forms": "11.0.0",
+    "@angular/forms": "12.0.0-next.8",
     "@angular/material": "11.0.0",
-    "@angular/platform-browser": "11.0.0",
-    "@angular/platform-browser-dynamic": "11.0.0",
-    "@angular/router": "11.0.0",
+    "@angular/platform-browser": "12.0.0-next.8",
+    "@angular/platform-browser-dynamic": "12.0.0-next.8",
+    "@angular/router": "12.0.0-next.8",
     "@ngrx/data": "^10.0.1",
     "@ngrx/effects": "^10.0.1",
     "@ngrx/entity": "^10.0.1",
@@ -84,13 +84,13 @@
     "subsink": "^1.0.1",
     "ts-enum-util": "^4.0.2",
     "tslib": "^2.0.3",
-    "zone.js": "^0.10.3"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1100.1",
-    "@angular/cli": "11.0.1",
-    "@angular/compiler-cli": "11.0.0",
-    "@angular/language-service": "11.0.0",
+    "@angular-devkit/build-angular": "~0.1200.0-next.8",
+    "@angular/cli": "12.0.0-next.8",
+    "@angular/compiler-cli": "12.0.0-next.8",
+    "@angular/language-service": "12.0.0-next.8",
     "@types/jasmine": "~3.6.1",
     "@types/jasminewd2": "~2.0.8",
     "@types/jsonwebtoken": "^8.5.0",
@@ -111,7 +111,7 @@
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
     "js-beautify": "^1.13.0",
-    "karma": "~5.2.3",
+    "karma": "~6.3.2",
     "karma-chrome-launcher": "~3.1.0",
     "karma-cli": "~2.0.0",
     "karma-coverage-istanbul-reporter": "~3.0.3",
@@ -130,7 +130,7 @@
     "tslint-etc": "^1.13.7",
     "tslint-plugin-prettier": "^2.3.0",
     "tsutils": "^3.17.1",
-    "typescript": "^4.0.5"
+    "typescript": "^4.2.4"
   },
   "importSort": {
     ".ts, .tsx": {
