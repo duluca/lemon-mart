@@ -49,7 +49,7 @@ export abstract class BaseFormDirective<TFormData extends object> {
   }
 
   protected deregisterAllForms() {
-    this.registeredForms.forEach(() => this.deregisterForm(name))
+    this.registeredForms.forEach((name) => this.deregisterForm(name))
   }
 
   protected hasChanged(change: SimpleChange): boolean {
