@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay'
 import { NgModule } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
@@ -27,9 +28,10 @@ const modules = [
   MatSnackBarModule,
   MatExpansionModule,
   MatGridListModule,
+  OverlayModule,
 ] as any[]
 
 @NgModule({
   exports: modules,
 })
-export class AppMaterialModule {}
+export class AppMaterialModule { }

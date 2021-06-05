@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatSort, SortDirection } from '@angular/material/sort'
 import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
+import { UiService } from 'src/app/common/ui.service'
 import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
@@ -36,7 +37,8 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
 
   constructor(
     private userService: UserService,
-    private userEntityService: UserEntityService
+    private userEntityService: UserEntityService,
+    private uiService: UiService
   ) {
     this.loading$ = merge(this.userEntityService.loading$, this.isLoadingResults$)
   }
@@ -71,7 +73,13 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.subs.sink = this.sort.sortChange.subscribe(() => this.paginator.firstPage())
-
+    this.subs.sink = this.loading$.subscribe((loading) => {
+      if (loading) {
+        this.uiService.showSpinner()
+      } else {
+        this.uiService.closeSpinner()
+      }
+    })
     if (this.skipLoading) {
       return
     }
@@ -97,7 +105,6 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
         this.isLoadingResults$.next(false)
         this.hasError = false
         this.resultsLength = results.total
-
         return results.data
       }),
       catchError((err) => {

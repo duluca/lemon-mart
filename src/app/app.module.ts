@@ -20,6 +20,7 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor'
 import { authFactory } from './auth/auth.factory'
 import { AuthService } from './auth/auth.service'
 import { SimpleDialogComponent } from './common/simple-dialog.component'
+import { SpinnerComponent } from './common/spinner.component'
 import { entityConfig } from './entity-metadata'
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
@@ -39,6 +40,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     LoginComponent,
     NavigationMenuComponent,
     SimpleDialogComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SimpleDialogComponent],
+  entryComponents: [SimpleDialogComponent, SpinnerComponent],
 })
-export class AppModule {}
+export class AppModule { }
