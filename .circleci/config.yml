@@ -42,7 +42,7 @@ commands:
         type: boolean
         default: true
     steps:
-      - run: npx ng build --prod --project << parameters.project >>
+      - run: npx ng build --configuration production --project << parameters.project >>
       - when:
           condition: << parameters.run-tests >>
           steps:
@@ -95,7 +95,7 @@ commands:
     steps:
       - attach_workspace:
           at: /tmp/workspace
-      - run: npx now --token $NOW_TOKEN --platform-version 2 --prod /tmp/workspace/dist/<< parameters.project >> --confirm
+      - run: npx now --token $NOW_TOKEN --platform-version 2 --configuration production /tmp/workspace/dist/<< parameters.project >> --confirm
 jobs:
   initialize:
     docker:
