@@ -4,7 +4,7 @@
 
 ![Angular Version](https://img.shields.io/badge/angular-v11-326839)
 [![CircleCI](https://circleci.com/gh/duluca/lemon-mart.svg?style=svg)](https://circleci.com/gh/duluca/lemon-mart)
-[![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=master)](https://coveralls.io/github/duluca/lemon-mart?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=main)](https://coveralls.io/github/duluca/lemon-mart?branch=main)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)
 
 ![devs served](https://img.shields.io/badge/devs%20served-17%2C280-F3DE48)
@@ -54,9 +54,9 @@ https://github.com/duluca/lemon-mart/wiki.
 
 For demonstration purposes the login screen shows the _Authentication Mode_ of the app. There are three modes:
 
-- InMemory: [auth.inmemory.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.inmemory.service.ts)
-- Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.custom.service.ts)
-- Firebase: [auth.firebase.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.firebase.service.ts)
+- InMemory: [auth.inmemory.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.inmemory.service.ts)
+- Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.custom.service.ts)
+- Firebase: [auth.firebase.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.firebase.service.ts)
 
 The current mode can be adjusted in `environment.ts`. You can see how each mode is implemented in the link source files above.
 
@@ -137,3 +137,16 @@ If you'd like to use this project as a starter or a template project for your pr
 ### Full-Stack Setup with Docker Compose and Deploying to AWS
 
 See the example project here https://github.com/duluca/lemon-mart-server
+
+## Deprecations
+
+### Renamed `master` branch to `main`
+
+If you already have a `master` branch locally, then execute the following commands:
+
+```
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
