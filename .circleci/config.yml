@@ -86,8 +86,8 @@ commands:
           root: /tmp/workspace
           paths:
             - dist/<< parameters.project >>
-  deploy_now:
-    description: 'Deploys project to Zeit Now --> https://now.sh'
+  deploy_vercel:
+    description: 'Deploys project to Vercel --> https://vercel.com'
     parameters:
       project:
         type: string
@@ -95,7 +95,7 @@ commands:
     steps:
       - attach_workspace:
           at: /tmp/workspace
-      - run: npx now --token $NOW_TOKEN --platform-version 2 --configuration production /tmp/workspace/dist/<< parameters.project >> --confirm
+      - run: npx vercel --token $VERCEL_TOKEN --platform-version 2 --configuration production /tmp/workspace/dist/<< parameters.project >> --confirm
 jobs:
   initialize:
     docker:
@@ -118,7 +118,7 @@ jobs:
       - image: circleci/node:lts
     working_directory: ~/repo
     steps:
-      - deploy_now
+      - deploy_vercel
 
   ch7: # this job is only here to verify sample code from the book, remove it in your own projects
     docker:
