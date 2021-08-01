@@ -11,7 +11,7 @@ import { AbstractControl, FormGroup } from '@angular/forms'
 @Directive()
 export abstract class BaseFormDirective<TFormData extends object> {
   @Input() initialData!: TFormData
-  @Input() disable: boolean = false
+  @Input() disable = false
   @Output() formReady: EventEmitter<AbstractControl>
   formGroup!: FormGroup
 

@@ -19,7 +19,7 @@ declare let dataLayer: IEvent[]
 })
 export class PosComponent implements OnInit, OnDestroy {
   private subs = new SubSink()
-  currentTransaction: ITransaction
+  currentTransaction!: ITransaction
   constructor(
     private transactionService: TransactionService,
     private uiService: UiService

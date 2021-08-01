@@ -17,7 +17,7 @@ import { IUsers, UserService } from '../../user/user/user.service'
 })
 export class UserTableComponent implements OnDestroy, AfterViewInit {
   displayedColumns = ['name', 'email', 'role', '_id']
-  items$: Observable<IUser[]>
+  items$!: Observable<IUser[]>
   resultsLength = 0
   hasError = false
   errorText = ''
@@ -29,8 +29,8 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
 
   search = new FormControl('', OptionalTextValidation)
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
-  @ViewChild(MatSort, { static: false }) sort: MatSort
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
+  @ViewChild(MatSort, { static: false }) sort!: MatSort
 
   constructor(private userService: UserService) {
     this.loading$ = this.isLoadingResults$

@@ -23,7 +23,7 @@ export class LemonRaterComponent implements ControlValueAccessor, AfterViewInit 
   @ViewChild('displayText', { static: false }) displayTextRef!: ElementRef
   disabled = false
 
-  private internalValue: number = 0
+  private internalValue = 0
   get value() {
     return this.internalValue
   }

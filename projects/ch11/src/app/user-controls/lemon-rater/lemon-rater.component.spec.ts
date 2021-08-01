@@ -9,7 +9,7 @@ import { LemonRaterComponent } from './lemon-rater.component'
 })
 class TestHostComponent {
   @ViewChild(LemonRaterComponent, { static: true })
-  public LemonRaterComponent: LemonRaterComponent
+  public LemonRaterComponent!: LemonRaterComponent
 
   public rating: FormControl = new FormControl({ value: null, disabled: false })
 }

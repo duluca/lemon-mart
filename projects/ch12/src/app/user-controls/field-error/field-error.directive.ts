@@ -15,15 +15,16 @@ export const ErrorSets: { [key: string]: ValidationError[] } = {
   selector: '[appFieldError]',
 })
 export class FieldErrorDirective implements OnDestroy, OnChanges {
-  @Input() appFieldError:
+  @Input()
+  appFieldError!:
     | ValidationError
     | ValidationError[]
     | { error: ValidationError; message: string }
     | { error: ValidationError; message: string }[]
   @Input() input: HTMLInputElement | undefined
-  @Input() group: FormGroup
+  @Input() group!: FormGroup
 
-  @Input() fieldControl: AbstractControl | null
+  @Input() fieldControl!: AbstractControl | null
   @Input() fieldLabel: string | undefined
 
   private controlSubscription: Subscription | undefined

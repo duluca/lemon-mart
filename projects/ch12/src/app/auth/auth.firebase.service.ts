@@ -64,7 +64,7 @@ export class FirebaseAuthService extends AuthService {
     return this.afAuth.user.pipe(map(this.transformFirebaseUser))
   }
 
-  private transformFirebaseUser(firebaseUser: firebase.User): User {
+  private transformFirebaseUser(firebaseUser: firebase.User | null): User {
     if (!firebaseUser) {
       return new User()
     }

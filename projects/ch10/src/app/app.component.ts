@@ -84,7 +84,8 @@ import { AuthService } from './auth/auth.service'
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subs = new SubSink()
-  opened: boolean
+  opened = false
+
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,

@@ -10,10 +10,10 @@ import { AbstractControl, FormGroup } from '@angular/forms'
 
 @Directive()
 export abstract class BaseFormDirective<TFormData extends object> {
-  @Input() initialData: TFormData
-  @Input() disable: boolean
+  @Input() initialData!: TFormData
+  @Input() disable = false
   @Output() formReady: EventEmitter<AbstractControl>
-  formGroup: FormGroup
+  formGroup!: FormGroup
 
   private registeredForms: string[] = []
 

@@ -28,9 +28,9 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private subs = new SubSink()
-  loginForm: FormGroup
+  loginForm!: FormGroup
   loginError = ''
-  redirectUrl: string
+  redirectUrl: string | undefined
   roles = Object.keys(Role)
   constructor(
     private formBuilder: FormBuilder,

@@ -2,6 +2,8 @@
 
 > LemonMart was implemented with a [Route-first approach](https://techtalkdc.com/router-first-architecture-in-spas/) to designing SPAs.
 
+> See [Changes](#changes) section for important or breaking changes made to the project.
+
 ![Angular Version](https://img.shields.io/badge/angular-v11-326839)
 [![CircleCI](https://circleci.com/gh/duluca/lemon-mart.svg?style=svg)](https://circleci.com/gh/duluca/lemon-mart)
 [![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=main)](https://coveralls.io/github/duluca/lemon-mart?branch=main)
@@ -138,9 +140,19 @@ If you'd like to use this project as a starter or a template project for your pr
 
 See the example project here https://github.com/duluca/lemon-mart-server
 
-## Deprecations
+# Changes
 
-### Renamed `master` branch to `main`
+Changes are inevitable to keep the project up-to-date with libraries, tools, patterns and practices. Below are some notable changes that differ from the 1st and 2nd edition of my book.
+
+## Angular 12 configuration changes
+
+- Enabled bundle budgets
+- Introduction `development` configuration
+- Made `production` configuration the default one
+- Added `npm run watch` command
+- Strict settings on by default
+
+## Renamed `master` branch to `main`
 
 If you already have a `master` branch locally, then execute the following commands:
 
