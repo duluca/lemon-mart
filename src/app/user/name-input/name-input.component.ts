@@ -58,7 +58,7 @@ export class NameInputComponent
     this.formReady.emit(this.formGroup)
   }
 
-  buildForm(initialData?: IName): FormGroup {
+  buildForm(initialData?: IName | null): FormGroup {
     const name = initialData
     return this.formBuilder.group({
       first: [name?.first || '', RequiredTextValidation],

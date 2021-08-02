@@ -77,7 +77,7 @@ export class ProfileComponent
 
   private subs = new SubSink()
 
-  currentUserId: string
+  currentUserId!: string
 
   ngOnInit() {
     this.formGroup = this.buildForm()

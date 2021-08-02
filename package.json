@@ -1,6 +1,6 @@
 {
   "name": "lemon-mart",
-  "version": "11.0.0",
+  "version": "12.0.0",
   "license": "MIT",
   "config": {
     "imageRepo": "073020584345.dkr.ecr.us-east-1.amazonaws.com/lemon-mart",
@@ -21,6 +21,7 @@
     "style": "import-sort -l \"**/{src,tests,e2e}/**/*.ts\" && prettier --check \"**/{src,tests,e2e}/**/*.{*css,ts}\"",
     "start": "ng serve --port 5000",
     "build": "ng build",
+    "watch": "ng build --watch --configuration development",
     "test": "ng test lemon-mart --browsers Chrome",
     "test:debug": "npm test -- --browsers Chrome --source-map",
     "lint": "run-p lint:ts lint:tsc",

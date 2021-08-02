@@ -30,11 +30,11 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
   Role = Role
   PhoneType = PhoneType
   PhoneTypes = $enum(PhoneType).getKeys()
-  formGroup: FormGroup
-  states$: Observable<IUSState[]>
+  formGroup!: FormGroup
+  states$!: Observable<IUSState[]>
   userError = ''
   ErrorSets = ErrorSets
-  currentUserId: string
+  currentUserId!: string
 
   now = new Date()
   minDate = new Date(
