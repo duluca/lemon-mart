@@ -2,9 +2,11 @@
 
 > LemonMart was implemented with a [Route-first approach](https://techtalkdc.com/router-first-architecture-in-spas/) to designing SPAs.
 
-![Angular Version](https://img.shields.io/badge/angular-v11-326839)
+> See [Changes](#changes) section for important or breaking changes made to the project.
+
+![Angular Version](https://img.shields.io/badge/angular-v12-326839)
 [![CircleCI](https://circleci.com/gh/duluca/lemon-mart.svg?style=svg)](https://circleci.com/gh/duluca/lemon-mart)
-[![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=master)](https://coveralls.io/github/duluca/lemon-mart?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=main)](https://coveralls.io/github/duluca/lemon-mart?branch=main)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)
 
 ![devs served](https://img.shields.io/badge/devs%20served-17%2C280-F3DE48)
@@ -48,15 +50,15 @@ https://github.com/duluca/lemon-mart/wiki.
 
 - `npm run build:prod` to build a production optimized version of the app.
 - `npm run docker:debug` to run tests and build a containerized version of the app.
-- `integration.Dockerfile` is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Zeit Now and Azure.
+- `integration.Dockerfile` is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Vercel and Azure.
 
 ### Authentication
 
 For demonstration purposes the login screen shows the _Authentication Mode_ of the app. There are three modes:
 
-- InMemory: [auth.inmemory.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.inmemory.service.ts)
-- Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.custom.service.ts)
-- Firebase: [auth.firebase.service.ts](https://github.com/duluca/lemon-mart/blob/master/src/app/auth/auth.firebase.service.ts)
+- InMemory: [auth.inmemory.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.inmemory.service.ts)
+- Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.custom.service.ts)
+- Firebase: [auth.firebase.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.firebase.service.ts)
 
 The current mode can be adjusted in `environment.ts`. You can see how each mode is implemented in the link source files above.
 
@@ -68,7 +70,7 @@ There are 3 build configurations that maps to authentication modes:
 
 1. Production:
 
-Executing `npm run build:prod` or `npx ng build --prod` or `npx ng build --configuration=production` leverages `InMemory` authentication. Note that the fake credentials are documented on the Login screen.
+Executing `npm run build:prod` or `npx ng build --configuration production` or `npx ng build --configuration=production` leverages `InMemory` authentication. Note that the fake credentials are documented on the Login screen.
 
 2. Firebase:
 
@@ -137,3 +139,32 @@ If you'd like to use this project as a starter or a template project for your pr
 ### Full-Stack Setup with Docker Compose and Deploying to AWS
 
 See the example project here https://github.com/duluca/lemon-mart-server
+
+# Changes
+
+Changes are inevitable to keep the project up-to-date with libraries, tools, patterns and practices. Below are some notable changes that differ from the 1st and 2nd edition of my book.
+
+## Angular 12 configuration changes
+
+- Enabled bundle budgets
+- Introduction `development` configuration
+- Made `production` configuration the default one
+- Added `npm run watch` command
+- Strict settings on by default
+- When using `mat-table` the `[dataSource]` property should NOT be set using an `async` pipe. Correct use is `[dataSource]="items$"`. See `user-table.component.html`.
+- Use of `FormGroupName` in `profile.component.html`
+
+## Renamed `master` branch to `main`
+
+If you already have a `master` branch locally, then execute the following commands:
+
+```
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
+
+## Augury
+
+- `Augury` extension is deprecated. Get use `Angular DevTools` instead: https://angular.io/guide/devtools.

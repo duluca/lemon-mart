@@ -20,10 +20,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
   ],
 })
 export class LemonRaterComponent implements ControlValueAccessor, AfterViewInit {
-  @ViewChild('displayText', { static: false }) displayTextRef: ElementRef
+  @ViewChild('displayText', { static: false }) displayTextRef!: ElementRef
   disabled = false
 
-  private internalValue: number
+  private internalValue!: number
   get value() {
     return this.internalValue
   }

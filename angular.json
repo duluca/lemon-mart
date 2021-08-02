@@ -39,7 +39,14 @@
               "src/lemonmart-theme.scss",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -126,7 +133,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -210,7 +218,6 @@
             "main": "projects/ch7/src/main.ts",
             "polyfills": "projects/ch7/src/polyfills.ts",
             "tsConfig": "projects/ch7/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ch7/src/favicon.ico",
               "projects/ch7/src/assets",
@@ -232,7 +239,13 @@
               "projects/ch7/src/lemonmart-theme.scss",
               "projects/ch7/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -262,7 +275,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -336,7 +350,6 @@
             "main": "projects/ch8/src/main.ts",
             "polyfills": "projects/ch8/src/polyfills.ts",
             "tsConfig": "projects/ch8/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ch8/src/favicon.ico",
               "projects/ch8/src/assets",
@@ -358,7 +371,13 @@
               "projects/ch8/src/lemonmart-theme.scss",
               "projects/ch8/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -388,7 +407,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -462,7 +482,6 @@
             "main": "projects/ch10/src/main.ts",
             "polyfills": "projects/ch10/src/polyfills.ts",
             "tsConfig": "projects/ch10/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ch10/src/favicon.ico",
               "projects/ch10/src/assets",
@@ -484,7 +503,13 @@
               "projects/ch10/src/lemonmart-theme.scss",
               "projects/ch10/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -514,7 +539,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -588,7 +614,6 @@
             "main": "projects/ch11/src/main.ts",
             "polyfills": "projects/ch11/src/polyfills.ts",
             "tsConfig": "projects/ch11/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ch11/src/favicon.ico",
               "projects/ch11/src/assets",
@@ -610,7 +635,13 @@
               "projects/ch11/src/lemonmart-theme.scss",
               "projects/ch11/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -640,7 +671,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -714,7 +746,6 @@
             "main": "projects/ch12/src/main.ts",
             "polyfills": "projects/ch12/src/polyfills.ts",
             "tsConfig": "projects/ch12/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ch12/src/favicon.ico",
               "projects/ch12/src/assets",
@@ -736,7 +767,13 @@
               "projects/ch12/src/lemonmart-theme.scss",
               "projects/ch12/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -766,7 +803,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -840,7 +878,6 @@
             "main": "projects/ch13/src/main.ts",
             "polyfills": "projects/ch13/src/polyfills.ts",
             "tsConfig": "projects/ch13/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ch13/src/favicon.ico",
               "projects/ch13/src/assets",
@@ -862,7 +899,13 @@
               "projects/ch13/src/lemonmart-theme.scss",
               "projects/ch13/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -892,7 +935,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -966,7 +1010,6 @@
             "main": "projects/ch14/src/main.ts",
             "polyfills": "projects/ch14/src/polyfills.ts",
             "tsConfig": "projects/ch14/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ch14/src/favicon.ico",
               "projects/ch14/src/assets",
@@ -988,7 +1031,13 @@
               "projects/ch14/src/lemonmart-theme.scss",
               "projects/ch14/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1018,7 +1067,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

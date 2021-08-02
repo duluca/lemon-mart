@@ -6,7 +6,7 @@
     <form [formGroup]="formGroup">
       <ng-template matStepLabel>Account Information</ng-template>
       <div class="stepContent">
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('name')"
+        <div fxLayout="row" fxLayout.lt-sm="column" formGroupName="name"
           fxLayoutGap="10px">
           <!-- Initial implementation of the name row with repeating mat-error elements -->
           <!-- <mat-form-field appearance="outline" fxFlex="40%">
@@ -125,56 +125,57 @@
     <form [formGroup]="formGroup">
       <ng-template matStepLabel>Contact Information</ng-template>
       <div class="stepContent">
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')"
-          fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex>
-            <mat-label>Address Line 1</mat-label>
-            <input matInput aria-label="Address Line 1" formControlName="line1" #line1 />
-            <mat-error [input]="line1" [group]="formGroup.get('address')"
-              [appFieldError]="ErrorSets.RequiredText">
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')"
-          fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex>
-            <mat-label>Line 2</mat-label>
-            <input matInput aria-label="Address Line 2" formControlName="line2" #line2 />
-            <mat-hint>Optional</mat-hint>
-            <mat-error [input]="line2" [group]="formGroup.get('address')"
-              [appFieldError]="ErrorSets.OptionalText">
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayout.lt-sm="column" [formGroup]="formGroup.get('address')"
-          fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex="40%">
-            <mat-label>City</mat-label>
-            <input matInput aria-label="City" formControlName="city" #city />
-            <mat-error [input]="city" [group]="formGroup.get('address')"
-              [appFieldError]="ErrorSets.RequiredText">
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline" fxFlex="30%">
-            <mat-label>State</mat-label>
-            <input type="text" aria-label="State" matInput formControlName="state"
-              [matAutocomplete]="stateAuto" #state />
-            <mat-autocomplete #stateAuto="matAutocomplete">
-              <mat-option *ngFor="let state of (states$ | async)" [value]="state.name">
-                {{ state.name }}
-              </mat-option>
-            </mat-autocomplete>
-            <mat-error [input]="state" [group]="formGroup.get('address')"
-              appFieldError="required">
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline" fxFlex="30%">
-            <mat-label>Zip Code</mat-label>
-            <input matInput aria-label="Zip Code" formControlName="zip" #zip />
-            <mat-error [input]="zip" [group]="formGroup.get('address')"
-              appFieldError="invalid">
-            </mat-error>
-          </mat-form-field>
+        <div formGroupName="address">
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+            <mat-form-field appearance="outline" fxFlex>
+              <mat-label>Address Line 1</mat-label>
+              <input matInput aria-label="Address Line 1" formControlName="line1"
+                #line1 />
+              <mat-error [input]="line1" [group]="formGroup.get('address')"
+                [appFieldError]="ErrorSets.RequiredText">
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+            <mat-form-field appearance="outline" fxFlex>
+              <mat-label>Line 2</mat-label>
+              <input matInput aria-label="Address Line 2" formControlName="line2"
+                #line2 />
+              <mat-hint>Optional</mat-hint>
+              <mat-error [input]="line2" [group]="formGroup.get('address')"
+                [appFieldError]="ErrorSets.OptionalText">
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+            <mat-form-field appearance="outline" fxFlex="40%">
+              <mat-label>City</mat-label>
+              <input matInput aria-label="City" formControlName="city" #city />
+              <mat-error [input]="city" [group]="formGroup.get('address')"
+                [appFieldError]="ErrorSets.RequiredText">
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex="30%">
+              <mat-label>State</mat-label>
+              <input type="text" aria-label="State" matInput formControlName="state"
+                [matAutocomplete]="stateAuto" #state />
+              <mat-autocomplete #stateAuto="matAutocomplete">
+                <mat-option *ngFor="let state of (states$ | async)" [value]="state.name">
+                  {{ state.name }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error [input]="state" [group]="formGroup.get('address')"
+                appFieldError="required">
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex="30%">
+              <mat-label>Zip Code</mat-label>
+              <input matInput aria-label="Zip Code" formControlName="zip" #zip />
+              <mat-error [input]="zip" [group]="formGroup.get('address')"
+                appFieldError="invalid">
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column">
           <mat-list formArrayName="phones">
