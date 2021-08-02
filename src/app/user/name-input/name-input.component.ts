@@ -40,7 +40,8 @@ import { IName } from '../user/user'
 })
 export class NameInputComponent
   extends BaseFormDirective<IName>
-  implements OnInit, OnChanges {
+  implements OnInit, OnChanges
+{
   ErrorSets = ErrorSets
 
   constructor(private formBuilder: FormBuilder) {
