@@ -12,8 +12,8 @@
     "awsService": "lemon-mart-service"
   },
   "engines": {
-    "node": "10.15",
-    "npm": "6.0.1"
+    "node": "14",
+    "npm": "7"
   },
   "scripts": {
     "ng": "ng",
