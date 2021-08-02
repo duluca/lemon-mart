@@ -1,24 +1,24 @@
+@use '~@angular/material' as mat;
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$lemon-mart-primary: mat-palette($mat-green, 800);
-$lemon-mart-accent: mat-palette($mat-lime, A400);
+$lemon-mart-primary: mat.define-palette(mat.$green-palette, 800);
+$lemon-mart-accent: mat.define-palette(mat.$lime-palette, A400);
 
 // The warn palette is optional (defaults to red).
-$lemon-mart-warn: mat-palette($mat-red);
+$lemon-mart-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$lemon-mart-theme: mat-light-theme(
+$lemon-mart-theme: mat.define-light-theme(
   $lemon-mart-primary,
   $lemon-mart-accent,
   $lemon-mart-warn
@@ -27,4 +27,4 @@ $lemon-mart-theme: mat-light-theme(
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($lemon-mart-theme);
+@include mat.all-component-themes($lemon-mart-theme);
