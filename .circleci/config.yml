@@ -42,7 +42,7 @@ commands:
         type: boolean
         default: true
     steps:
-      - run: npx ng build --prod --project << parameters.project >>
+      - run: npx ng build --configuration production --project << parameters.project >>
       - when:
           condition: << parameters.run-tests >>
           steps:

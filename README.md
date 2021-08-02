@@ -68,9 +68,9 @@ There are 3 build configurations that maps to authentication modes:
 
 1. Production:
 
-Executing `npm run build:prod` or `npx ng build --prod` or `npx ng build --configuration=production` leverages `InMemory` authentication. Note that the fake credentials are documented on the Login screen.
+Executing `npm run build:prod` or `npx ng build --configuration=production` leverages `InMemory` authentication. Note that the fake credentials are documented on the Login screen.
 
-2. Firebase:
+1. Firebase:
 
 Executing `npx ng build --configuration=firebase` leverages `Firebase` authentication. For this to work, you must setup your own Firebase back-end and create a user in the Firebase console.
 
