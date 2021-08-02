@@ -13,7 +13,7 @@ fs.readdirSync(root).forEach((module) => {
 
   const project = ['--project', module]
 
-  const build = ['ng', 'build', '--prod'].concat(project)
+  const build = ['ng', 'build', '--configuration production'].concat(project)
   const test = ['ng', 'test', '--watch=false'].concat(project)
   const e2e = ['ng', 'e2e', module]
 
