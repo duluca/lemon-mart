@@ -10,7 +10,7 @@ import { AbstractControl, FormGroup } from '@angular/forms'
 
 @Directive()
 export abstract class BaseFormDirective<TFormData extends object> {
-  @Input() initialData!: TFormData
+  @Input() initialData?: TFormData
   @Input() disable = false
   @Output() formReady: EventEmitter<AbstractControl>
   formGroup!: FormGroup
@@ -23,8 +23,10 @@ export abstract class BaseFormDirective<TFormData extends object> {
 
   abstract buildForm(initialData?: TFormData): FormGroup
 
-  patchUpdatedData(data: object) {
-    this.formGroup.patchValue(data, { onlySelf: false })
+  patchUpdatedData(data?: object) {
+    if (data) {
+      this.formGroup.patchValue(data, { onlySelf: false })
+    }
   }
 
   patchUpdatedDataIfChanged(changes: SimpleChanges) {

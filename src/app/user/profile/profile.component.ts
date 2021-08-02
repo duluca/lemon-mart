@@ -29,8 +29,7 @@ import { IUSState, USStateFilter } from './data'
 })
 export class ProfileComponent
   extends BaseFormDirective<IUser>
-  implements OnInit, OnDestroy
-{
+  implements OnInit, OnDestroy {
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
   }
@@ -46,11 +45,11 @@ export class ProfileComponent
   }
 
   get phonesArray(): FormArray {
-    return this.formGroup.get('phones') as FormArray
+    return this.formGroup?.get('phones') as FormArray
   }
 
   get dateOfBirth() {
-    return this.formGroup.get('dateOfBirth')?.value || this.now
+    return this.formGroup?.get('dateOfBirth')?.value || this.now
   }
 
   get age() {
@@ -80,7 +79,7 @@ export class ProfileComponent
   currentUserId!: string
 
   ngOnInit() {
-    this.formGroup = this.buildForm()
+    this.formGroup = this.buildForm(null)
 
     if (this.route.snapshot.data.user) {
       this.patchUser(this.route.snapshot.data.user)
@@ -110,7 +109,7 @@ export class ProfileComponent
     this.deregisterAllForms()
   }
 
-  buildForm(initialData?: IUser): FormGroup {
+  buildForm(initialData: IUser | null): FormGroup {
     const user = initialData
     this.currentUserId = user?._id || ''
     const form = this.formBuilder.group({

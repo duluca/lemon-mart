@@ -37,7 +37,7 @@ import { IUser, User } from '../user/user'
   ],
 })
 export class ViewUserComponent implements OnInit, OnChanges {
-  @Input() user: IUser | undefined | undefined
+  @Input() user: IUser | undefined
   readonly currentUser$ = new BehaviorSubject(new User())
 
   get editMode() {

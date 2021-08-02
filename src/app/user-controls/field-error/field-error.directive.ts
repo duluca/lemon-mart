@@ -22,7 +22,7 @@ export class FieldErrorDirective implements OnDestroy, OnChanges {
     | { error: ValidationError; message: string }
     | { error: ValidationError; message: string }[]
   @Input() input: HTMLInputElement | undefined
-  @Input() group!: FormGroup
+  @Input() group!: AbstractControl | null
 
   @Input() fieldControl!: AbstractControl | null
   @Input() fieldLabel: string | undefined

@@ -25,7 +25,7 @@
       {{ errorText }}
     </div>
   </div>
-  <table mat-table class="full-width" [dataSource]="items$ | async" matSort
+  <table mat-table class="full-width" [dataSource]="items$" matSort
     matSortActive="name" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
@@ -48,7 +48,7 @@
         <a mat-button mat-icon-button [routerLink]="[
             '/manager/users',
             { outlets: { detail: ['user', { userId: row._id }] } }
-          ]" skipLocationChange>
+          ]" [skipLocationChange]="true">
           <mat-icon>visibility</mat-icon>
         </a>
       </td>

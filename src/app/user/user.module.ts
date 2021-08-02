@@ -31,6 +31,6 @@ import { UserService } from './user/user.service'
     NgxMaskModule.forChild(),
   ],
   declarations: [ProfileComponent, LogoutComponent],
-  providers: [UserService, UserEntityService, AuthGuard, UserResolve],
+  providers: [UserEntityService, UserResolve],
 })
 export class UserModule {}

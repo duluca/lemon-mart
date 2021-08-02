@@ -40,8 +40,7 @@ import { IName } from '../user/user'
 })
 export class NameInputComponent
   extends BaseFormDirective<IName>
-  implements OnInit, OnChanges
-{
+  implements OnInit, OnChanges {
   ErrorSets = ErrorSets
 
   constructor(private formBuilder: FormBuilder) {
@@ -58,7 +57,7 @@ export class NameInputComponent
     this.formReady.emit(this.formGroup)
   }
 
-  buildForm(initialData?: IName): FormGroup {
+  buildForm(initialData: IName | null): FormGroup {
     const name = initialData
     return this.formBuilder.group({
       first: [name?.first || '', RequiredTextValidation],

@@ -151,6 +151,7 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 - Made `production` configuration the default one
 - Added `npm run watch` command
 - Strict settings on by default
+- When using `mat-table` the `[dataSource]` property should NOT be set using an `async` pipe. Correct use is `[dataSource]="items$"`. See `user-table.component.html`.
 
 ## Renamed `master` branch to `main`
 
@@ -162,3 +163,7 @@ git fetch origin
 git branch -u origin/main main
 git remote set-head origin -a
 ```
+
+## Augury
+
+- `Augury` extension is deprecated. Get use `Angular DevTools` instead: https://angular.io/guide/devtools.

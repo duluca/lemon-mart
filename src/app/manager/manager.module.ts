@@ -34,6 +34,6 @@ import { UserTableComponent } from './user-table/user-table.component'
     ReceiptLookupComponent,
     UserTableComponent,
   ],
-  providers: [AuthGuard, UserService, UserResolve],
+  providers: [UserResolve],
 })
 export class ManagerModule {}

@@ -8,7 +8,11 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -39,14 +43,7 @@
               "src/lemonmart-theme.scss",
               "src/styles.css"
             ],
-            "scripts": [],
-            "aot": false,
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -192,7 +189,11 @@
     },
     "ch7": {
       "projectType": "application",
-      "schematics": {},
+            "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "projects/ch7",
       "sourceRoot": "projects/ch7/src",
       "prefix": "app",
@@ -226,13 +227,7 @@
               "projects/ch7/src/lemonmart-theme.scss",
               "projects/ch7/src/styles.css"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -326,7 +321,11 @@
     },
     "ch8": {
       "projectType": "application",
-      "schematics": {},
+            "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "projects/ch8",
       "sourceRoot": "projects/ch8/src",
       "prefix": "app",
@@ -360,13 +359,7 @@
               "projects/ch8/src/lemonmart-theme.scss",
               "projects/ch8/src/styles.css"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -460,7 +453,11 @@
     },
     "ch10": {
       "projectType": "application",
-      "schematics": {},
+            "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "projects/ch10",
       "sourceRoot": "projects/ch10/src",
       "prefix": "app",
@@ -494,13 +491,7 @@
               "projects/ch10/src/lemonmart-theme.scss",
               "projects/ch10/src/styles.css"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -594,7 +585,11 @@
     },
     "ch11": {
       "projectType": "application",
-      "schematics": {},
+            "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "projects/ch11",
       "sourceRoot": "projects/ch11/src",
       "prefix": "app",
@@ -628,13 +623,7 @@
               "projects/ch11/src/lemonmart-theme.scss",
               "projects/ch11/src/styles.css"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -728,7 +717,11 @@
     },
     "ch12": {
       "projectType": "application",
-      "schematics": {},
+            "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "projects/ch12",
       "sourceRoot": "projects/ch12/src",
       "prefix": "app",
@@ -762,13 +755,7 @@
               "projects/ch12/src/lemonmart-theme.scss",
               "projects/ch12/src/styles.css"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -862,7 +849,11 @@
     },
     "ch13": {
       "projectType": "application",
-      "schematics": {},
+            "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "projects/ch13",
       "sourceRoot": "projects/ch13/src",
       "prefix": "app",
@@ -896,13 +887,7 @@
               "projects/ch13/src/lemonmart-theme.scss",
               "projects/ch13/src/styles.css"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -996,7 +981,11 @@
     },
     "ch14": {
       "projectType": "application",
-      "schematics": {},
+            "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "projects/ch14",
       "sourceRoot": "projects/ch14/src",
       "prefix": "app",
@@ -1030,13 +1019,7 @@
               "projects/ch14/src/lemonmart-theme.scss",
               "projects/ch14/src/styles.css"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
