@@ -73,7 +73,7 @@
     "@angular/platform-browser": "12.1.4",
     "@angular/platform-browser-dynamic": "12.1.4",
     "@angular/router": "12.1.4",
-    "@ngrx/data": "^12.3.0",
+    "@ngrx/data": "^12.4.0",
     "@ngrx/effects": "^12.3.0",
     "@ngrx/entity": "^12.3.0",
     "@ngrx/store": "^12.3.0",
