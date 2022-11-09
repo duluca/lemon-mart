@@ -1,6 +1,6 @@
 import { ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core'
 import { Directive } from '@angular/core'
-import { AbstractControl, FormGroup } from '@angular/forms'
+import { AbstractControl } from '@angular/forms'
 import { Subscription } from 'rxjs'
 import { filter, tap } from 'rxjs/operators'
 
@@ -15,15 +15,15 @@ export const ErrorSets: { [key: string]: ValidationError[] } = {
   selector: '[appFieldError]',
 })
 export class FieldErrorDirective implements OnDestroy, OnChanges {
-  @Input() appFieldError:
+  @Input() appFieldError!:
     | ValidationError
     | ValidationError[]
     | { error: ValidationError; message: string }
     | { error: ValidationError; message: string }[]
   @Input() input: HTMLInputElement | undefined
-  @Input() group: FormGroup
+  @Input() group!: AbstractControl | null
 
-  @Input() fieldControl: AbstractControl | null
+  @Input() fieldControl!: AbstractControl | null
   @Input() fieldLabel: string | undefined
 
   private controlSubscription: Subscription | undefined

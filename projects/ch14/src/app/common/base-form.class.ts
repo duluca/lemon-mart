@@ -10,10 +10,10 @@ import { AbstractControl, FormGroup } from '@angular/forms'
 
 @Directive()
 export abstract class BaseFormDirective<TFormData extends object> {
-  @Input() initialData: TFormData
-  @Input() disable: boolean
+  @Input() initialData!: TFormData | null
+  @Input() disable!: boolean
   @Output() formReady: EventEmitter<AbstractControl>
-  formGroup: FormGroup
+  formGroup!: FormGroup
 
   private registeredForms: string[] = []
 
@@ -21,10 +21,12 @@ export abstract class BaseFormDirective<TFormData extends object> {
     this.formReady = new EventEmitter<AbstractControl>(true)
   }
 
-  abstract buildForm(initialData?: TFormData): FormGroup
+  abstract buildForm(initialData?: TFormData | null): FormGroup
 
-  patchUpdatedData(data: object) {
-    this.formGroup.patchValue(data, { onlySelf: false })
+  patchUpdatedData(data: object | null) {
+    if (data) {
+      this.formGroup.patchValue(data, { onlySelf: false })
+    }
   }
 
   patchUpdatedDataIfChanged(changes: SimpleChanges) {
@@ -49,7 +51,7 @@ export abstract class BaseFormDirective<TFormData extends object> {
   }
 
   protected deregisterAllForms() {
-    this.registeredForms.forEach(() => this.deregisterForm(name))
+    this.registeredForms.forEach((name) => this.deregisterForm(name))
   }
 
   protected hasChanged(change: SimpleChange): boolean {
