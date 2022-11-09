@@ -37,7 +37,10 @@
     "activityBarBadge.foreground": "#15202b",
     "statusBar.background": "#2e7d32",
     "statusBarItem.hoverBackground": "#3ca241",
-    "statusBar.foreground": "#e7e7e7"
+    "statusBar.foreground": "#e7e7e7",
+    "sash.hoverBorder": "#3ca241",
+    "statusBarItem.remoteBackground": "#2e7d32",
+    "statusBarItem.remoteForeground": "#e7e7e7"
   },
   "peacock.color": "#2e7d32",
   "gitlens.menus": {
