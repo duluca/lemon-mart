@@ -123,8 +123,7 @@ If you'd like to use this project as a starter or a template project for your pr
 ### During Development
 
 - Run `npm start` for a developmenet web server.
-- Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.
-  - Note that the port is different than the default Angular port of `4200` intentionally, so you can run test projects or proof of concepts side-by-side without the hassle of specifiying a new port.
+- Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 - Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 - Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
