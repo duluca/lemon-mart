@@ -76,7 +76,7 @@
     "@ngrx/data": "^12.3.0",
     "@ngrx/effects": "^12.3.0",
     "@ngrx/entity": "^12.3.0",
-    "@ngrx/store": "^12.3.0",
+    "@ngrx/store": "^12.5.1",
     "@ngrx/store-devtools": "^12.3.0",
     "firebase": "^8.8.1",
     "jwt-decode": "^3.1.2",
