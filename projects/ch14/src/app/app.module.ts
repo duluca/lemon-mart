@@ -24,37 +24,36 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    PageNotFoundComponent,
-    LoginComponent,
-    SimpleDialogComponent,
-    NavigationMenuComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    AppMaterialModule,
-    HttpClientModule,
-    FieldErrorModule,
-    FlexLayoutModule,
-    ReactiveFormsModule,
-    NgxMaskModule.forRoot(options),
-  ],
-  providers: [
-    {
-      provide: AuthService,
-      useClass: CustomAuthService,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi: true,
-    },
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [SimpleDialogComponent],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        PageNotFoundComponent,
+        LoginComponent,
+        SimpleDialogComponent,
+        NavigationMenuComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        AppMaterialModule,
+        HttpClientModule,
+        FieldErrorModule,
+        FlexLayoutModule,
+        ReactiveFormsModule,
+        NgxMaskModule.forRoot(options),
+    ],
+    providers: [
+        {
+            provide: AuthService,
+            useClass: CustomAuthService,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthHttpInterceptor,
+            multi: true,
+        },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
