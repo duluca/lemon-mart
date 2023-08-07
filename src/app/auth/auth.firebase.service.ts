@@ -1,8 +1,11 @@
-import undefined from 'firebase/compat/auth'
 import { Injectable } from '@angular/core'
-import { AngularFireAuth } from '@angular/fire/compat/auth'
-import firebase from 'firebase/compat/app'
-import { Observable, Subject } from 'rxjs'
+import {
+  Auth as FireAuth,
+  User as FireUser,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth'
+
+import { Observable, Subject, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { IUser, User } from '../user/user/user'
@@ -23,7 +26,7 @@ interface IJwtToken {
 
 @Injectable()
 export class FirebaseAuthService extends AuthService {
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: FireAuth) {
     super()
   }
 
@@ -33,9 +36,9 @@ export class FirebaseAuthService extends AuthService {
   ): Observable<IServerAuthResponse> {
     const serverResponse$ = new Subject<IServerAuthResponse>()
 
-    this.afAuth.signInWithEmailAndPassword(email, password).then(
+    signInWithEmailAndPassword(this.afAuth, email, password).then(
       (res) => {
-        const firebaseUser: firebase.User | null = res.user
+        const firebaseUser: FireUser | null = res.user
         firebaseUser?.getIdToken().then(
           (token) => serverResponse$.next({ accessToken: token } as IServerAuthResponse),
           (err) => serverResponse$.error(err)
@@ -60,10 +63,10 @@ export class FirebaseAuthService extends AuthService {
   }
 
   protected getCurrentUser(): Observable<User> {
-    return this.afAuth.user.pipe(map(this.transformFirebaseUser))
+    return of(this.transformFirebaseUser(this.afAuth.currentUser))
   }
 
-  private transformFirebaseUser(firebaseUser: firebase.User | null): User {
+  private transformFirebaseUser(firebaseUser: FireUser | null): User {
     if (!firebaseUser) {
       return new User()
     }
