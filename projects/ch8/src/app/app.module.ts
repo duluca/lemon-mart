@@ -21,38 +21,38 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        PageNotFoundComponent,
-        LoginComponent,
-        SimpleDialogComponent,
-        NavigationMenuComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MaterialModule,
-        HttpClientModule,
-        FlexLayoutModule,
-        ReactiveFormsModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-    ],
-    providers: [
-        {
-            provide: AuthService,
-            useFactory: authFactory,
-            deps: [AngularFireAuth],
-            // useClass: InMemoryAuthService,
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthHttpInterceptor,
-            multi: true,
-        },
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    LoginComponent,
+    SimpleDialogComponent,
+    NavigationMenuComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+  ],
+  providers: [
+    {
+      provide: AuthService,
+      useFactory: authFactory,
+      deps: [AngularFireAuth],
+      // useClass: InMemoryAuthService,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

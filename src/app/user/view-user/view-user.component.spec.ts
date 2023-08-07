@@ -7,15 +7,13 @@ describe('ViewUserComponent', () => {
   let component: ViewUserComponent
   let fixture: ComponentFixture<ViewUserComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        providers: [],
-        imports: commonTestingModules,
-        declarations: [ViewUserComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      providers: [],
+      imports: commonTestingModules,
+      declarations: [ViewUserComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewUserComponent)

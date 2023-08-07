@@ -12,18 +12,16 @@ describe('PosComponent', () => {
   let fixture: ComponentFixture<PosComponent>
   let transactionServiceMock: jasmine.SpyObj<TransactionService>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [PosComponent],
-        providers: commonTestingProviders.concat([
-          { provide: TransactionService, useValue: autoSpyObj(TransactionService) },
-        ]),
-        imports: commonTestingModules,
-      }).compileComponents(),
-        (transactionServiceMock = injectSpy(TransactionService))
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PosComponent],
+      providers: commonTestingProviders.concat([
+        { provide: TransactionService, useValue: autoSpyObj(TransactionService) },
+      ]),
+      imports: commonTestingModules,
+    }).compileComponents(),
+      (transactionServiceMock = injectSpy(TransactionService))
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PosComponent)

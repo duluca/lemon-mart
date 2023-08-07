@@ -10,14 +10,12 @@ describe('NameInputComponent', () => {
   describe('DOM Tests', () => {
     let fixture: ComponentFixture<NameInputComponent>
 
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [NameInputComponent],
-          imports: commonTestingModules.concat(FieldErrorModule),
-        }).compileComponents()
-      })
-    )
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NameInputComponent],
+        imports: commonTestingModules.concat(FieldErrorModule),
+      }).compileComponents()
+    }))
 
     beforeEach(() => {
       fixture = TestBed.createComponent(NameInputComponent)

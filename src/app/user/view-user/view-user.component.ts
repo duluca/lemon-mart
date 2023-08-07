@@ -44,7 +44,10 @@ export class ViewUserComponent implements OnInit, OnChanges {
     return !this.user
   }
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     if (this.route.snapshot.data.user) {

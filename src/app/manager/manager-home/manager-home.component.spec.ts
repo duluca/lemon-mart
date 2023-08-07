@@ -6,13 +6,11 @@ describe('ManagerHomeComponent', () => {
   let component: ManagerHomeComponent
   let fixture: ComponentFixture<ManagerHomeComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ManagerHomeComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ManagerHomeComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ManagerHomeComponent)

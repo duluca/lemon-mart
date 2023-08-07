@@ -4,7 +4,6 @@ import {
   User as FireUser,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth'
-
 import { Observable, Subject, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 

@@ -32,43 +32,43 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        PageNotFoundComponent,
-        LoginComponent,
-        SimpleDialogComponent,
-        NavigationMenuComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        AppMaterialModule,
-        HttpClientModule,
-        FieldErrorModule,
-        FlexLayoutModule,
-        ReactiveFormsModule,
-        NgxMaskModule.forRoot(options),
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        StoreModule.forRoot({}, {}),
-        EffectsModule.forRoot([]),
-        EntityDataModule.forRoot(entityConfig),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    ],
-    providers: [
-        {
-            provide: AuthService,
-            useFactory: authFactory,
-            deps: [AngularFireAuth, HttpClient],
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthHttpInterceptor,
-            multi: true,
-        },
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    LoginComponent,
+    SimpleDialogComponent,
+    NavigationMenuComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AppMaterialModule,
+    HttpClientModule,
+    FieldErrorModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(options),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot(entityConfig),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+  ],
+  providers: [
+    {
+      provide: AuthService,
+      useFactory: authFactory,
+      deps: [AngularFireAuth, HttpClient],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
