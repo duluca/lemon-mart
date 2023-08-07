@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { AngularFireAuth } from '@angular/fire/auth'
-
+import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { environment } from '../../environments/environment'
 import { CustomAuthService } from './auth.custom.service'
 import { AuthMode } from './auth.enum'
