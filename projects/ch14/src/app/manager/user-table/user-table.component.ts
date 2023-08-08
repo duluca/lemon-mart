@@ -25,7 +25,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   private subs = new SubSink()
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
-  refresh$ = new Subject()
+  refresh$ = new Subject<void>()
 
   search = new FormControl('', OptionalTextValidation)
 
