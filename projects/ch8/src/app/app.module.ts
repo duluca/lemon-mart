@@ -1,7 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
-import { AngularFireModule } from '@angular/fire'
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
@@ -19,6 +17,10 @@ import { LoginComponent } from './login/login.component'
 import { MaterialModule } from './material.module'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+import { provideFirebaseApp } from '@angular/fire/app'
+import { provideAuth } from '@angular/fire/auth'
+import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
 @NgModule({
   declarations: [
@@ -37,14 +39,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [
     {
       provide: AuthService,
       useFactory: authFactory,
-      deps: [AngularFireAuth],
+      deps: [],
       // useClass: InMemoryAuthService,
     },
     {

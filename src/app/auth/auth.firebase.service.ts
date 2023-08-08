@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core'
+import { Injectable, Optional, inject } from '@angular/core'
 import {
   Auth as FireAuth,
   User as FireUser,
   signInWithEmailAndPassword,
+  signOut,
 } from '@angular/fire/auth'
 import { Observable, Subject, of } from 'rxjs'
-import { map } from 'rxjs/operators'
 
 import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
@@ -25,7 +25,9 @@ interface IJwtToken {
 
 @Injectable()
 export class FirebaseAuthService extends AuthService {
-  constructor(private afAuth: FireAuth) {
+  private afAuth: FireAuth = inject(FireAuth)
+
+  constructor() {
     super()
   }
 
@@ -82,9 +84,9 @@ export class FirebaseAuthService extends AuthService {
     } as IUser)
   }
 
-  logout() {
+  async logout() {
     if (this.afAuth) {
-      this.afAuth.signOut()
+      await signOut(this.afAuth)
     }
     this.clearToken()
     this.authStatus$.next(defaultAuthStatus)

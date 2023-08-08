@@ -1,7 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
-import { AngularFireModule } from '@angular/fire/compat'
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
@@ -26,6 +24,10 @@ import { LoginComponent } from './login/login.component'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 import { FieldErrorModule } from './user-controls/field-error/field-error.module'
+import { provideFirebaseApp } from '@angular/fire/app'
+import { initializeApp } from 'firebase/app'
+import { getAuth, connectAuthEmulator } from 'firebase/auth'
+import { provideAuth } from '@angular/fire/auth'
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   showMaskTyped: true,
@@ -50,8 +52,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     FlexLayoutModule,
     FieldErrorModule,
     NgxMaskModule.forRoot(options),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
@@ -61,7 +63,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     {
       provide: AuthService,
       useFactory: authFactory,
-      deps: [AngularFireAuth, HttpClient],
+      deps: [HttpClient],
     },
     {
       provide: HTTP_INTERCEPTORS,
