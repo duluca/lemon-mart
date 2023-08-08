@@ -1,5 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
+import { provideFirebaseApp } from '@angular/fire/app'
+import { provideAuth } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
@@ -8,6 +10,8 @@ import { EntityDataModule } from '@ngrx/data'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { initializeApp } from 'firebase/app'
+import { connectAuthEmulator, getAuth } from 'firebase/auth'
 import { IConfig, NgxMaskModule } from 'ngx-mask'
 
 import { environment } from '../environments/environment'
@@ -24,10 +28,6 @@ import { LoginComponent } from './login/login.component'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 import { FieldErrorModule } from './user-controls/field-error/field-error.module'
-import { provideFirebaseApp } from '@angular/fire/app'
-import { initializeApp } from 'firebase/app'
-import { getAuth, connectAuthEmulator } from 'firebase/auth'
-import { provideAuth } from '@angular/fire/auth'
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   showMaskTyped: true,

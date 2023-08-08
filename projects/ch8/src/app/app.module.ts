@@ -1,9 +1,13 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
+import { provideFirebaseApp } from '@angular/fire/app'
+import { provideAuth } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
 import { environment } from '../environments/environment'
 import { AppRoutingModule } from './app-routing.module'
@@ -17,10 +21,6 @@ import { LoginComponent } from './login/login.component'
 import { MaterialModule } from './material.module'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
-import { provideFirebaseApp } from '@angular/fire/app'
-import { provideAuth } from '@angular/fire/auth'
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
 
 @NgModule({
   declarations: [
