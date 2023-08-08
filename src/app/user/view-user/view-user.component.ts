@@ -18,7 +18,7 @@ import { IUser, User } from '../user/user'
           <p><span class="mat-input bold">E-mail</span></p>
           <p>{{ currentUser.email }}</p>
           <p><span class="mat-input bold">Date of Birth</span></p>
-          <p>{{ currentUser.dateOfBirth | date: 'mediumDate' }}</p>
+          <p>{{ currentUser.dateOfBirth | date : 'mediumDate' }}</p>
         </mat-card-content>
         <mat-card-actions *ngIf="editMode">
           <button mat-button mat-raised-button (click)="editUser(currentUser._id)">
@@ -44,10 +44,7 @@ export class ViewUserComponent implements OnInit, OnChanges {
     return !this.user
   }
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     if (this.route.snapshot.data.user) {

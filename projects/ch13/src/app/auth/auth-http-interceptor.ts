@@ -13,10 +13,7 @@ import { AuthService } from './auth.service'
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const jwt = this.authService.getToken()
     const authRequest = req.clone({ setHeaders: { authorization: `Bearer ${jwt}` } })
