@@ -1,4 +1,4 @@
-import { Injectable, Optional, inject } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import {
   Auth as FireAuth,
   User as FireUser,
