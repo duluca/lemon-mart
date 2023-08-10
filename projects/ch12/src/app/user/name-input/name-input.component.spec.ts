@@ -27,6 +27,4 @@ describe('NameInputComponent', () => {
       expect(component).toBeTruthy()
     })
   })
-
-  describe('Functional Tests', () => {})
 })

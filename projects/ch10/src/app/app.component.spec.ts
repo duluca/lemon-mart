@@ -5,9 +5,10 @@ import { DomSanitizer } from '@angular/platform-browser'
 import {
   ObservablePropertyStrategy,
   autoSpyObj,
-  createComponentMock,
   injectSpy,
 } from 'angular-unit-test-helper'
+
+import { MockComponent } from 'ng-mocks'
 
 import { AppComponent } from './app.component'
 import { AuthService, defaultAuthStatus } from './auth/auth.service'
@@ -17,6 +18,7 @@ import {
   MediaObserverFake,
   commonTestingModules,
 } from './common/common.testing'
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 
 describe('AppComponent', () => {
   let authServiceMock: jasmine.SpyObj<AuthService>
@@ -36,7 +38,7 @@ describe('AppComponent', () => {
         { provide: DomSanitizer, useClass: DomSanitizerFake },
         { provide: AuthService, useValue: authServiceSpy },
       ],
-      declarations: [AppComponent, createComponentMock('NavigationMenuComponent')],
+      declarations: [AppComponent, MockComponent(NavigationMenuComponent)],
     }).compileComponents()
 
     authServiceMock = injectSpy(AuthService)

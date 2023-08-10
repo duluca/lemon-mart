@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { createComponentMock } from 'angular-unit-test-helper'
 
 import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
 import { HomeComponent } from './home.component'
+import { MockComponent } from 'ng-mocks'
+import { LoginComponent } from '../login/login.component'
 
 describe('HomeComponent', () => {
   let component: HomeComponent
@@ -10,7 +11,7 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, createComponentMock('LoginComponent')],
+      declarations: [HomeComponent, MockComponent(LoginComponent)],
       providers: commonTestingProviders,
       imports: commonTestingModules,
     }).compileComponents()

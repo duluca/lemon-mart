@@ -47,7 +47,7 @@ commands:
           condition: << parameters.run-tests >>
           steps:
             - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
-            - run: npx ng test --code-coverage --watch=false --project << parameters.project >>
+            - run: npx ng test --watch=false --project << parameters.project >>
             - run: npx ng e2e << parameters.project >>
   store:
     description: 'Stores build_and_test artifacts'
@@ -68,7 +68,7 @@ commands:
       # upload coverage report to coveralls for readme badge support
       # requires config.yml version 2.1 and orbs: coveralls: coveralls/coveralls@1.0.4
       # requires coveralls account and token named COVERALLS_REPO_TOKEN specific to repo to be stored in CircleCI
-      - coveralls/upload
+      # ç- coveralls/upload
 
       - run:
           name: Tar & Gzip compiled app
@@ -178,7 +178,6 @@ jobs:
           project: 'ch14'
 
 workflows:
-  version: 2
   build-test-and-approval-deploy:
     jobs:
       - initialize
