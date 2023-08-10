@@ -55,6 +55,5 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SimpleDialogComponent],
 })
 export class AppModule {}

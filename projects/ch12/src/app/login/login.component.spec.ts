@@ -8,15 +8,13 @@ describe('LoginComponent', () => {
   let component: LoginComponent
   let fixture: ComponentFixture<LoginComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [LoginComponent],
-        providers: commonTestingProviders,
-        imports: commonTestingModules.concat(FieldErrorModule),
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginComponent],
+      providers: commonTestingProviders,
+      imports: commonTestingModules.concat(FieldErrorModule),
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent)

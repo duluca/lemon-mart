@@ -7,14 +7,12 @@ describe('NavigationMenuComponent', () => {
   let component: NavigationMenuComponent
   let fixture: ComponentFixture<NavigationMenuComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: commonTestingModules,
-        declarations: [NavigationMenuComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: commonTestingModules,
+      declarations: [NavigationMenuComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationMenuComponent)

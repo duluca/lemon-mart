@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TestBed, inject } from '@angular/core/testing'
-import { AngularFireAuth } from '@angular/fire/auth'
+import { Auth as FireAuth } from '@angular/fire/auth'
 
 import { UiService } from '../common/ui.service'
 import { FirebaseAuthService } from './auth.firebase.service'
@@ -17,7 +17,7 @@ describe('AuthService', () => {
       providers: [
         FirebaseAuthService,
         UiService,
-        { provide: AngularFireAuth, useValue: angularFireStub },
+        { provide: FireAuth, useValue: angularFireStub },
       ],
     })
   })

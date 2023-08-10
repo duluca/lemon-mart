@@ -47,5 +47,11 @@
     "editorGroup": false
   },
   "ng-evergreen.upgradeChannel": "Latest",
-  "editor.autoIndent": "full"
+  "editor.autoIndent": "full",
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
 }

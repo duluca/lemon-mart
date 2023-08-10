@@ -1,11 +1,12 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
-import { AngularFireModule } from '@angular/fire'
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth'
+import { provideFirebaseApp } from '@angular/fire/app'
+import { getAuth, provideAuth } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { initializeApp } from 'firebase/app'
 
 import { environment } from '../environments/environment'
 import { AppRoutingModule } from './app-routing.module'
@@ -37,14 +38,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [
     {
       provide: AuthService,
       useFactory: authFactory,
-      deps: [AngularFireAuth, HttpClient],
+      deps: [HttpClient],
     },
     {
       provide: HTTP_INTERCEPTORS,
@@ -53,6 +54,5 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SimpleDialogComponent],
 })
 export class AppModule {}

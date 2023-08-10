@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
-import { AngularFireModule } from '@angular/fire'
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth'
+import { provideFirebaseApp } from '@angular/fire/app'
+import { getAuth, provideAuth } from '@angular/fire/auth'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
@@ -10,6 +10,7 @@ import { EntityDataModule } from '@ngrx/data'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { initializeApp } from 'firebase/app'
 import { IConfig, NgxMaskModule } from 'ngx-mask'
 
 import { environment } from '../environments/environment'
@@ -50,8 +51,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     FlexLayoutModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(options),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
@@ -61,7 +62,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     {
       provide: AuthService,
       useFactory: authFactory,
-      deps: [AngularFireAuth, HttpClient],
+      deps: [HttpClient],
     },
     {
       provide: HTTP_INTERCEPTORS,
@@ -70,6 +71,5 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SimpleDialogComponent],
 })
 export class AppModule {}

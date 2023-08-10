@@ -27,7 +27,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   useNgRxData = false
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
-  refresh$ = new Subject()
+  refresh$ = new Subject<void>()
 
   search = new FormControl('', OptionalTextValidation)
 

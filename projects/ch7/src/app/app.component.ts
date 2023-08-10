@@ -16,16 +16,14 @@ import { DomSanitizer } from '@angular/platform-browser'
         mat-mini-fab
         routerLink="/user/profile"
         matTooltip="Profile"
-        aria-label="User Profile"
-      >
+        aria-label="User Profile">
         <mat-icon>account_circle</mat-icon>
       </button>
       <button
         mat-mini-fab
         routerLink="/user/logout"
         matTooltip="Logout"
-        aria-label="Logout"
-      >
+        aria-label="Logout">
         <mat-icon>lock_open</mat-icon>
       </button>
     </mat-toolbar>
