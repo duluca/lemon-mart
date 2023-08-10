@@ -8,7 +8,7 @@ import { IUser, User } from '../user/user'
   selector: 'app-view-user',
   template: `
     <div *ngIf="currentUser$ | async as currentUser">
-      <mat-card>
+      <mat-card appearance="outlined">
         <mat-card-header>
           <div mat-card-avatar><mat-icon>account_circle</mat-icon></div>
           <mat-card-title>{{ currentUser.fullName }}</mat-card-title>
@@ -30,10 +30,10 @@ import { IUser, User } from '../user/user'
   `,
   styles: [
     `
-      .bold {
-        font-weight: bold;
-      }
-    `,
+          .bold {
+            font-weight: bold;
+          }
+        `,
   ],
 })
 export class ViewUserComponent implements OnChanges {

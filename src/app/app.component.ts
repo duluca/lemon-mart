@@ -40,7 +40,7 @@ import { AuthService } from './auth/auth.service'
         position: relative;
         overflow: hidden;
         border-radius: 50%;
-        margin-top: -8px;
+        margin-top: 3px;
       }
     `,
   ],

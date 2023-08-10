@@ -36,19 +36,19 @@
           </div>
           <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top"
             fxLayoutGap="10px">
-            <mat-label class="mat-body-1">Role</mat-label>
+            <mat-label class="mat-body-2">Role</mat-label>
             <mat-radio-group formControlName="role">
               <mat-radio-button style="margin-right: 10px;" [value]="Role.None">
-                <span class="mat-body-1">None</span>
+                <span class="mat-body-2">None</span>
               </mat-radio-button>
               <mat-radio-button style="margin-right: 10px;" [value]="Role.Cashier">
-                <span class="mat-body-1">Cashier</span>
+                <span class="mat-body-2">Cashier</span>
               </mat-radio-button>
               <mat-radio-button style="margin-right: 10px;" [value]="Role.Clerk">
-                <span class="mat-body-1">Clerk</span>
+                <span class="mat-body-2">Clerk</span>
               </mat-radio-button>
               <mat-radio-button style="margin-right: 10px;" [value]="Role.Manager">
-                <span class="mat-body-1">Manager</span>
+                <span class="mat-body-2">Manager</span>
               </mat-radio-button>
             </mat-radio-group>
             <mat-error
@@ -58,7 +58,7 @@
           </div>
           <div fxLayout="row" fxLayout.lt-sm="column" class="margin-top"
             fxLayoutGap="10px">
-            <mat-label class="mat-body-1">Select the Limoncu level:
+            <mat-label class="mat-body-2">Select the Limoncu level:
               <app-lemon-rater formControlName="level">
               </app-lemon-rater>
             </mat-label>
@@ -138,7 +138,7 @@
                   Add Phone
                 </button>
               </h2>
-              <mat-list-item style="margin-top: 36px;"
+              <mat-list-item
                 *ngFor="let position of phonesArray.controls; let i = index"
                 [formGroupName]="i">
                 <mat-form-field appearance="outline" fxFlex="100px">
@@ -160,9 +160,11 @@
                     A valid phone number is required
                   </mat-error>
                 </mat-form-field>
-                <button fxFlex="33px" mat-icon-button (click)="phonesArray.removeAt(i)">
-                  <mat-icon>delete</mat-icon>
-                </button>
+                <div fxLayoutAlign="center center" fxFlex="60px">
+                  <button mat-icon-button (click)="phonesArray.removeAt(i)" style="margin-top: -4px">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
               </mat-list-item>
             </mat-list>
           </div>

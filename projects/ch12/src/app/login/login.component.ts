@@ -16,15 +16,15 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
   templateUrl: 'login.component.html',
   styles: [
     `
-      .error {
-        color: red;
-      }
-    `,
+          .error {
+            color: red;
+          }
+        `,
     `
-      div[fxLayout] {
-        margin-top: 32px;
-      }
-    `,
+          div[fxLayout] {
+            margin-top: 32px;
+          }
+        `,
   ],
 })
 export class LoginComponent implements OnInit, OnDestroy {

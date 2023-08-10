@@ -1,0 +1,11 @@
+.error {
+  color: red;
+}
+
+.mat-mdc-form-field {
+  padding-top: 16px;
+}
+
+.mat-mdc-list-item {
+  height: 72px;
+}

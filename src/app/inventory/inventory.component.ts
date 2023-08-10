@@ -4,11 +4,11 @@ import { Component, OnInit } from '@angular/core'
   selector: 'app-inventory',
   styles: [
     `
-      .active-link {
-        font-weight: bold;
-        border-bottom: 2px solid #005005;
-      }
-    `,
+          .active-link {
+            font-weight: bold;
+            border-bottom: 2px solid #005005;
+          }
+        `,
   ],
   template: `
     <mat-toolbar color="accent" fxLayoutGap="8px">

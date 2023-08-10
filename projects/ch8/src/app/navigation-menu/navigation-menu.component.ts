@@ -9,6 +9,11 @@ import { Component, OnInit } from '@angular/core'
         border-left: 3px solid green;
       }
     `,
+    `
+      .mat-mdc-subheader {
+        font-weight: bold;
+      }
+    `,
   ],
   template: `
     <mat-nav-list>
