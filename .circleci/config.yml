@@ -60,9 +60,10 @@ commands:
         type: string
         default: 'lemon-mart'
     steps:
-      - run:
-          name: Run Cypress tests
-          command: 'npx cypress run --record'
+      # - cypress/run:
+      #     cypress-command: npx cypress run
+      #     # install-browsers: true
+      #     # start-command: npm start
 
       - store_test_results:
           path: ./test_results
@@ -116,6 +117,7 @@ jobs:
       - install
       - lint
       - build_and_test
+      - cypress/run
       - store
   deploy:
     docker:

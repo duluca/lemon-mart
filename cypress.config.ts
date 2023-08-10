@@ -1,6 +1,5 @@
 export default {
-  projectId: '2jeenu',
-
+  projectId: 'lemon-mart',
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
@@ -10,7 +9,6 @@ export default {
     baseUrl: 'https://lemonmart.angularforenterprise.com',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
-
   component: {
     devServer: {
       framework: 'angular',
