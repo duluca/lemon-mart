@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { MatPaginator } from '@angular/material/paginator'
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator'
 import { MatSort, SortDirection } from '@angular/material/sort'
 import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'

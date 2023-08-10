@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core'
-import { MatPaginatorModule } from '@angular/material/paginator'
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator'
+import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
+import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle'
 import { MatSortModule } from '@angular/material/sort'
-import { MatTableModule } from '@angular/material/table'
+import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table'
 
 const modules = [
   MatTableModule,

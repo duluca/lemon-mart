@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog'
+import { MatLegacySnackBar as MatSnackBar, MatLegacySnackBarConfig as MatSnackBarConfig } from '@angular/material/legacy-snack-bar'
 import { Observable } from 'rxjs'
 
 import { SimpleDialogComponent } from './simple-dialog.component'
