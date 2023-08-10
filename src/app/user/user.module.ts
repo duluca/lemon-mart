@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
-import { provideEnvironmentNgxMask } from 'ngx-mask'
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 import { AppMaterialModule } from '../app-material.module'
 import { AuthGuard } from '../auth/auth-guard.service'
@@ -28,14 +28,9 @@ import { UserService } from './user/user.service'
     FieldErrorModule,
     SharedComponentsModule,
     LemonRaterModule,
+    NgxMaskDirective,
   ],
   declarations: [ProfileComponent, LogoutComponent],
-  providers: [
-    UserService,
-    UserEntityService,
-    AuthGuard,
-    UserResolve,
-    provideEnvironmentNgxMask({ showMaskTyped: true }),
-  ],
+  providers: [UserService, UserEntityService, AuthGuard, UserResolve, provideNgxMask()],
 })
 export class UserModule {}

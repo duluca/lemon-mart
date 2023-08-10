@@ -13,7 +13,7 @@ import { ProfileComponent } from './profile/profile.component'
 import { UserMaterialModule } from './user-material.module'
 import { UserRoutingModule } from './user-routing.module'
 import { UserResolve } from './user/user.resolve'
-import { provideEnvironmentNgxMask } from 'ngx-mask'
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 @NgModule({
   imports: [
@@ -26,8 +26,9 @@ import { provideEnvironmentNgxMask } from 'ngx-mask'
     UserMaterialModule,
     LemonRaterModule,
     FieldErrorModule,
+    NgxMaskDirective,
   ],
-  providers: [UserResolve, AuthGuard, provideEnvironmentNgxMask({ showMaskTyped: true })],
+  providers: [UserResolve, AuthGuard, provideNgxMask()],
   declarations: [ProfileComponent, LogoutComponent],
 })
 export class UserModule {}
