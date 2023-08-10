@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { FlexLayoutModule } from '@angular/flex-layout'
+import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
-import { NgxMaskModule } from 'ngx-mask'
+import { provideEnvironmentNgxMask } from 'ngx-mask'
 
 import { AppMaterialModule } from '../app-material.module'
 import { AuthGuard } from '../auth/auth-guard.service'
@@ -26,9 +26,8 @@ import { UserResolve } from './user/user.resolve'
     UserMaterialModule,
     LemonRaterModule,
     FieldErrorModule,
-    NgxMaskModule.forChild(),
   ],
-  providers: [UserResolve, AuthGuard],
+  providers: [UserResolve, AuthGuard, provideEnvironmentNgxMask({ showMaskTyped: true })],
   declarations: [ProfileComponent, LogoutComponent],
 })
 export class UserModule {}

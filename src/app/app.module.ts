@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { NgModule } from '@angular/core'
 import { provideFirebaseApp } from '@angular/fire/app'
 import { provideAuth } from '@angular/fire/auth'
-import { FlexLayoutModule } from '@angular/flex-layout'
+import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -12,7 +12,6 @@ import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { IConfig, NgxMaskModule } from 'ngx-mask'
 
 import { environment } from '../environments/environment'
 import { AppMaterialModule } from './app-material.module'
@@ -28,10 +27,6 @@ import { LoginComponent } from './login/login.component'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 import { FieldErrorModule } from './user-controls/field-error/field-error.module'
-
-export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
-  showMaskTyped: true,
-}
 
 @NgModule({
   declarations: [
@@ -51,7 +46,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     ReactiveFormsModule,
     FlexLayoutModule,
     FieldErrorModule,
-    NgxMaskModule.forRoot(options),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     StoreModule.forRoot({}),

@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { SecurityContext } from '@angular/core'
-import { MediaChange } from '@angular/flex-layout'
+import { MediaChange } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { SafeResourceUrl, SafeValue } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
