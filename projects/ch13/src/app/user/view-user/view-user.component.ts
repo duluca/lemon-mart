@@ -30,10 +30,10 @@ import { IUser, User } from '../user/user'
   `,
   styles: [
     `
-          .bold {
-            font-weight: bold;
-          }
-        `,
+      .bold {
+        font-weight: bold;
+      }
+    `,
   ],
 })
 export class ViewUserComponent implements OnInit, OnChanges {

@@ -4,10 +4,10 @@ import { Component, OnInit } from '@angular/core'
   selector: 'app-home',
   styles: [
     `
-          div[fxLayout] {
-            margin-top: 32px;
-          }
-        `,
+      div[fxLayout] {
+        margin-top: 32px;
+      }
+    `,
   ],
   template: `
     <div fxLayout="column" fxLayoutAlign="center center">

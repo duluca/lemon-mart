@@ -6,10 +6,10 @@ import { AuthService } from '../auth/auth.service'
   selector: 'app-home',
   styles: [
     `
-          div[fxLayout] {
-            margin-top: 32px;
-          }
-        `,
+      div[fxLayout] {
+        margin-top: 32px;
+      }
+    `,
   ],
   template: `
     <div *ngIf="(authService.authStatus$ | async)?.isAuthenticated; else doLogin">
