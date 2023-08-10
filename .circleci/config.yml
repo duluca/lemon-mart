@@ -60,8 +60,8 @@ commands:
         type: string
         default: 'lemon-mart'
     steps:
-      - cypress/run:
-          cypress-command: npx cypress run
+      - run:
+          command: npx cypress run
           # install-browsers: true
           # start-command: npm start
 
