@@ -117,6 +117,7 @@ jobs:
       - install
       - lint
       - build_and_test
+      - cypress/install
       - cypress/run
       - store
   deploy:
