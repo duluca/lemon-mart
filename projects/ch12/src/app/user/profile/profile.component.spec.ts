@@ -15,6 +15,7 @@ import { ViewUserComponent } from '../../user/view-user/view-user.component'
 import { NameInputComponent } from '../name-input/name-input.component'
 import { UserMaterialModule } from '../user-material.module'
 import { ProfileComponent } from './profile.component'
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent
@@ -29,14 +30,18 @@ describe('ProfileComponent', () => {
     )
 
     TestBed.configureTestingModule({
-      providers: commonTestingProviders.concat({
-        provide: AuthService,
-        useValue: authServiceSpy,
-      }),
+      providers: commonTestingProviders.concat(
+        {
+          provide: AuthService,
+          useValue: authServiceSpy,
+        },
+        provideNgxMask()
+      ),
       imports: commonTestingModules.concat([
         UserMaterialModule,
         FieldErrorModule,
         LemonRaterModule,
+        NgxMaskDirective,
       ]),
       declarations: [ProfileComponent, NameInputComponent, ViewUserComponent],
     }).compileComponents()
