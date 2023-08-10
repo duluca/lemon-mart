@@ -131,7 +131,7 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
     if (state != null) {
       this.states$ = state.valueChanges.pipe(
         startWith(''),
-        map((value) => USStateFilter(value))
+        map((value) => USStateFilter(value as string))
       )
     }
   }

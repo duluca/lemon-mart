@@ -145,7 +145,7 @@ export class ProfileComponent
 
     this.states$ = form.get('address.state')?.valueChanges.pipe(
       startWith(''),
-      map((value) => USStateFilter(value))
+      map((value) => USStateFilter(value as string))
     )
 
     return form

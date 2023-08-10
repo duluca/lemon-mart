@@ -100,7 +100,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
         this.isLoadingResults$.next(true)
         return this.getUsers(
           this.paginator.pageSize,
-          this.search.value,
+          this.search.value as string,
           this.paginator.pageIndex,
           this.sort.active,
           this.sort.direction

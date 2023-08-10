@@ -29,7 +29,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
   loading$: Observable<boolean>
   refresh$ = new Subject<void>()
 
-  search = new FormControl('', OptionalTextValidation)
+  search = new FormControl<string>('', OptionalTextValidation)
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: false }) sort!: MatSort
@@ -87,7 +87,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
         this.isLoadingResults$.next(true)
         return this.getUsers(
           this.paginator.pageSize,
-          this.search.value,
+          this.search.value as string,
           this.paginator.pageIndex,
           this.sort.active,
           this.sort.direction
