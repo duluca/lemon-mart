@@ -23,7 +23,7 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev',
     },
-    reporters: ['progress', 'kjhtml', 'html'],
+    reporters: ['progress', 'kjhtml'],
     htmlReporter: {
       outputFile: 'tests/units.html',
     },

@@ -147,7 +147,7 @@ export class ProfileComponent
   }
 
   private buildPhoneArray(phones: IPhone[]) {
-    const groups = []
+    const groups: FormGroup[] = []
 
     if (phones?.length === 0) {
       groups.push(this.buildPhoneFormControl(1))
@@ -159,7 +159,11 @@ export class ProfileComponent
     return groups
   }
 
-  private buildPhoneFormControl(id: number, type?: string, phoneNumber?: string) {
+  private buildPhoneFormControl(
+    id: number,
+    type?: string,
+    phoneNumber?: string
+  ): FormGroup {
     return this.formBuilder.group({
       id: [id],
       type: [type || '', Validators.required],
@@ -184,7 +188,7 @@ export class ProfileComponent
   }
 
   private loadFromCache(): Observable<User | null> {
-    let user = null
+    let user: User | null = null
 
     try {
       const draftUser = localStorage.getItem('draft-user')

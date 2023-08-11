@@ -70,7 +70,7 @@ export class DomSanitizerFake {
 export const commonTestingProviders = [
   { provide: AuthService, useValue: autoSpyObj(AuthService) },
   { provide: UiService, useValue: autoSpyObj(UiService) },
-]
+] as unknown[] as unknown[]
 
 export const commonTestingModules = [
   ReactiveFormsModule,
@@ -78,4 +78,4 @@ export const commonTestingModules = [
   NoopAnimationsModule,
   HttpClientTestingModule,
   RouterTestingModule,
-]
+] as unknown[] as unknown[]

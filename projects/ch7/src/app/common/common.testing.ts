@@ -74,4 +74,4 @@ export const commonTestingModules = [
   NoopAnimationsModule,
   HttpClientTestingModule,
   RouterTestingModule,
-]
+] as unknown[]
