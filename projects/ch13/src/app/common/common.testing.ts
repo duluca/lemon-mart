@@ -28,7 +28,7 @@ export class MediaObserverFake {
 
   subscribe(
     next?: (value: MediaChange) => void,
-    error?: (error) => void,
+    error?: (error: Error) => void,
     complete?: () => void
   ): Subscription {
     return new Subscription()
