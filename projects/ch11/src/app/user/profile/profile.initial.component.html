@@ -8,9 +8,7 @@
       <form [formGroup]="formGroup">
         <ng-template matStepLabel>Account Information</ng-template>
         <div class="stepContent">
-          <app-name-input
-            [initialData]="nameInitialData$ | async"
-            (formReady)="registerForm('name', $event)">
+          <app-name-input>
           </app-name-input>
           <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
             <mat-form-field appearance="outline" fxFlex="50%">
@@ -239,7 +237,7 @@
           <button mat-button matStepperPrevious>Back</button>
           <div class="flex-spacer"></div>
           <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
-          <button mat-button color="warn" (click)="stepper.reset(); clearCache()">
+          <button mat-button color="warn" (click)="stepper.reset();">
             Reset
           </button>
           <button
