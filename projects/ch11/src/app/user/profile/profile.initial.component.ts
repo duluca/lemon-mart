@@ -141,7 +141,7 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
   }
 
   private buildPhoneArray(phones: IPhone[]) {
-    const groups = []
+    const groups: FormGroup[] = []
 
     if (phones?.length === 0) {
       groups.push(this.buildPhoneFormControl(1))
@@ -153,7 +153,11 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
     return groups
   }
 
-  private buildPhoneFormControl(id: number, type?: string, phoneNumber?: string) {
+  private buildPhoneFormControl(
+    id: number,
+    type?: string,
+    phoneNumber?: string
+  ): FormGroup {
     return this.formBuilder.group({
       id: [id],
       type: [type || '', Validators.required],

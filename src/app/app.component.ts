@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MediaObserver } from '@angular/flex-layout'
+import { MediaObserver } from '@ngbracket/ngx-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 import { combineLatest } from 'rxjs'
@@ -40,7 +40,7 @@ import { AuthService } from './auth/auth.service'
         position: relative;
         overflow: hidden;
         border-radius: 50%;
-        margin-top: -8px;
+        margin-top: 3px;
       }
     `,
   ],

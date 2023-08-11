@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { FlexLayoutModule } from '@angular/flex-layout'
+import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 import { AppMaterialModule } from '../app-material.module'
 import { FieldErrorModule } from '../user-controls/field-error/field-error.module'
@@ -32,7 +32,8 @@ import { ViewUserComponent } from './view-user/view-user.component'
     AppMaterialModule,
     UserMaterialModule,
     LemonRaterModule,
-    NgxMaskModule.forChild(),
+    NgxMaskDirective,
   ],
+  providers: [provideNgxMask()],
 })
 export class UserModule {}

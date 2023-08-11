@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { AuthGuard } from './auth/auth-guard.service'
+import { authGuard } from './auth/auth.guard'
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'manager',
     loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule),
-    canLoad: [AuthGuard],
+    canLoad: [authGuard],
   },
   {
     path: 'user',
@@ -33,7 +33,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, {})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

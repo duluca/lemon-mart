@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { SecurityContext } from '@angular/core'
-import { MediaChange } from '@angular/flex-layout'
+import { MediaChange } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { SafeResourceUrl, SafeValue } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
@@ -27,7 +28,7 @@ export class MediaObserverFake {
 
   subscribe(
     next?: (value: MediaChange) => void,
-    error?: (error: any) => void,
+    error?: (error: Error) => void,
     complete?: () => void
   ): Subscription {
     return new Subscription()
@@ -42,7 +43,7 @@ export class MatIconRegistryFake {
     return this
   }
 
-  getNamedSvgIcon(name: string, namespace: string = ''): Observable<SVGElement> {
+  getNamedSvgIcon(name: string, namespace = ''): Observable<SVGElement> {
     return of(this._svgElementFromString(FAKE_SVGS.lemon))
   }
 
@@ -66,15 +67,15 @@ export class DomSanitizerFake {
   }
 }
 
-export const commonTestingProviders: any[] = [
+export const commonTestingProviders = [
   { provide: AuthService, useValue: autoSpyObj(AuthService) },
   { provide: UiService, useValue: autoSpyObj(UiService) },
-]
+] as unknown[] as unknown[]
 
-export const commonTestingModules: any[] = [
+export const commonTestingModules = [
   ReactiveFormsModule,
   AppMaterialModule,
   NoopAnimationsModule,
   HttpClientTestingModule,
   RouterTestingModule,
-]
+] as unknown[] as unknown[]

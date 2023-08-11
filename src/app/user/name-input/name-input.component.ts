@@ -36,7 +36,13 @@ import { IName } from '../user/user'
       </div>
     </form>
   `,
-  styles: [],
+  styles: [
+    `
+      .mat-mdc-form-field {
+        padding-top: 16px;
+      }
+    `,
+  ],
 })
 export class NameInputComponent
   extends BaseFormDirective<IName>

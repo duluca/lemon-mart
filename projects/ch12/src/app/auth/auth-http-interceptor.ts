@@ -14,11 +14,14 @@ import { AuthService } from './auth.service'
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private router: Router) {}
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     const jwt = this.authService.getToken()
     const authRequest = req.clone({ setHeaders: { authorization: `Bearer ${jwt}` } })
     return next.handle(authRequest).pipe(
-      catchError((err, caught) => {
+      catchError((err) => {
         if (err.status === 401) {
           this.router.navigate(['/login'], {
             queryParams: { redirectUrl: this.router.routerState.snapshot.url },

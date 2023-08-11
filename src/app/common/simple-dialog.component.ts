@@ -23,6 +23,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 export class SimpleDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<SimpleDialogComponent, boolean>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA)
+    public data: { title: string; content: string; okText: string; cancelText: string }
   ) {}
 }

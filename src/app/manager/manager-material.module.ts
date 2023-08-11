@@ -11,7 +11,7 @@ const modules = [
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSlideToggleModule,
-] as any[]
+]
 
 @NgModule({
   exports: modules,

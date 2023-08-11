@@ -27,7 +27,7 @@ const modules = [
   MatSnackBarModule,
   MatExpansionModule,
   MatGridListModule,
-] as any[]
+]
 
 @NgModule({
   exports: modules,

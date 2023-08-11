@@ -178,7 +178,10 @@
               "src/safari-pinned-tab.svg",
               "src/mstile-150x150.png"
             ],
-            "styles": ["src/lemonmart-theme.scss", "src/styles.css"],
+            "styles": [
+              "src/lemonmart-theme.scss",
+              "src/styles.css"
+            ],
             "scripts": []
           }
         },
@@ -192,6 +195,15 @@
             "production": {
               "devServerTarget": "lemon-mart:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
@@ -295,7 +307,10 @@
             "polyfills": "projects/ch7/src/polyfills.ts",
             "tsConfig": "projects/ch7/tsconfig.spec.json",
             "karmaConfig": "projects/ch7/karma.conf.js",
-            "assets": ["projects/ch7/src/favicon.ico", "projects/ch7/src/assets"],
+            "assets": [
+              "projects/ch7/src/favicon.ico",
+              "projects/ch7/src/assets"
+            ],
             "styles": [
               "projects/ch7/src/lemonmart-theme.scss",
               "projects/ch7/src/styles.css"
@@ -313,6 +328,15 @@
             "production": {
               "devServerTarget": "ch7:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ch7/**/*.ts",
+              "projects/ch7/**/*.html"
+            ]
           }
         }
       }
@@ -416,7 +440,10 @@
             "polyfills": "projects/ch8/src/polyfills.ts",
             "tsConfig": "projects/ch8/tsconfig.spec.json",
             "karmaConfig": "projects/ch8/karma.conf.js",
-            "assets": ["projects/ch8/src/favicon.ico", "projects/ch8/src/assets"],
+            "assets": [
+              "projects/ch8/src/favicon.ico",
+              "projects/ch8/src/assets"
+            ],
             "styles": [
               "projects/ch8/src/lemonmart-theme.scss",
               "projects/ch8/src/styles.css"
@@ -434,6 +461,15 @@
             "production": {
               "devServerTarget": "ch8:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ch8/**/*.ts",
+              "projects/ch8/**/*.html"
+            ]
           }
         }
       }
@@ -537,7 +573,10 @@
             "polyfills": "projects/ch10/src/polyfills.ts",
             "tsConfig": "projects/ch10/tsconfig.spec.json",
             "karmaConfig": "projects/ch10/karma.conf.js",
-            "assets": ["projects/ch10/src/favicon.ico", "projects/ch10/src/assets"],
+            "assets": [
+              "projects/ch10/src/favicon.ico",
+              "projects/ch10/src/assets"
+            ],
             "styles": [
               "projects/ch10/src/lemonmart-theme.scss",
               "projects/ch10/src/styles.css"
@@ -555,6 +594,15 @@
             "production": {
               "devServerTarget": "ch10:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ch10/**/*.ts",
+              "projects/ch10/**/*.html"
+            ]
           }
         }
       }
@@ -658,7 +706,10 @@
             "polyfills": "projects/ch11/src/polyfills.ts",
             "tsConfig": "projects/ch11/tsconfig.spec.json",
             "karmaConfig": "projects/ch11/karma.conf.js",
-            "assets": ["projects/ch11/src/favicon.ico", "projects/ch11/src/assets"],
+            "assets": [
+              "projects/ch11/src/favicon.ico",
+              "projects/ch11/src/assets"
+            ],
             "styles": [
               "projects/ch11/src/lemonmart-theme.scss",
               "projects/ch11/src/styles.css"
@@ -676,6 +727,15 @@
             "production": {
               "devServerTarget": "ch11:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ch11/**/*.ts",
+              "projects/ch11/**/*.html"
+            ]
           }
         }
       }
@@ -779,7 +839,10 @@
             "polyfills": "projects/ch12/src/polyfills.ts",
             "tsConfig": "projects/ch12/tsconfig.spec.json",
             "karmaConfig": "projects/ch12/karma.conf.js",
-            "assets": ["projects/ch12/src/favicon.ico", "projects/ch12/src/assets"],
+            "assets": [
+              "projects/ch12/src/favicon.ico",
+              "projects/ch12/src/assets"
+            ],
             "styles": [
               "projects/ch12/src/lemonmart-theme.scss",
               "projects/ch12/src/styles.css"
@@ -797,6 +860,15 @@
             "production": {
               "devServerTarget": "ch12:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ch12/**/*.ts",
+              "projects/ch12/**/*.html"
+            ]
           }
         }
       }
@@ -900,7 +972,10 @@
             "polyfills": "projects/ch13/src/polyfills.ts",
             "tsConfig": "projects/ch13/tsconfig.spec.json",
             "karmaConfig": "projects/ch13/karma.conf.js",
-            "assets": ["projects/ch13/src/favicon.ico", "projects/ch13/src/assets"],
+            "assets": [
+              "projects/ch13/src/favicon.ico",
+              "projects/ch13/src/assets"
+            ],
             "styles": [
               "projects/ch13/src/lemonmart-theme.scss",
               "projects/ch13/src/styles.css"
@@ -918,6 +993,15 @@
             "production": {
               "devServerTarget": "ch13:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ch13/**/*.ts",
+              "projects/ch13/**/*.html"
+            ]
           }
         }
       }
@@ -1021,7 +1105,10 @@
             "polyfills": "projects/ch14/src/polyfills.ts",
             "tsConfig": "projects/ch14/tsconfig.spec.json",
             "karmaConfig": "projects/ch14/karma.conf.js",
-            "assets": ["projects/ch14/src/favicon.ico", "projects/ch14/src/assets"],
+            "assets": [
+              "projects/ch14/src/favicon.ico",
+              "projects/ch14/src/assets"
+            ],
             "styles": [
               "projects/ch14/src/lemonmart-theme.scss",
               "projects/ch14/src/styles.css"
@@ -1039,6 +1126,15 @@
             "production": {
               "devServerTarget": "ch14:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ch14/**/*.ts",
+              "projects/ch14/**/*.html"
+            ]
           }
         }
       }

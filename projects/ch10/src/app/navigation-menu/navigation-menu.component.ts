@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-navigation-menu',
@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core'
       .active-link {
         font-weight: bold;
         border-left: 3px solid green;
+      }
+    `,
+    `
+      .mat-mdc-subheader {
+        font-weight: bold;
       }
     `,
   ],
@@ -34,8 +39,4 @@ import { Component, OnInit } from '@angular/core'
     </mat-nav-list>
   `,
 })
-export class NavigationMenuComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class NavigationMenuComponent {}

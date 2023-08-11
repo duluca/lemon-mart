@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { AuthGuard } from '../auth/auth-guard.service'
+import { authGuard } from '../auth/auth.guard'
 import { Role } from '../auth/auth.enum'
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
 import { ManagerComponent } from './manager.component'
@@ -17,7 +17,7 @@ const routes: Routes = [
       {
         path: 'home',
         component: ManagerHomeComponent,
-        canActivate: [AuthGuard],
+        canActivate: [authGuard],
         data: {
           expectedRole: Role.Manager,
         },
@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'users',
         component: UserManagementComponent,
-        canActivate: [AuthGuard],
+        canActivate: [authGuard],
         data: {
           expectedRole: Role.Manager,
         },
@@ -33,7 +33,7 @@ const routes: Routes = [
       {
         path: 'receipts',
         component: ReceiptLookupComponent,
-        canActivate: [AuthGuard],
+        canActivate: [authGuard],
         data: {
           expectedRole: Role.Manager,
         },
