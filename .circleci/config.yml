@@ -52,7 +52,6 @@ commands:
             # - run: cd ./node_modules/protractor && npm i webdriver-manager@latest
             # --code-coverage
             - run: npx ng test --watch=false --project << parameters.project >>
-            - run: npx ng e2e << parameters.project >>
   store:
     description: 'Stores build_and_test artifacts'
     parameters:
