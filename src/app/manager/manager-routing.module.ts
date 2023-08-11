@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { AuthGuard } from '../auth/auth-guard.service'
 import { Role } from '../auth/auth.enum'
 import { UserResolve } from '../user/user/user.resolve'
 import { ViewUserComponent } from '../user/view-user/view-user.component'
@@ -10,6 +9,7 @@ import { ManagerComponent } from './manager.component'
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component'
 import { UserManagementComponent } from './user-management/user-management.component'
 import { UserTableComponent } from './user-table/user-table.component'
+import { authGuard } from '../auth/auth.guard'
 
 const routes: Routes = [
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
       {
         path: 'home',
         component: ManagerHomeComponent,
-        canActivate: [AuthGuard],
+        canActivate: [authGuard],
         data: {
           expectedRole: Role.Manager,
         },
@@ -39,8 +39,8 @@ const routes: Routes = [
             },
           },
         ],
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
+        canActivate: [authGuard],
+        canActivateChild: [authGuard],
         data: {
           expectedRole: Role.Manager,
         },
@@ -48,7 +48,7 @@ const routes: Routes = [
       {
         path: 'receipts',
         component: ReceiptLookupComponent,
-        canActivate: [AuthGuard],
+        canActivate: [authGuard],
         data: {
           expectedRole: Role.Manager,
         },

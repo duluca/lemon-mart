@@ -75,7 +75,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(
         filter(([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''),
         tap(([authStatus, user]) => {
-          this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)
+          this.uiService.showToast(
+            `Welcome ${user.fullName}! Role: ${authStatus.userRole}`
+          )
           this.router.navigate([
             this.redirectUrl || this.homeRoutePerRole(user.role as Role),
           ])

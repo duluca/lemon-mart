@@ -43,27 +43,29 @@ export class LemonRaterComponent implements ControlValueAccessor, AfterViewInit 
     },
   ])
 
-  onChanged: any = () => {}
-  onTouched: any = () => {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChanged: (value: number) => unknown = () => {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouched: () => unknown = () => {}
 
   ngAfterViewInit(): void {
     this.setSelectedText(this.internalValue)
   }
 
-  writeValue(obj: any): void {
+  writeValue(obj: number): void {
     this.internalValue = obj
   }
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: () => void): void {
     this.onChanged = fn
   }
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn
   }
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled
   }
 
-  setRating(lemon: any) {
+  setRating(lemon: { value: number }) {
     if (!this.disabled) {
       this.internalValue = lemon.value
       this.setDisplayText()

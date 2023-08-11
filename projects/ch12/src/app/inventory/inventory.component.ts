@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-inventory',
@@ -28,8 +28,4 @@ import { Component, OnInit } from '@angular/core'
     <router-outlet></router-outlet>
   `,
 })
-export class InventoryComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class InventoryComponent {}

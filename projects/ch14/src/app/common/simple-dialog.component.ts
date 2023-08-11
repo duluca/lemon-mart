@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
 @Component({
-  // prettier-ignore
   template: `
     <h2 mat-dialog-title>{{ data.title }}</h2>
     <mat-dialog-content>
@@ -13,7 +12,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
       <button mat-button mat-dialog-close *ngIf="data.cancelText">
         {{ data.cancelText }}
       </button>
-      <button mat-button mat-button-raised color="primary" [mat-dialog-close]="true"
+      <button
+        mat-button
+        mat-button-raised
+        color="primary"
+        [mat-dialog-close]="true"
         cdkFocusInitial>
         {{ data.okText }}
       </button>
@@ -23,6 +26,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 export class SimpleDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<SimpleDialogComponent, boolean>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA)
+    public data: { title: string; content: string; okText: string; cancelText: string }
   ) {}
 }

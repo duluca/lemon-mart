@@ -146,7 +146,6 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 ## Angular 16 (planned)
 
 - Plan to replace jasmine and karma with Jest
-- Plan to replace tslint with eslint
 - Plan to move to standalone configuration and using @ngrx/component-store
 
 ## Angular 13-15
@@ -158,6 +157,9 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 - Disabled code coverage in prep for migration to Jest
 - Updated `style` and `lint` scripts
 - Updated `config.yml` for CircleCI updates
+- Refactored `AuthGuard`
+- Replaced `tslint` with `eslint`
+- Removed `protractor` and `e2e` scripts
 
 ## Angular 12 configuration changes
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { SecurityContext } from '@angular/core'
 import { MediaChange } from '@ngbracket/ngx-layout'
@@ -27,7 +28,7 @@ export class MediaObserverFake {
 
   subscribe(
     next?: (value: MediaChange) => void,
-    error?: (error: any) => void,
+    error?: (error) => void,
     complete?: () => void
   ): Subscription {
     return new Subscription()
@@ -42,7 +43,7 @@ export class MatIconRegistryFake {
     return this
   }
 
-  getNamedSvgIcon(name: string, namespace: string = ''): Observable<SVGElement> {
+  getNamedSvgIcon(name: string, namespace = ''): Observable<SVGElement> {
     return of(this._svgElementFromString(FAKE_SVGS.lemon))
   }
 
@@ -66,12 +67,12 @@ export class DomSanitizerFake {
   }
 }
 
-export const commonTestingProviders: any[] = [
+export const commonTestingProviders = [
   { provide: AuthService, useValue: autoSpyObj(AuthService) },
   { provide: UiService, useValue: autoSpyObj(UiService) },
 ]
 
-export const commonTestingModules: any[] = [
+export const commonTestingModules = [
   ReactiveFormsModule,
   AppMaterialModule,
   NoopAnimationsModule,

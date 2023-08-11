@@ -16,7 +16,7 @@ const modules = [
   MatAutocompleteModule,
   MatNativeDateModule,
   MatLineModule,
-] as any[]
+]
 
 @NgModule({
   exports: modules,

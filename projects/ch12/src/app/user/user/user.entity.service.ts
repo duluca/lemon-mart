@@ -19,6 +19,7 @@ export class UserEntityService extends EntityCollectionServiceBase<User> {
     super('User', serviceElementsFactory)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getAll(options?: EntityActionOptions): Observable<User[]> {
     return this.userService.getUsers(10).pipe(map((users) => users.data.map(User.Build)))
   }

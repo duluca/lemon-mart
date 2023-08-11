@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-navigation-menu',
@@ -39,8 +39,4 @@ import { Component, OnInit } from '@angular/core'
     </mat-nav-list>
   `,
 })
-export class NavigationMenuComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class NavigationMenuComponent {}

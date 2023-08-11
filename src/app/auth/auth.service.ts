@@ -115,7 +115,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
     const jwt = this.getToken()
 
     if (jwt) {
-      const payload = decode(jwt) as any
+      const payload = decode(jwt) as { exp: number }
       return Date.now() >= payload.exp * 1000
     }
 

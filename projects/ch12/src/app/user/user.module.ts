@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 import { AppMaterialModule } from '../app-material.module'
-import { AuthGuard } from '../auth/auth-guard.service'
 import { SharedComponentsModule } from '../shared-components.module'
 import { FieldErrorModule } from '../user-controls/field-error/field-error.module'
 import { LemonRaterModule } from '../user-controls/lemon-rater/lemon-rater.module'
@@ -28,7 +27,7 @@ import { UserResolve } from './user/user.resolve'
     FieldErrorModule,
     NgxMaskDirective,
   ],
-  providers: [UserResolve, AuthGuard, provideNgxMask()],
+  providers: [UserResolve, provideNgxMask()],
   declarations: [ProfileComponent, LogoutComponent],
 })
 export class UserModule {}

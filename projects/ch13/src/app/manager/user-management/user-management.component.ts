@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-user-management',
@@ -10,8 +10,4 @@ import { Component, OnInit } from '@angular/core'
     </div>
   `,
 })
-export class UserManagementComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class UserManagementComponent {}

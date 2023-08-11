@@ -123,7 +123,7 @@ export class FieldErrorDirective implements OnDestroy, OnChanges {
           this.fieldControl?.getError(error)?.requiredLength ?? 2
         } characters`
       case 'maxlength':
-        return `${label} can\'t exceed ${
+        return `${label} can't exceed ${
           this.fieldControl?.getError(error)?.requiredLength ?? 50
         } characters`
       case 'invalid':
