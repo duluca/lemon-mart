@@ -4,7 +4,7 @@
 
 > See [Changes](#changes) section for important or breaking changes made to the project.
 
-![Angular Version](https://img.shields.io/badge/angular-v15-326839)
+![Angular Version](https://img.shields.io/badge/angular-v16-326839)
 [![CircleCI](https://circleci.com/gh/duluca/lemon-mart.svg?style=svg)](https://circleci.com/gh/duluca/lemon-mart)
 [![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=main)](https://coveralls.io/github/duluca/lemon-mart?branch=main)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)

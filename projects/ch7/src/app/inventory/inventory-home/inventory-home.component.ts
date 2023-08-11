@@ -5,6 +5,7 @@ import { Component } from '@angular/core'
   template: `
     <p>
       <img
+        alt="Inventory"
         src="https://user-images.githubusercontent.com/822159/36186560-c61ba57a-110d-11e8-8fbe-ff1c69e70864.png" />
     </p>
   `,

@@ -23,7 +23,10 @@ export interface IUserService {
   providedIn: 'root',
 })
 export class UserService extends CacheService implements IUserService {
-  constructor(private httpClient: HttpClient, private authService: AuthService) {
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {
     super()
   }
 

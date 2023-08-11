@@ -24,7 +24,10 @@ import { AuthService } from '../auth/auth.service'
   `,
 })
 export class HomeComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   login() {
     this.authService.login('manager@test.com', '12345678')

@@ -9,7 +9,10 @@ import { SimpleDialogComponent } from './simple-dialog.component'
   providedIn: 'root',
 })
 export class UiService {
-  constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {}
+  constructor(
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
 
   showToast(message: string, action = 'Close', config?: MatSnackBarConfig) {
     this.snackBar.open(

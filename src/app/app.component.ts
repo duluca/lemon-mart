@@ -62,7 +62,7 @@ import { AuthService } from './auth/auth.service'
         <span class="flex-spacer"></span>
         <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
           aria-label="User Profile">
-          <img *ngIf="auth?.user?.picture" class="image-cropper" [src]="auth?.user?.picture" />
+          <img alt="Profile picture" *ngIf="auth?.user?.picture" class="image-cropper" [src]="auth?.user?.picture" />
           <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
         </button>
         <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
