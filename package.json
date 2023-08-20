@@ -72,7 +72,7 @@
     "@ngrx/entity": "^16.2.0",
     "@ngrx/store": "^16.2.0",
     "@ngrx/store-devtools": "^16.2.0",
-    "firebase": "^9.23.0",
+    "firebase": "^10.2.0",
     "jwt-decode": "^3.1.2",
     "ngx-mask": "^16.2.8",
     "rxjs": "^7.8.1",
