@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 // ***********************************************
 // This example namespace declaration will help
 // with Intellisense and code completion in your
