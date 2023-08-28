@@ -39,10 +39,10 @@ function checkLogin(
 }
 
 function checkRoleMatch(role: Role, route?: ActivatedRouteSnapshot) {
-  if (!route?.data?.expectedRole) {
+  if (!route?.data?.['expectedRole']) {
     return true
   }
-  return role === route.data.expectedRole
+  return role === route.data['expectedRole']
 }
 
 function showAlert(uiService: UiService, isAuth: boolean, roleMatch: boolean) {

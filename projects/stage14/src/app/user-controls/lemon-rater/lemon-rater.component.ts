@@ -10,7 +10,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 @Component({
   selector: 'app-lemon-rater',
   templateUrl: 'lemon-rater.component.html',
-  styleUrls: ['lemon-rater.component.css'],
+  styleUrls: ['lemon-rater.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

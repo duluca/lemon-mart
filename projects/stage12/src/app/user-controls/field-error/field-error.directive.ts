@@ -58,7 +58,7 @@ export class FieldErrorDirective implements OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.initFieldControl()
 
-    if (changes.input.firstChange) {
+    if (changes['input'].firstChange) {
       if (this.input) {
         this.input.onblur = () => this.updateErrorMessage()
         this.fieldLabel =

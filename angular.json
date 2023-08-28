@@ -1,6 +1,13 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "npm",
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
+  },
   "newProjectRoot": "projects",
   "projects": {
     "lemon-mart": {
@@ -16,8 +23,11 @@
             "outputPath": "dist/lemon-mart",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -36,34 +46,12 @@
               "src/mstile-150x150.png"
             ],
             "styles": [
-              "src/lemonmart-theme.scss",
-              "src/styles.css"
+              "src/styles.scss"
             ],
-            "scripts": [],
-            "aot": false,
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -75,7 +63,22 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             },
             "lemon-mart-server": {
               "fileReplacements": [
@@ -84,14 +87,7 @@
                   "with": "src/environments/environment.lemon-mart-server.ts"
                 }
               ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "aot": true,
+
               "budgets": [
                 {
                   "type": "initial",
@@ -112,14 +108,7 @@
                   "with": "src/environments/environment.firebase.ts"
                 }
               ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "aot": true,
+
               "budgets": [
                 {
                   "type": "initial",
@@ -134,7 +123,7 @@
               ]
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -158,9 +147,10 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -179,8 +169,7 @@
               "src/mstile-150x150.png"
             ],
             "styles": [
-              "src/lemonmart-theme.scss",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -254,8 +243,9 @@
             "outputPath": "dist/stage7",
             "index": "projects/stage7/src/index.html",
             "main": "projects/stage7/src/main.ts",
-            "polyfills": "projects/stage7/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/stage7/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage7/src/favicon.ico",
               "projects/stage7/src/assets",
@@ -274,32 +264,12 @@
               "projects/stage7/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/stage7/src/lemonmart-theme.scss",
-              "projects/stage7/src/styles.css"
+              "projects/stage7/src/styles.scss"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/stage7/src/environments/environment.ts",
-                  "with": "projects/stage7/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -311,10 +281,16 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/stage7/src/environments/environment.ts",
+                  "with": "projects/stage7/src/environments/environment.prod.ts"
+                }
               ]
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -337,16 +313,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/stage7/src/test.ts",
-            "polyfills": "projects/stage7/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage7/tsconfig.spec.json",
             "karmaConfig": "projects/stage7/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage7/src/favicon.ico",
               "projects/stage7/src/assets"
             ],
             "styles": [
-              "projects/stage7/src/lemonmart-theme.scss",
-              "projects/stage7/src/styles.css"
+              "projects/stage7/src/styles.scss"
             ],
             "scripts": []
           }
@@ -422,8 +398,9 @@
             "outputPath": "dist/stage8",
             "index": "projects/stage8/src/index.html",
             "main": "projects/stage8/src/main.ts",
-            "polyfills": "projects/stage8/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/stage8/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage8/src/favicon.ico",
               "projects/stage8/src/assets",
@@ -442,16 +419,9 @@
               "projects/stage8/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/stage8/src/lemonmart-theme.scss",
-              "projects/stage8/src/styles.css"
+              "projects/stage8/src/styles.scss"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -461,13 +431,7 @@
                   "with": "projects/stage8/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -480,9 +444,17 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -505,16 +477,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/stage8/src/test.ts",
-            "polyfills": "projects/stage8/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage8/tsconfig.spec.json",
             "karmaConfig": "projects/stage8/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage8/src/favicon.ico",
               "projects/stage8/src/assets"
             ],
             "styles": [
-              "projects/stage8/src/lemonmart-theme.scss",
-              "projects/stage8/src/styles.css"
+              "projects/stage8/src/styles.scss"
             ],
             "scripts": []
           }
@@ -590,8 +562,9 @@
             "outputPath": "dist/stage10",
             "index": "projects/stage10/src/index.html",
             "main": "projects/stage10/src/main.ts",
-            "polyfills": "projects/stage10/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/stage10/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage10/src/favicon.ico",
               "projects/stage10/src/assets",
@@ -610,16 +583,9 @@
               "projects/stage10/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/stage10/src/lemonmart-theme.scss",
-              "projects/stage10/src/styles.css"
+              "projects/stage10/src/styles.scss"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -629,13 +595,7 @@
                   "with": "projects/stage10/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -648,9 +608,17 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -673,16 +641,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/stage10/src/test.ts",
-            "polyfills": "projects/stage10/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage10/tsconfig.spec.json",
             "karmaConfig": "projects/stage10/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage10/src/favicon.ico",
               "projects/stage10/src/assets"
             ],
             "styles": [
-              "projects/stage10/src/lemonmart-theme.scss",
-              "projects/stage10/src/styles.css"
+              "projects/stage10/src/styles.scss"
             ],
             "scripts": []
           }
@@ -758,8 +726,9 @@
             "outputPath": "dist/stage11",
             "index": "projects/stage11/src/index.html",
             "main": "projects/stage11/src/main.ts",
-            "polyfills": "projects/stage11/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/stage11/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage11/src/favicon.ico",
               "projects/stage11/src/assets",
@@ -778,16 +747,9 @@
               "projects/stage11/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/stage11/src/lemonmart-theme.scss",
-              "projects/stage11/src/styles.css"
+              "projects/stage11/src/styles.scss"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -797,13 +759,7 @@
                   "with": "projects/stage11/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -816,9 +772,17 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -841,16 +805,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/stage11/src/test.ts",
-            "polyfills": "projects/stage11/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage11/tsconfig.spec.json",
             "karmaConfig": "projects/stage11/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage11/src/favicon.ico",
               "projects/stage11/src/assets"
             ],
             "styles": [
-              "projects/stage11/src/lemonmart-theme.scss",
-              "projects/stage11/src/styles.css"
+              "projects/stage11/src/styles.scss"
             ],
             "scripts": []
           }
@@ -926,8 +890,9 @@
             "outputPath": "dist/stage12",
             "index": "projects/stage12/src/index.html",
             "main": "projects/stage12/src/main.ts",
-            "polyfills": "projects/stage12/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/stage12/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage12/src/favicon.ico",
               "projects/stage12/src/assets",
@@ -946,16 +911,9 @@
               "projects/stage12/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/stage12/src/lemonmart-theme.scss",
-              "projects/stage12/src/styles.css"
+              "projects/stage12/src/styles.scss"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -965,13 +923,7 @@
                   "with": "projects/stage12/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -984,9 +936,17 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1009,16 +969,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/stage12/src/test.ts",
-            "polyfills": "projects/stage12/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage12/tsconfig.spec.json",
             "karmaConfig": "projects/stage12/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage12/src/favicon.ico",
               "projects/stage12/src/assets"
             ],
             "styles": [
-              "projects/stage12/src/lemonmart-theme.scss",
-              "projects/stage12/src/styles.css"
+              "projects/stage12/src/styles.scss"
             ],
             "scripts": []
           }
@@ -1094,8 +1054,9 @@
             "outputPath": "dist/stage13",
             "index": "projects/stage13/src/index.html",
             "main": "projects/stage13/src/main.ts",
-            "polyfills": "projects/stage13/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/stage13/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage13/src/favicon.ico",
               "projects/stage13/src/assets",
@@ -1114,16 +1075,9 @@
               "projects/stage13/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/stage13/src/lemonmart-theme.scss",
-              "projects/stage13/src/styles.css"
+              "projects/stage13/src/styles.scss"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -1133,13 +1087,7 @@
                   "with": "projects/stage13/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -1152,9 +1100,17 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1177,16 +1133,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/stage13/src/test.ts",
-            "polyfills": "projects/stage13/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage13/tsconfig.spec.json",
             "karmaConfig": "projects/stage13/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage13/src/favicon.ico",
               "projects/stage13/src/assets"
             ],
             "styles": [
-              "projects/stage13/src/lemonmart-theme.scss",
-              "projects/stage13/src/styles.css"
+              "projects/stage13/src/styles.scss"
             ],
             "scripts": []
           }
@@ -1262,8 +1218,9 @@
             "outputPath": "dist/stage14",
             "index": "projects/stage14/src/index.html",
             "main": "projects/stage14/src/main.ts",
-            "polyfills": "projects/stage14/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/stage14/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage14/src/favicon.ico",
               "projects/stage14/src/assets",
@@ -1282,16 +1239,9 @@
               "projects/stage14/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/stage14/src/lemonmart-theme.scss",
-              "projects/stage14/src/styles.css"
+              "projects/stage14/src/styles.scss"
             ],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -1301,13 +1251,7 @@
                   "with": "projects/stage14/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -1320,9 +1264,17 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1345,16 +1297,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/stage14/src/test.ts",
-            "polyfills": "projects/stage14/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage14/tsconfig.spec.json",
             "karmaConfig": "projects/stage14/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/stage14/src/favicon.ico",
               "projects/stage14/src/assets"
             ],
             "styles": [
-              "projects/stage14/src/lemonmart-theme.scss",
-              "projects/stage14/src/styles.css"
+              "projects/stage14/src/styles.scss"
             ],
             "scripts": []
           }
@@ -1417,11 +1369,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "schematicCollections": [
-      "@cypress/schematic",
-      "@schematics/angular"
-    ]
   }
 }

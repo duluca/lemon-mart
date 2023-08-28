@@ -50,13 +50,13 @@ export class ViewUserComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    if (this.route.snapshot.data.user) {
-      this.currentUser$.next(this.route.snapshot.data.user)
+    if (this.route.snapshot.data['user']) {
+      this.currentUser$.next(this.route.snapshot.data['user'])
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentUser$.next(User.Build(changes.user.currentValue))
+    this.currentUser$.next(User.Build(changes['user'].currentValue))
   }
 
   editUser(id: string) {

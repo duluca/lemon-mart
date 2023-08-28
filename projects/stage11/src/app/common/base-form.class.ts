@@ -30,7 +30,7 @@ export abstract class BaseFormDirective<TFormData extends object> {
   }
 
   patchUpdatedDataIfChanged(changes: SimpleChanges) {
-    if (this.formGroup && this.hasChanged(changes.initialData)) {
+    if (this.formGroup && this.hasChanged(changes['initialData'])) {
       this.patchUpdatedData(this.initialData)
     }
   }

@@ -84,7 +84,7 @@ export class FirebaseAuthService extends AuthService {
     } as IUser)
   }
 
-  async logout() {
+  override async logout() {
     if (this.afAuth) {
       await signOut(this.afAuth)
     }

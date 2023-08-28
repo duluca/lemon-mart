@@ -47,7 +47,7 @@ export class ViewUserComponent implements OnChanges {
   constructor(private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentUser$.next(User.Build(changes.user.currentValue))
+    this.currentUser$.next(User.Build(changes['user'].currentValue))
   }
 
   editUser(id: string) {

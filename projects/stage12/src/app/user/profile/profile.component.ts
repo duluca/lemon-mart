@@ -25,7 +25,7 @@ import { IUSState, USStateFilter } from './data'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent
   extends BaseFormDirective<IUser>
@@ -82,8 +82,8 @@ export class ProfileComponent
   ngOnInit() {
     this.formGroup = this.buildForm()
 
-    if (this.route.snapshot.data.user) {
-      this.patchUser(this.route.snapshot.data.user)
+    if (this.route.snapshot.data['user']) {
+      this.patchUser(this.route.snapshot.data['user'])
     } else {
       this.subs.sink = combineLatest([
         this.loadFromCache(),

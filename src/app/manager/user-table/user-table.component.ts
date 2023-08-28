@@ -14,7 +14,7 @@ import { IUsers, UserService } from '../../user/user/user.service'
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.css'],
+  styleUrls: ['./user-table.component.scss'],
 })
 export class UserTableComponent implements OnDestroy, AfterViewInit {
   displayedColumns = ['name', 'email', 'role', '_id']

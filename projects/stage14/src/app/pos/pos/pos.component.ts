@@ -15,7 +15,7 @@ declare let dataLayer: IEvent[]
 @Component({
   selector: 'app-pos',
   templateUrl: './pos.component.html',
-  styleUrls: ['./pos.component.css'],
+  styleUrls: ['./pos.component.scss'],
 })
 export class PosComponent implements OnInit, OnDestroy {
   private subs = new SubSink()

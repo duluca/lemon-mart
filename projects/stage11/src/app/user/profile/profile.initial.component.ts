@@ -24,7 +24,7 @@ import { IUSState, USStateFilter } from './data'
 @Component({
   selector: 'app-profile-initial',
   templateUrl: './profile.initial.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileInitialComponent implements OnInit, OnDestroy {
   Role = Role

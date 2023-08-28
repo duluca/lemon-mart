@@ -108,7 +108,7 @@
                 <mat-error
                   [input]="line1"
                   [group]="formGroup.get('address')"
-                  [appFieldError]="ErrorSets.RequiredText">
+                  [appFieldError]="ErrorSets['RequiredText']">
                 </mat-error>
               </mat-form-field>
             </div>
@@ -124,7 +124,7 @@
                 <mat-error
                   [input]="line2"
                   [group]="formGroup.get('address')"
-                  [appFieldError]="ErrorSets.OptionalText">
+                  [appFieldError]="ErrorSets['OptionalText']">
                 </mat-error>
               </mat-form-field>
             </div>
@@ -135,7 +135,7 @@
                 <mat-error
                   [input]="city"
                   [group]="formGroup.get('address')"
-                  [appFieldError]="ErrorSets.RequiredText">
+                  [appFieldError]="ErrorSets['RequiredText']">
                 </mat-error>
               </mat-form-field>
               <mat-form-field appearance="outline" fxFlex="30%">

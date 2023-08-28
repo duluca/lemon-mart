@@ -16,7 +16,7 @@ import { IName } from '../user/user'
           <mat-label>First Name</mat-label>
           <input matInput aria-label="First Name" formControlName="first" #first />
           <mat-error [input]="first" [group]="formGroup"
-                     [appFieldError]="ErrorSets.RequiredText">
+                     [appFieldError]="ErrorSets['RequiredText']">
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="20%">
@@ -30,7 +30,7 @@ import { IName } from '../user/user'
           <mat-label>Last Name</mat-label>
           <input matInput aria-label="Last Name" formControlName="last" #last />
           <mat-error [input]="last" [group]="formGroup"
-                     [appFieldError]="ErrorSets.RequiredText">
+                     [appFieldError]="ErrorSets['RequiredText']">
           </mat-error>
         </mat-form-field>
       </div>
