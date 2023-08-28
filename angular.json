@@ -146,7 +146,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
@@ -312,7 +311,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/stage7/src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage7/tsconfig.spec.json",
             "karmaConfig": "projects/stage7/karma.conf.js",
@@ -476,7 +474,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/stage8/src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage8/tsconfig.spec.json",
             "karmaConfig": "projects/stage8/karma.conf.js",
@@ -640,7 +637,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/stage10/src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage10/tsconfig.spec.json",
             "karmaConfig": "projects/stage10/karma.conf.js",
@@ -804,7 +800,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/stage11/src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage11/tsconfig.spec.json",
             "karmaConfig": "projects/stage11/karma.conf.js",
@@ -968,7 +963,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/stage12/src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage12/tsconfig.spec.json",
             "karmaConfig": "projects/stage12/karma.conf.js",
@@ -1132,7 +1126,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/stage13/src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage13/tsconfig.spec.json",
             "karmaConfig": "projects/stage13/karma.conf.js",
@@ -1296,7 +1289,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/stage14/src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/stage14/tsconfig.spec.json",
             "karmaConfig": "projects/stage14/karma.conf.js",
