@@ -26,6 +26,8 @@ $lemon-mart-theme: mat.define-light-theme(
       accent: $lemon-mart-accent,
       warn: $lemon-mart-warn,
     ),
+    typography: mat.define-typography-config(),
+    density: 0,
   )
 );
 
@@ -37,6 +39,8 @@ $lemon-mart-dark-theme: mat.define-dark-theme(
       accent: $lemon-mart-accent,
       warn: $lemon-mart-warn,
     ),
+    typography: mat.define-typography-config(),
+    density: 0,
   )
 );
 
