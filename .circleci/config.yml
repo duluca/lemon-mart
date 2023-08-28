@@ -113,7 +113,7 @@ jobs:
       - install
       - lint
       - build_and_test
-      - run: npx ng run local-weather-app:cypress-run
+      - run: npx ng run lemon-mart:cypress-run
       - store
   deploy:
     docker:
