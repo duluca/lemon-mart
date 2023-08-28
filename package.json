@@ -95,10 +95,8 @@
     "@cypress/schematic": "^2.5.0",
     "@ngbracket/ngx-layout": "^16.0.0",
     "@types/jasmine": "~4.3.5",
-    "@types/jasminewd2": "~2.0.10",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/jwt-decode": "^2.2.1",
-    "@types/node": "^20.4.9",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "angular-unit-test-helper": "^16.0.0",
@@ -111,9 +109,7 @@
     "fake-jwt-sign": "^1.1.1",
     "http-server": "^14.1.1",
     "init-dev-env": "^2.0.0",
-    "jasmine": "^4.3.0",
     "jasmine-core": "^4.3.0",
-    "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.3.4",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "^2.2.1",
@@ -125,8 +121,6 @@
     "open-cli": "^7.2.0",
     "prettier": "^3.0.1",
     "rimraf": "^5.0.1",
-    "ts-node": "~10.9.1",
-    "tsutils": "^3.21.0",
     "typescript": "^5.1.6"
   }
 }
