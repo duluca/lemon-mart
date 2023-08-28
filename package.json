@@ -26,7 +26,7 @@
     "build:integration": "cross-conf-env docker image build -f integration.Dockerfile . -t $npm_package_config_imageRepo:latest",
     "test:prod": "npm test -- --browsers ChromiumNoSandbox --watch=false",
     "test:prod:e2e": "npm run e2e",
-    "cypress:run": "npx cypress run --record",
+    "cypress:run": "cypress run",
     "test:coverage": "npm test -- --browsers ChromiumNoSandbox --watch=false --code-coverage",
     "posttest:coverage": "http-server -c-1 -o -p 9875 ./coverage",
     "predocker:build": "npm run build",
@@ -52,7 +52,9 @@
     "lint:ts:fix": "tslint --config tslint.json --fix --project . -e \"**/{test,polyfills}.ts\"",
     "lint:tsc": "tsc --noEmit --skipLibCheck",
     "docker:stop": "cross-conf-env docker stop $npm_package_config_imageName || true",
-    "docker:open": "sleep 2 && cross-conf-env open-cli http://localhost:$npm_package_config_imagePort"
+    "docker:open": "sleep 2 && cross-conf-env open-cli http://localhost:$npm_package_config_imagePort",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open"
   },
   "private": true,
   "dependencies": {
@@ -90,6 +92,7 @@
     "@angular/cli": "^16.2.0",
     "@angular/compiler-cli": "16.2.0",
     "@angular/language-service": "16.2.0",
+    "@cypress/schematic": "^2.5.0",
     "@ngbracket/ngx-layout": "^16.0.0",
     "@types/jasmine": "~4.3.5",
     "@types/jasminewd2": "~2.0.10",

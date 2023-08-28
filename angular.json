@@ -186,10 +186,11 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "lemon-mart:serve"
+            "devServerTarget": "lemon-mart:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
@@ -205,44 +206,76 @@
               "src/**/*.html"
             ]
           }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "lemon-mart:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lemon-mart:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "lemon-mart:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "lemon-mart:serve:development"
+            }
+          }
         }
       }
     },
-    "ch7": {
+    "stage7": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ch7",
-      "sourceRoot": "projects/ch7/src",
+      "root": "projects/stage7",
+      "sourceRoot": "projects/stage7/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ch7",
-            "index": "projects/ch7/src/index.html",
-            "main": "projects/ch7/src/main.ts",
-            "polyfills": "projects/ch7/src/polyfills.ts",
-            "tsConfig": "projects/ch7/tsconfig.app.json",
+            "outputPath": "dist/stage7",
+            "index": "projects/stage7/src/index.html",
+            "main": "projects/stage7/src/main.ts",
+            "polyfills": "projects/stage7/src/polyfills.ts",
+            "tsConfig": "projects/stage7/tsconfig.app.json",
             "assets": [
-              "projects/ch7/src/favicon.ico",
-              "projects/ch7/src/assets",
-              "projects/ch7/src/android-chrome-192x192.png",
-              "projects/ch7/src/favicon-16x16.png",
-              "projects/ch7/src/mstile-310x150.png",
-              "projects/ch7/src/android-chrome-512x512.png",
-              "projects/ch7/src/favicon-32x32.png",
-              "projects/ch7/src/mstile-310x310.png",
-              "projects/ch7/src/apple-touch-icon.png",
-              "projects/ch7/src/manifest.json",
-              "projects/ch7/src/mstile-70x70.png",
-              "projects/ch7/src/browserconfig.xml",
-              "projects/ch7/src/mstile-144x144.png",
-              "projects/ch7/src/safari-pinned-tab.svg",
-              "projects/ch7/src/mstile-150x150.png"
+              "projects/stage7/src/favicon.ico",
+              "projects/stage7/src/assets",
+              "projects/stage7/src/android-chrome-192x192.png",
+              "projects/stage7/src/favicon-16x16.png",
+              "projects/stage7/src/mstile-310x150.png",
+              "projects/stage7/src/android-chrome-512x512.png",
+              "projects/stage7/src/favicon-32x32.png",
+              "projects/stage7/src/mstile-310x310.png",
+              "projects/stage7/src/apple-touch-icon.png",
+              "projects/stage7/src/manifest.json",
+              "projects/stage7/src/mstile-70x70.png",
+              "projects/stage7/src/browserconfig.xml",
+              "projects/stage7/src/mstile-144x144.png",
+              "projects/stage7/src/safari-pinned-tab.svg",
+              "projects/stage7/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/ch7/src/lemonmart-theme.scss",
-              "projects/ch7/src/styles.css"
+              "projects/stage7/src/lemonmart-theme.scss",
+              "projects/stage7/src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -256,8 +289,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ch7/src/environments/environment.ts",
-                  "with": "projects/ch7/src/environments/environment.prod.ts"
+                  "replace": "projects/stage7/src/environments/environment.ts",
+                  "with": "projects/stage7/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -286,47 +319,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ch7:build"
+            "browserTarget": "stage7:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ch7:build:production"
+              "browserTarget": "stage7:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ch7:build"
+            "browserTarget": "stage7:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ch7/src/test.ts",
-            "polyfills": "projects/ch7/src/polyfills.ts",
-            "tsConfig": "projects/ch7/tsconfig.spec.json",
-            "karmaConfig": "projects/ch7/karma.conf.js",
+            "main": "projects/stage7/src/test.ts",
+            "polyfills": "projects/stage7/src/polyfills.ts",
+            "tsConfig": "projects/stage7/tsconfig.spec.json",
+            "karmaConfig": "projects/stage7/karma.conf.js",
             "assets": [
-              "projects/ch7/src/favicon.ico",
-              "projects/ch7/src/assets"
+              "projects/stage7/src/favicon.ico",
+              "projects/stage7/src/assets"
             ],
             "styles": [
-              "projects/ch7/src/lemonmart-theme.scss",
-              "projects/ch7/src/styles.css"
+              "projects/stage7/src/lemonmart-theme.scss",
+              "projects/stage7/src/styles.css"
             ],
             "scripts": []
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ch7/e2e/protractor.conf.js",
-            "devServerTarget": "ch7:serve"
+            "devServerTarget": "stage7:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ch7:serve:production"
+              "devServerTarget": "stage7:serve:production"
             }
           }
         },
@@ -334,48 +368,82 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ch7/**/*.ts",
-              "projects/ch7/**/*.html"
+              "projects/stage7/**/*.ts",
+              "projects/stage7/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage7:serve",
+            "configFile": "projects/stage7/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "stage7:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/stage7/cypress.config.js"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage7:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "stage7:serve:development"
+            }
           }
         }
       }
     },
-    "ch8": {
+    "stage8": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ch8",
-      "sourceRoot": "projects/ch8/src",
+      "root": "projects/stage8",
+      "sourceRoot": "projects/stage8/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ch8",
-            "index": "projects/ch8/src/index.html",
-            "main": "projects/ch8/src/main.ts",
-            "polyfills": "projects/ch8/src/polyfills.ts",
-            "tsConfig": "projects/ch8/tsconfig.app.json",
+            "outputPath": "dist/stage8",
+            "index": "projects/stage8/src/index.html",
+            "main": "projects/stage8/src/main.ts",
+            "polyfills": "projects/stage8/src/polyfills.ts",
+            "tsConfig": "projects/stage8/tsconfig.app.json",
             "assets": [
-              "projects/ch8/src/favicon.ico",
-              "projects/ch8/src/assets",
-              "projects/ch8/src/android-chrome-192x192.png",
-              "projects/ch8/src/favicon-16x16.png",
-              "projects/ch8/src/mstile-310x150.png",
-              "projects/ch8/src/android-chrome-512x512.png",
-              "projects/ch8/src/favicon-32x32.png",
-              "projects/ch8/src/mstile-310x310.png",
-              "projects/ch8/src/apple-touch-icon.png",
-              "projects/ch8/src/manifest.json",
-              "projects/ch8/src/mstile-70x70.png",
-              "projects/ch8/src/browserconfig.xml",
-              "projects/ch8/src/mstile-144x144.png",
-              "projects/ch8/src/safari-pinned-tab.svg",
-              "projects/ch8/src/mstile-150x150.png"
+              "projects/stage8/src/favicon.ico",
+              "projects/stage8/src/assets",
+              "projects/stage8/src/android-chrome-192x192.png",
+              "projects/stage8/src/favicon-16x16.png",
+              "projects/stage8/src/mstile-310x150.png",
+              "projects/stage8/src/android-chrome-512x512.png",
+              "projects/stage8/src/favicon-32x32.png",
+              "projects/stage8/src/mstile-310x310.png",
+              "projects/stage8/src/apple-touch-icon.png",
+              "projects/stage8/src/manifest.json",
+              "projects/stage8/src/mstile-70x70.png",
+              "projects/stage8/src/browserconfig.xml",
+              "projects/stage8/src/mstile-144x144.png",
+              "projects/stage8/src/safari-pinned-tab.svg",
+              "projects/stage8/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/ch8/src/lemonmart-theme.scss",
-              "projects/ch8/src/styles.css"
+              "projects/stage8/src/lemonmart-theme.scss",
+              "projects/stage8/src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -389,8 +457,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ch8/src/environments/environment.ts",
-                  "with": "projects/ch8/src/environments/environment.prod.ts"
+                  "replace": "projects/stage8/src/environments/environment.ts",
+                  "with": "projects/stage8/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -419,47 +487,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ch8:build"
+            "browserTarget": "stage8:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ch8:build:production"
+              "browserTarget": "stage8:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ch8:build"
+            "browserTarget": "stage8:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ch8/src/test.ts",
-            "polyfills": "projects/ch8/src/polyfills.ts",
-            "tsConfig": "projects/ch8/tsconfig.spec.json",
-            "karmaConfig": "projects/ch8/karma.conf.js",
+            "main": "projects/stage8/src/test.ts",
+            "polyfills": "projects/stage8/src/polyfills.ts",
+            "tsConfig": "projects/stage8/tsconfig.spec.json",
+            "karmaConfig": "projects/stage8/karma.conf.js",
             "assets": [
-              "projects/ch8/src/favicon.ico",
-              "projects/ch8/src/assets"
+              "projects/stage8/src/favicon.ico",
+              "projects/stage8/src/assets"
             ],
             "styles": [
-              "projects/ch8/src/lemonmart-theme.scss",
-              "projects/ch8/src/styles.css"
+              "projects/stage8/src/lemonmart-theme.scss",
+              "projects/stage8/src/styles.css"
             ],
             "scripts": []
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ch8/e2e/protractor.conf.js",
-            "devServerTarget": "ch8:serve"
+            "devServerTarget": "stage8:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ch8:serve:production"
+              "devServerTarget": "stage8:serve:production"
             }
           }
         },
@@ -467,48 +536,82 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ch8/**/*.ts",
-              "projects/ch8/**/*.html"
+              "projects/stage8/**/*.ts",
+              "projects/stage8/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage8:serve",
+            "configFile": "projects/stage8/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "stage8:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/stage8/cypress.config.js"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage8:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "stage8:serve:development"
+            }
           }
         }
       }
     },
-    "ch10": {
+    "stage10": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ch10",
-      "sourceRoot": "projects/ch10/src",
+      "root": "projects/stage10",
+      "sourceRoot": "projects/stage10/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ch10",
-            "index": "projects/ch10/src/index.html",
-            "main": "projects/ch10/src/main.ts",
-            "polyfills": "projects/ch10/src/polyfills.ts",
-            "tsConfig": "projects/ch10/tsconfig.app.json",
+            "outputPath": "dist/stage10",
+            "index": "projects/stage10/src/index.html",
+            "main": "projects/stage10/src/main.ts",
+            "polyfills": "projects/stage10/src/polyfills.ts",
+            "tsConfig": "projects/stage10/tsconfig.app.json",
             "assets": [
-              "projects/ch10/src/favicon.ico",
-              "projects/ch10/src/assets",
-              "projects/ch10/src/android-chrome-192x192.png",
-              "projects/ch10/src/favicon-16x16.png",
-              "projects/ch10/src/mstile-310x150.png",
-              "projects/ch10/src/android-chrome-512x512.png",
-              "projects/ch10/src/favicon-32x32.png",
-              "projects/ch10/src/mstile-310x310.png",
-              "projects/ch10/src/apple-touch-icon.png",
-              "projects/ch10/src/manifest.json",
-              "projects/ch10/src/mstile-70x70.png",
-              "projects/ch10/src/browserconfig.xml",
-              "projects/ch10/src/mstile-144x144.png",
-              "projects/ch10/src/safari-pinned-tab.svg",
-              "projects/ch10/src/mstile-150x150.png"
+              "projects/stage10/src/favicon.ico",
+              "projects/stage10/src/assets",
+              "projects/stage10/src/android-chrome-192x192.png",
+              "projects/stage10/src/favicon-16x16.png",
+              "projects/stage10/src/mstile-310x150.png",
+              "projects/stage10/src/android-chrome-512x512.png",
+              "projects/stage10/src/favicon-32x32.png",
+              "projects/stage10/src/mstile-310x310.png",
+              "projects/stage10/src/apple-touch-icon.png",
+              "projects/stage10/src/manifest.json",
+              "projects/stage10/src/mstile-70x70.png",
+              "projects/stage10/src/browserconfig.xml",
+              "projects/stage10/src/mstile-144x144.png",
+              "projects/stage10/src/safari-pinned-tab.svg",
+              "projects/stage10/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/ch10/src/lemonmart-theme.scss",
-              "projects/ch10/src/styles.css"
+              "projects/stage10/src/lemonmart-theme.scss",
+              "projects/stage10/src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -522,8 +625,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ch10/src/environments/environment.ts",
-                  "with": "projects/ch10/src/environments/environment.prod.ts"
+                  "replace": "projects/stage10/src/environments/environment.ts",
+                  "with": "projects/stage10/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -552,47 +655,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ch10:build"
+            "browserTarget": "stage10:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ch10:build:production"
+              "browserTarget": "stage10:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ch10:build"
+            "browserTarget": "stage10:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ch10/src/test.ts",
-            "polyfills": "projects/ch10/src/polyfills.ts",
-            "tsConfig": "projects/ch10/tsconfig.spec.json",
-            "karmaConfig": "projects/ch10/karma.conf.js",
+            "main": "projects/stage10/src/test.ts",
+            "polyfills": "projects/stage10/src/polyfills.ts",
+            "tsConfig": "projects/stage10/tsconfig.spec.json",
+            "karmaConfig": "projects/stage10/karma.conf.js",
             "assets": [
-              "projects/ch10/src/favicon.ico",
-              "projects/ch10/src/assets"
+              "projects/stage10/src/favicon.ico",
+              "projects/stage10/src/assets"
             ],
             "styles": [
-              "projects/ch10/src/lemonmart-theme.scss",
-              "projects/ch10/src/styles.css"
+              "projects/stage10/src/lemonmart-theme.scss",
+              "projects/stage10/src/styles.css"
             ],
             "scripts": []
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ch10/e2e/protractor.conf.js",
-            "devServerTarget": "ch10:serve"
+            "devServerTarget": "stage10:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ch10:serve:production"
+              "devServerTarget": "stage10:serve:production"
             }
           }
         },
@@ -600,48 +704,82 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ch10/**/*.ts",
-              "projects/ch10/**/*.html"
+              "projects/stage10/**/*.ts",
+              "projects/stage10/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage10:serve",
+            "configFile": "projects/stage10/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "stage10:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/stage10/cypress.config.js"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage10:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "stage10:serve:development"
+            }
           }
         }
       }
     },
-    "ch11": {
+    "stage11": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ch11",
-      "sourceRoot": "projects/ch11/src",
+      "root": "projects/stage11",
+      "sourceRoot": "projects/stage11/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ch11",
-            "index": "projects/ch11/src/index.html",
-            "main": "projects/ch11/src/main.ts",
-            "polyfills": "projects/ch11/src/polyfills.ts",
-            "tsConfig": "projects/ch11/tsconfig.app.json",
+            "outputPath": "dist/stage11",
+            "index": "projects/stage11/src/index.html",
+            "main": "projects/stage11/src/main.ts",
+            "polyfills": "projects/stage11/src/polyfills.ts",
+            "tsConfig": "projects/stage11/tsconfig.app.json",
             "assets": [
-              "projects/ch11/src/favicon.ico",
-              "projects/ch11/src/assets",
-              "projects/ch11/src/android-chrome-192x192.png",
-              "projects/ch11/src/favicon-16x16.png",
-              "projects/ch11/src/mstile-310x150.png",
-              "projects/ch11/src/android-chrome-512x512.png",
-              "projects/ch11/src/favicon-32x32.png",
-              "projects/ch11/src/mstile-310x310.png",
-              "projects/ch11/src/apple-touch-icon.png",
-              "projects/ch11/src/manifest.json",
-              "projects/ch11/src/mstile-70x70.png",
-              "projects/ch11/src/browserconfig.xml",
-              "projects/ch11/src/mstile-144x144.png",
-              "projects/ch11/src/safari-pinned-tab.svg",
-              "projects/ch11/src/mstile-150x150.png"
+              "projects/stage11/src/favicon.ico",
+              "projects/stage11/src/assets",
+              "projects/stage11/src/android-chrome-192x192.png",
+              "projects/stage11/src/favicon-16x16.png",
+              "projects/stage11/src/mstile-310x150.png",
+              "projects/stage11/src/android-chrome-512x512.png",
+              "projects/stage11/src/favicon-32x32.png",
+              "projects/stage11/src/mstile-310x310.png",
+              "projects/stage11/src/apple-touch-icon.png",
+              "projects/stage11/src/manifest.json",
+              "projects/stage11/src/mstile-70x70.png",
+              "projects/stage11/src/browserconfig.xml",
+              "projects/stage11/src/mstile-144x144.png",
+              "projects/stage11/src/safari-pinned-tab.svg",
+              "projects/stage11/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/ch11/src/lemonmart-theme.scss",
-              "projects/ch11/src/styles.css"
+              "projects/stage11/src/lemonmart-theme.scss",
+              "projects/stage11/src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -655,8 +793,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ch11/src/environments/environment.ts",
-                  "with": "projects/ch11/src/environments/environment.prod.ts"
+                  "replace": "projects/stage11/src/environments/environment.ts",
+                  "with": "projects/stage11/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -685,47 +823,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ch11:build"
+            "browserTarget": "stage11:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ch11:build:production"
+              "browserTarget": "stage11:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ch11:build"
+            "browserTarget": "stage11:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ch11/src/test.ts",
-            "polyfills": "projects/ch11/src/polyfills.ts",
-            "tsConfig": "projects/ch11/tsconfig.spec.json",
-            "karmaConfig": "projects/ch11/karma.conf.js",
+            "main": "projects/stage11/src/test.ts",
+            "polyfills": "projects/stage11/src/polyfills.ts",
+            "tsConfig": "projects/stage11/tsconfig.spec.json",
+            "karmaConfig": "projects/stage11/karma.conf.js",
             "assets": [
-              "projects/ch11/src/favicon.ico",
-              "projects/ch11/src/assets"
+              "projects/stage11/src/favicon.ico",
+              "projects/stage11/src/assets"
             ],
             "styles": [
-              "projects/ch11/src/lemonmart-theme.scss",
-              "projects/ch11/src/styles.css"
+              "projects/stage11/src/lemonmart-theme.scss",
+              "projects/stage11/src/styles.css"
             ],
             "scripts": []
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ch11/e2e/protractor.conf.js",
-            "devServerTarget": "ch11:serve"
+            "devServerTarget": "stage11:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ch11:serve:production"
+              "devServerTarget": "stage11:serve:production"
             }
           }
         },
@@ -733,48 +872,82 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ch11/**/*.ts",
-              "projects/ch11/**/*.html"
+              "projects/stage11/**/*.ts",
+              "projects/stage11/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage11:serve",
+            "configFile": "projects/stage11/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "stage11:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/stage11/cypress.config.js"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage11:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "stage11:serve:development"
+            }
           }
         }
       }
     },
-    "ch12": {
+    "stage12": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ch12",
-      "sourceRoot": "projects/ch12/src",
+      "root": "projects/stage12",
+      "sourceRoot": "projects/stage12/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ch12",
-            "index": "projects/ch12/src/index.html",
-            "main": "projects/ch12/src/main.ts",
-            "polyfills": "projects/ch12/src/polyfills.ts",
-            "tsConfig": "projects/ch12/tsconfig.app.json",
+            "outputPath": "dist/stage12",
+            "index": "projects/stage12/src/index.html",
+            "main": "projects/stage12/src/main.ts",
+            "polyfills": "projects/stage12/src/polyfills.ts",
+            "tsConfig": "projects/stage12/tsconfig.app.json",
             "assets": [
-              "projects/ch12/src/favicon.ico",
-              "projects/ch12/src/assets",
-              "projects/ch12/src/android-chrome-192x192.png",
-              "projects/ch12/src/favicon-16x16.png",
-              "projects/ch12/src/mstile-310x150.png",
-              "projects/ch12/src/android-chrome-512x512.png",
-              "projects/ch12/src/favicon-32x32.png",
-              "projects/ch12/src/mstile-310x310.png",
-              "projects/ch12/src/apple-touch-icon.png",
-              "projects/ch12/src/manifest.json",
-              "projects/ch12/src/mstile-70x70.png",
-              "projects/ch12/src/browserconfig.xml",
-              "projects/ch12/src/mstile-144x144.png",
-              "projects/ch12/src/safari-pinned-tab.svg",
-              "projects/ch12/src/mstile-150x150.png"
+              "projects/stage12/src/favicon.ico",
+              "projects/stage12/src/assets",
+              "projects/stage12/src/android-chrome-192x192.png",
+              "projects/stage12/src/favicon-16x16.png",
+              "projects/stage12/src/mstile-310x150.png",
+              "projects/stage12/src/android-chrome-512x512.png",
+              "projects/stage12/src/favicon-32x32.png",
+              "projects/stage12/src/mstile-310x310.png",
+              "projects/stage12/src/apple-touch-icon.png",
+              "projects/stage12/src/manifest.json",
+              "projects/stage12/src/mstile-70x70.png",
+              "projects/stage12/src/browserconfig.xml",
+              "projects/stage12/src/mstile-144x144.png",
+              "projects/stage12/src/safari-pinned-tab.svg",
+              "projects/stage12/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/ch12/src/lemonmart-theme.scss",
-              "projects/ch12/src/styles.css"
+              "projects/stage12/src/lemonmart-theme.scss",
+              "projects/stage12/src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -788,8 +961,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ch12/src/environments/environment.ts",
-                  "with": "projects/ch12/src/environments/environment.prod.ts"
+                  "replace": "projects/stage12/src/environments/environment.ts",
+                  "with": "projects/stage12/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -818,47 +991,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ch12:build"
+            "browserTarget": "stage12:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ch12:build:production"
+              "browserTarget": "stage12:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ch12:build"
+            "browserTarget": "stage12:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ch12/src/test.ts",
-            "polyfills": "projects/ch12/src/polyfills.ts",
-            "tsConfig": "projects/ch12/tsconfig.spec.json",
-            "karmaConfig": "projects/ch12/karma.conf.js",
+            "main": "projects/stage12/src/test.ts",
+            "polyfills": "projects/stage12/src/polyfills.ts",
+            "tsConfig": "projects/stage12/tsconfig.spec.json",
+            "karmaConfig": "projects/stage12/karma.conf.js",
             "assets": [
-              "projects/ch12/src/favicon.ico",
-              "projects/ch12/src/assets"
+              "projects/stage12/src/favicon.ico",
+              "projects/stage12/src/assets"
             ],
             "styles": [
-              "projects/ch12/src/lemonmart-theme.scss",
-              "projects/ch12/src/styles.css"
+              "projects/stage12/src/lemonmart-theme.scss",
+              "projects/stage12/src/styles.css"
             ],
             "scripts": []
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ch12/e2e/protractor.conf.js",
-            "devServerTarget": "ch12:serve"
+            "devServerTarget": "stage12:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ch12:serve:production"
+              "devServerTarget": "stage12:serve:production"
             }
           }
         },
@@ -866,48 +1040,82 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ch12/**/*.ts",
-              "projects/ch12/**/*.html"
+              "projects/stage12/**/*.ts",
+              "projects/stage12/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage12:serve",
+            "configFile": "projects/stage12/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "stage12:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/stage12/cypress.config.js"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage12:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "stage12:serve:development"
+            }
           }
         }
       }
     },
-    "ch13": {
+    "stage13": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ch13",
-      "sourceRoot": "projects/ch13/src",
+      "root": "projects/stage13",
+      "sourceRoot": "projects/stage13/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ch13",
-            "index": "projects/ch13/src/index.html",
-            "main": "projects/ch13/src/main.ts",
-            "polyfills": "projects/ch13/src/polyfills.ts",
-            "tsConfig": "projects/ch13/tsconfig.app.json",
+            "outputPath": "dist/stage13",
+            "index": "projects/stage13/src/index.html",
+            "main": "projects/stage13/src/main.ts",
+            "polyfills": "projects/stage13/src/polyfills.ts",
+            "tsConfig": "projects/stage13/tsconfig.app.json",
             "assets": [
-              "projects/ch13/src/favicon.ico",
-              "projects/ch13/src/assets",
-              "projects/ch13/src/android-chrome-192x192.png",
-              "projects/ch13/src/favicon-16x16.png",
-              "projects/ch13/src/mstile-310x150.png",
-              "projects/ch13/src/android-chrome-512x512.png",
-              "projects/ch13/src/favicon-32x32.png",
-              "projects/ch13/src/mstile-310x310.png",
-              "projects/ch13/src/apple-touch-icon.png",
-              "projects/ch13/src/manifest.json",
-              "projects/ch13/src/mstile-70x70.png",
-              "projects/ch13/src/browserconfig.xml",
-              "projects/ch13/src/mstile-144x144.png",
-              "projects/ch13/src/safari-pinned-tab.svg",
-              "projects/ch13/src/mstile-150x150.png"
+              "projects/stage13/src/favicon.ico",
+              "projects/stage13/src/assets",
+              "projects/stage13/src/android-chrome-192x192.png",
+              "projects/stage13/src/favicon-16x16.png",
+              "projects/stage13/src/mstile-310x150.png",
+              "projects/stage13/src/android-chrome-512x512.png",
+              "projects/stage13/src/favicon-32x32.png",
+              "projects/stage13/src/mstile-310x310.png",
+              "projects/stage13/src/apple-touch-icon.png",
+              "projects/stage13/src/manifest.json",
+              "projects/stage13/src/mstile-70x70.png",
+              "projects/stage13/src/browserconfig.xml",
+              "projects/stage13/src/mstile-144x144.png",
+              "projects/stage13/src/safari-pinned-tab.svg",
+              "projects/stage13/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/ch13/src/lemonmart-theme.scss",
-              "projects/ch13/src/styles.css"
+              "projects/stage13/src/lemonmart-theme.scss",
+              "projects/stage13/src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -921,8 +1129,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ch13/src/environments/environment.ts",
-                  "with": "projects/ch13/src/environments/environment.prod.ts"
+                  "replace": "projects/stage13/src/environments/environment.ts",
+                  "with": "projects/stage13/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -951,47 +1159,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ch13:build"
+            "browserTarget": "stage13:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ch13:build:production"
+              "browserTarget": "stage13:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ch13:build"
+            "browserTarget": "stage13:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ch13/src/test.ts",
-            "polyfills": "projects/ch13/src/polyfills.ts",
-            "tsConfig": "projects/ch13/tsconfig.spec.json",
-            "karmaConfig": "projects/ch13/karma.conf.js",
+            "main": "projects/stage13/src/test.ts",
+            "polyfills": "projects/stage13/src/polyfills.ts",
+            "tsConfig": "projects/stage13/tsconfig.spec.json",
+            "karmaConfig": "projects/stage13/karma.conf.js",
             "assets": [
-              "projects/ch13/src/favicon.ico",
-              "projects/ch13/src/assets"
+              "projects/stage13/src/favicon.ico",
+              "projects/stage13/src/assets"
             ],
             "styles": [
-              "projects/ch13/src/lemonmart-theme.scss",
-              "projects/ch13/src/styles.css"
+              "projects/stage13/src/lemonmart-theme.scss",
+              "projects/stage13/src/styles.css"
             ],
             "scripts": []
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ch13/e2e/protractor.conf.js",
-            "devServerTarget": "ch13:serve"
+            "devServerTarget": "stage13:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ch13:serve:production"
+              "devServerTarget": "stage13:serve:production"
             }
           }
         },
@@ -999,48 +1208,82 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ch13/**/*.ts",
-              "projects/ch13/**/*.html"
+              "projects/stage13/**/*.ts",
+              "projects/stage13/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage13:serve",
+            "configFile": "projects/stage13/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "stage13:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/stage13/cypress.config.js"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage13:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "stage13:serve:development"
+            }
           }
         }
       }
     },
-    "ch14": {
+    "stage14": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/ch14",
-      "sourceRoot": "projects/ch14/src",
+      "root": "projects/stage14",
+      "sourceRoot": "projects/stage14/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ch14",
-            "index": "projects/ch14/src/index.html",
-            "main": "projects/ch14/src/main.ts",
-            "polyfills": "projects/ch14/src/polyfills.ts",
-            "tsConfig": "projects/ch14/tsconfig.app.json",
+            "outputPath": "dist/stage14",
+            "index": "projects/stage14/src/index.html",
+            "main": "projects/stage14/src/main.ts",
+            "polyfills": "projects/stage14/src/polyfills.ts",
+            "tsConfig": "projects/stage14/tsconfig.app.json",
             "assets": [
-              "projects/ch14/src/favicon.ico",
-              "projects/ch14/src/assets",
-              "projects/ch14/src/android-chrome-192x192.png",
-              "projects/ch14/src/favicon-16x16.png",
-              "projects/ch14/src/mstile-310x150.png",
-              "projects/ch14/src/android-chrome-512x512.png",
-              "projects/ch14/src/favicon-32x32.png",
-              "projects/ch14/src/mstile-310x310.png",
-              "projects/ch14/src/apple-touch-icon.png",
-              "projects/ch14/src/manifest.json",
-              "projects/ch14/src/mstile-70x70.png",
-              "projects/ch14/src/browserconfig.xml",
-              "projects/ch14/src/mstile-144x144.png",
-              "projects/ch14/src/safari-pinned-tab.svg",
-              "projects/ch14/src/mstile-150x150.png"
+              "projects/stage14/src/favicon.ico",
+              "projects/stage14/src/assets",
+              "projects/stage14/src/android-chrome-192x192.png",
+              "projects/stage14/src/favicon-16x16.png",
+              "projects/stage14/src/mstile-310x150.png",
+              "projects/stage14/src/android-chrome-512x512.png",
+              "projects/stage14/src/favicon-32x32.png",
+              "projects/stage14/src/mstile-310x310.png",
+              "projects/stage14/src/apple-touch-icon.png",
+              "projects/stage14/src/manifest.json",
+              "projects/stage14/src/mstile-70x70.png",
+              "projects/stage14/src/browserconfig.xml",
+              "projects/stage14/src/mstile-144x144.png",
+              "projects/stage14/src/safari-pinned-tab.svg",
+              "projects/stage14/src/mstile-150x150.png"
             ],
             "styles": [
-              "projects/ch14/src/lemonmart-theme.scss",
-              "projects/ch14/src/styles.css"
+              "projects/stage14/src/lemonmart-theme.scss",
+              "projects/stage14/src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -1054,8 +1297,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ch14/src/environments/environment.ts",
-                  "with": "projects/ch14/src/environments/environment.prod.ts"
+                  "replace": "projects/stage14/src/environments/environment.ts",
+                  "with": "projects/stage14/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -1084,47 +1327,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ch14:build"
+            "browserTarget": "stage14:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ch14:build:production"
+              "browserTarget": "stage14:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ch14:build"
+            "browserTarget": "stage14:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ch14/src/test.ts",
-            "polyfills": "projects/ch14/src/polyfills.ts",
-            "tsConfig": "projects/ch14/tsconfig.spec.json",
-            "karmaConfig": "projects/ch14/karma.conf.js",
+            "main": "projects/stage14/src/test.ts",
+            "polyfills": "projects/stage14/src/polyfills.ts",
+            "tsConfig": "projects/stage14/tsconfig.spec.json",
+            "karmaConfig": "projects/stage14/karma.conf.js",
             "assets": [
-              "projects/ch14/src/favicon.ico",
-              "projects/ch14/src/assets"
+              "projects/stage14/src/favicon.ico",
+              "projects/stage14/src/assets"
             ],
             "styles": [
-              "projects/ch14/src/lemonmart-theme.scss",
-              "projects/ch14/src/styles.css"
+              "projects/stage14/src/lemonmart-theme.scss",
+              "projects/stage14/src/styles.css"
             ],
             "scripts": []
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ch14/e2e/protractor.conf.js",
-            "devServerTarget": "ch14:serve"
+            "devServerTarget": "stage14:serve",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ch14:serve:production"
+              "devServerTarget": "stage14:serve:production"
             }
           }
         },
@@ -1132,12 +1376,52 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ch14/**/*.ts",
-              "projects/ch14/**/*.html"
+              "projects/stage14/**/*.ts",
+              "projects/stage14/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage14:serve",
+            "configFile": "projects/stage14/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "stage14:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/stage14/cypress.config.js"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "stage14:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "stage14:serve:development"
+            }
           }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }
