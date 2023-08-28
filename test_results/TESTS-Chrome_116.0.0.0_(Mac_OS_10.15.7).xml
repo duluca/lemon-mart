@@ -1,43 +1,43 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 116.0.0.0 (Mac OS 10.15.7)" package="" timestamp="2023-08-28T18:55:54" id="0" hostname="dougi-mbp21" tests="35" errors="0" failures="0" time="0.37">
+<testsuite name="Chrome 116.0.0.0 (Mac OS 10.15.7)" package="" timestamp="2023-08-28T19:58:13" id="0" hostname="dougi-mbp21" tests="35" errors="0" failures="0" time="0.293">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"/>
   </properties>
-  <testcase name="HomeComponent should create" time="0.06" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).HomeComponent"/>
-  <testcase name="LoginComponent should create" time="0.03" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LoginComponent"/>
-  <testcase name="FormErrorDirective should create an instance" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).FormErrorDirective"/>
-  <testcase name="InventoryComponent should create" time="0.009" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).InventoryComponent"/>
-  <testcase name="LemonRaterComponent should call touched when lemon selected" time="0.006" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
-  <testcase name="LemonRaterComponent should set the lemon rating based on the formControl value" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
-  <testcase name="LemonRaterComponent should call change with rating value when lemon selected" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
-  <testcase name="LemonRaterComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
-  <testcase name="LemonRaterComponent should set disabled class when formControl is disabled" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
-  <testcase name="LemonRaterComponent should remove disabled class when formControl is enabled" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
-  <testcase name="LemonRaterComponent should not call touch or change events when disabled" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
-  <testcase name="PageNotFoundComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PageNotFoundComponent"/>
+  <testcase name="ManagerHomeComponent should create" time="0.033" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerHomeComponent"/>
+  <testcase name="UserManagementComponent should create" time="0.016" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserManagementComponent"/>
+  <testcase name="UserTableComponent should create" time="0.051" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserTableComponent"/>
+  <testcase name="AuthService should be created" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AuthService"/>
   <testcase name="CategoriesComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).CategoriesComponent"/>
-  <testcase name="AppComponent should render app-container" time="0.035" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
-  <testcase name="AppComponent should create the app" time="0.011" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
-  <testcase name="AuthService should be created" time="0.01" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AuthService"/>
   <testcase name="AuthService should be created" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AuthService"/>
-  <testcase name="BaseFormDirective should create an instance" time="0" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).BaseFormDirective"/>
+  <testcase name="LoginComponent should create" time="0.015" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LoginComponent"/>
   <testcase name="InventoryHomeComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).InventoryHomeComponent"/>
-  <testcase name="NavigationMenuComponent should create" time="0.016" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NavigationMenuComponent"/>
-  <testcase name="UiService should be created" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UiService"/>
-  <testcase name="ProfileComponent should create" time="0.092" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProfileComponent"/>
-  <testcase name="ProductsComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProductsComponent"/>
-  <testcase name="UserService should be created" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserService"/>
-  <testcase name="ViewUserComponent should create" time="0.005" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ViewUserComponent"/>
+  <testcase name="ManagerComponent should create" time="0.011" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerComponent"/>
   <testcase name="StockEntryComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).StockEntryComponent"/>
-  <testcase name="ManagerHomeComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerHomeComponent"/>
-  <testcase name="ReceiptLookupComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ReceiptLookupComponent"/>
+  <testcase name="NavigationMenuComponent should create" time="0.008" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NavigationMenuComponent"/>
+  <testcase name="AppComponent should create the app" time="0.014" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
+  <testcase name="AppComponent should render app-container" time="0.016" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
   <testcase name="TransactionService should be created" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).TransactionService"/>
-  <testcase name="LogoutComponent should create" time="0.006" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LogoutComponent"/>
-  <testcase name="UserManagementComponent should create" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserManagementComponent"/>
-  <testcase name="ManagerComponent should create" time="0.005" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerComponent"/>
-  <testcase name="UserTableComponent should create" time="0.029" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserTableComponent"/>
-  <testcase name="NameInputComponent DOM Tests should create" time="0.006" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NameInputComponent DOM Tests"/>
-  <testcase name="PosComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PosComponent"/>
+  <testcase name="HomeComponent should create" time="0.008" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).HomeComponent"/>
+  <testcase name="PosComponent should create" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PosComponent"/>
+  <testcase name="ProductsComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProductsComponent"/>
+  <testcase name="BaseFormDirective should create an instance" time="0" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).BaseFormDirective"/>
+  <testcase name="UserService should be created" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserService"/>
+  <testcase name="UiService should be created" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UiService"/>
+  <testcase name="ProfileComponent should create" time="0.059" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProfileComponent"/>
+  <testcase name="PageNotFoundComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PageNotFoundComponent"/>
+  <testcase name="FormErrorDirective should create an instance" time="0" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).FormErrorDirective"/>
+  <testcase name="LogoutComponent should create" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LogoutComponent"/>
+  <testcase name="NameInputComponent DOM Tests should create" time="0.009" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NameInputComponent DOM Tests"/>
+  <testcase name="LemonRaterComponent should call touched when lemon selected" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should not call touch or change events when disabled" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should remove disabled class when formControl is enabled" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should set disabled class when formControl is disabled" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should call change with rating value when lemon selected" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should set the lemon rating based on the formControl value" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="ReceiptLookupComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ReceiptLookupComponent"/>
+  <testcase name="InventoryComponent should create" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).InventoryComponent"/>
+  <testcase name="ViewUserComponent should create" time="0.006" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ViewUserComponent"/>
   <system-out>
     <![CDATA[
 ]]>
