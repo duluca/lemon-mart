@@ -6,7 +6,7 @@ describe('LemonMart', () => {
   })
 
   it('has the correct title', () => {
-    cy.byTestId('title').should('have.text', 'LocalCast Weather')
+    cy.byTestId('title').should('have.text', 'LemonMart')
   })
 
   it('can login as cashier', () => {
