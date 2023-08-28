@@ -125,7 +125,7 @@ If you'd like to use this project as a starter or a template project for your pr
 - Run `npm start` for a developmenet web server.
 - Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 - Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-- Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- Run `npm run e2e` to execute the end-to-end tests via [Cypress](https://cypress.io).
 
 ### Code scaffolding
 
@@ -141,12 +141,14 @@ See the example project here https://github.com/duluca/lemon-mart-server
 
 # Changes
 
-Changes are inevitable to keep the project up-to-date with libraries, tools, patterns and practices. Below are some notable changes that differ from the 1st and 2nd edition of my book.
+Changes are inevitable to keep the project up-to-date with libraries, tools, patterns and practices. Below are some notable changes that differ from the 1st, 2nd, and 3rd edition of my book.
 
-## Angular 16 (planned)
+## Angular 16
 
-- Plan to replace jasmine and karma with Jest
-- Plan to move to standalone configuration and using @ngrx/component-store
+- Renamed `projects` from `ch2` format to `stage2`, so they make sense in the 3rd edition.
+- Replaced tslint with eslint
+- Replaced protractor with cypress for e2e, added tests
+- Moved to Standalone configuration
 
 ## Angular 13-15
 

@@ -38,14 +38,6 @@
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "preLaunchTask": "npm: test"
-    },
-    {
-      "name": "npm run e2e",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceRoot}/node_modules/protractor/bin/protractor",
-      "protocol": "inspector",
-      "args": ["${workspaceRoot}/protractor.conf.js"]
     }
   ]
 }

@@ -22,9 +22,6 @@ ENV TESTER_SRC_DIR=/usr/src
 WORKDIR $TESTER_SRC_DIR
 COPY --from=builder $BUILDER_SRC_DIR .
 
-# force update the webdriver, so it runs with latest version of Chrome
-RUN cd ./node_modules/protractor && npm i webdriver-manager@latest
-
 WORKDIR $TESTER_SRC_DIR
 
 RUN npm run test:prod
