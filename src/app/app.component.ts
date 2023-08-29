@@ -6,6 +6,8 @@ import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 
+import { LEMON_ICON } from './svg.icons'
+
 import { AuthService } from './auth/auth.service'
 
 @Component({
@@ -92,10 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     public media: MediaObserver
   ) {
-    iconRegistry.addSvgIcon(
-      'lemon',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/lemon.svg')
-    )
+    iconRegistry.addSvgIconLiteral('lemon', sanitizer.bypassSecurityTrustHtml(LEMON_ICON))
   }
 
   ngOnInit() {
