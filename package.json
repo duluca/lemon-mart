@@ -23,6 +23,8 @@
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "e2e": "ng e2e",
+    "build:appshell": "ng run lemon-mart:app-shell:production",
+    "serve:appshell": "http-server -c-1 -o -p 8080 dist/lemon-mart/browser",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "build:prod": "ng build --configuration production",
