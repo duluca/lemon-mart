@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lemon-mart",
+            "outputPath": "dist/lemon-mart/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -226,6 +226,75 @@
               "devServerTarget": "lemon-mart:serve:development"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/lemon-mart/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            },
+            "lemon-mart-server": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.lemon-mart-server.ts"
+                }
+              ]
+            },
+            "firebase": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.firebase.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "lemon-mart:build:production",
+              "serverTarget": "lemon-mart:server:production"
+            },
+            "development": {
+              "browserTarget": "lemon-mart:build:development",
+              "serverTarget": "lemon-mart:server:development"
+            },
+            "lemon-mart-server": {
+              "browserTarget": "lemon-mart:build:lemon-mart-server",
+              "serverTarget": "lemon-mart:server:lemon-mart-server"
+            },
+            "firebase": {
+              "browserTarget": "lemon-mart:build:firebase",
+              "serverTarget": "lemon-mart:server:firebase"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },

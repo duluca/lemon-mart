@@ -26,7 +26,8 @@ import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
-import { FieldErrorModule } from './user-controls/field-error/field-error.module'
+import { FieldErrorModule } from './user-controls/field-error/field-error.module';
+import { RouterModule } from '@angular/router'
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FieldErrorModule } from './user-controls/field-error/field-error.module
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    RouterModule,
   ],
   providers: [
     {
