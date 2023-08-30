@@ -9,9 +9,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=main)](https://coveralls.io/github/duluca/lemon-mart?branch=main)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)
 
-![devs served](https://img.shields.io/badge/devs%20served-17%2C280-F3DE48)
-![lemons served](https://img.shields.io/badge/lemons%20served-191%2C451-F3DE48)
-<sup>As of December 2020</sup>
+![devs served](https://img.shields.io/badge/devs%20served-32%2C528-F3DE48)
+![lemons served](https://img.shields.io/badge/lemons%20served-257%2C428-F3DE48)
+<sup>As of August 2023</sup>
 
 ![lemon-mart-login](https://user-images.githubusercontent.com/822159/77232462-694aa000-6b77-11ea-9a45-470f252d7e18.png)
 
