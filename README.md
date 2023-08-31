@@ -148,7 +148,7 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 - Renamed `projects` from `ch2` format to `stage2`, so they make sense in the 3rd edition.
 - Replaced tslint with eslint
 - Replaced protractor with cypress for e2e, added tests
-- Moved to Standalone configuration
+- Removed SharedModule, implemented shared components as Standalone components
 
 ## Angular 13-15
 
