@@ -1,25 +1,13 @@
 import { TestBed, waitForAsync } from '@angular/core/testing'
-import { MediaObserver } from '@ngbracket/ngx-layout'
-import { MatIconRegistry } from '@angular/material/icon'
-import { DomSanitizer } from '@angular/platform-browser'
 
 import { AppComponent } from './app.component'
-import {
-  DomSanitizerFake,
-  MatIconRegistryFake,
-  MediaObserverFake,
-  commonTestingModules,
-} from './common/common.testing'
+import { commonTestingModules } from './common/common.testing'
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [...commonTestingModules, AppComponent],
-      providers: [
-        { provide: MediaObserver, useClass: MediaObserverFake },
-        { provide: MatIconRegistry, useClass: MatIconRegistryFake },
-        { provide: DomSanitizer, useClass: DomSanitizerFake },
-      ],
+      providers: [],
     }).compileComponents()
   }))
 
@@ -29,7 +17,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy()
   })
 
-  xit('should render title', () => {
+  it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent)
     fixture.detectChanges()
     const compiled = fixture.debugElement.nativeElement

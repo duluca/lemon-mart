@@ -1,10 +1,8 @@
-import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
-
+import { Routes } from '@angular/router'
 import { HomeComponent } from './home/home.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   // { path: 'manager', children: managerModuleRoutes }, // Example of eager loading
@@ -25,11 +23,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./inventory/inventory.module').then((m) => m.InventoryModule),
   },
-  { path: '**', component: PageNotFoundComponent },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./page-not-found/page-not-found.component').then(
+        (m) => m.PageNotFoundComponent
+      ),
+  },
 ]
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, {})],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
