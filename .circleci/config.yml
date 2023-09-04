@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
-  coveralls: coveralls/coveralls@2.2.1
-  browser-tools: circleci/browser-tools@1.4.3
+  coveralls: coveralls/coveralls@2
+  browser-tools: circleci/browser-tools@1
   cypress: cypress-io/cypress@3
 commands:
   install:
