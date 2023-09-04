@@ -8,7 +8,7 @@ describe('NavigationMenuComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NavigationMenuComponent],
+      imports: [NavigationMenuComponent],
     }).compileComponents()
   }))
 

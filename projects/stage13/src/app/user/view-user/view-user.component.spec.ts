@@ -18,8 +18,8 @@ describe('ViewUserComponent', () => {
         FlexLayoutModule,
         AppMaterialModule,
         RouterTestingModule,
+        ViewUserComponent,
       ],
-      declarations: [ViewUserComponent],
     }).compileComponents()
   }))
 

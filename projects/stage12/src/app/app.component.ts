@@ -7,6 +7,10 @@ import { tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 
 import { AuthService } from './auth/auth.service'
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
+import { RouterLink, RouterOutlet } from '@angular/router'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
+import { NgIf, AsyncPipe } from '@angular/common'
 
 @Component({
   selector: 'app-root',
@@ -81,6 +85,15 @@ import { AuthService } from './auth/auth.service'
     </mat-sidenav-container>
   </div>
   `,
+  standalone: true,
+  imports: [
+    NgIf,
+    FlexModule,
+    RouterLink,
+    NavigationMenuComponent,
+    RouterOutlet,
+    AsyncPipe,
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subs = new SubSink()

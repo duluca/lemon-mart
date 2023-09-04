@@ -10,9 +10,8 @@ describe('LoginComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
       providers: commonTestingProviders,
-      imports: commonTestingModules.concat(FieldErrorModule),
+      imports: [...commonTestingModules.concat(FieldErrorModule), LoginComponent],
     }).compileComponents()
   }))
 

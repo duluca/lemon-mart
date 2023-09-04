@@ -6,6 +6,8 @@ import { LemonRaterComponent } from './lemon-rater.component'
 
 @Component({
   template: '<app-lemon-rater [formControl]="rating"></app-lemon-rater>',
+  standalone: true,
+  imports: [ReactiveFormsModule],
 })
 class TestHostComponent {
   @ViewChild(LemonRaterComponent, { static: true })
@@ -20,8 +22,7 @@ describe('LemonRaterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LemonRaterComponent, TestHostComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, LemonRaterComponent, TestHostComponent],
     }).compileComponents()
   }))
 

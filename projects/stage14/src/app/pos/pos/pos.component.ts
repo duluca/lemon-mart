@@ -6,6 +6,8 @@ import { UiService } from '../../common/ui.service'
 import { ITransaction } from '../transaction/transaction'
 import { TransactionType } from '../transaction/transaction.enum'
 import { TransactionService } from '../transaction/transaction.service'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button'
 
 interface IEvent {
   event: 'checkoutCompleted' | 'checkoutInitiated'
@@ -16,6 +18,8 @@ declare let dataLayer: IEvent[]
   selector: 'app-pos',
   templateUrl: './pos.component.html',
   styleUrls: ['./pos.component.scss'],
+  standalone: true,
+  imports: [MatButtonModule, MatIconModule],
 })
 export class PosComponent implements OnInit, OnDestroy {
   private subs = new SubSink()

@@ -11,8 +11,10 @@ describe('UserManagementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: commonTestingProviders,
-      imports: commonTestingModules.concat([ManagerMaterialModule]),
-      declarations: [UserManagementComponent],
+      imports: [
+        ...commonTestingModules.concat([ManagerMaterialModule]),
+        UserManagementComponent,
+      ],
     }).compileComponents()
   }))
 

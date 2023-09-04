@@ -1,6 +1,8 @@
 import { Component } from '@angular/core'
 
 import { AuthService } from '../auth/auth.service'
+import { LoginComponent } from '../login/login.component'
+import { NgIf, AsyncPipe } from '@angular/common'
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,8 @@ import { AuthService } from '../auth/auth.service'
       <app-login></app-login>
     </ng-template>
   `,
+  standalone: true,
+  imports: [NgIf, LoginComponent, AsyncPipe],
 })
 export class HomeComponent {
   constructor(public authService: AuthService) {}

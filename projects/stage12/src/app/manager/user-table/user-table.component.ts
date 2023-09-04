@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
-import { FormControl } from '@angular/forms'
-import { MatPaginator } from '@angular/material/paginator'
-import { MatSort, SortDirection } from '@angular/material/sort'
+import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'
+import { MatSort, SortDirection, MatSortModule } from '@angular/material/sort'
 import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
@@ -10,11 +10,41 @@ import { OptionalTextValidation } from '../../common/validations'
 import { IUser, User } from '../../user/user/user'
 import { UserEntityService } from '../../user/user/user.entity.service'
 import { IUsers, UserService } from '../../user/user/user.service'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { RouterLink } from '@angular/router'
+import { MatButtonModule } from '@angular/material/button'
+import { MatTableModule } from '@angular/material/table'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { NgIf, AsyncPipe } from '@angular/common'
+import { MatInputModule } from '@angular/material/input'
+import { MatIconModule } from '@angular/material/icon'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss'],
+  standalone: true,
+  imports: [
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    FormsModule,
+    FlexModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    NgIf,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatButtonModule,
+    RouterLink,
+    MatToolbarModule,
+    MatPaginatorModule,
+    AsyncPipe,
+  ],
 })
 export class UserTableComponent implements OnDestroy, AfterViewInit {
   displayedColumns = ['name', 'email', 'role', '_id']

@@ -13,9 +13,11 @@ describe('UserTableComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [UserTableComponent],
       providers: commonTestingProviders,
-      imports: commonTestingModules.concat([FormsModule, ManagerMaterialModule]),
+      imports: [
+        ...commonTestingModules.concat([FormsModule, ManagerMaterialModule]),
+        UserTableComponent,
+      ],
     }).compileComponents()
   }))
 

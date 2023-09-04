@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { catchError, filter, tap } from 'rxjs/operators'
@@ -9,6 +9,14 @@ import { Role } from '../auth/auth.enum'
 import { AuthService } from '../auth/auth.service'
 import { UiService } from '../common/ui.service'
 import { EmailValidation, PasswordValidation } from '../common/validations'
+import { MatButtonModule } from '@angular/material/button'
+import { NgIf } from '@angular/common'
+import { FieldErrorDirective } from '../user-controls/field-error/field-error.directive'
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatCardModule } from '@angular/material/card'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
 
 @Component({
   selector: 'app-login',
@@ -24,6 +32,18 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
         margin-top: 32px;
       }
     `,
+  ],
+  standalone: true,
+  imports: [
+    FlexModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FieldErrorDirective,
+    NgIf,
+    MatButtonModule,
   ],
 })
 export class LoginComponent implements OnInit, OnDestroy {

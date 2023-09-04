@@ -1,4 +1,8 @@
 import { Component } from '@angular/core'
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
+import { MatButtonModule } from '@angular/material/button'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 @Component({
   selector: 'app-manager',
@@ -24,5 +28,14 @@ import { Component } from '@angular/core'
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    FlexModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+  ],
 })
 export class ManagerComponent {}

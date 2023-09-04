@@ -1,4 +1,9 @@
 import { Component } from '@angular/core'
+import { MatIconModule } from '@angular/material/icon'
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
+import { MatButtonModule } from '@angular/material/button'
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 @Component({
   selector: 'app-manager',
@@ -40,5 +45,15 @@ import { Component } from '@angular/core'
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    MatTooltipModule,
+    MatIconModule,
+    RouterOutlet,
+  ],
 })
 export class ManagerComponent {}

@@ -1,10 +1,16 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 
 import { BaseFormDirective } from '../../common/base-form.class'
 import { OneCharValidation, RequiredTextValidation } from '../../common/validations'
-import { ErrorSets } from '../../user-controls/field-error/field-error.directive'
+import {
+  ErrorSets,
+  FieldErrorDirective,
+} from '../../user-controls/field-error/field-error.directive'
 import { IName } from '../user/user'
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
 
 @Component({
   selector: 'app-name-input',
@@ -37,6 +43,14 @@ import { IName } from '../user/user'
     </form>
   `,
   styles: [],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    FlexModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FieldErrorDirective,
+  ],
 })
 export class NameInputComponent
   extends BaseFormDirective<IName>

@@ -11,9 +11,8 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, MockComponent(LoginComponent)],
       providers: commonTestingProviders,
-      imports: commonTestingModules,
+      imports: [...commonTestingModules, HomeComponent, MockComponent(LoginComponent)],
     }).compileComponents()
   }))
 

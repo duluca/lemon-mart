@@ -6,6 +6,7 @@ import {
   forwardRef,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { NgClass, NgFor } from '@angular/common'
 
 @Component({
   selector: 'app-lemon-rater',
@@ -18,6 +19,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
       multi: true,
     },
   ],
+  standalone: true,
+  imports: [NgClass, NgFor],
 })
 export class LemonRaterComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('displayText', { static: false }) displayTextRef!: ElementRef

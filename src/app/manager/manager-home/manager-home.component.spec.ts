@@ -8,7 +8,7 @@ describe('ManagerHomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ManagerHomeComponent],
+      imports: [ManagerHomeComponent],
     }).compileComponents()
   }))
 

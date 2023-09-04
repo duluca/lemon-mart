@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { AppMaterialModule } from '../app-material.module'
-import { SharedComponentsModule } from '../shared-components.module'
 import { UserResolve } from '../user/user/user.resolve'
 import { UserService } from '../user/user/user.service'
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
-import { ManagerMaterialModule } from './manager-material.module'
+
 import { ManagerRoutingModule } from './manager-routing.module'
 import { ManagerComponent } from './manager.component'
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component'
@@ -19,14 +17,9 @@ import { UserTableComponent } from './user-table/user-table.component'
   imports: [
     CommonModule,
     ManagerRoutingModule,
-    SharedComponentsModule,
-    AppMaterialModule,
-    ManagerMaterialModule,
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
-  ],
-  declarations: [
     ManagerHomeComponent,
     ManagerComponent,
     UserManagementComponent,

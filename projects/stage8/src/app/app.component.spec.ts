@@ -31,14 +31,17 @@ describe('AppComponent', () => {
     )
 
     TestBed.configureTestingModule({
-      imports: commonTestingModules,
+      imports: [
+        ...commonTestingModules,
+        MockComponent(NavigationMenuComponent),
+        AppComponent,
+      ],
       providers: [
         { provide: MediaObserver, useClass: MediaObserverFake },
         { provide: MatIconRegistry, useClass: MatIconRegistryFake },
         { provide: DomSanitizer, useClass: DomSanitizerFake },
         { provide: AuthService, useValue: authServiceSpy },
       ],
-      declarations: [AppComponent, MockComponent(NavigationMenuComponent)],
     }).compileComponents()
 
     authServiceMock = injectSpy(AuthService)

@@ -14,13 +14,12 @@ import {
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: commonTestingModules,
+      imports: [...commonTestingModules, AppComponent],
       providers: [
         { provide: MediaObserver, useClass: MediaObserverFake },
         { provide: MatIconRegistry, useClass: MatIconRegistryFake },
         { provide: DomSanitizer, useClass: DomSanitizerFake },
       ],
-      declarations: [AppComponent],
     }).compileComponents()
   }))
 

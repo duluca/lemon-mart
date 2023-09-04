@@ -1,6 +1,8 @@
 import { Component } from '@angular/core'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
+import { RouterLink, RouterOutlet } from '@angular/router'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
 
 @Component({
   selector: 'app-root',
@@ -30,6 +32,8 @@ import { DomSanitizer } from '@angular/platform-browser'
     <router-outlet></router-outlet>
   `,
   styles: [],
+  standalone: true,
+  imports: [FlexModule, RouterLink, RouterOutlet],
 })
 export class AppComponent {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {

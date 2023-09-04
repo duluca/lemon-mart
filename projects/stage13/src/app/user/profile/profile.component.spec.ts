@@ -37,13 +37,17 @@ describe('ProfileComponent', () => {
         },
         provideNgxMask()
       ),
-      imports: commonTestingModules.concat([
-        UserMaterialModule,
-        FieldErrorModule,
-        LemonRaterModule,
-        NgxMaskDirective,
-      ]),
-      declarations: [ProfileComponent, NameInputComponent, ViewUserComponent],
+      imports: [
+        ...commonTestingModules.concat([
+          UserMaterialModule,
+          FieldErrorModule,
+          LemonRaterModule,
+          NgxMaskDirective,
+        ]),
+        ProfileComponent,
+        NameInputComponent,
+        ViewUserComponent,
+      ],
     }).compileComponents()
 
     authServiceMock = injectSpy(AuthService)
