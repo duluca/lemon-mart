@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing'
+import { inject, TestBed } from '@angular/core/testing'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { UserService } from './user.service'

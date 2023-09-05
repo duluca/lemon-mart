@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { PosRoutingModule } from './pos-routing.module'
 import { PosComponent } from './pos/pos.component'
+import { PosRoutingModule } from './pos-routing.module'
 import { TransactionService } from './transaction/transaction.service'
 
 @NgModule({

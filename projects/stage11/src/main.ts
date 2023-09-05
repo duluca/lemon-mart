@@ -1,24 +1,24 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core'
-
-import { environment } from './environments/environment'
-import { AppComponent } from './app/app.component'
-import { provideAuth, getAuth } from '@angular/fire/auth'
-import { initializeApp } from 'firebase/app'
-import { provideFirebaseApp } from '@angular/fire/app'
-import { ReactiveFormsModule } from '@angular/forms'
-import { FlexLayoutModule } from '@ngbracket/ngx-layout'
-import { provideAnimations } from '@angular/platform-browser/animations'
-import { AppRoutingModule } from './app/app-routing.module'
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser'
-import { AuthHttpInterceptor } from './app/auth/auth-http-interceptor'
 import {
-  HttpClient,
   HTTP_INTERCEPTORS,
-  withInterceptorsFromDi,
+  HttpClient,
   provideHttpClient,
+  withInterceptorsFromDi,
 } from '@angular/common/http'
+import { enableProdMode, importProvidersFrom } from '@angular/core'
+import { provideFirebaseApp } from '@angular/fire/app'
+import { getAuth, provideAuth } from '@angular/fire/auth'
+import { ReactiveFormsModule } from '@angular/forms'
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser'
+import { provideAnimations } from '@angular/platform-browser/animations'
+import { FlexLayoutModule } from '@ngbracket/ngx-layout'
+import { initializeApp } from 'firebase/app'
+
+import { AppComponent } from './app/app.component'
+import { AppRoutingModule } from './app/app-routing.module'
 import { authFactory } from './app/auth/auth.factory'
 import { AuthService } from './app/auth/auth.service'
+import { AuthHttpInterceptor } from './app/auth/auth-http-interceptor'
+import { environment } from './environments/environment'
 
 if (environment.production) {
   enableProdMode()

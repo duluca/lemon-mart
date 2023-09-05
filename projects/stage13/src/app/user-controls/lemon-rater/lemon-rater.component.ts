@@ -1,12 +1,12 @@
+import { NgClass, NgFor } from '@angular/common'
 import {
   AfterViewInit,
   Component,
   ElementRef,
-  ViewChild,
   forwardRef,
+  ViewChild,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
-import { NgClass, NgFor } from '@angular/common'
 
 @Component({
   selector: 'app-lemon-rater',

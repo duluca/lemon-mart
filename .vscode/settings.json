@@ -8,12 +8,20 @@
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.codeActionsOnSave": {
+    "source.fixAll": true,
     "source.organizeImports": false,
-    "source.fixAll.tslint": true
+    "source.fixAll.eslint": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[html]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ],
+  "eslint.options": {
+    "extensions": [".ts", ".html"]
   },
   "explorer.openEditors.visible": 0,
   "files.trimTrailingWhitespace": true,
@@ -48,6 +56,10 @@
   },
   "ng-evergreen.upgradeChannel": "Latest",
   "editor.autoIndent": "full",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },

@@ -27,7 +27,7 @@ export class UserService extends CacheService implements IUserService {
 
   getUser(id: string | null): Observable<IUser> {
     if (id === null) {
-      return throwError('User id is not set')
+      return throwError(() => 'User id is not set')
     }
 
     return this.httpClient.get<IUser>(`${environment.baseUrl}/v2/user/${id}`)
@@ -35,7 +35,7 @@ export class UserService extends CacheService implements IUserService {
 
   updateUser(id: string, user: IUser): Observable<IUser> {
     if (id === '') {
-      return throwError('User id is not set')
+      return throwError(() => 'User id is not set')
     }
 
     // cache user data in case of errors
@@ -49,7 +49,7 @@ export class UserService extends CacheService implements IUserService {
         this.authService.currentUser$.next(res)
         this.removeItem('draft-user')
       },
-      (err) => throwError(err)
+      (err) => throwError(() => err)
     )
 
     return updateResponse$

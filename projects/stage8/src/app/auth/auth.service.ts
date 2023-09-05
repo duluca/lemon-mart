@@ -95,7 +95,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
     loginResponse$.subscribe({
       error: (err) => {
         this.logout()
-        return throwError(err)
+        return throwError(() => err)
       },
     })
 

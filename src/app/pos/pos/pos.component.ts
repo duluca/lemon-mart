@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule } from '@angular/material/icon'
 import { filter, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 
@@ -6,8 +8,6 @@ import { UiService } from '../../common/ui.service'
 import { ITransaction } from '../transaction/transaction'
 import { TransactionType } from '../transaction/transaction.enum'
 import { TransactionService } from '../transaction/transaction.service'
-import { MatIconModule } from '@angular/material/icon'
-import { MatButtonModule } from '@angular/material/button'
 
 interface IEvent {
   event: 'checkoutCompleted' | 'checkoutInitiated'

@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
+import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 import { LogoutComponent } from './logout/logout.component'
 import { ProfileComponent } from './profile/profile.component'
-
-import { UserRoutingModule } from './user-routing.module'
 import { UserEntityService } from './user/user.entity.service'
 import { UserResolve } from './user/user.resolve'
 import { UserService } from './user/user.service'
+import { UserRoutingModule } from './user-routing.module'
 
 @NgModule({
   imports: [

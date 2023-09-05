@@ -1,16 +1,19 @@
+import { AsyncPipe, NgIf } from '@angular/common'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MediaObserver } from '@ngbracket/ngx-layout'
-import { MatIconRegistry } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatToolbarModule } from '@angular/material/toolbar'
 import { DomSanitizer } from '@angular/platform-browser'
+import { RouterLink, RouterOutlet } from '@angular/router'
+import { MediaObserver } from '@ngbracket/ngx-layout'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 
 import { AuthService } from './auth/auth.service'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
-import { RouterLink, RouterOutlet } from '@angular/router'
-import { FlexModule } from '@ngbracket/ngx-layout/flex'
-import { NgIf, AsyncPipe } from '@angular/common'
 
 @Component({
   selector: 'app-root',
@@ -93,6 +96,10 @@ import { NgIf, AsyncPipe } from '@angular/common'
     NavigationMenuComponent,
     RouterOutlet,
     AsyncPipe,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {

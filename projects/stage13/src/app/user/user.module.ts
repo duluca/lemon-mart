@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
+import { FlexLayoutModule } from '@ngbracket/ngx-layout'
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 import { LogoutComponent } from './logout/logout.component'
 import { ProfileComponent } from './profile/profile.component'
-
-import { UserRoutingModule } from './user-routing.module'
 import { UserResolve } from './user/user.resolve'
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
+import { UserRoutingModule } from './user-routing.module'
 
 @NgModule({
   imports: [

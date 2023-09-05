@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import { RouterLinkActive, RouterLink } from '@angular/router'
 import { MatListModule } from '@angular/material/list'
+import { RouterLink, RouterLinkActive } from '@angular/router'
 
 @Component({
   selector: 'app-navigation-menu',

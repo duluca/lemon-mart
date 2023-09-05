@@ -1,38 +1,25 @@
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { HttpHandlerFn, HttpRequest } from '@angular/common/http'
+import { inject } from '@angular/core'
 import { Router } from '@angular/router'
-import { Observable, throwError } from 'rxjs'
+import { throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 
 import { AuthService } from './auth.service'
 
-@Injectable()
-export class AuthHttpInterceptor implements HttpInterceptor {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
-  intercept(
-    req: HttpRequest<unknown>,
-    next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
-    const jwt = this.authService.getToken()
-    const authRequest = req.clone({ setHeaders: { authorization: `Bearer ${jwt}` } })
-    return next.handle(authRequest).pipe(
-      catchError((err) => {
-        if (err.status === 401) {
-          this.router.navigate(['/login'], {
-            queryParams: { redirectUrl: this.router.routerState.snapshot.url },
-          })
-        }
+export function AuthHttpInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
+  const authService = inject(AuthService)
+  const router = inject(Router)
 
-        return throwError(err)
-      })
-    )
-  }
+  const jwt = authService.getToken()
+  const authRequest = req.clone({ setHeaders: { authorization: `Bearer ${jwt}` } })
+  return next(authRequest).pipe(
+    catchError((err) => {
+      if (err.status === 401) {
+        router.navigate(['/login'], {
+          queryParams: { redirectUrl: router.routerState.snapshot.url },
+        })
+      }
+      return throwError(() => err)
+    })
+  )
 }

@@ -1,12 +1,27 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common'
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import {
   FormArray,
   FormBuilder,
   FormGroup,
-  Validators,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms'
-import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatButtonModule } from '@angular/material/button'
+import { MatOptionModule } from '@angular/material/core'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { MatListModule } from '@angular/material/list'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatSelectModule } from '@angular/material/select'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
+import { NgxMaskDirective } from 'ngx-mask'
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs'
 import { filter, map, startWith, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 import { $enum } from 'ts-enum-util'
@@ -26,27 +41,12 @@ import {
   ErrorSets,
   FieldErrorDirective,
 } from '../../user-controls/field-error/field-error.directive'
+import { LemonRaterComponent } from '../../user-controls/lemon-rater/lemon-rater.component'
+import { NameInputComponent } from '../name-input/name-input.component'
 import { IName, IPhone, IUser, PhoneType, User } from '../user/user'
 import { UserService } from '../user/user.service'
-import { IUSState, USStateFilter } from './data'
 import { ViewUserComponent } from '../view-user/view-user.component'
-import { NgxMaskDirective } from 'ngx-mask'
-import { MatSelectModule } from '@angular/material/select'
-import { MatIconModule } from '@angular/material/icon'
-import { MatListModule } from '@angular/material/list'
-import { MatOptionModule } from '@angular/material/core'
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
-import { MatButtonModule } from '@angular/material/button'
-import { LemonRaterComponent } from '../../user-controls/lemon-rater/lemon-rater.component'
-import { MatRadioModule } from '@angular/material/radio'
-import { MatDatepickerModule } from '@angular/material/datepicker'
-import { MatInputModule } from '@angular/material/input'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { FlexModule } from '@ngbracket/ngx-layout/flex'
-import { NameInputComponent } from '../name-input/name-input.component'
-import { MatStepperModule } from '@angular/material/stepper'
-import { NgIf, NgFor, AsyncPipe } from '@angular/common'
-import { MatToolbarModule } from '@angular/material/toolbar'
+import { IUSState, USStateFilter } from './data'
 
 @Component({
   selector: 'app-profile',

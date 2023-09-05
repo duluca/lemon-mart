@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
 
 import { HomeComponent } from './home.component'
-import { RouterTestingModule } from '@angular/router/testing'
 
 describe('HomeComponent', () => {
   let component: HomeComponent

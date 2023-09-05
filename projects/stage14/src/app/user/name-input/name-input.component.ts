@@ -1,5 +1,8 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
 
 import { BaseFormDirective } from '../../common/base-form.class'
 import { OneCharValidation, RequiredTextValidation } from '../../common/validations'
@@ -8,9 +11,6 @@ import {
   FieldErrorDirective,
 } from '../../user-controls/field-error/field-error.directive'
 import { IName } from '../user/user'
-import { MatInputModule } from '@angular/material/input'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { FlexModule } from '@ngbracket/ngx-layout/flex'
 
 @Component({
   selector: 'app-name-input',

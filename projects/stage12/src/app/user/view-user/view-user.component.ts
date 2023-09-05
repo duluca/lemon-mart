@@ -1,12 +1,12 @@
+import { AsyncPipe, DatePipe, NgIf } from '@angular/common'
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatIconModule } from '@angular/material/icon'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 
 import { IUser, User } from '../user/user'
-import { MatButtonModule } from '@angular/material/button'
-import { MatIconModule } from '@angular/material/icon'
-import { MatCardModule } from '@angular/material/card'
-import { NgIf, AsyncPipe, DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-view-user',

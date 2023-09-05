@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import decode from 'jwt-decode'
 import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
@@ -6,6 +7,7 @@ import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
 import { transformError } from '../common/common'
 import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
+import { authFactory } from './auth.factory'
 import { CacheService } from './cache.service'
 
 export interface IAuthService {
@@ -85,7 +87,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
     loginResponse$.subscribe({
       error: (err) => {
         this.logout()
-        return throwError(err)
+        return throwError(() => err)
       },
     })
 
@@ -124,5 +126,13 @@ export abstract class AuthService extends CacheService implements IAuthService {
 
   protected getAuthStatusFromToken(): IAuthStatus {
     return this.transformJwtToken(decode(this.getToken()))
+  }
+}
+
+export function provideAuthService() {
+  return {
+    provide: AuthService,
+    useFactory: authFactory,
+    deps: [HttpClient],
   }
 }

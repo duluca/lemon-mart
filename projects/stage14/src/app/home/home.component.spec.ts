@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { MockComponent } from 'ng-mocks'
 
 import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
-import { HomeComponent } from './home.component'
-import { MockComponent } from 'ng-mocks'
 import { LoginComponent } from '../login/login.component'
+import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {
   let component: HomeComponent
