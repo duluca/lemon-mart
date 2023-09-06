@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core'
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
+import { Injectable, Provider } from '@angular/core'
+import {
+  MAT_DIALOG_SCROLL_STRATEGY_PROVIDER,
+  MatDialog,
+  MatDialogConfig,
+} from '@angular/material/dialog'
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
 import { Observable } from 'rxjs'
 
@@ -41,4 +45,18 @@ export class UiService {
 
     return dialogRef.afterClosed()
   }
+}
+
+export function provideUiService(): Provider[] {
+  return [
+    {
+      provide: UiService,
+    },
+    {
+      provide: MatSnackBar,
+    },
+    {
+      provide: MatDialog,
+    },
+  ]
 }

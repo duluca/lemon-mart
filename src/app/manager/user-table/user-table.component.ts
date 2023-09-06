@@ -14,7 +14,16 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { RouterLink } from '@angular/router'
 import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { BehaviorSubject, merge, Observable, of, Subject } from 'rxjs'
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  startWith,
+  switchMap,
+  take,
+} from 'rxjs/operators'
+import { $D } from 'rxjs-debug'
 import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
@@ -34,12 +43,12 @@ import { IUsers, UserService } from '../../user/user/user.service'
     FlexModule,
     MatFormFieldModule,
     MatIconModule,
+    // MatButtonModule,
     MatInputModule,
     NgIf,
     MatProgressSpinnerModule,
     MatTableModule,
     MatSortModule,
-    MatButtonModule,
     RouterLink,
     MatToolbarModule,
     MatPaginatorModule,
@@ -61,8 +70,8 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
 
   search = new FormControl<string>('', OptionalTextValidation)
 
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
-  @ViewChild(MatSort, { static: false }) sort!: MatSort
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
+  @ViewChild(MatSort, { static: true }) sort!: MatSort
 
   constructor(
     private userService: UserService,
@@ -124,6 +133,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
         )
       }),
       map((results: { total: number; data: IUser[] }) => {
+        console.log(results)
         this.isLoadingResults$.next(false)
         this.hasError = false
         this.resultsLength = results.total

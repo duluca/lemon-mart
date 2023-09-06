@@ -3,7 +3,7 @@
   "ignorePatterns": ["projects/**/*"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "warn"
   },
   "overrides": [
     {
@@ -16,8 +16,8 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error",
+        "simple-import-sort/imports": "warn",
+        "simple-import-sort/exports": "warn",
         "sort-imports": "off",
         "import/order": "off",
         "@angular-eslint/directive-selector": [

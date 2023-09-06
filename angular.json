@@ -134,8 +134,12 @@
           "configurations": {
             "production": {
               "browserTarget": "lemon-mart:build:production"
+            },
+            "development": {
+              "browserTarget": "lemon-mart:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

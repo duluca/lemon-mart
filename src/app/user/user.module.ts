@@ -10,6 +10,7 @@ import { UserEntityService } from './user/user.entity.service'
 import { UserResolve } from './user/user.resolve'
 import { UserService } from './user/user.service'
 import { UserRoutingModule } from './user-routing.module'
+import { DateAdapter } from '@angular/material/core'
 
 @NgModule({
   imports: [

@@ -9,7 +9,7 @@ import {
 } from '@angular/forms'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatButtonModule } from '@angular/material/button'
-import { MatOptionModule } from '@angular/material/core'
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
@@ -64,6 +64,7 @@ import { IUSState, USStateFilter } from './data'
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     FieldErrorDirective,
     MatRadioModule,
     LemonRaterComponent,
