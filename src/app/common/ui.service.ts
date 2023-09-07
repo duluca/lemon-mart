@@ -1,10 +1,10 @@
-import { Injectable, Provider } from '@angular/core'
+import { importProvidersFrom, Injectable, makeEnvironmentProviders } from '@angular/core'
+import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog'
 import {
-  MAT_DIALOG_SCROLL_STRATEGY_PROVIDER,
-  MatDialog,
-  MatDialogConfig,
-} from '@angular/material/dialog'
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
+  MatSnackBar,
+  MatSnackBarConfig,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar'
 import { Observable } from 'rxjs'
 
 import { SimpleDialogComponent } from './simple-dialog.component'
@@ -47,16 +47,8 @@ export class UiService {
   }
 }
 
-export function provideUiService(): Provider[] {
-  return [
-    {
-      provide: UiService,
-    },
-    {
-      provide: MatSnackBar,
-    },
-    {
-      provide: MatDialog,
-    },
-  ]
+export function provideUiService() {
+  return makeEnvironmentProviders([
+    importProvidersFrom(MatDialogModule, MatSnackBarModule),
+  ])
 }

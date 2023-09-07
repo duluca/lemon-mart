@@ -2,10 +2,9 @@ import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common
 import { ApplicationConfig, importProvidersFrom } from '@angular/core'
 import { provideFirebaseApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth'
-import { MatDialogModule } from '@angular/material/dialog'
 import { provideAnimations } from '@angular/platform-browser/animations'
 import { provideRouter } from '@angular/router'
-import { EntityDataModule, provideEntityData } from '@ngrx/data'
+import { provideEntityData } from '@ngrx/data'
 import { provideEffects } from '@ngrx/effects'
 import { provideStore } from '@ngrx/store'
 import { provideStoreDevtools } from '@ngrx/store-devtools'
@@ -14,10 +13,11 @@ import { environment } from 'src/environments/environment'
 
 import { routes } from './app.routes'
 import { authFactory } from './auth/auth.factory'
+import { AuthHttpInterceptor } from './auth/auth.http.interceptor'
 import { AuthService } from './auth/auth.service'
-import { AuthHttpInterceptor } from './auth/auth-http-interceptor'
 import { provideUiService } from './common/ui.service'
 import { entityConfig } from './entity-metadata'
+import { provideGraphQL } from './provideGraphQL'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,10 +34,10 @@ export const appConfig: ApplicationConfig = {
       deps: [HttpClient],
     },
     provideUiService(),
+    provideGraphQL(),
     importProvidersFrom(
       provideFirebaseApp(() => initializeApp(environment.firebase)),
-      provideAuth(() => getAuth()),
-      MatDialogModule // TODO: figure out how to provide in UiService
+      provideAuth(() => getAuth())
     ),
   ],
 }

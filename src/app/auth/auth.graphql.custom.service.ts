@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { catchError, first, map } from 'rxjs/operators'
+import { inject, Injectable } from '@angular/core'
+import { Apollo, gql } from 'apollo-angular'
+import { first, map, Observable, Subject } from 'rxjs'
 import { $enum } from 'ts-enum-util'
 
 import { environment } from '../../environments/environment'
-import { transformError } from '../common/common'
 import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
+import { GET_ME, LOGIN } from './auth.graphql.queries'
 import { AuthService, IAuthStatus, IServerAuthResponse } from './auth.service'
 
 interface IJwtToken {
@@ -20,21 +20,25 @@ interface IJwtToken {
 }
 
 @Injectable()
-export class CustomAuthService extends AuthService {
-  constructor(private httpClient: HttpClient) {
-    super()
-  }
+export class CustomGraphQLAuthService extends AuthService {
+  apollo: Apollo = inject(Apollo)
 
   protected authProvider(
     email: string,
     password: string
   ): Observable<IServerAuthResponse> {
-    return this.httpClient
-      .post<IServerAuthResponse>(`${environment.baseUrl}/v1/auth/login`, {
-        email,
-        password,
+    return this.apollo
+      .mutate<{ login: IServerAuthResponse }>({
+        mutation: LOGIN,
+        variables: {
+          email,
+          password,
+        },
       })
-      .pipe(first())
+      .pipe(
+        first(),
+        map((result) => result.data?.login as IServerAuthResponse)
+      )
   }
 
   protected transformJwtToken(token: IJwtToken): IAuthStatus {
@@ -48,10 +52,13 @@ export class CustomAuthService extends AuthService {
   }
 
   protected getCurrentUser(): Observable<User> {
-    return this.httpClient.get<IUser>(`${environment.baseUrl}/v1/auth/me`).pipe(
-      first(),
-      map((user) => User.Build(user)),
-      catchError(transformError)
-    )
+    return this.apollo
+      .watchQuery<{ me: IUser }>({
+        query: GET_ME,
+      })
+      .valueChanges.pipe(
+        first(),
+        map((result) => User.Build(result.data.me))
+      )
   }
 }
