@@ -1,4 +1,4 @@
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
+import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { ApplicationConfig, importProvidersFrom } from '@angular/core'
 import { provideFirebaseApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth'
@@ -28,7 +28,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: AuthService,
       useFactory: authFactory,
-      deps: [HttpClient],
     },
     provideUiService(),
     provideGraphQL(),

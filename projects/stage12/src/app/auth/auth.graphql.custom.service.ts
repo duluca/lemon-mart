@@ -19,7 +19,7 @@ interface IJwtToken {
 
 @Injectable()
 export class CustomGraphQLAuthService extends AuthService {
-  apollo: Apollo = inject(Apollo)
+  private apollo: Apollo = inject(Apollo)
 
   protected authProvider(
     email: string,

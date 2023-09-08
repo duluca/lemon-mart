@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { $enum } from 'ts-enum-util'
@@ -21,9 +21,7 @@ interface IJwtToken {
 
 @Injectable()
 export class CustomAuthService extends AuthService {
-  constructor(private httpClient: HttpClient) {
-    super()
-  }
+  private httpClient: HttpClient = inject(HttpClient)
 
   protected authProvider(
     email: string,
