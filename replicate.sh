@@ -17,7 +17,7 @@ fi
 
 # define folders array
 # take multiple folders as input arg
-stages=("8" "10" "11" "12" "13" "14")
+stages=("8" "10" "11" "12")
 # if the third arg is not empty use it as the stages array
 if [[ -n $3 ]]; then
   stages=($3)
