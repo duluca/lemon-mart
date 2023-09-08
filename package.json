@@ -115,6 +115,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "fake-jwt-sign": "^1.1.1",
+    "firebase-tools": "^12.5.2",
     "http-server": "^14.1.1",
     "init-dev-env": "^2.0.0",
     "jasmine-core": "^5.1.1",
