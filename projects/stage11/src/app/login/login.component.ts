@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common'
-import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
@@ -52,7 +52,7 @@ import { FieldErrorDirective } from '../user-controls/field-error/field-error.di
     NgFor,
   ],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   private destroyRef = inject(DestroyRef)
   loginForm!: FormGroup
   loginError = ''
@@ -70,9 +70,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     route.paramMap
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((params) => (this.redirectUrl = params.get('redirectUrl') ?? ''))
-  }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.')
   }
 
   ngOnInit() {
