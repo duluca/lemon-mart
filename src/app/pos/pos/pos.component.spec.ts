@@ -14,9 +14,10 @@ describe('PosComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      providers: commonTestingProviders.concat([
+      providers: [
+        ...commonTestingProviders,
         { provide: TransactionService, useValue: autoSpyObj(TransactionService) },
-      ]),
+      ],
       imports: [...commonTestingModules, PosComponent],
     }).compileComponents(),
       (transactionServiceMock = injectSpy(TransactionService))

@@ -18,13 +18,11 @@ describe('UserTableComponent', () => {
     TestBed.configureTestingModule({
       providers: commonTestingProviders,
       imports: [
-        ...commonTestingModules.concat([
-          FormsModule,
-
-          EntityDataModule.forRoot(entityConfig),
-          EffectsModule.forRoot([]),
-          StoreModule.forRoot({}),
-        ]),
+        ...commonTestingModules,
+        FormsModule,
+        EntityDataModule.forRoot(entityConfig),
+        EffectsModule.forRoot([]),
+        StoreModule.forRoot({}),
         UserTableComponent,
       ],
     }).compileComponents()

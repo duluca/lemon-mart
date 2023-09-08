@@ -27,15 +27,17 @@ describe('ProfileComponent', () => {
     )
 
     TestBed.configureTestingModule({
-      providers: commonTestingProviders.concat(
+      providers: [
+        ...commonTestingProviders,
         {
           provide: AuthService,
           useValue: authServiceSpy,
         },
-        provideNgxMask()
-      ),
+        provideNgxMask(),
+      ],
       imports: [
-        ...commonTestingModules.concat([NgxMaskDirective]),
+        ...commonTestingModules,
+        NgxMaskDirective,
         ProfileComponent,
         NameInputComponent,
         ViewUserComponent,
