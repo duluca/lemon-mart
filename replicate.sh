@@ -29,10 +29,15 @@ for file in "${files[@]}"; do
   for folder in "${stageFolders[@]}"; do
     echo -n "Copying $src/$file to $folder"
     if [[ -d "$folder" ]]; then
-      cp -r $src/$file $folder/$src/
-      echo "... done"
+      # copy only if target file exists
+      if [[ -f "$folder/$src/$file" ]]; then
+        cp -r $src/$file $folder/$src/
+        echo "... done"
+      else
+        echo "... file does not exist"
+      fi
     else
-      echo "... does not exist"
+      echo "... folder does not exist"
     fi
   done
 done
