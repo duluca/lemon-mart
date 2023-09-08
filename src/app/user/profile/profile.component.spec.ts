@@ -11,10 +11,7 @@ import { defaultAuthStatus } from '../../auth/auth.service'
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { User } from '../../user/user/user'
 import { ViewUserComponent } from '../../user/view-user/view-user.component'
-import { FieldErrorModule } from '../../user-controls/field-error/field-error.module'
-import { LemonRaterModule } from '../../user-controls/lemon-rater/lemon-rater.module'
 import { NameInputComponent } from '../name-input/name-input.component'
-import { UserMaterialModule } from '../user-material.module'
 import { ProfileComponent } from './profile.component'
 
 describe('ProfileComponent', () => {
@@ -38,12 +35,7 @@ describe('ProfileComponent', () => {
         provideNgxMask()
       ),
       imports: [
-        ...commonTestingModules.concat([
-          UserMaterialModule,
-          FieldErrorModule,
-          LemonRaterModule,
-          NgxMaskDirective,
-        ]),
+        ...commonTestingModules.concat([NgxMaskDirective]),
         ProfileComponent,
         NameInputComponent,
         ViewUserComponent,

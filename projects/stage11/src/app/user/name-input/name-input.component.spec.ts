@@ -12,7 +12,7 @@ describe('NameInputComponent', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [...commonTestingModules.concat(FieldErrorModule), NameInputComponent],
+        imports: [...commonTestingModules, NameInputComponent],
       }).compileComponents()
     }))
 
