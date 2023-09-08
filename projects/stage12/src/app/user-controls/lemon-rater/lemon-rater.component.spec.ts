@@ -4,25 +4,25 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms'
 
 import { LemonRaterComponent } from './lemon-rater.component'
 
-@Component({
-  template: '<app-lemon-rater [formControl]="rating"></app-lemon-rater>',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-})
-class TestHostComponent {
-  @ViewChild(LemonRaterComponent, { static: true })
-  public LemonRaterComponent!: LemonRaterComponent
-
-  public rating: FormControl = new FormControl({ value: null, disabled: false })
-}
-
 describe('LemonRaterComponent', () => {
+  @Component({
+    imports: [ReactiveFormsModule, LemonRaterComponent],
+    standalone: true,
+    template: '<app-lemon-rater [formControl]="rating"></app-lemon-rater>',
+  })
+  class TestHostComponent {
+    @ViewChild(LemonRaterComponent)
+    LemonRaterComponent!: LemonRaterComponent
+
+    rating: FormControl = new FormControl({ value: null, disabled: false })
+  }
+
   let hostFixture: ComponentFixture<TestHostComponent>
   let testHostComponent: TestHostComponent
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, LemonRaterComponent, TestHostComponent],
+      imports: [TestHostComponent],
     }).compileComponents()
   }))
 
