@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http'
 import { inject, Injectable } from '@angular/core'
-import { Apollo, gql } from 'apollo-angular'
-import { first, map, Observable, Subject } from 'rxjs'
+import { Apollo } from 'apollo-angular'
+import { first, map, Observable } from 'rxjs'
 import { $enum } from 'ts-enum-util'
 
-import { environment } from '../../environments/environment'
 import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import { GET_ME, LOGIN } from './auth.graphql.queries'

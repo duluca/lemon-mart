@@ -111,6 +111,7 @@
     "eslint-plugin-cypress": "^2.14.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "fake-jwt-sign": "^1.1.1",
     "http-server": "^14.1.1",
     "init-dev-env": "^2.0.0",
