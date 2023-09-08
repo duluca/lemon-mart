@@ -17,7 +17,11 @@ fi
 
 # define folders array
 # take multiple folders as input arg
-stages=($3)
+stages=("8" "10" "11" "12" "13" "14")
+# if the third arg is not empty use it as the stages array
+if [[ -n $3 ]]; then
+  stages=($3)
+fi
 
 stageFolders=()
 # prepend each stages input with stage
@@ -25,16 +29,25 @@ for number in "${stages[@]}"; do
   stageFolders+=("projects/stage$number")
 done
 
+# set param named force if --force or -f is passed
+force=false
+if [[ $4 == "--force" || $4 == "-f" ]]; then
+  force=true
+fi
+
 for file in "${files[@]}"; do
   for folder in "${stageFolders[@]}"; do
     echo -n "Copying $src/$file to $folder"
     if [[ -d "$folder" ]]; then
-      # copy only if target file exists
-      if [[ -f "$folder/$src/$file" ]]; then
+      # copy only if target file exists or force is true
+      if [[ -f "$folder/$src/$file" && $force == true ]]; then
+        cp -r $src/$file $folder/$src/
+        echo "... done"
+      elif [[ ! -f "$folder/$src/$file" ]]; then
         cp -r $src/$file $folder/$src/
         echo "... done"
       else
-        echo "... file does not exist"
+        echo "... file exists"
       fi
     else
       echo "... folder does not exist"
