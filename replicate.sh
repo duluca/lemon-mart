@@ -40,14 +40,14 @@ for file in "${files[@]}"; do
     echo -n "Copying $src/$file to $folder"
     if [[ -d "$folder" ]]; then
       # copy only if target file exists or force is true
-      if [[ -f "$folder/$src/$file" && $force == true ]]; then
+      if [[ $force == true ]]; then
         cp -r $src/$file $folder/$src/
-        echo "... done"
-      elif [[ ! -f "$folder/$src/$file" ]]; then
+        echo "... created"
+      elif [[ -f "$folder/$src/$file" ]]; then
         cp -r $src/$file $folder/$src/
-        echo "... done"
+        echo "... updated"
       else
-        echo "... file exists"
+        echo "... file does not exist"
       fi
     else
       echo "... folder does not exist"
