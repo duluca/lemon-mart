@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { commonTestingModules } from '../../common/common.testing'
-import { FieldErrorModule } from '../../user-controls/field-error/field-error.module'
 import { NameInputComponent } from './name-input.component'
 
 describe('NameInputComponent', () => {

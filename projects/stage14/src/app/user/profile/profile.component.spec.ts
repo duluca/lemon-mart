@@ -11,9 +11,7 @@ import { defaultAuthStatus } from '../../auth/auth.service'
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { User } from '../../user/user/user'
 import { ViewUserComponent } from '../../user/view-user/view-user.component'
-
 import { NameInputComponent } from '../name-input/name-input.component'
-
 import { ProfileComponent } from './profile.component'
 
 describe('ProfileComponent', () => {

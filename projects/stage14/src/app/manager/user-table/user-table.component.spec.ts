@@ -4,7 +4,6 @@ import { of } from 'rxjs'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { User } from '../../user/user/user'
-
 import { UserTableComponent } from './user-table.component'
 
 describe('UserTableComponent', () => {

@@ -1,141 +1,43 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 116.0.0.0 (Mac OS 10.15.7)" package="" timestamp="2023-09-08T06:32:12" id="0" hostname="dougi-mbp21" tests="35" errors="0" failures="7" time="0.246">
+<testsuite name="Chrome 116.0.0.0 (Mac OS 10.15.7)" package="" timestamp="2023-09-08T07:31:02" id="0" hostname="dougi-mbp21" tests="35" errors="0" failures="0" time="0.267">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"/>
   </properties>
-  <testcase name="AuthService should be created" time="0.005" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AuthService"/>
-  <testcase name="AuthService should be created" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AuthService"/>
-  <testcase name="UserManagementComponent should create" time="0.01" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserManagementComponent"/>
-  <testcase name="PosComponent should create" time="0.007" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PosComponent"/>
-  <testcase name="UiService should be created" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UiService"/>
-  <testcase name="AppComponent should create the app" time="0.028" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
-  <testcase name="AppComponent should render app-container" time="0.019" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
-  <testcase name="TransactionService should be created" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).TransactionService"/>
-  <testcase name="UserTableComponent should create" time="0.028" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserTableComponent"/>
-  <testcase name="ReceiptLookupComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ReceiptLookupComponent"/>
-  <testcase name="ProductsComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProductsComponent"/>
-  <testcase name="NameInputComponent DOM Tests should create" time="0.011" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NameInputComponent DOM Tests"/>
-  <testcase name="ManagerHomeComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerHomeComponent"/>
+  <testcase name="PageNotFoundComponent should create" time="0.013" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PageNotFoundComponent"/>
+  <testcase name="ViewUserComponent should create" time="0.01" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ViewUserComponent"/>
+  <testcase name="ManagerComponent should create" time="0.007" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerComponent"/>
+  <testcase name="UserService should be created" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserService"/>
+  <testcase name="ProfileComponent should create" time="0.076" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProfileComponent"/>
+  <testcase name="AuthService should be created" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AuthService"/>
   <testcase name="StockEntryComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).StockEntryComponent"/>
-  <testcase name="CategoriesComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).CategoriesComponent"/>
-  <testcase name="InventoryHomeComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).InventoryHomeComponent"/>
-  <testcase name="ProfileComponent should create" time="0.057" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProfileComponent"/>
-  <testcase name="HomeComponent should create" time="0.031" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).HomeComponent"/>
-  <testcase name="InventoryComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).InventoryComponent"/>
-  <testcase name="ManagerComponent should create" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerComponent"/>
-  <testcase name="LoginComponent should create" time="0.009" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LoginComponent"/>
-  <testcase name="PageNotFoundComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PageNotFoundComponent"/>
-  <testcase name="BaseFormDirective should create an instance" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).BaseFormDirective"/>
+  <testcase name="NavigationMenuComponent should create" time="0.005" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NavigationMenuComponent"/>
+  <testcase name="ProductsComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ProductsComponent"/>
+  <testcase name="NameInputComponent DOM Tests should create" time="0.007" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NameInputComponent DOM Tests"/>
   <testcase name="LogoutComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LogoutComponent"/>
-  <testcase name="UserService should be created" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserService"/>
-  <testcase name="ViewUserComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ViewUserComponent"/>
-  <testcase name="NavigationMenuComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).NavigationMenuComponent"/>
+  <testcase name="InventoryHomeComponent should create" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).InventoryHomeComponent"/>
+  <testcase name="InventoryComponent should create" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).InventoryComponent"/>
+  <testcase name="TransactionService should be created" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).TransactionService"/>
+  <testcase name="CategoriesComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).CategoriesComponent"/>
+  <testcase name="HomeComponent should create" time="0.036" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).HomeComponent"/>
+  <testcase name="PosComponent should create" time="0.004" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).PosComponent"/>
+  <testcase name="UserManagementComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserManagementComponent"/>
+  <testcase name="ReceiptLookupComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ReceiptLookupComponent"/>
+  <testcase name="ManagerHomeComponent should create" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).ManagerHomeComponent"/>
+  <testcase name="LemonRaterComponent should call touched when lemon selected" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should call change with rating value when lemon selected" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should remove disabled class when formControl is enabled" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should not call touch or change events when disabled" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should set disabled class when formControl is disabled" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="LemonRaterComponent should set the lemon rating based on the formControl value" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent"/>
+  <testcase name="AuthService should be created" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AuthService"/>
   <testcase name="FormErrorDirective should create an instance" time="0" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).FormErrorDirective"/>
-  <testcase name="LemonRaterComponent should call change with rating value when lemon selected" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent">
-    <failure type="">Error: NG01203: No value accessor for form control unspecified name attribute. Find more at https://angular.io/errors/NG01203
-error properties: Object({ code: -1203 })
-    at _throwMissingValueAccessorError (node_modules/@angular/forms/fesm2022/forms.mjs:3162:11)
-    at setUpControl (node_modules/@angular/forms/fesm2022/forms.mjs:2935:13)
-    at FormControlDirective.ngOnChanges (node_modules/@angular/forms/fesm2022/forms.mjs:4570:13)
-    at FormControlDirective.call (node_modules/@angular/core/fesm2022/core.mjs:2948:14)
-    at callHookInternal (node_modules/@angular/core/fesm2022/core.mjs:3940:14)
-    at callHook (node_modules/@angular/core/fesm2022/core.mjs:3971:9)
-    at callHooks (node_modules/@angular/core/fesm2022/core.mjs:3922:17)
-    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/core.mjs:3872:9)
-    at refreshView (node_modules/@angular/core/fesm2022/core.mjs:13483:21)
-    at detectChangesInView (node_modules/@angular/core/fesm2022/core.mjs:13632:9)
-</failure>
-  </testcase>
-  <testcase name="LemonRaterComponent should set disabled class when formControl is disabled" time="0.002" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent">
-    <failure type="">Error: NG01203: No value accessor for form control unspecified name attribute. Find more at https://angular.io/errors/NG01203
-error properties: Object({ code: -1203 })
-    at _throwMissingValueAccessorError (node_modules/@angular/forms/fesm2022/forms.mjs:3162:11)
-    at setUpControl (node_modules/@angular/forms/fesm2022/forms.mjs:2935:13)
-    at FormControlDirective.ngOnChanges (node_modules/@angular/forms/fesm2022/forms.mjs:4570:13)
-    at FormControlDirective.call (node_modules/@angular/core/fesm2022/core.mjs:2948:14)
-    at callHookInternal (node_modules/@angular/core/fesm2022/core.mjs:3940:14)
-    at callHook (node_modules/@angular/core/fesm2022/core.mjs:3971:9)
-    at callHooks (node_modules/@angular/core/fesm2022/core.mjs:3922:17)
-    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/core.mjs:3872:9)
-    at refreshView (node_modules/@angular/core/fesm2022/core.mjs:13483:21)
-    at detectChangesInView (node_modules/@angular/core/fesm2022/core.mjs:13632:9)
-</failure>
-  </testcase>
-  <testcase name="LemonRaterComponent should create" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent">
-    <failure type="">Error: NG01203: No value accessor for form control unspecified name attribute. Find more at https://angular.io/errors/NG01203
-error properties: Object({ code: -1203 })
-    at _throwMissingValueAccessorError (node_modules/@angular/forms/fesm2022/forms.mjs:3162:11)
-    at setUpControl (node_modules/@angular/forms/fesm2022/forms.mjs:2935:13)
-    at FormControlDirective.ngOnChanges (node_modules/@angular/forms/fesm2022/forms.mjs:4570:13)
-    at FormControlDirective.call (node_modules/@angular/core/fesm2022/core.mjs:2948:14)
-    at callHookInternal (node_modules/@angular/core/fesm2022/core.mjs:3940:14)
-    at callHook (node_modules/@angular/core/fesm2022/core.mjs:3971:9)
-    at callHooks (node_modules/@angular/core/fesm2022/core.mjs:3922:17)
-    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/core.mjs:3872:9)
-    at refreshView (node_modules/@angular/core/fesm2022/core.mjs:13483:21)
-    at detectChangesInView (node_modules/@angular/core/fesm2022/core.mjs:13632:9)
-</failure>
-  </testcase>
-  <testcase name="LemonRaterComponent should remove disabled class when formControl is enabled" time="0" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent">
-    <failure type="">Error: NG01203: No value accessor for form control unspecified name attribute. Find more at https://angular.io/errors/NG01203
-error properties: Object({ code: -1203 })
-    at _throwMissingValueAccessorError (node_modules/@angular/forms/fesm2022/forms.mjs:3162:11)
-    at setUpControl (node_modules/@angular/forms/fesm2022/forms.mjs:2935:13)
-    at FormControlDirective.ngOnChanges (node_modules/@angular/forms/fesm2022/forms.mjs:4570:13)
-    at FormControlDirective.call (node_modules/@angular/core/fesm2022/core.mjs:2948:14)
-    at callHookInternal (node_modules/@angular/core/fesm2022/core.mjs:3940:14)
-    at callHook (node_modules/@angular/core/fesm2022/core.mjs:3971:9)
-    at callHooks (node_modules/@angular/core/fesm2022/core.mjs:3922:17)
-    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/core.mjs:3872:9)
-    at refreshView (node_modules/@angular/core/fesm2022/core.mjs:13483:21)
-    at detectChangesInView (node_modules/@angular/core/fesm2022/core.mjs:13632:9)
-</failure>
-  </testcase>
-  <testcase name="LemonRaterComponent should not call touch or change events when disabled" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent">
-    <failure type="">Error: NG01203: No value accessor for form control unspecified name attribute. Find more at https://angular.io/errors/NG01203
-error properties: Object({ code: -1203 })
-    at _throwMissingValueAccessorError (node_modules/@angular/forms/fesm2022/forms.mjs:3162:11)
-    at setUpControl (node_modules/@angular/forms/fesm2022/forms.mjs:2935:13)
-    at FormControlDirective.ngOnChanges (node_modules/@angular/forms/fesm2022/forms.mjs:4570:13)
-    at FormControlDirective.call (node_modules/@angular/core/fesm2022/core.mjs:2948:14)
-    at callHookInternal (node_modules/@angular/core/fesm2022/core.mjs:3940:14)
-    at callHook (node_modules/@angular/core/fesm2022/core.mjs:3971:9)
-    at callHooks (node_modules/@angular/core/fesm2022/core.mjs:3922:17)
-    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/core.mjs:3872:9)
-    at refreshView (node_modules/@angular/core/fesm2022/core.mjs:13483:21)
-    at detectChangesInView (node_modules/@angular/core/fesm2022/core.mjs:13632:9)
-</failure>
-  </testcase>
-  <testcase name="LemonRaterComponent should set the lemon rating based on the formControl value" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent">
-    <failure type="">Error: NG01203: No value accessor for form control unspecified name attribute. Find more at https://angular.io/errors/NG01203
-error properties: Object({ code: -1203 })
-    at _throwMissingValueAccessorError (node_modules/@angular/forms/fesm2022/forms.mjs:3162:11)
-    at setUpControl (node_modules/@angular/forms/fesm2022/forms.mjs:2935:13)
-    at FormControlDirective.ngOnChanges (node_modules/@angular/forms/fesm2022/forms.mjs:4570:13)
-    at FormControlDirective.call (node_modules/@angular/core/fesm2022/core.mjs:2948:14)
-    at callHookInternal (node_modules/@angular/core/fesm2022/core.mjs:3940:14)
-    at callHook (node_modules/@angular/core/fesm2022/core.mjs:3971:9)
-    at callHooks (node_modules/@angular/core/fesm2022/core.mjs:3922:17)
-    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/core.mjs:3872:9)
-    at refreshView (node_modules/@angular/core/fesm2022/core.mjs:13483:21)
-    at detectChangesInView (node_modules/@angular/core/fesm2022/core.mjs:13632:9)
-</failure>
-  </testcase>
-  <testcase name="LemonRaterComponent should call touched when lemon selected" time="0.001" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LemonRaterComponent">
-    <failure type="">Error: NG01203: No value accessor for form control unspecified name attribute. Find more at https://angular.io/errors/NG01203
-error properties: Object({ code: -1203 })
-    at _throwMissingValueAccessorError (node_modules/@angular/forms/fesm2022/forms.mjs:3162:11)
-    at setUpControl (node_modules/@angular/forms/fesm2022/forms.mjs:2935:13)
-    at FormControlDirective.ngOnChanges (node_modules/@angular/forms/fesm2022/forms.mjs:4570:13)
-    at FormControlDirective.call (node_modules/@angular/core/fesm2022/core.mjs:2948:14)
-    at callHookInternal (node_modules/@angular/core/fesm2022/core.mjs:3940:14)
-    at callHook (node_modules/@angular/core/fesm2022/core.mjs:3971:9)
-    at callHooks (node_modules/@angular/core/fesm2022/core.mjs:3922:17)
-    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/core.mjs:3872:9)
-    at refreshView (node_modules/@angular/core/fesm2022/core.mjs:13483:21)
-    at detectChangesInView (node_modules/@angular/core/fesm2022/core.mjs:13632:9)
-</failure>
-  </testcase>
+  <testcase name="UserTableComponent should create" time="0.026" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UserTableComponent"/>
+  <testcase name="AppComponent should create the app" time="0.019" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
+  <testcase name="AppComponent should render app-container" time="0.017" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).AppComponent"/>
+  <testcase name="BaseFormDirective should create an instance" time="0" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).BaseFormDirective"/>
+  <testcase name="LoginComponent should create" time="0.009" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).LoginComponent"/>
+  <testcase name="UiService should be created" time="0.003" classname="Chrome_116_0_0_0_(Mac_OS_10_15_7).UiService"/>
   <system-out>
     <![CDATA[
 ]]>

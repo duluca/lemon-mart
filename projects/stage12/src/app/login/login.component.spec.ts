@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
-
 import { LoginComponent } from './login.component'
 
 describe('LoginComponent', () => {
