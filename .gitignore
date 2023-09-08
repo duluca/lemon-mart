@@ -49,4 +49,3 @@ cypress/videos
 cypress/screenshots
 coverage
 test_results
-test_results/*.xml

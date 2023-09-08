@@ -1,5 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon'
 import { MatSidenavModule } from '@angular/material/sidenav'
@@ -10,7 +11,6 @@ import { MediaObserver } from '@ngbracket/ngx-layout'
 import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
 
 import { AuthService } from './auth/auth.service'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
@@ -102,8 +102,8 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
     MatSidenavModule,
   ],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private subs = new SubSink()
+export class AppComponent implements OnInit {
+  private destroyRef = inject(DestroyRef)
   opened!: boolean
 
   constructor(
@@ -119,11 +119,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subs.sink = combineLatest([
-      this.media.asObservable(),
-      this.authService.authStatus$,
-    ])
+    combineLatest([this.media.asObservable(), this.authService.authStatus$])
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         tap(([mediaValue, authStatus]) => {
           if (!authStatus?.isAuthenticated) {
             this.opened = false
@@ -137,9 +135,5 @@ export class AppComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe()
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe()
   }
 }
