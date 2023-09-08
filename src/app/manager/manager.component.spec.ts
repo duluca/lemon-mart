@@ -9,7 +9,7 @@ describe('ManagerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      providers: commonTestingProviders,
+      providers: [...commonTestingProviders],
       imports: [...commonTestingModules, ManagerComponent],
     }).compileComponents()
   }))

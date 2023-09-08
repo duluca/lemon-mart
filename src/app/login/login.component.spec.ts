@@ -9,7 +9,7 @@ describe('LoginComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      providers: commonTestingProviders,
+      providers: [...commonTestingProviders],
       imports: [...commonTestingModules, LoginComponent],
     }).compileComponents()
   }))

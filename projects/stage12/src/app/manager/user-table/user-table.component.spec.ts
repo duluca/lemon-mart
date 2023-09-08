@@ -16,7 +16,7 @@ describe('UserTableComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      providers: commonTestingProviders,
+      providers: [...commonTestingProviders],
       imports: [
         ...commonTestingModules,
         FormsModule,
