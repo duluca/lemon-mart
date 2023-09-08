@@ -7,7 +7,12 @@ src=$1
 
 # define files array
 # take multiple files as input arg
-files=($2)
+# if * is passed, copy all files
+if [[ $2 == "*" ]]; then
+  files=($(ls $src))
+else
+  files=($2)
+fi
 # files=(auth.service.ts auth.service.spec.ts)
 
 # define folders array
