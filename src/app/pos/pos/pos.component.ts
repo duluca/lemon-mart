@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { filter, tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
 
 import { UiService } from '../../common/ui.service'
 import { ITransaction } from '../transaction/transaction'
@@ -21,8 +21,8 @@ declare let dataLayer: IEvent[]
   standalone: true,
   imports: [MatButtonModule, MatIconModule],
 })
-export class PosComponent implements OnInit, OnDestroy {
-  private subs = new SubSink()
+export class PosComponent implements OnInit {
+  private destroyRef = inject(DestroyRef)
   currentTransaction!: ITransaction
   constructor(
     private transactionService: TransactionService,
@@ -41,9 +41,10 @@ export class PosComponent implements OnInit, OnDestroy {
     dataLayer.push({
       event: 'checkoutInitiated',
     })
-    this.subs.sink = this.transactionService
+    this.transactionService
       .processTransaction(transaction)
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         filter((tx) => tx != null || tx !== undefined),
         tap(() => {
           this.uiService.showToast('Checkout completed')
@@ -53,9 +54,5 @@ export class PosComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe()
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe()
   }
 }

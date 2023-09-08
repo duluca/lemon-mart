@@ -1,5 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common'
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, DestroyRef, inject, ViewChild } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -15,7 +16,6 @@ import { RouterLink } from '@angular/router'
 import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { BehaviorSubject, merge, Observable, of, Subject } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser, User } from '../../user/user/user'
@@ -46,14 +46,14 @@ import { IUsers, UserService } from '../../user/user/user.service'
     AsyncPipe,
   ],
 })
-export class UserTableComponent implements OnDestroy, AfterViewInit {
+export class UserTableComponent implements AfterViewInit {
   displayedColumns = ['name', 'email', 'role', '_id']
   items$!: Observable<IUser[]>
   resultsLength = 0
   hasError = false
   errorText = ''
   private skipLoading = false
-  private subs = new SubSink()
+  private destroyRef = inject(DestroyRef)
   useNgRxData = false
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
@@ -108,12 +108,10 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
     this.userEntityService.update(user)
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe()
-  }
-
   ngAfterViewInit() {
-    this.subs.sink = this.sort.sortChange.subscribe(() => this.paginator.firstPage())
+    this.sort.sortChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.paginator.firstPage())
 
     if (this.skipLoading) {
       return
@@ -125,6 +123,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
       this.paginator.page,
       this.search.valueChanges.pipe(debounceTime(1000))
     ).pipe(
+      takeUntilDestroyed(this.destroyRef),
       startWith({}),
       switchMap(() => {
         this.isLoadingResults$.next(true)

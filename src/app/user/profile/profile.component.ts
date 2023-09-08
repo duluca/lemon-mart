@@ -1,5 +1,6 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
   FormArray,
   FormBuilder,
@@ -23,8 +24,7 @@ import { ActivatedRoute } from '@angular/router'
 import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { NgxMaskDirective } from 'ngx-mask'
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs'
-import { filter, map, startWith, tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
+import { filter, first, map, startWith, tap } from 'rxjs/operators'
 import { $enum } from 'ts-enum-util'
 
 import { Role } from '../../auth/auth.enum'
@@ -128,7 +128,7 @@ export class ProfileComponent
     last: '',
   })
 
-  private subs = new SubSink()
+  private destroyRef = inject(DestroyRef)
 
   currentUserId!: string
 
@@ -138,11 +138,9 @@ export class ProfileComponent
     if (this.route.snapshot.data['user']) {
       this.patchUser(this.route.snapshot.data['user'])
     } else {
-      this.subs.sink = combineLatest([
-        this.loadFromCache(),
-        this.authService.currentUser$,
-      ])
+      combineLatest([this.loadFromCache(), this.authService.currentUser$])
         .pipe(
+          takeUntilDestroyed(this.destroyRef),
           filter(([cachedUser, me]) => cachedUser != null || me != null),
           tap(([cachedUser, me]) => this.patchUser(cachedUser || me))
         )
@@ -159,7 +157,6 @@ export class ProfileComponent
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe()
     this.deregisterAllForms()
   }
 
@@ -234,15 +231,16 @@ export class ProfileComponent
   }
 
   async save(form: FormGroup) {
-    this.subs.add(
-      this.userService.updateUser(this.currentUserId, form.value).subscribe(
-        (res: IUser) => {
+    this.userService
+      .updateUser(this.currentUserId, form.value)
+      .pipe(first())
+      .subscribe({
+        next: (res: IUser) => {
           this.patchUser(res)
           this.uiService.showToast('Updated user')
         },
-        (err: string) => (this.userError = err)
-      )
-    )
+        error: (err: string) => (this.userError = err),
+      })
   }
 
   convertTypeToPhoneType(type: string): PhoneType {

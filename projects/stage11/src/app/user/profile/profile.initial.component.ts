@@ -1,5 +1,6 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
   FormArray,
   FormBuilder,
@@ -22,8 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { NgxMaskDirective } from 'ngx-mask'
 import { Observable } from 'rxjs'
-import { filter, map, startWith, tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
+import { filter, first, map, startWith, tap } from 'rxjs/operators'
 import { $enum } from 'ts-enum-util'
 
 import { Role } from '../../auth/auth.enum'
@@ -78,7 +78,7 @@ import { IUSState, USStateFilter } from './data'
     AsyncPipe,
   ],
 })
-export class ProfileInitialComponent implements OnInit, OnDestroy {
+export class ProfileInitialComponent implements OnInit {
   Role = Role
   PhoneType = PhoneType
   PhoneTypes = $enum(PhoneType).getKeys()
@@ -107,7 +107,7 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
     return this.formGroup.get('phones') as FormArray
   }
 
-  subs = new SubSink()
+  private destroyRef = inject(DestroyRef)
 
   constructor(
     private formBuilder: FormBuilder,
@@ -118,8 +118,9 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buildForm()
-    this.subs.sink = this.authService.currentUser$
+    this.authService.currentUser$
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         filter((user) => user !== null),
         tap((user) => {
           this.currentUserId = user._id
@@ -131,10 +132,6 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
 
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe()
   }
 
   buildForm(user?: IUser) {
@@ -218,15 +215,16 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
   }
 
   async save(form: FormGroup) {
-    this.subs.add(
-      this.userService.updateUser(this.currentUserId, form.value).subscribe(
-        (res: IUser) => {
+    this.userService
+      .updateUser(this.currentUserId, form.value)
+      .pipe(first())
+      .subscribe({
+        next: (res: IUser) => {
           this.formGroup.patchValue(res)
           this.uiService.showToast('Updated user')
         },
-        (err: string) => (this.userError = err)
-      )
-    )
+        error: (err: string) => (this.userError = err),
+      })
   }
 
   convertTypeToPhoneType(type: string): PhoneType {

@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
@@ -9,8 +10,7 @@ import { MatInputModule } from '@angular/material/input'
 import { ActivatedRoute, Router } from '@angular/router'
 import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { combineLatest } from 'rxjs'
-import { catchError, filter, tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
+import { catchError, filter, first, tap } from 'rxjs/operators'
 
 import { Role } from '../auth/auth.enum'
 import { AuthService } from '../auth/auth.service'
@@ -45,7 +45,7 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
   ],
 })
 export class LoginComponent implements OnInit {
-  private subs = new SubSink()
+  private destroyRef = inject(DestroyRef)
   loginForm!: FormGroup
   loginError = ''
   redirectUrl!: string
@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private uiService: UiService
   ) {
-    this.subs.sink = route.paramMap.subscribe(
-      (params) => (this.redirectUrl = params.get('redirectUrl') ?? '')
-    )
+    route.paramMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((params) => (this.redirectUrl = params.get('redirectUrl') ?? ''))
   }
 
   ngOnInit() {
@@ -83,17 +83,14 @@ export class LoginComponent implements OnInit {
       .login(submittedForm.value.email, submittedForm.value.password)
       .pipe(catchError((err) => (this.loginError = err)))
 
-    this.subs.sink = combineLatest([
-      this.authService.authStatus$,
-      this.authService.currentUser$,
-    ])
+    combineLatest([this.authService.authStatus$, this.authService.currentUser$])
       .pipe(
         filter(([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''),
+        first(),
         tap(([authStatus, user]) => {
           this.uiService.showToast(
             `Welcome ${user.fullName}! Role: ${authStatus.userRole}`
           )
-          // this.uiService.showDialog(`Welcome ${user.fullName}!`, `Role: ${authStatus.userRole}`)
           this.router.navigate([
             this.redirectUrl || this.homeRoutePerRole(user.role as Role),
           ])
