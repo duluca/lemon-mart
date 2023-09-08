@@ -1,5 +1,6 @@
 import { NgFor, NgIf } from '@angular/common'
 import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
@@ -19,7 +20,6 @@ import { AuthService } from '../auth/auth.service'
 import { UiService } from '../common/ui.service'
 import { EmailValidation, PasswordValidation } from '../common/validations'
 import { FieldErrorDirective } from '../user-controls/field-error/field-error.directive'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'app-login',
