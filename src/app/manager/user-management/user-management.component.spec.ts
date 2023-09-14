@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
-import { ManagerMaterialModule } from '../manager-material.module'
 import { UserManagementComponent } from './user-management.component'
 
 describe('UserManagementComponent', () => {
@@ -10,9 +9,8 @@ describe('UserManagementComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      providers: commonTestingProviders,
-      imports: commonTestingModules.concat([ManagerMaterialModule]),
-      declarations: [UserManagementComponent],
+      providers: [...commonTestingProviders],
+      imports: [...commonTestingModules, UserManagementComponent],
     }).compileComponents()
   }))
 

@@ -42,8 +42,7 @@ export class InMemoryAuthService extends AuthService {
 
   protected authProvider(
     email: string,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    password: string
+    _password: string
   ): Observable<IServerAuthResponse> {
     email = email.toLowerCase()
 

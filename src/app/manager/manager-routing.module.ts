@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
 import { Role } from '../auth/auth.enum'
+import { authGuard } from '../auth/auth.guard'
 import { UserResolve } from '../user/user/user.resolve'
 import { ViewUserComponent } from '../user/view-user/view-user.component'
-import { ManagerHomeComponent } from './manager-home/manager-home.component'
 import { ManagerComponent } from './manager.component'
+import { ManagerHomeComponent } from './manager-home/manager-home.component'
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component'
 import { UserManagementComponent } from './user-management/user-management.component'
 import { UserTableComponent } from './user-table/user-table.component'
-import { authGuard } from '../auth/auth.guard'
 
 const routes: Routes = [
   {

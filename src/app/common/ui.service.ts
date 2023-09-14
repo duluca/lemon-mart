@@ -1,6 +1,10 @@
-import { Injectable } from '@angular/core'
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
+import { importProvidersFrom, Injectable, makeEnvironmentProviders } from '@angular/core'
+import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog'
+import {
+  MatSnackBar,
+  MatSnackBarConfig,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar'
 import { Observable } from 'rxjs'
 
 import { SimpleDialogComponent } from './simple-dialog.component'
@@ -41,4 +45,10 @@ export class UiService {
 
     return dialogRef.afterClosed()
   }
+}
+
+export function provideUiService() {
+  return makeEnvironmentProviders([
+    importProvidersFrom(MatDialogModule, MatSnackBarModule),
+  ])
 }

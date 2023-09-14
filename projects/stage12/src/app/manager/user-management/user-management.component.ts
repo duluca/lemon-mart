@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
 
 @Component({
   selector: 'app-user-management',
@@ -9,5 +10,7 @@ import { Component } from '@angular/core'
       <router-outlet name="detail"></router-outlet>
     </div>
   `,
+  standalone: true,
+  imports: [RouterOutlet],
 })
 export class UserManagementComponent {}

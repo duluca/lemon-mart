@@ -8,7 +8,7 @@ describe('StockEntryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [StockEntryComponent],
+      imports: [StockEntryComponent],
     }).compileComponents()
   }))
 

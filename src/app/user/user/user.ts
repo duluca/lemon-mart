@@ -73,7 +73,7 @@ export class User implements IUser {
       user.email,
       user.name,
       user.picture,
-      user.role as Role,
+      Role[user.role as keyof typeof Role],
       user.dateOfBirth,
       user.userStatus,
       user.level,

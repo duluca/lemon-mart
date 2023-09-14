@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
-  coveralls: coveralls/coveralls@2.2.1
-  browser-tools: circleci/browser-tools@1.4.3
+  coveralls: coveralls/coveralls@2
+  browser-tools: circleci/browser-tools@1
   cypress: cypress-io/cypress@3
 commands:
   install:
@@ -162,22 +162,6 @@ jobs:
       - install
       - build_and_test:
           project: 'stage12'
-  stage13: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: cimg/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'stage13'
-  stage14: # this job is only here to verify sample code from the book, remove it in your own projects
-    docker:
-      - image: cimg/node:lts-browsers
-    working_directory: ~/repo
-    steps:
-      - install
-      - build_and_test:
-          project: 'stage14'
 
 workflows:
   build-test-and-approval-deploy:
@@ -199,12 +183,6 @@ workflows:
           requires:
             - initialize
       - stage12: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - stage13: # this job is only here to verify sample code from the book, remove it in your own projects
-          requires:
-            - initialize
-      - stage14: # this job is only here to verify sample code from the book, remove it in your own projects
           requires:
             - initialize
       - deploy:

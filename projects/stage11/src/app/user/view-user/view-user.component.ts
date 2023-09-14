@@ -1,5 +1,9 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
-import { Router } from '@angular/router'
+import { AsyncPipe, DatePipe, NgIf } from '@angular/common'
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatIconModule } from '@angular/material/icon'
+import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 
 import { IUser, User } from '../user/user'
@@ -35,8 +39,10 @@ import { IUser, User } from '../user/user'
       }
     `,
   ],
+  standalone: true,
+  imports: [NgIf, MatCardModule, MatIconModule, MatButtonModule, AsyncPipe, DatePipe],
 })
-export class ViewUserComponent implements OnChanges {
+export class ViewUserComponent implements OnInit, OnChanges {
   @Input() user!: IUser
   readonly currentUser$ = new BehaviorSubject(new User())
 
@@ -44,7 +50,16 @@ export class ViewUserComponent implements OnChanges {
     return !this.user
   }
 
-  constructor(private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    if (this.route.snapshot.data['user']) {
+      this.currentUser$.next(this.route.snapshot.data['user'])
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.currentUser$.next(User.Build(changes['user'].currentValue))

@@ -1,17 +1,37 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "warn"
+  },
   "overrides": [
     {
       "files": ["*.ts"],
+      "plugins": ["simple-import-sort", "unused-imports"],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates",
-        "prettier"
+        "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "simple-import-sort/imports": "warn",
+        "simple-import-sort/exports": "warn",
+        "sort-imports": "off",
+        "import/order": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
+        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -34,8 +54,7 @@
       "files": ["*.html"],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
-        "plugin:@angular-eslint/template/accessibility",
-        "prettier"
+        "plugin:@angular-eslint/template/accessibility"
       ],
       "rules": {}
     }

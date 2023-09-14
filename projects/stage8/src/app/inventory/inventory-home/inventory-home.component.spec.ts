@@ -8,7 +8,7 @@ describe('InventoryHomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [InventoryHomeComponent],
+      imports: [InventoryHomeComponent],
     }).compileComponents()
   }))
 

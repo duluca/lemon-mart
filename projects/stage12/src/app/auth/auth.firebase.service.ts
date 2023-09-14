@@ -1,19 +1,19 @@
-import { Injectable, inject } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import {
   Auth as FireAuth,
-  User as FireUser,
   signInWithEmailAndPassword,
   signOut,
+  User as FireUser,
 } from '@angular/fire/auth'
-import { Observable, Subject, of } from 'rxjs'
+import { Observable, of, Subject } from 'rxjs'
 
 import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import {
   AuthService,
+  defaultAuthStatus,
   IAuthStatus,
   IServerAuthResponse,
-  defaultAuthStatus,
 } from './auth.service'
 
 interface IJwtToken {

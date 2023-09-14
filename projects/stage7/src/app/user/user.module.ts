@@ -7,7 +7,12 @@ import { ProfileComponent } from './profile/profile.component'
 import { UserRoutingModule } from './user-routing.module'
 
 @NgModule({
-  declarations: [ProfileComponent, LogoutComponent, NavigationMenuComponent],
-  imports: [CommonModule, UserRoutingModule],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    ProfileComponent,
+    LogoutComponent,
+    NavigationMenuComponent,
+  ],
 })
 export class UserModule {}

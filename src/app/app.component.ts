@@ -1,12 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MediaObserver } from '@ngbracket/ngx-layout'
-import { MatIconRegistry } from '@angular/material/icon'
+import { AsyncPipe, NgIf } from '@angular/common'
+import { NgOptimizedImage } from '@angular/common'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatToolbarModule } from '@angular/material/toolbar'
 import { DomSanitizer } from '@angular/platform-browser'
+import { RouterLink, RouterOutlet } from '@angular/router'
+import { MediaObserver } from '@ngbracket/ngx-layout'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
 
 import { AuthService } from './auth/auth.service'
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 
 @Component({
   selector: 'app-root',
@@ -35,12 +43,7 @@ import { AuthService } from './auth/auth.service'
         width: 200px;
       }
       .image-cropper {
-        width: 40px;
-        height: 40px;
-        position: relative;
-        overflow: hidden;
         border-radius: 50%;
-        margin-top: 3px;
       }
     `,
   ],
@@ -62,7 +65,7 @@ import { AuthService } from './auth/auth.service'
         <span class="flex-spacer"></span>
         <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
           aria-label="User Profile">
-          <img alt="Profile picture" *ngIf="auth?.user?.picture" class="image-cropper" [src]="auth?.user?.picture" />
+          <img alt="Profile picture" *ngIf="auth?.user?.picture" class="image-cropper" [ngSrc]="auth?.user?.picture ?? ''" width="40px" height="40px" fill />
           <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
         </button>
         <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
@@ -81,9 +84,23 @@ import { AuthService } from './auth/auth.service'
       </mat-sidenav-container>
     </div>
   `,
+  standalone: true,
+  imports: [
+    NgIf,
+    FlexModule,
+    RouterLink,
+    NavigationMenuComponent,
+    RouterOutlet,
+    AsyncPipe,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    NgOptimizedImage,
+  ],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private subs = new SubSink()
+export class AppComponent implements OnInit {
+  private destroyRef = inject(DestroyRef)
   opened!: boolean
 
   constructor(
@@ -99,11 +116,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subs.sink = combineLatest([
-      this.media.asObservable(),
-      this.authService.authStatus$,
-    ])
+    combineLatest([this.media.asObservable(), this.authService.authStatus$])
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         tap(([mediaValue, authStatus]) => {
           if (!authStatus?.isAuthenticated) {
             this.opened = false
@@ -117,9 +132,5 @@ export class AppComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe()
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe()
   }
 }

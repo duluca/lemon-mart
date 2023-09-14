@@ -1,4 +1,6 @@
 import { Component } from '@angular/core'
+import { MatListModule } from '@angular/material/list'
+import { RouterLink, RouterLinkActive } from '@angular/router'
 
 @Component({
   selector: 'app-navigation-menu',
@@ -38,5 +40,7 @@ import { Component } from '@angular/core'
       <a mat-list-item routerLinkActive="active-link" routerLink="/pos">POS</a>
     </mat-nav-list>
   `,
+  standalone: true,
+  imports: [MatListModule, RouterLinkActive, RouterLink],
 })
 export class NavigationMenuComponent {}

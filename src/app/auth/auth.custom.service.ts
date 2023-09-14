@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, map } from 'rxjs/operators'
+import { catchError, first, map } from 'rxjs/operators'
 import { $enum } from 'ts-enum-util'
 
 import { environment } from '../../environments/environment'
@@ -21,21 +21,18 @@ interface IJwtToken {
 
 @Injectable()
 export class CustomAuthService extends AuthService {
-  constructor(private httpClient: HttpClient) {
-    super()
-  }
+  private httpClient: HttpClient = inject(HttpClient)
 
   protected authProvider(
     email: string,
     password: string
   ): Observable<IServerAuthResponse> {
-    return this.httpClient.post<IServerAuthResponse>(
-      `${environment.baseUrl}/v1/auth/login`,
-      {
+    return this.httpClient
+      .post<IServerAuthResponse>(`${environment.baseUrl}/v1/auth/login`, {
         email,
         password,
-      }
-    )
+      })
+      .pipe(first())
   }
 
   protected transformJwtToken(token: IJwtToken): IAuthStatus {
@@ -49,8 +46,10 @@ export class CustomAuthService extends AuthService {
   }
 
   protected getCurrentUser(): Observable<User> {
-    return this.httpClient
-      .get<IUser>(`${environment.baseUrl}/v1/auth/me`)
-      .pipe(map(User.Build, catchError(transformError)))
+    return this.httpClient.get<IUser>(`${environment.baseUrl}/v1/auth/me`).pipe(
+      first(),
+      map((user) => User.Build(user)),
+      catchError(transformError)
+    )
   }
 }

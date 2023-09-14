@@ -10,8 +10,7 @@ describe('ViewUserComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [],
-      imports: commonTestingModules,
-      declarations: [ViewUserComponent],
+      imports: [...commonTestingModules, ViewUserComponent],
     }).compileComponents()
   }))
 

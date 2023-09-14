@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { SecurityContext } from '@angular/core'
-import { MediaChange } from '@ngbracket/ngx-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { SafeResourceUrl, SafeValue } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
+import { MediaChange } from '@ngbracket/ngx-layout'
 import { autoSpyObj } from 'angular-unit-test-helper'
-import { Observable, Subscription, of } from 'rxjs'
+import { Observable, of, Subscription } from 'rxjs'
 
 import { AuthService } from '../auth/auth.service'
-import { MaterialModule } from '../material.module'
 import { UiService } from './ui.service'
 
 const FAKE_SVGS = {
@@ -18,7 +17,7 @@ const FAKE_SVGS = {
 }
 
 export class MediaObserverFake {
-  isActive(query: string): boolean {
+  isActive(_query: string): boolean {
     return false
   }
 
@@ -27,23 +26,22 @@ export class MediaObserverFake {
   }
 
   subscribe(
-    next?: (value: MediaChange) => void,
-    error?: (error: Error) => void,
-    complete?: () => void
+    _next?: (value: MediaChange) => void,
+    _error?: (error: Error) => void,
+    _complete?: () => void
   ): Subscription {
     return new Subscription()
   }
 }
 
 export class MatIconRegistryFake {
-  // tslint:disable-next-line: variable-name
   _document = document
-  addSvgIcon(iconName: string, url: SafeResourceUrl): this {
+  addSvgIcon(_iconName: string, _url: SafeResourceUrl): this {
     // this.addSvgIcon('lemon', 'lemon.svg')
     return this
   }
 
-  getNamedSvgIcon(name: string, namespace = ''): Observable<SVGElement> {
+  getNamedSvgIcon(_name: string, _namespace = ''): Observable<SVGElement> {
     return of(this._svgElementFromString(FAKE_SVGS.lemon))
   }
 
@@ -59,7 +57,7 @@ export class MatIconRegistryFake {
 }
 
 export class DomSanitizerFake {
-  bypassSecurityTrustResourceUrl(url: string): SafeResourceUrl {
+  bypassSecurityTrustResourceUrl(_url: string): SafeResourceUrl {
     return {} as SafeResourceUrl
   }
   sanitize(context: SecurityContext, value: SafeValue | string | null): string | null {
@@ -74,7 +72,6 @@ export const commonTestingProviders = [
 
 export const commonTestingModules = [
   ReactiveFormsModule,
-  MaterialModule,
   NoopAnimationsModule,
   HttpClientTestingModule,
   RouterTestingModule,

@@ -9,8 +9,7 @@ describe('NavigationMenuComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: commonTestingModules,
-      declarations: [NavigationMenuComponent],
+      imports: [...commonTestingModules, NavigationMenuComponent],
     }).compileComponents()
   }))
 

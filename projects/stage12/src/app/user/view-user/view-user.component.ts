@@ -1,4 +1,8 @@
+import { AsyncPipe, DatePipe, NgIf } from '@angular/common'
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatIconModule } from '@angular/material/icon'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 
@@ -35,6 +39,8 @@ import { IUser, User } from '../user/user'
       }
     `,
   ],
+  standalone: true,
+  imports: [NgIf, MatCardModule, MatIconModule, MatButtonModule, AsyncPipe, DatePipe],
 })
 export class ViewUserComponent implements OnInit, OnChanges {
   @Input() user!: IUser

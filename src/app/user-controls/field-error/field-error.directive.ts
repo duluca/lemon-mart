@@ -13,6 +13,7 @@ export const ErrorSets: { [key: string]: ValidationError[] } = {
 
 @Directive({
   selector: '[appFieldError]',
+  standalone: true,
 })
 export class FieldErrorDirective implements OnDestroy, OnChanges {
   @Input() appFieldError!:

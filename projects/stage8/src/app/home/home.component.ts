@@ -1,6 +1,8 @@
+import { AsyncPipe, NgIf } from '@angular/common'
 import { Component } from '@angular/core'
 
 import { AuthService } from '../auth/auth.service'
+import { LoginComponent } from '../login/login.component'
 
 @Component({
   selector: 'app-home',
@@ -23,6 +25,8 @@ import { AuthService } from '../auth/auth.service'
       <app-login></app-login>
     </ng-template>
   `,
+  standalone: true,
+  imports: [NgIf, LoginComponent, AsyncPipe],
 })
 export class HomeComponent {
   // displayLogin = true

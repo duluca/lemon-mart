@@ -8,7 +8,7 @@ describe('PosComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PosComponent],
+      imports: [PosComponent],
     }).compileComponents()
   }))
 

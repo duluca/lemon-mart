@@ -1,10 +1,20 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
-import { FormControl } from '@angular/forms'
-import { MatPaginator } from '@angular/material/paginator'
-import { MatSort, SortDirection } from '@angular/material/sort'
-import { BehaviorSubject, Observable, Subject, merge, of } from 'rxjs'
+import { AsyncPipe, NgIf } from '@angular/common'
+import { AfterViewInit, Component, DestroyRef, inject, ViewChild } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatSort, MatSortModule, SortDirection } from '@angular/material/sort'
+import { MatTableModule } from '@angular/material/table'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { RouterLink } from '@angular/router'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
+import { BehaviorSubject, merge, Observable, of, Subject } from 'rxjs'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
 
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
@@ -15,15 +25,34 @@ import { IUsers, UserService } from '../../user/user/user.service'
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss'],
+  standalone: true,
+  imports: [
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    FormsModule,
+    FlexModule,
+    MatFormFieldModule,
+    MatIconModule,
+    // MatButtonModule, // Note: Due to an Angular bug, in dev mode disable this line
+    MatInputModule,
+    NgIf,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    RouterLink,
+    MatToolbarModule,
+    MatPaginatorModule,
+    AsyncPipe,
+  ],
 })
-export class UserTableComponent implements OnDestroy, AfterViewInit {
+export class UserTableComponent implements AfterViewInit {
   displayedColumns = ['name', 'email', 'role', '_id']
   items$!: Observable<IUser[]>
   resultsLength = 0
   hasError = false
   errorText = ''
   private skipLoading = false
-  private subs = new SubSink()
+  private destroyRef = inject(DestroyRef)
   useNgRxData = false
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
@@ -31,8 +60,8 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
 
   search = new FormControl<string>('', OptionalTextValidation)
 
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
-  @ViewChild(MatSort, { static: false }) sort!: MatSort
+  @ViewChild(MatPaginator) paginator!: MatPaginator
+  @ViewChild(MatSort) sort!: MatSort
 
   constructor(
     private userService: UserService,
@@ -65,12 +94,10 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe()
-  }
-
   ngAfterViewInit() {
-    this.subs.sink = this.sort.sortChange.subscribe(() => this.paginator.firstPage())
+    this.sort.sortChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.paginator.firstPage())
 
     if (this.skipLoading) {
       return
@@ -82,6 +109,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
       this.paginator.page,
       this.search.valueChanges.pipe(debounceTime(1000))
     ).pipe(
+      takeUntilDestroyed(this.destroyRef),
       startWith({}),
       switchMap(() => {
         this.isLoadingResults$.next(true)
@@ -94,6 +122,7 @@ export class UserTableComponent implements OnDestroy, AfterViewInit {
         )
       }),
       map((results: { total: number; data: IUser[] }) => {
+        console.log(results)
         this.isLoadingResults$.next(false)
         this.hasError = false
         this.resultsLength = results.total

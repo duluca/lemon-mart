@@ -1,8 +1,29 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AsyncPipe, NgFor, NgIf } from '@angular/common'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatButtonModule } from '@angular/material/button'
+import { MatOptionModule } from '@angular/material/core'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { MatListModule } from '@angular/material/list'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatSelectModule } from '@angular/material/select'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
+import { NgxMaskDirective } from 'ngx-mask'
 import { Observable } from 'rxjs'
-import { filter, map, startWith, tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
+import { filter, first, map, startWith, tap } from 'rxjs/operators'
 import { $enum } from 'ts-enum-util'
 
 import { Role } from '../../auth/auth.enum'
@@ -16,17 +37,48 @@ import {
   USAPhoneNumberValidation,
   USAZipCodeValidation,
 } from '../../common/validations'
-import { ErrorSets } from '../../user-controls/field-error/field-error.directive'
+import {
+  ErrorSets,
+  FieldErrorDirective,
+} from '../../user-controls/field-error/field-error.directive'
+import { LemonRaterComponent } from '../../user-controls/lemon-rater/lemon-rater.component'
+import { NameInputComponent } from '../name-input/name-input.component'
 import { IPhone, IUser, PhoneType } from '../user/user'
 import { UserService } from '../user/user.service'
+import { ViewUserComponent } from '../view-user/view-user.component'
 import { IUSState, USStateFilter } from './data'
 
 @Component({
   selector: 'app-profile-initial',
   templateUrl: './profile.initial.component.html',
   styleUrls: ['./profile.component.scss'],
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    NgIf,
+    MatStepperModule,
+    ReactiveFormsModule,
+    NameInputComponent,
+    FlexModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    FieldErrorDirective,
+    MatRadioModule,
+    LemonRaterComponent,
+    MatButtonModule,
+    MatAutocompleteModule,
+    NgFor,
+    MatOptionModule,
+    MatListModule,
+    MatIconModule,
+    MatSelectModule,
+    NgxMaskDirective,
+    ViewUserComponent,
+    AsyncPipe,
+  ],
 })
-export class ProfileInitialComponent implements OnInit, OnDestroy {
+export class ProfileInitialComponent implements OnInit {
   Role = Role
   PhoneType = PhoneType
   PhoneTypes = $enum(PhoneType).getKeys()
@@ -55,7 +107,7 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
     return this.formGroup.get('phones') as FormArray
   }
 
-  subs = new SubSink()
+  private destroyRef = inject(DestroyRef)
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,8 +118,9 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buildForm()
-    this.subs.sink = this.authService.currentUser$
+    this.authService.currentUser$
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         filter((user) => user !== null),
         tap((user) => {
           this.currentUserId = user._id
@@ -79,10 +132,6 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
 
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe()
   }
 
   buildForm(user?: IUser) {
@@ -166,15 +215,16 @@ export class ProfileInitialComponent implements OnInit, OnDestroy {
   }
 
   async save(form: FormGroup) {
-    this.subs.add(
-      this.userService.updateUser(this.currentUserId, form.value).subscribe(
-        (res: IUser) => {
+    this.userService
+      .updateUser(this.currentUserId, form.value)
+      .pipe(first())
+      .subscribe({
+        next: (res: IUser) => {
           this.formGroup.patchValue(res)
           this.uiService.showToast('Updated user')
         },
-        (err: string) => (this.userError = err)
-      )
-    )
+        error: (err: string) => (this.userError = err),
+      })
   }
 
   convertTypeToPhoneType(type: string): PhoneType {

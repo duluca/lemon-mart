@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { authGuard } from '../auth/auth.guard'
 import { Role } from '../auth/auth.enum'
-import { ManagerHomeComponent } from './manager-home/manager-home.component'
+import { authGuard } from '../auth/auth.guard'
 import { ManagerComponent } from './manager.component'
+import { ManagerHomeComponent } from './manager-home/manager-home.component'
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component'
 import { UserManagementComponent } from './user-management/user-management.component'
 

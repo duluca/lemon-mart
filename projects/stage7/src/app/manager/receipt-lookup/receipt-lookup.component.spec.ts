@@ -8,7 +8,7 @@ describe('ReceiptLookupComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ReceiptLookupComponent],
+      imports: [ReceiptLookupComponent],
     }).compileComponents()
   }))
 

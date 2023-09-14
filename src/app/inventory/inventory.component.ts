@@ -1,4 +1,7 @@
 import { Component } from '@angular/core'
+import { MatButtonModule } from '@angular/material/button'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
 
 @Component({
   selector: 'app-inventory',
@@ -27,5 +30,13 @@ import { Component } from '@angular/core'
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+  ],
 })
 export class InventoryComponent {}

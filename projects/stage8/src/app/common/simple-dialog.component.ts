@@ -1,5 +1,7 @@
+import { NgIf } from '@angular/common'
 import { Component, Inject } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
+import { MatButtonModule } from '@angular/material/button'
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog'
 
 @Component({
   // prettier-ignore
@@ -19,6 +21,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
       </button>
     </mat-dialog-actions>
   `,
+  standalone: true,
+  imports: [MatDialogModule, NgIf, MatButtonModule],
 })
 export class SimpleDialogComponent {
   constructor(

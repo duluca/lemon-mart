@@ -8,7 +8,6 @@ import { of } from 'rxjs'
 import { commonTestingModules, commonTestingProviders } from '../../common/common.testing'
 import { entityConfig } from '../../entity-metadata'
 import { User } from '../../user/user/user'
-import { ManagerMaterialModule } from '../manager-material.module'
 import { UserTableComponent } from './user-table.component'
 
 describe('UserTableComponent', () => {
@@ -17,15 +16,15 @@ describe('UserTableComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [UserTableComponent],
-      providers: commonTestingProviders,
-      imports: commonTestingModules.concat([
+      providers: [...commonTestingProviders],
+      imports: [
+        ...commonTestingModules,
         FormsModule,
-        ManagerMaterialModule,
         EntityDataModule.forRoot(entityConfig),
         EffectsModule.forRoot([]),
         StoreModule.forRoot({}),
-      ]),
+        UserTableComponent,
+      ],
     }).compileComponents()
   }))
 

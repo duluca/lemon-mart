@@ -1,15 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { NgFor, NgIf } from '@angular/common'
+import { Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatGridListModule } from '@angular/material/grid-list'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
 import { ActivatedRoute, Router } from '@angular/router'
+import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { combineLatest } from 'rxjs'
-import { catchError, filter, tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
+import { catchError, filter, first, tap } from 'rxjs/operators'
 
 import { environment } from '../../environments/environment'
 import { AuthMode, Role } from '../auth/auth.enum'
 import { AuthService } from '../auth/auth.service'
 import { UiService } from '../common/ui.service'
 import { EmailValidation, PasswordValidation } from '../common/validations'
+import { FieldErrorDirective } from '../user-controls/field-error/field-error.directive'
 
 @Component({
   selector: 'app-login',
@@ -26,9 +36,24 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
       }
     `,
   ],
+  standalone: true,
+  imports: [
+    FlexModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FieldErrorDirective,
+    NgIf,
+    MatButtonModule,
+    MatExpansionModule,
+    MatGridListModule,
+    NgFor,
+  ],
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  private subs = new SubSink()
+export class LoginComponent implements OnInit {
+  private destroyRef = inject(DestroyRef)
   loginForm!: FormGroup
   loginError = ''
   redirectUrl!: string
@@ -42,18 +67,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     route: ActivatedRoute,
     private uiService: UiService
   ) {
-    this.subs.sink = route.paramMap.subscribe(
-      (params) => (this.redirectUrl = params.get('redirectUrl') ?? '')
-    )
+    route.paramMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((params) => (this.redirectUrl = params.get('redirectUrl') ?? ''))
   }
 
   ngOnInit() {
     this.authService.logout()
     this.buildLoginForm()
-  }
-
-  ngOnDestroy(): void {
-    this.subs.unsubscribe()
   }
 
   buildLoginForm() {
@@ -68,12 +89,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       .login(submittedForm.value.email, submittedForm.value.password)
       .pipe(catchError((err) => (this.loginError = err)))
 
-    this.subs.sink = combineLatest([
-      this.authService.authStatus$,
-      this.authService.currentUser$,
-    ])
+    combineLatest([this.authService.authStatus$, this.authService.currentUser$])
       .pipe(
         filter(([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''),
+        first(),
         tap(([authStatus, user]) => {
           this.uiService.showToast(
             `Welcome ${user.fullName}! Role: ${authStatus.userRole}`

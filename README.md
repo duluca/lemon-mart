@@ -146,9 +146,12 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 ## Angular 16
 
 - Renamed `projects` from `ch2` format to `stage2`, so they make sense in the 3rd edition.
+- Dropped `ch13` and `ch14` as there are no meaningful changes between projects. Refer to the main application under `src` for reference.
 - Replaced tslint with eslint
 - Replaced protractor with cypress for e2e, added tests
 - Moved to Standalone configuration
+- Added GraphQL auth provider
+- Removed subsink in favor of `takeUntilDestroyed`
 
 ## Angular 13-15
 
