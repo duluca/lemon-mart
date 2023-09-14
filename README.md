@@ -149,7 +149,8 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 - Dropped `ch13` and `ch14` as there are no meaningful changes between projects. Refer to the main application under `src` for reference.
 - Replaced tslint with eslint
 - Replaced protractor with cypress for e2e, added tests
-- Moved to Standalone configuration
+- Removed SharedModule, and implemented shared components as Standalone components
+- Moved to Standalone project configuration
 - Added GraphQL auth provider
 - Removed subsink in favor of `takeUntilDestroyed`
 
