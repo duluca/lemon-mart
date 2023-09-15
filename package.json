@@ -22,7 +22,7 @@
     "test:debug": "npm test -- --browsers Chrome --source-map",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e --browser electron",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "build:prod": "ng build --configuration production",
