@@ -60,7 +60,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
         </button>
         <a mat-icon-button routerLink="/home">
           <mat-icon svgIcon="lemon"></mat-icon>
-          <span class="mat-h2" data-testid="title">LemonMart</span>
+          <span class="mat-h2 left-pad" data-testid="title">LemonMart</span>
         </a>
         <span class="flex-spacer"></span>
         <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile"

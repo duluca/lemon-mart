@@ -97,6 +97,7 @@
     "@angular/cli": "^16.2.0",
     "@angular/compiler-cli": "16.2.3",
     "@angular/language-service": "16.2.3",
+    "@bahmutov/cypress-code-coverage": "^2.6.1",
     "@cypress/schematic": "^2.5.0",
     "@ngbracket/ngx-layout": "^16.0.0",
     "@types/jasmine": "~4.3.5",

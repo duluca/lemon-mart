@@ -46,11 +46,7 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div
-            fxLayout="row"
-            fxLayout.lt-sm="column"
-            class="margin-top"
-            fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-sm="column" class="top-pad" fxLayoutGap="10px">
             <mat-label class="mat-body-2">Role</mat-label>
             <mat-radio-group formControlName="role">
               <mat-radio-button style="margin-right: 10px" [value]="Role.None">
@@ -74,18 +70,14 @@
               <span class="mat-caption">Role is required</span>
             </mat-error>
           </div>
-          <div
-            fxLayout="row"
-            fxLayout.lt-sm="column"
-            class="margin-top"
-            fxLayoutGap="10px">
+          <div fxLayout="row" fxLayout.lt-sm="column" class="top-pad" fxLayoutGap="10px">
             <mat-label class="mat-body-2"
               >Select the Limoncu level:
               <app-lemon-rater formControlName="level"> </app-lemon-rater>
             </mat-label>
           </div>
         </div>
-        <div fxLayout="row" class="margin-top">
+        <div fxLayout="row" class="top-pad">
           <div class="flex-spacer"></div>
           <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
           <button mat-raised-button matStepperNext color="accent">Next</button>
@@ -220,7 +212,7 @@
             </mat-list>
           </div>
         </div>
-        <div fxLayout="row" class="margin-top">
+        <div fxLayout="row" class="top-pad">
           <button mat-button matStepperPrevious>Back</button>
           <div class="flex-spacer"></div>
           <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>
@@ -235,7 +227,7 @@
           Review and update your user profile.
           <app-view-user [user]="formGroup.getRawValue()"></app-view-user>
         </div>
-        <div fxLayout="row" class="margin-top">
+        <div fxLayout="row" class="top-pad">
           <button mat-button matStepperPrevious>Back</button>
           <div class="flex-spacer"></div>
           <div *ngIf="userError" class="mat-caption error">{{ userError }}</div>

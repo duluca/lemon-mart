@@ -10,13 +10,12 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.margin-top {
+.top-pad {
   margin-top: 16px;
 }
 
-.horizontal-padding {
-  margin-left: 16px;
-  margin-right: 16px;
+.h-pad {
+  margin: 0 16px;
 }
 
 .flex-spacer {
