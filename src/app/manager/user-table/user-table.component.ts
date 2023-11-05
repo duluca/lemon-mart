@@ -87,13 +87,6 @@ export class UserTableComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults$.next(true)
-          console.log({
-            size: this.paginator.pageSize,
-            search: this.search.value as string,
-            skip: this.paginator.pageIndex,
-            sort: this.sort.active,
-            direction: this.sort.direction,
-          })
 
           return this.userService.getUsers(
             this.paginator.pageSize,
@@ -104,7 +97,6 @@ export class UserTableComponent implements AfterViewInit {
           )
         }),
         map((results: { total: number; data: IUser[] }) => {
-          console.log(results)
           this.isLoadingResults$.next(false)
           this.hasError = false
           this.resultsLength = results.total
