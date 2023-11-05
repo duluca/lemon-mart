@@ -15,6 +15,8 @@ import { authFactory } from './auth/auth.factory'
 import { AuthHttpInterceptor } from './auth/auth.http.interceptor'
 import { AuthService } from './auth/auth.service'
 import { provideUiService } from './common/ui.service'
+import { makeEnvironmentProviders } from '@angular/core'
+import { AuthMode } from './auth/auth.enum'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,9 +31,29 @@ export const appConfig: ApplicationConfig = {
       useFactory: authFactory,
     },
     provideUiService(),
+    provideFirebase(),
+  ],
+}
+
+function provideFirebase() {
+  if (environment.authMode !== AuthMode.Firebase) {
+    return []
+  }
+  return makeEnvironmentProviders([
     importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(environment.firebase)),
+      provideFirebaseApp(() =>
+        initializeApp({
+          apiKey: 'AIzaSyA_39OnkusNS7WeMqTuhRosonMV20WntcA',
+          authDomain: 'lemon-mart-007.firebaseapp.com',
+          databaseURL: 'https://lemon-mart-007.firebaseio.com',
+          projectId: 'lemon-mart-007',
+          storageBucket: 'lemon-mart-007.appspot.com',
+          messagingSenderId: '416892066612',
+          appId: '1:416892066612:web:ec2f404c18fd4bd8',
+          measurementId: 'G-2L4VLZEFWX',
+        })
+      ),
       provideAuth(() => getAuth())
     ),
-  ],
+  ])
 }

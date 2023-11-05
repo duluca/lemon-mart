@@ -41,9 +41,13 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
+
 .env
 cache
-.firebase
 *.tar**
 cypress/videos
 cypress/screenshots

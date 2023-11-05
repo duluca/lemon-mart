@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "lemon-mart",
     "public": "dist/lemon-mart",
     "ignore": [
       "firebase.json",
