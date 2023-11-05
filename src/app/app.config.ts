@@ -1,6 +1,9 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
-import { ApplicationConfig, importProvidersFrom } from '@angular/core'
-import { makeEnvironmentProviders } from '@angular/core'
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  makeEnvironmentProviders,
+} from '@angular/core'
 import { provideFirebaseApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth'
 import { provideAnimations } from '@angular/platform-browser/animations'

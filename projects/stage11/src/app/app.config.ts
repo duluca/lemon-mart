@@ -1,5 +1,9 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
-import { ApplicationConfig, importProvidersFrom } from '@angular/core'
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  makeEnvironmentProviders,
+} from '@angular/core'
 import { provideFirebaseApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth'
 import { provideAnimations } from '@angular/platform-browser/animations'
@@ -11,13 +15,12 @@ import { initializeApp } from 'firebase/app'
 import { environment } from 'src/environments/environment'
 
 import { routes } from './app.routes'
+import { AuthMode } from './auth/auth.enum'
 import { authFactory } from './auth/auth.factory'
 import { AuthHttpInterceptor } from './auth/auth.http.interceptor'
 import { AuthService } from './auth/auth.service'
 import { provideUiService } from './common/ui.service'
 import { provideGraphQL } from './provideGraphQL'
-import { makeEnvironmentProviders } from '@angular/core'
-import { AuthMode } from './auth/auth.enum'
 
 export const appConfig: ApplicationConfig = {
   providers: [
