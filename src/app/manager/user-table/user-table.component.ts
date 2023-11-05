@@ -2,6 +2,7 @@ import { AsyncPipe, NgIf } from '@angular/common'
 import { AfterViewInit, Component, DestroyRef, inject, ViewChild } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
@@ -18,7 +19,6 @@ import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operat
 
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
-import { UserEntityService } from '../../user/user/user.entity.service'
 import { IUsers, UserService } from '../../user/user/user.service'
 
 @Component({
@@ -27,22 +27,22 @@ import { IUsers, UserService } from '../../user/user/user.service'
   styleUrls: ['./user-table.component.scss'],
   standalone: true,
   imports: [
-    MatSlideToggleModule,
-    ReactiveFormsModule,
-    FormsModule,
+    AsyncPipe,
     FlexModule,
+    FormsModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    // MatButtonModule, // Note: Due to an Angular bug, in dev mode disable this line
     MatInputModule,
-    NgIf,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatSortModule,
-    RouterLink,
-    MatToolbarModule,
     MatPaginatorModule,
-    AsyncPipe,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    NgIf,
+    ReactiveFormsModule,
+    RouterLink,
   ],
 })
 export class UserTableComponent implements AfterViewInit {
@@ -63,35 +63,8 @@ export class UserTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
 
-  constructor(
-    private userService: UserService,
-    private userEntityService: UserEntityService
-  ) {
-    this.loading$ = merge(this.userEntityService.loading$, this.isLoadingResults$)
-  }
-
-  getUsers(
-    pageSize: number,
-    searchText: string,
-    pagesToSkip: number,
-    sortColumn: string,
-    sortDirection: SortDirection
-  ): Observable<IUsers> {
-    if (this.useNgRxData) {
-      return this.userEntityService.getAll().pipe(
-        map((value) => {
-          return { total: value.length, data: value }
-        })
-      )
-    } else {
-      return this.userService.getUsers(
-        pageSize,
-        searchText,
-        pagesToSkip,
-        sortColumn,
-        sortDirection
-      )
-    }
+  constructor(private userService: UserService) {
+    this.loading$ = this.isLoadingResults$
   }
 
   ngAfterViewInit() {
@@ -113,7 +86,7 @@ export class UserTableComponent implements AfterViewInit {
       startWith({}),
       switchMap(() => {
         this.isLoadingResults$.next(true)
-        return this.getUsers(
+        return this.userService.getUsers(
           this.paginator.pageSize,
           this.search.value as string,
           this.paginator.pageIndex,
