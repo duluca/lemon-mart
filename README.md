@@ -1,6 +1,8 @@
-# LemonMart <img src="https://user-images.githubusercontent.com/822159/76695715-1cd40180-6659-11ea-8815-00f0e1d7a209.png" alt="LemonMart" width="36"/>
+# <img src="https://user-images.githubusercontent.com/822159/76695715-1cd40180-6659-11ea-8815-00f0e1d7a209.png" alt="LemonMart" width="36"/> LemonMart
 
-> LemonMart was implemented with a [Route-first approach](https://techtalkdc.com/router-first-architecture-in-spas/) to designing SPAs.
+The enterprise-ready Angular template project with REST and GraphQL RBAC pre-configured.
+
+> LemonMart was implemented with a [Route-first architecture](https://techtalkdc.com/router-first-architecture-in-spas/) to designing SPAs.
 
 > See [Changes](#changes) section for important or breaking changes made to the project.
 
@@ -13,7 +15,7 @@
 ![lemons served](https://img.shields.io/badge/lemons%20served-257%2C428-F3DE48)
 <sup>As of August 2023</sup>
 
-![lemon-mart-login](https://user-images.githubusercontent.com/822159/77232462-694aa000-6b77-11ea-9a45-470f252d7e18.png)
+![lemon-mart-profile](https://github.com/duluca/lemon-mart/assets/822159/8f7d3b01-e084-4b46-a08c-164b4a7adb92")
 
 ## Get the book & watch the talk
 
@@ -27,34 +29,34 @@ Check out **LocalCast Weather**, to learn Angular, Material, RxJS fundemantals u
 
 Build, debug and publish Docker images with [**npm Scripts for Docker**](https://bit.ly/npmScriptsForDocker) and achieve Blue-Green deployments on AWS Fargate with [**npm Scripts for AWS**](https://bit.ly/npmScriptsForAWS).
 
-## Router-first Approach
+## Router-first Architecture
 
-A router-first approach to SPA design will save development teams, large and small, significant waste in duplicative work, and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
+A router-first architecture to SPA design will save development teams, large and small, significant waste in duplicative work, and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
 
 In order to pull off a router-first implementation, you need to:
 
-1. Define user roles and a site-map early on,
+1. Define user roles and a site map early on,
 2. Design with lazy loading in mind, leveraging router outlets, auxiliary paths and smart link tracking,
 3. Implement a walking-skeleton navigation experience and validate, allowing multiple teams to execute seamlessly,
 4. Design around major data components, using stateless data-driven components using RxJS/BehaviorSubjects,
 5. Be disciplined in sticking to a decoupled component architecture, allowing remixing the UX quickly to respond to changes in requirements without having to re-architect the codebase,
-6. Differentiate between user controls and components to appropriate use binding, resolve and auth guards,
-7. With TypeScript classes, interfaces, enums, validators and pipes maximize code reuse
+6. Differentiate between user controls and components to appropriately use binding, resolve and auth guards,
+7. With TypeScript classes, interfaces, enums, validators, and pipes maximize code reuse
 
 ### Design Artifacts
 
-Head over to the Wiki for user roles, site maps, data entity diagrams and user mock ups:
+Head over to the Wiki for user roles, site maps, data entity diagrams, and user mock-ups:
 https://github.com/duluca/lemon-mart/wiki.
 
 ## Building Lemon Mart
 
 - `npm run build:prod` to build a production optimized version of the app.
 - `npm run docker:debug` to run tests and build a containerized version of the app.
-- `integration.Dockerfile` is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent mannger. The optimized image generated in the last step, can then be deployed to any Docker host, including AWS, Heroku, Vercel and Azure.
+- `integration.Dockerfile` is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent manner. The optimized image generated in the last step can then be deployed to any Docker host, including AWS, Heroku, Vercel, and Azure.
 
 ### Authentication
 
-For demonstration purposes the login screen shows the _Authentication Mode_ of the app. There are three modes:
+For demonstration purposes, the login screen shows the _Authentication Mode_ of the app. There are three modes:
 
 - InMemory: [auth.inmemory.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.inmemory.service.ts)
 - Custom: [auth.custom.service.ts](https://github.com/duluca/lemon-mart/blob/main/src/app/auth/auth.custom.service.ts)
@@ -66,7 +68,7 @@ The current mode can be adjusted in `environment.ts`. You can see how each mode 
 
 ### Build Configurations
 
-There are 3 build configurations that maps to authentication modes:
+3 build configurations map to authentication modes:
 
 1. Production:
 
@@ -74,28 +76,28 @@ Executing `npm run build:prod` or `npx ng build --configuration production` or `
 
 2. Firebase:
 
-Executing `npx ng build --configuration=firebase` leverages `Firebase` authentication. For this to work, you must setup your own Firebase back-end and create a user in the Firebase console.
+Executing `npx ng build --configuration=firebase` leverages `Firebase` authentication. For this to work, you must set up your own Firebase back-end and create a user in the Firebase console.
 
 3. Lemon-Mart-Server:
 
-Executing `npx ng build --configuration=lemon-mart-server` leverages `Custom` authentication. Note that this is implemented by the example projects Lemon Mart Server, which is detailed below.
+Executing `npx ng build --configuration=lemon-mart-server` leverages `Custom` authentication. Note that this is implemented by the example project Lemon Mart Server, which is detailed below.
 
 ### Lemon Mart Server
 
 Lemon Mart Server is an easy to learn and use TypeScript Node.js server using [Minimal MEAN](https://github.com/duluca/minimal-mean) for [Lemon Mart](https://github.com/duluca/lemon-mart).
 
-In order to run Lemon Mart in a full-stack set up, visit https://github.com/duluca/lemon-mart-server.
+To run Lemon Mart in a full-stack setup, visit https://github.com/duluca/lemon-mart-server.
 
 ## Developers
 
-This project is a sample implementation, which contains numerous recipes and design patterns useful to develop an Angular application.
+This project is a sample implementation, which contains numerous recipes and design patterns useful for developing an Angular application.
 
-If you'd like to use this project as a starter or a template project for your project, you can get a lot of benefit out of using a pre-configured project. Some the benefits are:
+If you'd like to use this project as a starter or a template project for your project, you can get a lot of benefits out of using a pre-configured project. Some of the benefits are:
 
 - Optimized development experience for VS Code
 - Lazy loading feature module configuration
 - A responsive landing, login, and user profile experience
-- Angular Material and Angular Flex Layout configured for UI development
+- Angular Material and Flex Layout configured for UI development
 - npm scripts for `style` and `lint` checks, building docker containers, testing, or deploying your app
 - CircleCI configuration for Continuous Integration
 - Pre-wired extensible authentication and authorization module
