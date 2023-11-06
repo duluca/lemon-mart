@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FlexLayoutModule } from '@ngbracket/ngx-layout'
 
-import { UserResolve } from '../user/user/user.resolve'
 import { UserService } from '../user/user/user.service'
 import { ManagerComponent } from './manager.component'
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
@@ -15,16 +14,16 @@ import { UserTableComponent } from './user-table/user-table.component'
 @NgModule({
   imports: [
     CommonModule,
-    ManagerRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     FlexLayoutModule,
+    FormsModule,
     ManagerComponent,
     ManagerHomeComponent,
-    UserManagementComponent,
+    ManagerRoutingModule,
+    ReactiveFormsModule,
     ReceiptLookupComponent,
+    UserManagementComponent,
     UserTableComponent,
   ],
-  providers: [UserService, UserResolve],
+  providers: [UserService],
 })
 export class ManagerModule {}

@@ -2,13 +2,14 @@ import { AsyncPipe, NgIf } from '@angular/common'
 import { AfterViewInit, Component, DestroyRef, inject, ViewChild } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
-import { MatSort, MatSortModule, SortDirection } from '@angular/material/sort'
+import { MatSort, MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { RouterLink } from '@angular/router'
@@ -18,8 +19,7 @@ import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operat
 
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
-import { UserEntityService } from '../../user/user/user.entity.service'
-import { IUsers, UserService } from '../../user/user/user.service'
+import { UserService } from '../../user/user/user.service'
 
 @Component({
   selector: 'app-user-table',
@@ -27,22 +27,22 @@ import { IUsers, UserService } from '../../user/user/user.service'
   styleUrls: ['./user-table.component.scss'],
   standalone: true,
   imports: [
-    MatSlideToggleModule,
-    ReactiveFormsModule,
-    FormsModule,
+    AsyncPipe,
     FlexModule,
+    FormsModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    // MatButtonModule, // Note: Due to an Angular bug, in dev mode disable this line
     MatInputModule,
-    NgIf,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatSortModule,
-    RouterLink,
-    MatToolbarModule,
     MatPaginatorModule,
-    AsyncPipe,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    NgIf,
+    ReactiveFormsModule,
+    RouterLink,
   ],
 })
 export class UserTableComponent implements AfterViewInit {
@@ -53,7 +53,7 @@ export class UserTableComponent implements AfterViewInit {
   errorText = ''
   private skipLoading = false
   private destroyRef = inject(DestroyRef)
-  useNgRxData = false
+
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
   refresh$ = new Subject<void>()
@@ -63,35 +63,8 @@ export class UserTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
 
-  constructor(
-    private userService: UserService,
-    private userEntityService: UserEntityService
-  ) {
-    this.loading$ = merge(this.userEntityService.loading$, this.isLoadingResults$)
-  }
-
-  getUsers(
-    pageSize: number,
-    searchText: string,
-    pagesToSkip: number,
-    sortColumn: string,
-    sortDirection: SortDirection
-  ): Observable<IUsers> {
-    if (this.useNgRxData) {
-      return this.userEntityService.getAll().pipe(
-        map((value) => {
-          return { total: value.length, data: value }
-        })
-      )
-    } else {
-      return this.userService.getUsers(
-        pageSize,
-        searchText,
-        pagesToSkip,
-        sortColumn,
-        sortDirection
-      )
-    }
+  constructor(private userService: UserService) {
+    this.loading$ = this.isLoadingResults$
   }
 
   ngAfterViewInit() {
@@ -103,39 +76,40 @@ export class UserTableComponent implements AfterViewInit {
       return
     }
 
-    this.items$ = merge(
-      this.refresh$,
-      this.sort.sortChange,
-      this.paginator.page,
-      this.search.valueChanges.pipe(debounceTime(1000))
-    ).pipe(
-      takeUntilDestroyed(this.destroyRef),
-      startWith({}),
-      switchMap(() => {
-        this.isLoadingResults$.next(true)
-        return this.getUsers(
-          this.paginator.pageSize,
-          this.search.value as string,
-          this.paginator.pageIndex,
-          this.sort.active,
-          this.sort.direction
-        )
-      }),
-      map((results: { total: number; data: IUser[] }) => {
-        console.log(results)
-        this.isLoadingResults$.next(false)
-        this.hasError = false
-        this.resultsLength = results.total
+    setTimeout(() => {
+      this.items$ = merge(
+        this.refresh$,
+        this.sort.sortChange,
+        this.paginator.page,
+        this.search.valueChanges.pipe(debounceTime(1000))
+      ).pipe(
+        takeUntilDestroyed(this.destroyRef),
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults$.next(true)
 
-        return results.data
-      }),
-      catchError((err) => {
-        this.isLoadingResults$.next(false)
-        this.hasError = true
-        this.errorText = err
-        return of([])
-      })
-    )
-    this.items$.subscribe()
+          return this.userService.getUsers(
+            this.paginator.pageSize,
+            this.search.value as string,
+            this.paginator.pageIndex,
+            this.sort.active,
+            this.sort.direction
+          )
+        }),
+        map((results: { total: number; data: IUser[] }) => {
+          this.isLoadingResults$.next(false)
+          this.hasError = false
+          this.resultsLength = results.total
+
+          return results.data
+        }),
+        catchError((err) => {
+          this.isLoadingResults$.next(false)
+          this.hasError = true
+          this.errorText = err
+          return of([])
+        })
+      )
+    })
   }
 }

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 
 import { Role } from '../auth/auth.enum'
 import { authGuard } from '../auth/auth.guard'
-import { UserResolve } from '../user/user/user.resolve'
+import { userResolver } from '../user/user/user.resolve'
 import { ViewUserComponent } from '../user/view-user/view-user.component'
 import { ManagerComponent } from './manager.component'
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
@@ -35,7 +35,7 @@ const routes: Routes = [
             component: ViewUserComponent,
             outlet: 'detail',
             resolve: {
-              user: UserResolve,
+              user: userResolver,
             },
           },
         ],

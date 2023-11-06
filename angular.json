@@ -81,13 +81,27 @@
               "namedChunks": true
             },
             "lemon-mart-server": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.lemon-mart-server.ts"
                 }
               ],
-
+              "outputHashing": "all"
+            },
+            "firebase": {
               "budgets": [
                 {
                   "type": "initial",
@@ -99,28 +113,14 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
-            },
-            "firebase": {
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.firebase.ts"
                 }
               ],
-
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
+              "outputHashing": "all"
             }
           },
           "defaultConfiguration": "production"
@@ -229,6 +229,13 @@
             "development": {
               "devServerTarget": "lemon-mart:serve:development"
             }
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "lemon-mart:build:firebase"
           }
         }
       }

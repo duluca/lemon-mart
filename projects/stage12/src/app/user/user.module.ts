@@ -6,7 +6,6 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 import { LogoutComponent } from './logout/logout.component'
 import { ProfileComponent } from './profile/profile.component'
-import { UserResolve } from './user/user.resolve'
 import { UserRoutingModule } from './user-routing.module'
 
 @NgModule({
@@ -19,6 +18,6 @@ import { UserRoutingModule } from './user-routing.module'
     ProfileComponent,
     LogoutComponent,
   ],
-  providers: [UserResolve, provideNgxMask()],
+  providers: [provideNgxMask()],
 })
 export class UserModule {}

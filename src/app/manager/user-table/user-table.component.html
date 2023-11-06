@@ -1,12 +1,4 @@
 <div class="filter-row">
-  <div class="center" style="margin-bottom: 32px">
-    <mat-slide-toggle
-      color="accent"
-      [(ngModel)]="useNgRxData"
-      (ngModelChange)="refresh$.next()">
-      {{ useNgRxData ? 'Using NgRX Data' : 'Using BehaviorSubject' }}
-    </mat-slide-toggle>
-  </div>
   <form style="margin-bottom: 32px">
     <div fxLayout="row">
       <mat-form-field class="full-width">
@@ -52,8 +44,7 @@
     <ng-container matColumnDef="_id">
       <th mat-header-cell *matHeaderCellDef>View Details</th>
       <td mat-cell *matCellDef="let row" style="margin-right: 8px">
-        <a
-          mat-button
+        <button
           mat-icon-button
           [routerLink]="[
             '/manager/users',
@@ -61,7 +52,7 @@
           ]"
           [skipLocationChange]="true">
           <mat-icon>visibility</mat-icon>
-        </a>
+        </button>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
