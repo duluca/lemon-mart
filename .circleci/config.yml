@@ -47,7 +47,6 @@ commands:
             - browser-tools/install-chrome
             - browser-tools/install-chromedriver
             - run: npx ng test --watch=false --project << parameters.project >> --code-coverage
-            # - run: npx ng run << parameters.project >>:cypress-run
   store:
     description: 'Stores build_and_test artifacts'
     parameters:
@@ -61,7 +60,7 @@ commands:
           path: ./coverage
 
       # upload coverage report to coveralls for readme badge support
-      # requires config.yml version 2.1 and orbs: coveralls: coveralls/coveralls@1.0.4
+      # requires the orbs coveralls: coveralls/coveralls@2
       # requires coveralls account and token named COVERALLS_REPO_TOKEN specific to repo to be stored in CircleCI
       - coveralls/upload
       # https://docs.cypress.io/guides/tooling/code-coverage
