@@ -128,15 +128,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lemon-mart:build",
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.json",
+            "buildTarget": "lemon-mart:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "lemon-mart:build:production"
+              "buildTarget": "lemon-mart:build:production"
             },
             "development": {
-              "browserTarget": "lemon-mart:build:development"
+              "buildTarget": "lemon-mart:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -144,7 +144,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lemon-mart:build"
+            "buildTarget": "lemon-mart:build"
           }
         },
         "test": {
@@ -313,21 +313,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stage7:build"
+            "buildTarget": "stage7:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stage7:build:production"
+              "buildTarget": "stage7:build:production"
             },
             "development": {
-              "browserTarget": "stage7:build:development"
+              "buildTarget": "stage7:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stage7:build"
+            "buildTarget": "stage7:build"
           }
         },
         "test": {
@@ -479,18 +479,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stage8:build"
+            "buildTarget": "stage8:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stage8:build:production"
+              "buildTarget": "stage8:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stage8:build"
+            "buildTarget": "stage8:build"
           }
         },
         "test": {
@@ -642,18 +642,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stage10:build"
+            "buildTarget": "stage10:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stage10:build:production"
+              "buildTarget": "stage10:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stage10:build"
+            "buildTarget": "stage10:build"
           }
         },
         "test": {
@@ -805,18 +805,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stage11:build"
+            "buildTarget": "stage11:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stage11:build:production"
+              "buildTarget": "stage11:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stage11:build"
+            "buildTarget": "stage11:build"
           }
         },
         "test": {
@@ -968,18 +968,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stage12:build"
+            "buildTarget": "stage12:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stage12:build:production"
+              "buildTarget": "stage12:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stage12:build"
+            "buildTarget": "stage12:build"
           }
         },
         "test": {

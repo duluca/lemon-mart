@@ -99,9 +99,11 @@
                 [style.background]="oddRow ? 'lightGray' : 'white'">
                 <div fxFlex fxLayoutAlign="end center">
                   <div *ngIf="role.toLowerCase() === 'none'; else otherRoles">
-                    Any @test.com email
+                    Any &#64;test.com email
                   </div>
-                  <ng-template #otherRoles>{{ role.toLowerCase() }}@test.com</ng-template>
+                  <ng-template #otherRoles
+                    >{{ role.toLowerCase() }}&#64;test.com</ng-template
+                  >
                   <button
                     mat-button
                     (click)="
