@@ -29,7 +29,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore(),
     provideEffects(),
-    provideStoreDevtools({ maxAge: 25, logOnly: environment.production }),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: environment.production,
+      connectInZone: true,
+    }),
     {
       provide: AuthService,
       useFactory: authFactory,
