@@ -6,7 +6,7 @@ The enterprise-ready Angular template project with REST and GraphQL RBAC pre-con
 
 > See [Changes](#changes) section for important or breaking changes made to the project.
 
-![Angular Version](https://img.shields.io/badge/angular-v16-326839)
+![Angular Version](https://img.shields.io/badge/angular-v17-326839)
 [![CircleCI](https://circleci.com/gh/duluca/lemon-mart.svg?style=svg)](https://circleci.com/gh/duluca/lemon-mart)
 [![Coverage Status](https://coveralls.io/repos/github/duluca/lemon-mart/badge.svg?branch=main)](https://coveralls.io/github/duluca/lemon-mart?branch=main)
 [![DeepScan grade](https://deepscan.io/api/projects/2669/branches/18284/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2669&bid=18284)
@@ -144,6 +144,10 @@ See the example project here https://github.com/duluca/lemon-mart-server
 # Changes
 
 Changes are inevitable to keep the project up-to-date with libraries, tools, patterns and practices. Below are some notable changes that differ from the 1st, 2nd, and 3rd edition of my book.
+
+## Angular 17
+
+- ...
 
 ## Angular 16
 

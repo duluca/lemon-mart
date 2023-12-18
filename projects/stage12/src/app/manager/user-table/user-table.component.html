@@ -13,20 +13,26 @@
         <mat-icon matPrefix>search</mat-icon>
         <input matInput placeholder="Search" aria-label="Search" [formControl]="search" />
         <mat-hint>Search by e-mail or name</mat-hint>
-        <mat-error *ngIf="search.invalid">
-          Type more than one character to search
-        </mat-error>
+        @if (search.invalid) {
+          <mat-error> Type more than one character to search </mat-error>
+        }
       </mat-form-field>
     </div>
   </form>
 </div>
 <div class="mat-elevation-z8">
-  <div class="loading-shade" *ngIf="loading$ | async as loading">
-    <mat-spinner *ngIf="loading"></mat-spinner>
-    <div class="error" *ngIf="hasError">
-      {{ errorText }}
+  @if (loading$ | async; as loading) {
+    <div class="loading-shade">
+      @if (loading) {
+        <mat-spinner></mat-spinner>
+      }
+      @if (hasError) {
+        <div class="error">
+          {{ errorText }}
+        </div>
+      }
     </div>
-  </div>
+  }
   <table
     mat-table
     class="full-width"

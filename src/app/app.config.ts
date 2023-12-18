@@ -32,7 +32,11 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideEffects(),
     provideEntityData(entityConfig),
-    provideStoreDevtools({ maxAge: 25, logOnly: environment.production }),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: environment.production,
+      connectInZone: true,
+    }),
     {
       provide: AuthService,
       useFactory: authFactory,

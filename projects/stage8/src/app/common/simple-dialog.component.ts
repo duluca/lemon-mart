@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common'
 import { Component, Inject } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog'
@@ -12,17 +11,19 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
     </mat-dialog-content>
     <mat-dialog-actions>
       <span class="flex-spacer"></span>
-      <button mat-button mat-dialog-close *ngIf="data.cancelText">
-        {{ data.cancelText }}
-      </button>
+      @if (data.cancelText) {
+        <button mat-button mat-dialog-close>
+          {{ data.cancelText }}
+        </button>
+      }
       <button mat-button mat-button-raised color="primary" [mat-dialog-close]="true"
         cdkFocusInitial>
         {{ data.okText }}
       </button>
     </mat-dialog-actions>
-  `,
+    `,
   standalone: true,
-  imports: [MatDialogModule, NgIf, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule],
 })
 export class SimpleDialogComponent {
   constructor(

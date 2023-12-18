@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common'
 import { Component, DestroyRef, inject, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
@@ -45,11 +44,9 @@ import { FieldErrorDirective } from '../user-controls/field-error/field-error.di
     MatFormFieldModule,
     MatInputModule,
     FieldErrorDirective,
-    NgIf,
     MatButtonModule,
     MatExpansionModule,
     MatGridListModule,
-    NgFor,
   ],
 })
 export class LoginComponent implements OnInit {

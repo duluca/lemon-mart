@@ -1,4 +1,4 @@
-import { NgClass, NgFor } from '@angular/common'
+import { NgClass } from '@angular/common'
 import {
   AfterViewInit,
   Component,
@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
     },
   ],
   standalone: true,
-  imports: [NgClass, NgFor],
+  imports: [NgClass],
 })
 export class LemonRaterComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('displayText', { static: false }) displayTextRef!: ElementRef

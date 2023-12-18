@@ -39,7 +39,9 @@
           </mat-form-field>
         </div>
         <div fxLayout="row" class="top-pad">
-          <div *ngIf="loginError" class="mat-caption error">{{ loginError }}</div>
+          @if (loginError) {
+            <div class="mat-caption error">{{ loginError }}</div>
+          }
           <div class="flex-spacer"></div>
           <button
             mat-raised-button
@@ -55,69 +57,72 @@
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
         <span>Authentication Mode: </span><i>{{ authMode }}</i>
       </div>
-      <div
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="10px"
-        *ngIf="authMode !== AuthMode.InMemory">
-        <span>Demo Credentials: </span
-        ><button
-          mat-button
-          (click)="
-            this.loginForm.patchValue({
-              email: 'duluca@gmail.com',
-              password: 'l0l1pop!!'
-            })
-          ">
-          Fill
-        </button>
-      </div>
-      <mat-accordion *ngIf="authMode === AuthMode.InMemory">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Fake Login Info </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-grid-list cols="3" rowHeight="48px" role="list">
-            <mat-grid-tile [colspan]="3" role="listitem" style="background: pink">
-              Use any 8 character string as password
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <mat-grid-tile-header>Role</mat-grid-tile-header>
-            </mat-grid-tile>
-            <mat-grid-tile [colspan]="2">
-              <mat-grid-tile-header>E-mail</mat-grid-tile-header>
-            </mat-grid-tile>
-            <div *ngFor="let role of roles; odd as oddRow">
-              <mat-grid-tile
-                role="listitem"
-                [style.background]="oddRow ? 'lightGray' : 'white'">
-                {{ role }}
+      @if (authMode !== AuthMode.InMemory) {
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <span>Demo Credentials: </span
+          ><button
+            mat-button
+            (click)="
+              this.loginForm.patchValue({
+                email: 'duluca@gmail.com',
+                password: 'l0l1pop!!'
+              })
+            ">
+            Fill
+          </button>
+        </div>
+      }
+      @if (authMode === AuthMode.InMemory) {
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Fake Login Info </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-grid-list cols="3" rowHeight="48px" role="list">
+              <mat-grid-tile [colspan]="3" role="listitem" style="background: pink">
+                Use any 8 character string as password
               </mat-grid-tile>
-              <mat-grid-tile
-                [colspan]="2"
-                role="listitem"
-                [style.background]="oddRow ? 'lightGray' : 'white'">
-                <div fxFlex fxLayoutAlign="end center">
-                  <div *ngIf="role.toLowerCase() === 'none'; else otherRoles">
-                    Any @test.com email
-                  </div>
-                  <ng-template #otherRoles>{{ role.toLowerCase() }}@test.com</ng-template>
-                  <button
-                    mat-button
-                    (click)="
-                      this.loginForm.patchValue({
-                        email: role.toLowerCase() + '@test.com',
-                        password: 'whatever'
-                      })
-                    ">
-                    Fill
-                  </button>
+              <mat-grid-tile>
+                <mat-grid-tile-header>Role</mat-grid-tile-header>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="2">
+                <mat-grid-tile-header>E-mail</mat-grid-tile-header>
+              </mat-grid-tile>
+              @for (role of roles; track role; let oddRow = $odd) {
+                <div>
+                  <mat-grid-tile
+                    role="listitem"
+                    [style.background]="oddRow ? 'lightGray' : 'white'">
+                    {{ role }}
+                  </mat-grid-tile>
+                  <mat-grid-tile
+                    [colspan]="2"
+                    role="listitem"
+                    [style.background]="oddRow ? 'lightGray' : 'white'">
+                    <div fxFlex fxLayoutAlign="end center">
+                      @if (role.toLowerCase() === 'none') {
+                        <div>Any &#64;test.com email</div>
+                      } @else {
+                        {{ role.toLowerCase() }}&#64;test.com
+                      }
+                      <button
+                        mat-button
+                        (click)="
+                          this.loginForm.patchValue({
+                            email: role.toLowerCase() + '@test.com',
+                            password: 'whatever'
+                          })
+                        ">
+                        Fill
+                      </button>
+                    </div>
+                  </mat-grid-tile>
                 </div>
-              </mat-grid-tile>
-            </div>
-          </mat-grid-list>
-        </mat-expansion-panel>
-      </mat-accordion>
+              }
+            </mat-grid-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      }
     </mat-card-content>
   </mat-card>
 </div>

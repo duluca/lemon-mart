@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common'
+import { AsyncPipe } from '@angular/common'
 import { NgOptimizedImage } from '@angular/common'
 import { Component, DestroyRef, inject, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -50,29 +50,41 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
   // prettier-ignore
   template: `
     <div class="app-container">
-      <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar" [class.app-is-mobile]="media.isActive('xs')"
-        *ngIf="{
-          status: authService.authStatus$ | async,
-          user: authService.currentUser$ | async
-        } as auth;">
-        <button *ngIf="auth?.status?.isAuthenticated" mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <a mat-icon-button routerLink="/home">
-          <mat-icon svgIcon="lemon"></mat-icon>
-          <span class="mat-h2 left-pad" data-testid="title">LemonMart</span>
-        </a>
-        <span class="flex-spacer"></span>
-        <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
-          aria-label="User Profile">
-          <img alt="Profile picture" *ngIf="auth?.user?.picture" class="image-cropper" [ngSrc]="auth?.user?.picture ?? ''" width="40px" height="40px" fill />
-          <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
-        </button>
-        <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
-          aria-label="Logout">
-          <mat-icon>lock_open</mat-icon>
-        </button>
-      </mat-toolbar>
+      @if ({
+        status: authService.authStatus$ | async,
+        user: authService.currentUser$ | async
+        }; as auth;) {
+        <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar" [class.app-is-mobile]="media.isActive('xs')"
+          >
+          @if (auth?.status?.isAuthenticated) {
+            <button mat-icon-button (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+          }
+          <a mat-icon-button routerLink="/home">
+            <mat-icon svgIcon="lemon"></mat-icon>
+            <span class="mat-h2 left-pad" data-testid="title">LemonMart</span>
+          </a>
+          <span class="flex-spacer"></span>
+          @if (auth?.status?.isAuthenticated) {
+            <button mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
+              aria-label="User Profile">
+              @if (auth?.user?.picture) {
+                <img alt="Profile picture" class="image-cropper" [ngSrc]="auth?.user?.picture ?? ''" width="40px" height="40px" fill />
+              }
+              @if (!auth?.user?.picture) {
+                <mat-icon>account_circle</mat-icon>
+              }
+            </button>
+          }
+          @if (auth?.status?.isAuthenticated) {
+            <button mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
+              aria-label="Logout">
+              <mat-icon>lock_open</mat-icon>
+            </button>
+          }
+        </mat-toolbar>
+      }
       <mat-sidenav-container class="app-sidenav-container">
         <mat-sidenav #sidenav [mode]="media.isActive('xs') ? 'over' : 'side'" [fixedInViewport]="media.isActive('xs')" _
           fixedTopGap="56" [(opened)]="opened">
@@ -83,10 +95,9 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
         </mat-sidenav-content>
       </mat-sidenav-container>
     </div>
-  `,
+    `,
   standalone: true,
   imports: [
-    NgIf,
     FlexModule,
     RouterLink,
     NavigationMenuComponent,
