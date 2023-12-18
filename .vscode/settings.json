@@ -8,9 +8,9 @@
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": false,
-    "source.fixAll.eslint": true
+    "source.fixAll": "explicit",
+    "source.organizeImports": "never",
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.enable": true,
   "eslint.validate": [
