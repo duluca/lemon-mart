@@ -147,7 +147,7 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 
 ## Angular 17
 
-- ...
+- Moved to control flow syntax
 
 ## Angular 16
 
