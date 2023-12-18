@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common'
+import { AsyncPipe } from '@angular/common'
 import { AfterViewInit, Component, DestroyRef, inject, ViewChild } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -41,7 +41,6 @@ import { IUsers, UserService } from '../../user/user/user.service'
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
-    NgIf,
     ReactiveFormsModule,
     RouterLink,
   ],

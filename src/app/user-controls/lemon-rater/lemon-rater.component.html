@@ -1,6 +1,6 @@
 <i #displayText></i>
 <div class="lemons" [ngClass]="{ disabled: disabled }">
-  <ng-container *ngFor="let lemon of ratings">
+  @for (lemon of ratings; track lemon) {
     <svg
       width="24px"
       height="24px"
@@ -58,5 +58,5 @@
           id="Path"></path>
       </g>
     </svg>
-  </ng-container>
+  }
 </div>

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common'
+import { AsyncPipe } from '@angular/common'
 import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
@@ -56,7 +56,6 @@ import { IUSState, USStateFilter } from './data'
   standalone: true,
   imports: [
     MatToolbarModule,
-    NgIf,
     MatStepperModule,
     ReactiveFormsModule,
     NameInputComponent,
@@ -70,7 +69,6 @@ import { IUSState, USStateFilter } from './data'
     LemonRaterComponent,
     MatButtonModule,
     MatAutocompleteModule,
-    NgFor,
     MatOptionModule,
     MatListModule,
     MatIconModule,

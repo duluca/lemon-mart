@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common'
 import { Component, DestroyRef, inject, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
@@ -40,7 +39,6 @@ import { EmailValidation, PasswordValidation } from '../common/validations'
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    NgIf,
     MatButtonModule,
   ],
 })
