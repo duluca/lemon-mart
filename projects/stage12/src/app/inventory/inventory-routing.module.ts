@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: InventoryComponent,
     children: [
-      { path: '', redirectTo: '/inventory/home', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: InventoryHomeComponent },
       { path: 'stock-entry', component: StockEntryComponent },
       { path: 'products', component: ProductsComponent },
