@@ -23,13 +23,11 @@ import { FlexModule } from '@ngbracket/ngx-layout/flex'
   ],
   template: `
     <mat-toolbar color="accent" fxLayoutGap="8px">
-      <a mat-button routerLink="/manager/home" routerLinkActive="active-link"
+      <a mat-button routerLink="home" routerLinkActive="active-link"
         >Manager's Dashboard</a
       >
-      <a mat-button routerLink="/manager/users" routerLinkActive="active-link"
-        >User Management</a
-      >
-      <a mat-button routerLink="/manager/receipts" routerLinkActive="active-link"
+      <a mat-button routerLink="users" routerLinkActive="active-link">User Management</a>
+      <a mat-button routerLink="receipts" routerLinkActive="active-link"
         >Receipt Lookup</a
       >
       <span class="flex-spacer"></span>
