@@ -29,6 +29,7 @@ import { $enum } from 'ts-enum-util'
 import { Role } from '../../auth/auth.enum'
 import { AuthService } from '../../auth/auth.service'
 import { BaseFormDirective } from '../../common/base-form.class'
+import { CacheService } from '../../common/cache.service'
 import { UiService } from '../../common/ui.service'
 import {
   EmailValidation,
@@ -47,7 +48,6 @@ import { IName, IPhone, IUser, PhoneType, User } from '../user/user'
 import { UserService } from '../user/user.service'
 import { ViewUserComponent } from '../view-user/view-user.component'
 import { IUSState, USStateFilter } from './data'
-import { CacheService } from '../../common/cache.service'
 
 @Component({
   selector: 'app-profile',

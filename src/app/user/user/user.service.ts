@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { Observable, throwError } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 
@@ -23,13 +23,10 @@ export interface IUserService {
 @Injectable({
   providedIn: 'root',
 })
-export class UserService extends CacheService implements IUserService {
-  constructor(
-    private httpClient: HttpClient,
-    private authService: AuthService
-  ) {
-    super()
-  }
+export class UserService implements IUserService {
+  private readonly cache = inject(CacheService)
+  private readonly httpClient = inject(HttpClient)
+  private readonly authService = inject(AuthService)
 
   getUser(id: string | null): Observable<IUser> {
     if (id === null) {
@@ -45,18 +42,18 @@ export class UserService extends CacheService implements IUserService {
     }
 
     // cache user data in case of errors
-    this.setItem('draft-user', Object.assign(user, { _id: id }))
+    this.cache.setItem('draft-user', Object.assign(user, { _id: id }))
     const updateResponse$ = this.httpClient
       .put<IUser>(`${environment.baseUrl}/v2/user/${id}`, user)
       .pipe(map(User.Build), catchError(transformError))
 
-    updateResponse$.subscribe(
-      (res) => {
+    updateResponse$.subscribe({
+      next: (res) => {
         this.authService.currentUser$.next(res)
-        this.removeItem('draft-user')
+        this.cache.removeItem('draft-user')
       },
-      (err) => throwError(() => err)
-    )
+      error: (err) => throwError(() => err),
+    })
 
     return updateResponse$
   }

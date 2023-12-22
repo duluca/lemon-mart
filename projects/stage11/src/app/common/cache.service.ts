@@ -9,9 +9,7 @@ export class CacheService {
 
     if (data !== 'undefined' && data !== null) {
       const parsedData = JSON.parse(data) as never
-      if (hydrator) {
-        return hydrator(parsedData)
-      }
+      return hydrator ? hydrator(parsedData) : parsedData
     }
     return null
   }
