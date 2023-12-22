@@ -54,7 +54,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy()
   }))
 
-  it('should render app-container', waitForAsync(() => {
+  it('should render title', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent)
     fixture.detectChanges()
     const titleElement = getNativeElementByTestId(fixture, 'title')
