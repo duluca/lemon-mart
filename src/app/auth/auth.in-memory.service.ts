@@ -6,7 +6,9 @@ import { PhoneType, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import { AuthService, IAuthStatus, IServerAuthResponse } from './auth.service'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class InMemoryAuthService extends AuthService {
   // LemonMart Server User Id: 5da01751da27cc462d265913
   private defaultUser = User.Build({

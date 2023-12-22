@@ -47,6 +47,7 @@ import { IName, IPhone, IUser, PhoneType, User } from '../user/user'
 import { UserService } from '../user/user.service'
 import { ViewUserComponent } from '../view-user/view-user.component'
 import { IUSState, USStateFilter } from './data'
+import { CacheService } from '../../common/cache.service'
 
 @Component({
   selector: 'app-profile',
@@ -81,6 +82,8 @@ export class ProfileComponent
   extends BaseFormDirective<IUser>
   implements OnInit, OnDestroy
 {
+  private readonly cache = inject(CacheService)
+
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
   }
@@ -241,25 +244,18 @@ export class ProfileComponent
 
   private loadFromCache(): Observable<User | null> {
     let user: User | null = null
-
     try {
-      const draftUser = localStorage.getItem('draft-user')
-
-      if (draftUser != null) {
-        user = User.Build(JSON.parse(draftUser))
-      }
-
+      user = this.cache.getItem<User>('draft-user', User.Build)
       if (user) {
         this.uiService.showToast('Loaded data from cache')
       }
     } catch (err) {
-      localStorage.removeItem('draft-user')
+      this.cache.removeItem('draft-user')
     }
-
     return of(user)
   }
 
   clearCache() {
-    localStorage.removeItem('draft-user')
+    this.cache.removeItem('draft-user')
   }
 }

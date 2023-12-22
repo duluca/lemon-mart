@@ -1,5 +1,10 @@
-export abstract class CacheService {
-  protected getItem<T>(key: string): T | null {
+import { Injectable } from '@angular/core'
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CacheService {
+  public getItem<T>(key: string): T | null {
     const data = localStorage.getItem(key)
     if (data !== 'undefined' && data !== null) {
       return JSON.parse(data)
@@ -7,18 +12,18 @@ export abstract class CacheService {
     return null
   }
 
-  protected setItem(key: string, data: object | string) {
+  public setItem(key: string, data: object | string) {
     if (typeof data === 'string') {
       localStorage.setItem(key, data)
     }
     localStorage.setItem(key, JSON.stringify(data))
   }
 
-  protected removeItem(key: string) {
+  public removeItem(key: string) {
     localStorage.removeItem(key)
   }
 
-  protected clear() {
+  public clear() {
     localStorage.clear()
   }
 }

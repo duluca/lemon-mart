@@ -25,6 +25,7 @@ import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { NgxMaskDirective } from 'ngx-mask'
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs'
 import { filter, first, map, startWith, tap } from 'rxjs/operators'
+import { CacheService } from 'src/app/common/cache.service'
 import { $enum } from 'ts-enum-util'
 
 import { Role } from '../../auth/auth.enum'
@@ -82,6 +83,7 @@ export class ProfileComponent
   extends BaseFormDirective<IUser>
   implements OnInit, OnDestroy
 {
+  private readonly cache = inject(CacheService)
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
   }
@@ -256,25 +258,18 @@ export class ProfileComponent
 
   private loadFromCache(): Observable<User | null> {
     let user: User | null = null
-
     try {
-      const draftUser = localStorage.getItem('draft-user')
-
-      if (draftUser != null) {
-        user = User.Build(JSON.parse(draftUser))
-      }
-
+      user = this.cache.getItem<User>('draft-user', User.Build)
       if (user) {
         this.uiService.showToast('Loaded data from cache')
       }
     } catch (err) {
-      localStorage.removeItem('draft-user')
+      this.cache.removeItem('draft-user')
     }
-
     return of(user)
   }
 
   clearCache() {
-    localStorage.removeItem('draft-user')
+    this.cache.removeItem('draft-user')
   }
 }

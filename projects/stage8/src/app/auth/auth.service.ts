@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { jwtDecode as decode } from 'jwt-decode'
 import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
 import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
 
+import { CacheService } from '../common/cache.service'
 import { transformError } from '../common/common'
 import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
-import { CacheService } from './cache.service'
 
 export interface IAuthStatus {
   isAuthenticated: boolean
@@ -33,13 +33,15 @@ export interface IAuthService {
 }
 
 @Injectable()
-export abstract class AuthService extends CacheService implements IAuthService {
+export abstract class AuthService implements IAuthService {
   private getAndUpdateUserIfAuthenticated = pipe(
     filter((status: IAuthStatus) => status.isAuthenticated),
     mergeMap(() => this.getCurrentUser()),
     map((user: IUser) => this.currentUser$.next(user)),
     catchError(transformError)
   )
+
+  protected readonly cache = inject(CacheService)
 
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
   readonly currentUser$ = new BehaviorSubject<IUser>(new User())
@@ -53,8 +55,6 @@ export abstract class AuthService extends CacheService implements IAuthService {
   // )
 
   constructor() {
-    super()
-
     // this.authStatus$.pipe(tap((authStatus) => this.setItem('authStatus', authStatus))) // example caching technique
 
     if (this.hasExpiredToken()) {
@@ -110,15 +110,15 @@ export abstract class AuthService extends CacheService implements IAuthService {
   }
 
   protected setToken(jwt: string) {
-    this.setItem('jwt', jwt)
+    this.cache.setItem('jwt', jwt)
   }
 
   getToken(): string {
-    return this.getItem('jwt') ?? ''
+    return this.cache.getItem('jwt') ?? ''
   }
 
   protected clearToken() {
-    this.removeItem('jwt')
+    this.cache.removeItem('jwt')
   }
 
   protected hasExpiredToken(): boolean {
