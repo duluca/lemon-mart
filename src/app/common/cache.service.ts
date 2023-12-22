@@ -6,10 +6,14 @@ import { Injectable } from '@angular/core'
 export class CacheService {
   public getItem<T>(key: string, hydrator?: (data: never) => T): T | null {
     const data = localStorage.getItem(key)
-
-    if (data !== 'undefined' && data !== null) {
-      const parsedData = JSON.parse(data) as never
-      return hydrator ? hydrator(parsedData) : parsedData
+    if (data !== null) {
+      try {
+        const parsedData = JSON.parse(data) as never
+        return hydrator ? hydrator(parsedData) : parsedData
+      } catch (error) {
+        console.error('Parsing error:', error)
+        return null
+      }
     }
     return null
   }
