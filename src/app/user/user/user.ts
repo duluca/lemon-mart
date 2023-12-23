@@ -64,17 +64,15 @@ export class User implements IUser {
       return new User()
     }
 
-    if (typeof user.dateOfBirth === 'string') {
-      user.dateOfBirth = new Date(user.dateOfBirth)
-    }
-
     return new User(
       user._id,
       user.email,
       user.name,
       user.picture,
       Role[user.role as keyof typeof Role],
-      user.dateOfBirth,
+      typeof user.dateOfBirth === 'string'
+        ? new Date(user.dateOfBirth)
+        : user.dateOfBirth,
       user.userStatus,
       user.level,
       user.address,
