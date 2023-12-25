@@ -1,5 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { Component, inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
@@ -23,18 +22,10 @@ import { FieldErrorDirective } from '../user-controls/field-error/field-error.di
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
-  styles: [
-    `
-      .error {
-        color: red;
-      }
+  styles: `
+      .error { color: red; }
+      div[fxLayout] { margin-top: 32px; }
     `,
-    `
-      div[fxLayout] {
-        margin-top: 32px;
-      }
-    `,
-  ],
   standalone: true,
   imports: [
     FlexModule,
@@ -50,23 +41,20 @@ import { FieldErrorDirective } from '../user-controls/field-error/field-error.di
   ],
 })
 export class LoginComponent implements OnInit {
-  private destroyRef = inject(DestroyRef)
+  private readonly formBuilder = inject(FormBuilder)
+  private readonly authService = inject(AuthService)
+  private readonly router = inject(Router)
+  private readonly route = inject(ActivatedRoute)
+  private readonly uiService = inject(UiService)
+
   loginForm!: FormGroup
   loginError = ''
-  redirectUrl!: string
   roles = Object.keys(Role)
   authMode = environment.authMode
   AuthMode = AuthMode
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    route: ActivatedRoute,
-    private uiService: UiService
-  ) {
-    route.paramMap
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((params) => (this.redirectUrl = params.get('redirectUrl') ?? ''))
+
+  get redirectUrl() {
+    return this.route.snapshot.queryParamMap.get('redirectUrl') || ''
   }
 
   ngOnInit() {

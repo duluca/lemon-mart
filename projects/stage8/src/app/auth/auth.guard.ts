@@ -28,7 +28,7 @@ function checkLogin(
         showAlert(uiService, authStatus.isAuthenticated, roleMatch)
         router.navigate(['login'], {
           queryParams: {
-            redirectUrl: getResolvedUrl(route),
+            redirectUrl: router?.getCurrentNavigation()?.initialUrl.toString(),
           },
         })
       }
@@ -52,14 +52,4 @@ function showAlert(uiService: UiService, isAuth: boolean, roleMatch: boolean) {
   if (!roleMatch) {
     uiService.showToast('You do not have the permissions to view this resource')
   }
-}
-
-function getResolvedUrl(route?: ActivatedRouteSnapshot): string {
-  if (!route) {
-    return ''
-  }
-  return route.pathFromRoot
-    .map((r) => r.url.map((segment) => segment.toString()).join('/'))
-    .join('/')
-    .replace('//', '/')
 }
