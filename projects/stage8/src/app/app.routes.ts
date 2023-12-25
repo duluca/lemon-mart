@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router'
 
+import { Role } from './auth/auth.enum'
 import { authGuard } from './auth/auth.guard'
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
@@ -9,10 +10,14 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/:redirectUrl', component: LoginComponent },
+  // { path: 'manager', children: managerModuleRoutes }, // Example of eager loading
   {
     path: 'manager',
     loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule),
     canLoad: [authGuard],
+    data: {
+      expectedRole: Role.Manager,
+    },
   },
   {
     path: 'user',

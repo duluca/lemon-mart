@@ -3,6 +3,7 @@ import { Routes } from '@angular/router'
 import { authGuard } from './auth/auth.guard'
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
+import { Role } from './auth/auth.enum'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,6 +14,9 @@ export const routes: Routes = [
     path: 'manager',
     loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule),
     canLoad: [authGuard],
+    data: {
+      expectedRole: Role.Manager,
+    },
   },
   {
     path: 'user',

@@ -322,7 +322,8 @@
             "development": {
               "buildTarget": "stage7:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -484,8 +485,12 @@
           "configurations": {
             "production": {
               "buildTarget": "stage8:build:production"
+            },
+            "development": {
+              "buildTarget": "stage8:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -647,8 +652,12 @@
           "configurations": {
             "production": {
               "buildTarget": "stage10:build:production"
+            },
+            "development": {
+              "buildTarget": "stage10:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -810,8 +819,12 @@
           "configurations": {
             "production": {
               "buildTarget": "stage11:build:production"
+            },
+            "development": {
+              "buildTarget": "stage11:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -973,8 +986,12 @@
           "configurations": {
             "production": {
               "buildTarget": "stage12:build:production"
+            },
+            "development": {
+              "buildTarget": "stage12:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
