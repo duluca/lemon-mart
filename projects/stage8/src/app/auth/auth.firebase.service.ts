@@ -23,7 +23,9 @@ interface IJwtToken {
   sub: string
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class FirebaseAuthService extends AuthService {
   private afAuth: FireAuth = inject(FireAuth)
 
