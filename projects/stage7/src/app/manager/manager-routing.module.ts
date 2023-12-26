@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     component: ManagerComponent,
     children: [
-      { path: '', redirectTo: '/manager/home', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: ManagerHomeComponent },
       { path: 'users', component: UserManagementComponent },
       { path: 'receipts', component: ReceiptLookupComponent },

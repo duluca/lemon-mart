@@ -8,8 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { DomSanitizer } from '@angular/platform-browser'
 import { RouterLink, RouterOutlet } from '@angular/router'
-import { MediaObserver } from '@ngbracket/ngx-layout'
-import { FlexModule } from '@ngbracket/ngx-layout/flex'
+import { FlexLayoutModule, MediaObserver } from '@ngbracket/ngx-layout'
 import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
@@ -63,7 +62,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
           }
           <a mat-icon-button routerLink="/home">
             <mat-icon svgIcon="lemon"></mat-icon>
-            <span class="mat-h2 left-pad" data-testid="title">LemonMart</span>
+            <span class="left-pad" data-testid="title">LemonMart</span>
           </a>
           <span class="flex-spacer"></span>
           @if (auth?.status?.isAuthenticated) {
@@ -98,7 +97,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
     `,
   standalone: true,
   imports: [
-    FlexModule,
+    FlexLayoutModule,
     RouterLink,
     NavigationMenuComponent,
     RouterOutlet,

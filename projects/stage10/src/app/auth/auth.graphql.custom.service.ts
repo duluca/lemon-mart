@@ -17,7 +17,9 @@ interface IJwtToken {
   sub: string
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CustomGraphQLAuthService extends AuthService {
   private apollo: Apollo = inject(Apollo)
 

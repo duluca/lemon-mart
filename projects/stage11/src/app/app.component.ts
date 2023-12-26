@@ -63,7 +63,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
           }
           <a mat-icon-button routerLink="/home">
             <mat-icon svgIcon="lemon"></mat-icon>
-            <span class="mat-h2" data-testid="title">LemonMart</span>
+            <span class="left-pad" data-testid="title">LemonMart</span>
           </a>
           <span class="flex-spacer"></span>
           @if (auth?.status?.isAuthenticated) {

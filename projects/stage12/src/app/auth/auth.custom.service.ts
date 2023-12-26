@@ -19,7 +19,9 @@ interface IJwtToken {
   sub: string
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CustomAuthService extends AuthService {
   private httpClient: HttpClient = inject(HttpClient)
 

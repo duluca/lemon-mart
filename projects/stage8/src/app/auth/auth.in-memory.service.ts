@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core'
-import { sign } from 'fake-jwt-sign' // For InMemoryAuthService only
+import { sign } from 'fake-jwt-sign'
 import { Observable, of, throwError } from 'rxjs'
 
 import { PhoneType, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import { AuthService, IAuthStatus, IServerAuthResponse } from './auth.service'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class InMemoryAuthService extends AuthService {
-  // LemonMart Server User Id: 5da01751da27cc462d265913
   private defaultUser = User.Build({
     _id: '5da01751da27cc462d265913',
     email: 'duluca@gmail.com',

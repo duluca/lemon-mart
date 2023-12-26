@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { MediaObserver } from '@ngbracket/ngx-layout'
 import {
   autoSpyObj,
+  getNativeElementByTestId,
   injectSpy,
   ObservablePropertyStrategy,
 } from 'angular-unit-test-helper'
@@ -53,10 +54,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy()
   }))
 
-  it('should render app-container', waitForAsync(() => {
+  it('should render title', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent)
     fixture.detectChanges()
-    const compiled = fixture.debugElement.nativeElement
-    expect(compiled.querySelector('.app-container')).toBeDefined()
+    const titleElement = getNativeElementByTestId(fixture, 'title')
+    expect(titleElement.textContent).toContain('LemonMart')
   }))
 })

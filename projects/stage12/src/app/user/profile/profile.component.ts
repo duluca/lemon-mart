@@ -30,6 +30,7 @@ import { $enum } from 'ts-enum-util'
 import { Role } from '../../auth/auth.enum'
 import { AuthService } from '../../auth/auth.service'
 import { BaseFormDirective } from '../../common/base-form.class'
+import { CacheService } from '../../common/cache.service'
 import { UiService } from '../../common/ui.service'
 import {
   EmailValidation,
@@ -82,6 +83,8 @@ export class ProfileComponent
   extends BaseFormDirective<IUser>
   implements OnInit, OnDestroy
 {
+  private readonly cache = inject(CacheService)
+
   private get currentUserRole() {
     return this.authService.authStatus$.value.userRole
   }
@@ -247,25 +250,18 @@ export class ProfileComponent
 
   private loadFromCache(): Observable<User | null> {
     let user: User | null = null
-
     try {
-      const draftUser = localStorage.getItem('draft-user')
-
-      if (draftUser != null) {
-        user = User.Build(JSON.parse(draftUser))
-      }
-
+      user = this.cache.getItem<User>('draft-user', User.Build)
       if (user) {
         this.uiService.showToast('Loaded data from cache')
       }
     } catch (err) {
-      localStorage.removeItem('draft-user')
+      this.cache.removeItem('draft-user')
     }
-
     return of(user)
   }
 
   clearCache() {
-    localStorage.removeItem('draft-user')
+    this.cache.removeItem('draft-user')
   }
 }

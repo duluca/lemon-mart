@@ -1,43 +1,20 @@
 {
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug npm start with Chrome",
+      "name": "ng serve",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:4200/#",
-      "webRoot": "${workspaceRoot}",
-      "runtimeArgs": ["--remote-debugging-port=9222"],
-      "sourceMaps": true,
-      "preLaunchTask": "npm: start"
+      "preLaunchTask": "npm: start",
+      "url": "http://localhost:4200/"
     },
     {
-      "name": "Debug npm start with Edge",
-      "type": "edge",
-      "request": "launch",
-      "url": "http://localhost:4200/#",
-      "webRoot": "${workspaceRoot}",
-      "sourceMaps": true,
-      "preLaunchTask": "npm: start"
-    },
-    {
-      "name": "Debug npm test with Chrome",
+      "name": "ng test",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:9876/debug.html",
-      "webRoot": "${workspaceRoot}",
-      "runtimeArgs": ["--remote-debugging-port=9222"],
-      "sourceMaps": true,
-      "preLaunchTask": "npm: test"
-    },
-    {
-      "name": "Debug npm test with Edge",
-      "type": "edge",
-      "request": "launch",
-      "url": "http://localhost:9876/debug.html",
-      "webRoot": "${workspaceRoot}",
-      "sourceMaps": true,
-      "preLaunchTask": "npm: test"
+      "preLaunchTask": "npm: test",
+      "url": "http://localhost:9876/debug.html"
     }
   ]
 }
