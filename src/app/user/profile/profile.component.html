@@ -21,7 +21,7 @@
                   aria-label="Date of Birth"
                   formControlName="dateOfBirth"
                   [min]="minDate"
-                  [max]="now()"
+                  [max]="now"
                   [matDatepicker]="dateOfBirthPicker"
                   #dob />
                 @if (formGroup.get('dateOfBirth')?.value) {

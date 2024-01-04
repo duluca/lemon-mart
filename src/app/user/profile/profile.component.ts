@@ -1,13 +1,5 @@
 import { AsyncPipe } from '@angular/common'
-import {
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  OnDestroy,
-  OnInit,
-  signal,
-} from '@angular/core'
+import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
   FormArray,
@@ -110,22 +102,22 @@ export class ProfileComponent
     return this.formGroup.get('phones') as FormArray
   }
 
-  now = signal(new Date())
+  get dateOfBirth() {
+    return this.formGroup.get('dateOfBirth')?.value || this.now
+  }
 
-  dateOfBirth = signal(this.formGroup.get('dateOfBirth')?.value || this.now())
-
-  age = computed(() => {
-    return this.now().getFullYear() - this.dateOfBirth().getFullYear()
-  })
-
+  get age() {
+    return this.now.getFullYear() - this.dateOfBirth.getFullYear()
+  }
   ErrorSets = ErrorSets
   Role = Role
   PhoneTypes = $enum(PhoneType).getKeys()
 
+  now = new Date()
   minDate = new Date(
-    this.now().getFullYear() - 100,
-    this.now().getMonth(),
-    this.now().getDate()
+    this.now.getFullYear() - 100,
+    this.now.getMonth(),
+    this.now.getDate()
   )
 
   states$: Observable<IUSState[]> | undefined
