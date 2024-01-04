@@ -81,7 +81,7 @@ export class NameInputComponent
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.disable ? this.formGroup.disable() : this.formGroup.enable()
+    this.disable ? this.formGroup?.disable() : this.formGroup?.enable()
     this.patchUpdatedDataIfChanged(changes)
   }
 }
