@@ -25,4 +25,5 @@ echo "Replicating..."
 
 # ./replicate.sh src/app/common "ui.service.ts ui.service.spec.ts" "8 10 11 12"
 
-./replicate.sh src/app/user/user "user.ts" "8 10 11 12"
+# ./replicate.sh src/app/user/user "user.ts" "8 10 11 12"
+./replicate.sh src/app/auth "auth.service.ts" "8 10 11 12"

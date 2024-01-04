@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core'
+import { inject } from '@angular/core'
 import { jwtDecode as decode } from 'jwt-decode'
 import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
 import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
@@ -32,7 +32,6 @@ export interface IAuthService {
   getToken(): string
 }
 
-@Injectable()
 export abstract class AuthService implements IAuthService {
   private getAndUpdateUserIfAuthenticated = pipe(
     filter((status: IAuthStatus) => status.isAuthenticated),
@@ -118,7 +117,8 @@ export abstract class AuthService implements IAuthService {
   }
 
   protected clearToken() {
-    this.cache.removeItem('jwt')
+    // clear all cache data along with jwt
+    this.cache.clear()
   }
 
   protected hasExpiredToken(): boolean {
