@@ -22,3 +22,7 @@ echo "Replicating..."
 # ./replicate.sh src/app "app.component.ts app.component.spec.ts" "8 10 11 12"
 # ./replicate.sh src/app/auth "auth.guard.ts" "8 10 11 12"
 # ./replicate.sh src/app/login "login.component.ts" "8 10 11 12"
+
+# ./replicate.sh src/app/common "ui.service.ts ui.service.spec.ts" "8 10 11 12"
+
+./replicate.sh src/app/user/user "user.ts" "8 10 11 12"

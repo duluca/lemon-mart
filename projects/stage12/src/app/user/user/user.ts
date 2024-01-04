@@ -1,3 +1,5 @@
+import { $enum } from 'ts-enum-util'
+
 import { Role } from '../../auth/auth.enum'
 
 export interface IName {
@@ -69,7 +71,7 @@ export class User implements IUser {
       user.email,
       user.name,
       user.picture,
-      Role[user.role as keyof typeof Role],
+      $enum(Role).asValueOrDefault(user.role, Role.None),
       typeof user.dateOfBirth === 'string'
         ? new Date(user.dateOfBirth)
         : user.dateOfBirth,
