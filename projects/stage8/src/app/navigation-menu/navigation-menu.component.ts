@@ -9,8 +9,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router'
         font-weight: bold;
         border-left: 3px solid green;
       }
-    `,
-    `
       .mat-mdc-subheader {
         font-weight: bold;
       }

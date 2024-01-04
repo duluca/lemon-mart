@@ -11,8 +11,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
       div[fxLayout] {
         margin-top: 32px;
       }
-    `,
-    `
       .active-link {
         font-weight: bold;
         border-bottom: 2px solid #005005;
