@@ -107,7 +107,8 @@ export abstract class AuthService implements IAuthService {
   }
 
   protected clearToken() {
-    this.cache.removeItem('jwt')
+    // clear all cache data along with jwt
+    this.cache.clear()
   }
 
   protected hasExpiredToken(): boolean {
