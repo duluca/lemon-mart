@@ -172,7 +172,7 @@ export class ProfileComponent
           value: user?.role || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
-        [Validators.required],
+        Validators.required,
       ],
       level: [user?.level || 0, Validators.required],
       // use the code below to test disabled condition of <app-lemon-rater>
@@ -250,7 +250,7 @@ export class ProfileComponent
         this.uiService.showToast('Loaded data from cache')
       }
     } catch (err) {
-      this.cache.removeItem('draft-user')
+      this.clearCache()
     }
     return of(user)
   }

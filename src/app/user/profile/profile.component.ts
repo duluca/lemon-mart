@@ -1,5 +1,13 @@
 import { AsyncPipe } from '@angular/common'
-import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
   FormArray,
@@ -102,22 +110,22 @@ export class ProfileComponent
     return this.formGroup.get('phones') as FormArray
   }
 
-  get dateOfBirth() {
-    return this.formGroup.get('dateOfBirth')?.value || this.now
-  }
+  now = signal(new Date())
 
-  get age() {
-    return this.now.getFullYear() - this.dateOfBirth.getFullYear()
-  }
+  dateOfBirth = signal(this.formGroup.get('dateOfBirth')?.value || this.now())
+
+  age = computed(() => {
+    return this.now().getFullYear() - this.dateOfBirth().getFullYear()
+  })
+
   ErrorSets = ErrorSets
   Role = Role
   PhoneTypes = $enum(PhoneType).getKeys()
 
-  now = new Date()
   minDate = new Date(
-    this.now.getFullYear() - 100,
-    this.now.getMonth(),
-    this.now.getDate()
+    this.now().getFullYear() - 100,
+    this.now().getMonth(),
+    this.now().getDate()
   )
 
   states$: Observable<IUSState[]> | undefined
@@ -177,7 +185,7 @@ export class ProfileComponent
           value: user?.role || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
-        [Validators.required],
+        Validators.required,
       ],
       level: [user?.level || 0, Validators.required],
       // use the code below to test disabled condition of <app-lemon-rater>
@@ -264,7 +272,7 @@ export class ProfileComponent
         this.uiService.showToast('Loaded data from cache')
       }
     } catch (err) {
-      this.cache.removeItem('draft-user')
+      this.clearCache()
     }
     return of(user)
   }

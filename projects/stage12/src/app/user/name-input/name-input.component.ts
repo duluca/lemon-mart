@@ -64,11 +64,6 @@ export class NameInputComponent
 
   ngOnInit() {
     this.formGroup = this.buildForm(this.initialData)
-
-    if (this.disable) {
-      this.formGroup.disable()
-    }
-
     this.formReady.emit(this.formGroup)
   }
 
@@ -82,6 +77,7 @@ export class NameInputComponent
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.disable ? this.formGroup.disable() : this.formGroup.enable()
     this.patchUpdatedDataIfChanged(changes)
   }
 }

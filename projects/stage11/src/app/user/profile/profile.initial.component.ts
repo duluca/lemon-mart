@@ -151,7 +151,7 @@ export class ProfileInitialComponent implements OnInit {
           value: (user && user.role) || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
-        [Validators.required],
+        Validators.required,
       ],
       dateOfBirth: [(user && user.dateOfBirth) || '', Validators.required],
       address: this.formBuilder.group({
