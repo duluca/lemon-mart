@@ -5,13 +5,11 @@ import { FlexModule } from '@ngbracket/ngx-layout/flex'
 
 @Component({
   selector: 'app-home',
-  styles: [
-    `
+  styles: `
       div[fxLayout] {
         margin-top: 32px;
       }
-    `,
-  ],
+  `,
   template: `
     <div fxLayout="column" fxLayoutAlign="center center">
       <span class="mat-headline-3">Hello, Limoncu!</span>

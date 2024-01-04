@@ -33,7 +33,7 @@ import { FlexModule } from '@ngbracket/ngx-layout/flex'
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
-  styles: [],
+  styles: ``,
   standalone: true,
   imports: [
     FlexModule,

@@ -36,13 +36,11 @@ import { IUser, User } from '../user/user'
       </div>
     }
   `,
-  styles: [
-    `
+  styles: `
       .bold {
         font-weight: bold;
       }
-    `,
-  ],
+  `,
   standalone: true,
   imports: [MatCardModule, MatIconModule, MatButtonModule, AsyncPipe, DatePipe],
 })

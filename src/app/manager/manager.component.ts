@@ -6,14 +6,12 @@ import { FlexModule } from '@ngbracket/ngx-layout/flex'
 
 @Component({
   selector: 'app-manager',
-  styles: [
-    `
+  styles: `
       .active-link {
         font-weight: bold;
         border-bottom: 2px solid #005005;
       }
-    `,
-  ],
+  `,
   template: `
     <mat-toolbar color="accent" fxLayoutGap="8px">
       <a mat-button routerLink="home" routerLinkActive="active-link">

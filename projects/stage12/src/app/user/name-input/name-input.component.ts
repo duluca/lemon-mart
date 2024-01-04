@@ -42,7 +42,7 @@ import { IName } from '../user/user'
       </div>
     </form>
   `,
-  styles: [],
+  styles: ``,
   standalone: true,
   imports: [
     ReactiveFormsModule,

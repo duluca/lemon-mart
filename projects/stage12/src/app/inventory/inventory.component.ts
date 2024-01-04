@@ -5,14 +5,12 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
 
 @Component({
   selector: 'app-inventory',
-  styles: [
-    `
+  styles: `
       .active-link {
         font-weight: bold;
         border-bottom: 2px solid #005005;
       }
-    `,
-  ],
+  `,
   template: `
     <mat-toolbar color="accent" fxLayoutGap="8px">
       <a mat-button routerLink="home" routerLinkActive="active-link">

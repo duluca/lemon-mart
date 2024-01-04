@@ -7,13 +7,11 @@ import { AuthService } from '../auth/auth.service'
 
 @Component({
   selector: 'app-home',
-  styles: [
-    `
+  styles: `
       div[fxLayout] {
         margin-top: 32px;
       }
-    `,
-  ],
+  `,
   template: `
     <div fxLayout="column" fxLayoutAlign="center center">
       <span class="mat-display-2">Hello, Limoncu!</span>

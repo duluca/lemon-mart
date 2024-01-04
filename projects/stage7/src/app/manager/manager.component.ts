@@ -7,8 +7,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
 
 @Component({
   selector: 'app-manager',
-  styles: [
-    `
+  styles: `
       div[fxLayout] {
         margin-top: 32px;
       }
@@ -18,8 +17,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
         font-weight: bold;
         border-bottom: 2px solid #005005;
       }
-    `,
-  ],
+  `,
   template: `
     <mat-toolbar color="accent" fxLayoutGap="8px">
       <a mat-button routerLink="home" routerLinkActive="active-link"

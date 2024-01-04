@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router'
   template: `
     <p>This page doesn't exist. Go back to <a routerLink="/home">home</a>.</p>
   `,
-  styles: [],
+  styles: ``,
   standalone: true,
   imports: [RouterLink],
 })

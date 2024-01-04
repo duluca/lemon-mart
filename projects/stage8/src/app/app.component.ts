@@ -18,8 +18,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
 
 @Component({
   selector: 'app-root',
-  styles: [
-    `
+  styles: `
       .app-container {
         display: flex;
         flex-direction: column;
@@ -45,8 +44,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
       .image-cropper {
         border-radius: 50%;
       }
-    `,
-  ],
+  `,
   // prettier-ignore
   template: `
     <div class="app-container">

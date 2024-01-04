@@ -4,8 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router'
 
 @Component({
   selector: 'app-navigation-menu',
-  styles: [
-    `
+  styles: `
       .active-link {
         font-weight: bold;
         border-left: 3px solid green;
@@ -15,8 +14,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router'
       .mat-mdc-subheader {
         font-weight: bold;
       }
-    `,
-  ],
+  `,
   template: `
     <mat-nav-list>
       <h3 matSubheader>Manager</h3>

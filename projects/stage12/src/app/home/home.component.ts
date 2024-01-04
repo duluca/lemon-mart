@@ -6,13 +6,11 @@ import { LoginComponent } from '../login/login.component'
 
 @Component({
   selector: 'app-home',
-  styles: [
-    `
+  styles: `
       div[fxLayout] {
         margin-top: 32px;
       }
-    `,
-  ],
+  `,
   template: `
     @if ((authService.authStatus$ | async)?.isAuthenticated) {
       <div>
