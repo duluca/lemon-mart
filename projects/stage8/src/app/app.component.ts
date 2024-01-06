@@ -109,7 +109,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
   ],
 })
 export class AppComponent implements OnInit {
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
   opened!: boolean
 
   constructor(

@@ -51,7 +51,7 @@ export class UserTableComponent implements AfterViewInit {
   hasError = false
   errorText = ''
   private skipLoading = false
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
 
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>

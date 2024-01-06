@@ -105,7 +105,7 @@ export class ProfileInitialComponent implements OnInit {
     return this.formGroup.get('phones') as FormArray
   }
 
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
 
   constructor(
     private formBuilder: FormBuilder,

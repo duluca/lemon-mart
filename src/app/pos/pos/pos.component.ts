@@ -22,7 +22,7 @@ declare let dataLayer: IEvent[]
   imports: [MatButtonModule, MatIconModule],
 })
 export class PosComponent implements OnInit {
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
   currentTransaction!: ITransaction
   constructor(
     private transactionService: TransactionService,

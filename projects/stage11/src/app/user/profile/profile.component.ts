@@ -127,7 +127,7 @@ export class ProfileComponent
     last: '',
   })
 
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
 
   currentUserId!: string
 
