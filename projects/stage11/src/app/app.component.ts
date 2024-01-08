@@ -138,7 +138,7 @@ export class AppComponent implements OnInit {
             }
           }
         }),
-        takeUntilDestroyed(this.destroyRef),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe()
   }
