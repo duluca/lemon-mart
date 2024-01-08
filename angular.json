@@ -46,7 +46,11 @@
               "src/mstile-150x150.png"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/lemonmart-theme.scss",
+                "inject": false
+              }
             ],
             "scripts": []
           },

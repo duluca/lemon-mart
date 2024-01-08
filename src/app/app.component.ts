@@ -13,6 +13,7 @@ import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
 import { AuthService } from './auth/auth.service'
+import { LoadingOverlayComponent } from './common/loading-overlay.component'
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 
 @Component({
@@ -44,15 +45,21 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
         border-radius: 50%;
       }
   `,
-  // prettier-ignore
   template: `
+    <app-loading-overlay></app-loading-overlay>
     <div class="app-container">
-      @if ({
-        status: authService.authStatus$ | async,
-        user: authService.currentUser$ | async
-        }; as auth;) {
-        <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar" [class.app-is-mobile]="media.isActive('xs')"
-          >
+      @if (
+        {
+          status: authService.authStatus$ | async,
+          user: authService.currentUser$ | async
+        };
+        as auth
+      ) {
+        <mat-toolbar
+          color="primary"
+          fxLayoutGap="8px"
+          class="app-toolbar"
+          [class.app-is-mobile]="media.isActive('xs')">
           @if (auth?.status?.isAuthenticated) {
             <button mat-icon-button (click)="sidenav.toggle()">
               <mat-icon>menu</mat-icon>
@@ -64,18 +71,27 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
           </a>
           <span class="flex-spacer"></span>
           @if (auth?.status?.isAuthenticated) {
-            <button mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
+            <button
+              mat-mini-fab
+              routerLink="/user/profile"
+              matTooltip="Profile"
               aria-label="User Profile">
               @if (auth?.user?.picture) {
-                <img alt="Profile picture" class="image-cropper" [ngSrc]="auth?.user?.picture ?? ''" width="40px" height="40px" fill />
-              }
-              @if (!auth?.user?.picture) {
+                <img
+                  alt="Profile picture"
+                  class="image-cropper"
+                  [ngSrc]="auth.user?.picture ?? ''"
+                  width="40px"
+                  height="40px"
+                  fill />
+              } @else {
                 <mat-icon>account_circle</mat-icon>
               }
             </button>
-          }
-          @if (auth?.status?.isAuthenticated) {
-            <button mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
+            <button
+              mat-mini-fab
+              routerLink="/user/logout"
+              matTooltip="Logout"
               aria-label="Logout">
               <mat-icon>lock_open</mat-icon>
             </button>
@@ -83,8 +99,12 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
         </mat-toolbar>
       }
       <mat-sidenav-container class="app-sidenav-container">
-        <mat-sidenav #sidenav [mode]="media.isActive('xs') ? 'over' : 'side'" [fixedInViewport]="media.isActive('xs')" _
-          fixedTopGap="56" [(opened)]="opened">
+        <mat-sidenav
+          #sidenav
+          [mode]="media.isActive('xs') ? 'over' : 'side'"
+          [fixedInViewport]="media.isActive('xs')"
+          fixedTopGap="56"
+          [(opened)]="opened">
           <app-navigation-menu></app-navigation-menu>
         </mat-sidenav>
         <mat-sidenav-content>
@@ -92,7 +112,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
         </mat-sidenav-content>
       </mat-sidenav-container>
     </div>
-    `,
+  `,
   standalone: true,
   imports: [
     FlexLayoutModule,
@@ -105,10 +125,11 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
     MatButtonModule,
     MatSidenavModule,
     NgOptimizedImage,
+    LoadingOverlayComponent,
   ],
 })
 export class AppComponent implements OnInit {
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
   opened!: boolean
 
   constructor(
@@ -126,7 +147,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     combineLatest([this.media.asObservable(), this.authService.authStatus$])
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         tap(([mediaValue, authStatus]) => {
           if (!authStatus?.isAuthenticated) {
             this.opened = false
@@ -137,7 +157,8 @@ export class AppComponent implements OnInit {
               this.opened = true
             }
           }
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe()
   }

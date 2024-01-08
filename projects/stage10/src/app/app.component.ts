@@ -109,7 +109,7 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
   ],
 })
 export class AppComponent implements OnInit {
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
   opened!: boolean
 
   constructor(
@@ -127,7 +127,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     combineLatest([this.media.asObservable(), this.authService.authStatus$])
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         tap(([mediaValue, authStatus]) => {
           if (!authStatus?.isAuthenticated) {
             this.opened = false
@@ -138,7 +137,8 @@ export class AppComponent implements OnInit {
               this.opened = true
             }
           }
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe()
   }

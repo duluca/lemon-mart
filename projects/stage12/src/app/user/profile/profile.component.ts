@@ -129,7 +129,7 @@ export class ProfileComponent
     last: '',
   })
 
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
 
   currentUserId!: string
 
@@ -141,9 +141,9 @@ export class ProfileComponent
     } else {
       combineLatest([this.loadFromCache(), this.authService.currentUser$])
         .pipe(
-          takeUntilDestroyed(this.destroyRef),
           filter(([cachedUser, me]) => cachedUser != null || me != null),
-          tap(([cachedUser, me]) => this.patchUser(cachedUser || me))
+          tap(([cachedUser, me]) => this.patchUser(cachedUser || me)),
+          takeUntilDestroyed(this.destroyRef)
         )
         .subscribe()
     }
@@ -178,7 +178,7 @@ export class ProfileComponent
           value: user?.role || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
-        [Validators.required],
+        Validators.required,
       ],
       level: [user?.level || 0, Validators.required],
       // use the code below to test disabled condition of <app-lemon-rater>
@@ -256,7 +256,7 @@ export class ProfileComponent
         this.uiService.showToast('Loaded data from cache')
       }
     } catch (err) {
-      this.cache.removeItem('draft-user')
+      this.clearCache()
     }
     return of(user)
   }

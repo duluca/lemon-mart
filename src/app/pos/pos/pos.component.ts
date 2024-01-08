@@ -22,7 +22,7 @@ declare let dataLayer: IEvent[]
   imports: [MatButtonModule, MatIconModule],
 })
 export class PosComponent implements OnInit {
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
   currentTransaction!: ITransaction
   constructor(
     private transactionService: TransactionService,
@@ -44,14 +44,14 @@ export class PosComponent implements OnInit {
     this.transactionService
       .processTransaction(transaction)
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         filter((tx) => tx != null || tx !== undefined),
         tap(() => {
           this.uiService.showToast('Checkout completed')
           dataLayer.push({
             event: 'checkoutCompleted',
           })
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe()
   }

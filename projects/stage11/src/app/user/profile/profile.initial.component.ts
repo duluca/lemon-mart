@@ -105,7 +105,7 @@ export class ProfileInitialComponent implements OnInit {
     return this.formGroup.get('phones') as FormArray
   }
 
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
 
   constructor(
     private formBuilder: FormBuilder,
@@ -118,12 +118,12 @@ export class ProfileInitialComponent implements OnInit {
     this.buildForm()
     this.authService.currentUser$
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         filter((user) => user !== null),
         tap((user) => {
           this.currentUserId = user._id
           this.buildForm(user)
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe()
   }
@@ -151,7 +151,7 @@ export class ProfileInitialComponent implements OnInit {
           value: (user && user.role) || '',
           disabled: this.currentUserRole !== Role.Manager,
         },
-        [Validators.required],
+        Validators.required,
       ],
       dateOfBirth: [(user && user.dateOfBirth) || '', Validators.required],
       address: this.formBuilder.group({

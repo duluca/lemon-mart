@@ -52,7 +52,7 @@ export class UserTableComponent implements AfterViewInit {
   hasError = false
   errorText = ''
   private skipLoading = false
-  private destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
   useNgRxData = false
   readonly isLoadingResults$ = new BehaviorSubject(true)
   loading$: Observable<boolean>
@@ -122,7 +122,6 @@ export class UserTableComponent implements AfterViewInit {
       this.paginator.page,
       this.search.valueChanges.pipe(debounceTime(1000))
     ).pipe(
-      takeUntilDestroyed(this.destroyRef),
       startWith({}),
       switchMap(() => {
         this.isLoadingResults$.next(true)
@@ -146,7 +145,8 @@ export class UserTableComponent implements AfterViewInit {
         this.hasError = true
         this.errorText = err
         return of([])
-      })
+      }),
+      takeUntilDestroyed(this.destroyRef)
     )
     this.items$.subscribe()
   }

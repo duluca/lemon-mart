@@ -6,6 +6,8 @@ import { filter, tap } from 'rxjs/operators'
 
 export type ValidationError = 'required' | 'minlength' | 'maxlength' | 'invalid'
 
+export type ValidationErrorTuple = { error: ValidationError; message: string }
+
 export const ErrorSets: { [key: string]: ValidationError[] } = {
   OptionalText: ['minlength', 'maxlength'],
   RequiredText: ['minlength', 'maxlength', 'required'],
@@ -19,8 +21,8 @@ export class FieldErrorDirective implements OnDestroy, OnChanges {
   @Input() appFieldError!:
     | ValidationError
     | ValidationError[]
-    | { error: ValidationError; message: string }
-    | { error: ValidationError; message: string }[]
+    | ValidationErrorTuple
+    | ValidationErrorTuple[]
   @Input() input: HTMLInputElement | undefined
   @Input() group!: AbstractControl | null
 
@@ -93,15 +95,15 @@ export class FieldErrorDirective implements OnDestroy, OnChanges {
         const errorCode = typeof error === 'object' ? error.error : error
         const message =
           typeof error === 'object'
-            ? () => error.message
-            : () => this.getStandardErrorMessage(errorCode)
+            ? error.message
+            : this.getStandardErrorMessage(errorCode)
         const errorChecker =
           errorCode === 'invalid'
-            ? () => this.fieldControl?.invalid
-            : () => this.fieldControl?.hasError(errorCode)
+            ? this.fieldControl?.invalid
+            : this.fieldControl?.hasError(errorCode)
 
-        if (errorChecker()) {
-          errorsToDisplay.push(message())
+        if (errorChecker) {
+          errorsToDisplay.push(message)
         }
       }
     )
@@ -110,7 +112,7 @@ export class FieldErrorDirective implements OnDestroy, OnChanges {
   }
 
   renderErrors(errors: string) {
-    this.nativeElement.innerHTML = errors
+    this.nativeElement.innerText = errors
   }
 
   getStandardErrorMessage(error: ValidationError): string {
