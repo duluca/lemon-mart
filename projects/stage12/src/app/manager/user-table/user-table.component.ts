@@ -122,7 +122,6 @@ export class UserTableComponent implements AfterViewInit {
       this.paginator.page,
       this.search.valueChanges.pipe(debounceTime(1000))
     ).pipe(
-      takeUntilDestroyed(this.destroyRef),
       startWith({}),
       switchMap(() => {
         this.isLoadingResults$.next(true)
@@ -146,7 +145,8 @@ export class UserTableComponent implements AfterViewInit {
         this.hasError = true
         this.errorText = err
         return of([])
-      })
+      }),
+      takeUntilDestroyed(this.destroyRef)
     )
     this.items$.subscribe()
   }

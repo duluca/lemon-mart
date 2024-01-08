@@ -6,7 +6,7 @@ import {
 } from '@angular/core'
 import { provideFirebaseApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth'
-import { provideAnimations } from '@angular/platform-browser/animations'
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 import { provideRouter } from '@angular/router'
 import { provideEntityData } from '@ngrx/data'
 import { provideEffects } from '@ngrx/effects'
@@ -20,15 +20,16 @@ import { AuthMode } from './auth/auth.enum'
 import { authFactory } from './auth/auth.factory'
 import { AuthHttpInterceptor } from './auth/auth.http.interceptor'
 import { AuthService } from './auth/auth.service'
+import { LoadingHttpInterceptor } from './common/loading.http.interceptor'
 import { provideUiService } from './common/ui.service'
 import { entityConfig } from './entity-metadata'
 import { provideGraphQL } from './provideGraphQL'
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(),
-    provideHttpClient(withInterceptors([AuthHttpInterceptor])),
-    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([AuthHttpInterceptor, LoadingHttpInterceptor])),
+    provideRouter(routes), // withDebugTracing()
     provideStore(),
     provideEffects(),
     provideEntityData(entityConfig),
@@ -36,6 +37,7 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25,
       logOnly: environment.production,
       connectInZone: true,
+      // trace: true,
     }),
     {
       provide: AuthService,

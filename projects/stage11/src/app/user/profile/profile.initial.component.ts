@@ -118,12 +118,12 @@ export class ProfileInitialComponent implements OnInit {
     this.buildForm()
     this.authService.currentUser$
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         filter((user) => user !== null),
         tap((user) => {
           this.currentUserId = user._id
           this.buildForm(user)
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe()
   }

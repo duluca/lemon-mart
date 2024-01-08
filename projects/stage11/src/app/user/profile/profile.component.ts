@@ -136,9 +136,9 @@ export class ProfileComponent
 
     combineLatest([this.loadFromCache(), this.authService.currentUser$])
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         filter(([cachedUser, me]) => cachedUser != null || me != null),
-        tap(([cachedUser, me]) => this.patchUser(cachedUser || me))
+        tap(([cachedUser, me]) => this.patchUser(cachedUser || me)),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe()
   }
