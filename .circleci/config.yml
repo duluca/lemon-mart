@@ -14,17 +14,15 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - npm-cache-{{ checksum "package-lock.json" }}
-            # Fallback key to use the latest cache if no exact match is found
-            - npm-cache-
+            - node_modules-{{ checksum "package-lock.json" }}
       - when:
           condition: << parameters.warm-cache >>
           steps:
             - run: npm ci
             - save_cache:
-                key: npm-cache-{{ checksum "package-lock.json" }}
+                key: node_modules-{{ checksum "package-lock.json" }}
                 paths:
-                  - ~/.npm
+                  - node_modules
   lint:
     description: 'Check for code style and linting errors'
     steps:
