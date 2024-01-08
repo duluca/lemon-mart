@@ -26,7 +26,6 @@ import { FlexModule } from '@ngbracket/ngx-layout/flex'
 import { merge, Observable, of, Subject } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators'
-import { OutletCloser } from 'src/app/common/outlet-closer.service'
 
 import { OptionalTextValidation } from '../../common/validations'
 import { IUser } from '../../user/user/user'
@@ -64,7 +63,6 @@ export class UserTableComponent implements AfterViewInit {
   private readonly userService = inject(UserService)
   private readonly router = inject(Router)
   private readonly activatedRoute = inject(ActivatedRoute)
-  private readonly outletCloser = inject(OutletCloser)
   private readonly destroyRef = inject(DestroyRef)
 
   readonly refresh$ = new Subject<void>()
