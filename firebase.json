@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/firebase/firebase-tools/master/schema/firebase-config.json",
   "hosting": {
     "target": "lemon-mart",
     "public": "dist/lemon-mart",
