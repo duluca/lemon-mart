@@ -23,3 +23,20 @@
 .mat-mdc-paginator {
   background: transparent;
 }
+
+/* row selection styles */
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+  background-color: #efefef;
+}
+
+.selected {
+  font-weight: 500;
+  background-color: #efefef;
+}

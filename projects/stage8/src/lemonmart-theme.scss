@@ -52,3 +52,4 @@ $lemon-mart-dark-theme: mat.define-dark-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($lemon-mart-theme);
+@include mat.strong-focus-indicators-theme($lemon-mart-theme);
