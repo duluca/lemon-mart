@@ -6,7 +6,7 @@ import {
 } from '@angular/core'
 import { provideFirebaseApp } from '@angular/fire/app'
 import { getAuth, provideAuth } from '@angular/fire/auth'
-import { provideAnimations } from '@angular/platform-browser/animations'
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 import { provideRouter } from '@angular/router'
 import { provideEffects } from '@ngrx/effects'
 import { provideStore } from '@ngrx/store'
@@ -23,7 +23,7 @@ import { provideUiService } from './common/ui.service'
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideHttpClient(withInterceptors([AuthHttpInterceptor])),
     provideRouter(routes),
     provideStore(),
