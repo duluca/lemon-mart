@@ -1,5 +1,4 @@
 # <img src="https://user-images.githubusercontent.com/822159/76695715-1cd40180-6659-11ea-8815-00f0e1d7a209.png" alt="LemonMart" width="36"/> LemonMart
-
 The enterprise-ready Angular template project with REST and GraphQL RBAC pre-configured.
 
 > LemonMart was implemented with a [Route-first architecture](https://techtalkdc.com/router-first-architecture-in-spas/) to designing SPAs.
@@ -15,33 +14,33 @@ The enterprise-ready Angular template project with REST and GraphQL RBAC pre-con
 ![lemons served](https://img.shields.io/badge/lemons%20served-257%2C428-F3DE48)
 <sup>As of August 2023</sup>
 
-![lemon-mart-profile](https://github.com/duluca/lemon-mart/assets/822159/8f7d3b01-e084-4b46-a08c-164b4a7adb92")
+![lemon-mart-profile](https://github.com/duluca/lemon-mart/assets/822159/d90b9aba-bc34-409f-a55b-ade3fb6c0b7f)
 
 ## Get the book & watch the talk
 
-LemontMart has been developed in support of my book _Angular for Enterprise-Ready Web Applications_. You can get the book at any major bookstore or find the links at http://AngularForEnterprise.com.
+LemontMart has been developed to support my book _Angular for Enterprise Applications_. You can get the book at any major bookstore or find the links at https://AngularForEnterprise.com.
 
 Watch the talk on `Architecture for Scalable Angular Apps` on [Pluralsight](https://www.pluralsight.com/courses/angular-denver-2019-session-28).
 
 Check out the slides for `Architecture for Scalable Angular Apps` _free_ at [Slides.com](https://slides.com/doguhanuluca/architecture-for-scalable-angular-apps#).
 
-Check out **LocalCast Weather**, to learn Angular, Material, RxJS fundemantals using OpenWeatherMap.org APIs, at https://github.com/duluca/local-weather-app.
+Check out **LocalCast Weather**to learn Angular, Material, and RxJS fundamentals using OpenWeatherMap.org APIs at https://github.com/duluca/local-weather-app.
 
-Build, debug and publish Docker images with [**npm Scripts for Docker**](https://bit.ly/npmScriptsForDocker) and achieve Blue-Green deployments on AWS Fargate with [**npm Scripts for AWS**](https://bit.ly/npmScriptsForAWS).
+Build, debug, and publish Docker images with [**npm Scripts for Docker**](https://bit.ly/npmScriptsForDocker) and achieve Blue-Green deployments on AWS Fargate with [**npm Scripts for AWS**](https://bit.ly/npmScriptsForAWS).
 
 ## Router-first Architecture
 
-A router-first architecture to SPA design will save development teams, large and small, significant waste in duplicative work, and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
+A router-first architecture to SPA design will save development teams, large and small, significant waste in duplicative work and re-architecting of the code base to enable better collaboration or achieve sub-second first meaningful paints in your application.
 
 In order to pull off a router-first implementation, you need to:
 
 1. Define user roles and a site map early on,
-2. Design with lazy loading in mind, leveraging router outlets, auxiliary paths and smart link tracking,
+2. Design with lazy loading in mind, leveraging router outlets, auxiliary paths, and smart link tracking,
 3. Implement a walking-skeleton navigation experience and validate, allowing multiple teams to execute seamlessly,
 4. Design around major data components, using stateless data-driven components using RxJS/BehaviorSubjects,
 5. Be disciplined in sticking to a decoupled component architecture, allowing remixing the UX quickly to respond to changes in requirements without having to re-architect the codebase,
-6. Differentiate between user controls and components to appropriately use binding, resolve and auth guards,
-7. With TypeScript classes, interfaces, enums, validators, and pipes maximize code reuse
+6. Differentiate between user controls and components to appropriately use binding, resolve, and auth guards,
+7. With TypeScript classes, interfaces, enums, validators, and pipes to maximize code reuse
 
 ### Design Artifacts
 
@@ -50,9 +49,9 @@ https://github.com/duluca/lemon-mart/wiki.
 
 ## Building Lemon Mart
 
-- `npm run build:prod` to build a production optimized version of the app.
+- `npm run build:prod` is used to build a production-optimized version of the app.
 - `npm run docker:debug` to run tests and build a containerized version of the app.
-- `integration.Dockerfile` is a multi-stage Dockerfile that can be used to build and test the app in various CI environments in a consistent manner. The optimized image generated in the last step can then be deployed to any Docker host, including AWS, Heroku, Vercel, and Azure.
+- `integration.Dockerfile` is a multi-stage Dockerfile that can be used to consistently build and test the app in various CI environments. The optimized image generated in the last step can then be deployed to any Docker host, including AWS, Heroku, Vercel, and Azure.
 
 ### Authentication
 
@@ -81,19 +80,19 @@ Executing `npx ng build --configuration=firebase` leverages `Firebase` authentic
 
 3. Lemon-Mart-Server:
 
-Executing `npx ng build --configuration=lemon-mart-server` leverages `Custom` authentication. Note that this is implemented by the example project Lemon Mart Server, which is detailed below.
+Executing `npx ng build --configuration=lemon-mart-server` leverages `Custom` authentication. This is implemented by the example project Lemon Mart Server, which is detailed below.
 
 ### Lemon Mart Server
 
-Lemon Mart Server is an easy to learn and use TypeScript Node.js server using [Minimal MEAN](https://github.com/duluca/minimal-mean) for [Lemon Mart](https://github.com/duluca/lemon-mart).
+Lemon Mart Server is an easy-to-learn and use TypeScript Node.js server using [Minimal MEAN](https://github.com/duluca/minimal-mean) for [Lemon Mart](https://github.com/duluca/lemon-mart).
 
 To run Lemon Mart in a full-stack setup, visit https://github.com/duluca/lemon-mart-server.
 
 ## Developers
 
-This project is a sample implementation, which contains numerous recipes and design patterns useful for developing an Angular application.
+This project is a sample implementation containing numerous recipes and design patterns useful for developing an Angular application.
 
-If you'd like to use this project as a starter or a template project for your project, you can get a lot of benefits out of using a pre-configured project. Some of the benefits are:
+If you'd like to use this project as a starter or a template project for your project, you can get many benefits from using a pre-configured project. Some of the benefits are:
 
 - Optimized development experience for VS Code
 - Lazy loading feature module configuration
@@ -149,6 +148,7 @@ Changes are inevitable to keep the project up-to-date with libraries, tools, pat
 ## Angular 17
 
 - Moved to control flow syntax
+- Global spinner demonstrating SignalState
 
 ## Angular 16
 
