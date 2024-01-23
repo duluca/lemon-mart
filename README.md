@@ -18,7 +18,7 @@ The enterprise-ready Angular template project with REST and GraphQL RBAC pre-con
 
 ## Get the book & watch the talk
 
-LemontMart has been developed to support my book _Angular for Enterprise Applications_. You can get the book at any major bookstore or find the links at https://AngularForEnterprise.com.
+LemontMart has been developed to support my book _Angular for Enterprise Applications_. You can get the book at any major bookstore or find the links at [AngularForEnterprise.com](https://AngularForEnterprise.com).
 
 Watch the talk on `Architecture for Scalable Angular Apps` on [Pluralsight](https://www.pluralsight.com/courses/angular-denver-2019-session-28).
 
@@ -64,7 +64,7 @@ For demonstration purposes, the login screen shows the _Authentication Mode_ of 
 
 The current mode can be adjusted in `environment.ts`. You can see how each mode is implemented in the link source files above.
 
-> This is covered in more detail in [Angular for Enterprise, 2nd Edition](https://expertlysimple.io/angular-for-enterprise-2nd-edition/).
+> This is covered in more detail in [Angular for Enterprise Applications, 3rd Edition](https://www.amazon.com/Angular-Enterprise-Applications-Router-first-architecture/dp/1805127128).
 
 ### Build Configurations
 
@@ -120,7 +120,7 @@ If you'd like to use this project as a starter or a template project for your pr
 - You may modify `profile.component.ts` and `view-user.component.ts` under the `user` folder to fit your needs.
 - Edit `lemonmart-theme.scss` to match your desired color scheme.
 - Now you may begin implementing your own feature modules.
-  - Questions? Consider creating an issue on this repo and buying my book at http://AngularForEnterprise.com.
+  - Questions? Consider creating an issue on this repo and buying my book at [AngularForEnterprise.com](https://AngularForEnterprise.com).
 
 ### During Development
 
